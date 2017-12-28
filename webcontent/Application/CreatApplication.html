@@ -1,0 +1,1471 @@
+﻿
+    <!--Basic Styles-->
+    <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
+		<link href="plugin/uploadify/Huploadify.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+     <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+		<link href="assets/css/codemirror.css" rel="stylesheet" />
+		<link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+    <!--main.css-->
+    <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+
+    <style>
+			.CodeMirror{background:black;color:white;height:100px;}
+			.CodeMirror-cursor{border-left:1px solid white}
+		</style>
+    
+
+
+
+
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                        <li id="titleName">
+                        </li>
+                        <li class="active" id="pageType">创建应用</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                
+                <!-- Page Body -->
+                <div class="page-body">
+                <div id="sessionExpiredAlertBlock" class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		     			<span>会话失效，请重新登录! <a class="btn btn-danger" href="/iMonitor/login.jsp">登录</a></span>
+					</div>
+			
+					<div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			     		<span id="warningMsg"></span>
+					</div>
+				
+					<div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				     	<span id="successMsg"></span>
+					</div>
+									<div class="row">
+										<div class="col-lg-12 col-sm-12 col-xs-12">
+
+											<div>
+												<form class="form-horizontal form-bordered" role="form">
+													<div id="WiredWizard" class="wizard wizard-wired" data-target="#WiredWizardsteps">
+														<ul class="steps">
+															<li data-target="#wiredstep1" class="active" style="width:33%"><span class="step">1</span><span class="title">应用配置</span><span class="chevron"></span></li>
+															<li data-target="#wiredstep2" style="width:33%"><span class="step">2</span><span class="title">容器配置</span> <span class="chevron"></span></li>
+															<li data-target="#wiredstep3" style="width:33%"><span class="step">3</span><span class="title">运行环境</span> <span class="chevron"></span></li>
+
+
+														</ul>
+
+													</div>
+													<div class="step-content" id="WiredWizardsteps">
+														<div class="step-pane active" id="wiredstep1">
+
+															<div class="form-group  margin-bottom-20">
+																<label  class="col-sm-2 control-label">资源池<span class="red padding-left-5">*</span></label>
+																<div class="col-sm-4 padding-left-30">
+																	<div class="buttons-preview">
+																		<div class="btn-group btn-group-justified" id="ResourcesPool">
+																			<!--<a href="#" class="btn btn-info">生产域（核心区）</a>
+																			<a href="#" class="btn btn-default">生产域（DMZ区）</a>-->
+
+																		</div>
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group padding-top-30 padding-bottom-20">
+																<label  class="col-sm-2 control-label">系统名称<span class="red padding-left-5">*</span></label>
+																<div class="col-sm-8 sys_select">
+																	<div class="col-sm-4">
+																		<select   id="firstResource" name="selectcheck" style="width:100%">
+																		</select>
+																		<span class="red"></span>
+																	</div>
+																	<div class="col-sm-4">
+																		<select  id="secondResource" name="selectcheck" style="width:100%">
+																		</select>
+																		<span class="red"></span>
+																	</div>
+																	<div class="col-sm-4">
+																		<select  id="thirdResource" name="selectcheck" style="width:100%">
+																		</select>
+																		<span class="red"></span>
+																	</div>
+																</div>
+
+																<div class="col-sm-8 sys_input" style="display:none;">
+																	<div class="col-sm-4">
+																		<input type="text" class="form-control" disabled updatedata="" id="firstinput">
+																	</div>
+																	<div class="col-sm-4">
+																		<input type="text" class="form-control" disabled updatedata="" id="secondinput">
+																	</div>
+																	<div class="col-sm-4" >
+																		<input type="text" class="form-control" disabled updatedata="" id="thirdinput">
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group padding-top-30 padding-bottom-20">
+																<label  class="col-sm-2 control-label">应用名称<span class="red padding-left-5">*</span></label>
+																<div class="col-sm-8">
+																	<div class="col-sm-12">
+																		<input type="text" class="form-control" data="Isempty"  placeholder="填写应用名称" id="app_name" onblur="fnAppNameUnique();">
+																		<span class="red"></span>
+																	</div>
+
+																</div>
+															</div>
+															<!--<div class="form-group padding-top-30 padding-bottom-20">
+																<label  class="col-sm-2 control-label">甲方接口人<span class="red padding-left-5">*</span></label>
+																<div class="col-sm-8">
+																	<div class="col-sm-12">
+																		<div class="col-sm-6 no-padding-left">
+																			<label  class="col-sm-2  no-padding-left" style="line-height: 30px;" >姓名</label>
+																			<div class="col-sm-9 no-padding-left" id="typeselect" style="height: 34px;"onclick="fnCheckClick(this)" >
+																				<select id='dataTypes'  class="control-select" style="margin-left:0;width:100%"  data-click="false" >
+
+																				</select>
+																				<span class="hidden" id="saveIdBlock"></span>
+																			</div>
+																			<div class="con-sm-1" style="line-height:25px" onclick="fnAddInterfaceUser(this)" id="addLogo">
+																				<img src="assets/img/svg/add.svg" width="20em" height="20em"/>
+																			</div>
+																			<div class="col-sm-9 no-padding-left hidden" id="typeinput" >
+																				<div class="input-group">
+																					<input type="text" class="form-control" data-flag="empty"  placeholder="输入接口人姓名" id="interface_a_Name" onblur="fnValidate(this)">
+																					<span class="red"></span>
+																					<span class="input-group-btn">
+																					<button class="btn btn-default" id="switcher" type="button" onclick="closeInputSelect(this);">
+																					  <i class="fa fa-remove"></i>
+																					</button>
+																				  </span>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col-sm-6 no-padding-right">
+																			<label  class="col-sm-2 no-padding-left" style="line-height: 30px;">电话</label>
+																			<div class="col-sm-10 no-padding-right">
+																				<input type="text" class="form-control "  data="Isempty" placeholder="输入接口人电话" id="interface_a_Tel" onblur="fnValidate(this)">
+																				<span class="red"></span>
+																			</div>
+																		</div>
+
+
+																	</div>
+																	<div class="col-sm-12 margin-top-20 ">
+
+																		<div class="col-sm-6 no-padding-left">
+																			<label  class="col-sm-2  no-padding-left" style="line-height: 30px;" >邮箱</label>
+																			<div class="col-sm-9 no-padding-left"  >
+																				<div >
+																					<input type="text" class="form-control " data="Isempty"  placeholder="输入接口人邮箱" id="interface_a_Email" onblur="fnValidate(this)">
+																					<span class="red"></span>
+																				</div>
+																			</div>
+																		</div>
+
+																		<div class="col-sm-6 no-padding-right">
+																			<label  class="col-sm-2 no-padding-left" style="line-height: 30px;" >单位</label>
+																			<div class="col-sm-10 no-padding-right">
+																				<input type="text" class="form-control " data="Isempty" placeholder="输入接口人所在单位" id="interfaceDepart" onblur="fnValidate(this)">
+																				<span class="red"></span>
+																			</div>
+																		</div>
+																	</div>
+
+																</div>
+															</div>
+															<div class="form-group padding-top-30 padding-bottom-20">
+																<label  class="col-sm-2 control-label">乙方接口人<span class="red padding-left-5">*</span></label>
+																<div class="col-sm-8">
+																	<div class="col-sm-12">
+																		<div class="col-sm-6 no-padding-left">
+																			<label  class="col-sm-2  no-padding-left" style="line-height: 30px;" >姓名</label>
+																			<div class="col-sm-9 no-padding-left" id="typeselect1" style="height: 34px;"onclick="fnCheckClick(this)" >
+																				<select id='dataTypes1'  class="control-select" style="margin-left:0;width:100%"  data-click="false" >
+
+																				</select>
+																				<span class="hidden" id="saveIdBlock1"></span>
+																			</div>
+																			<div class="con-sm-1" style="line-height:25px" onclick="fnAddInterfaceUser(this)" id="addLogo1">
+																				<img src="assets/img/svg/add.svg" width="20em" height="20em"/>
+																			</div>
+																			<div class="col-sm-9 no-padding-left hidden" id="typeinput1" >
+																				<div class="input-group">
+																					<input type="text" class="form-control"   placeholder="输入接口人姓名" id="interface_b_Name" onblur="fnValidate(this)">
+																					<span class="red"></span>
+																					<span class="input-group-btn">
+																					<button class="btn btn-default" id="switcher1" type="button" onclick="closeInputSelect(this);">
+																					  <i class="fa fa-remove"></i>
+																					</button>
+																				  </span>
+																				</div>
+																			</div>
+																		</div>
+
+																		<div class="col-sm-6 no-padding-right">
+																			<label  class="col-sm-2 no-padding-left" style="line-height: 30px;">电话</label>
+																			<div class="col-sm-10 no-padding-right">
+																				<input type="text" class="form-control " data="Isempty" placeholder="输入接口人电话" id="interface_b_Tel" onblur="fnValidate(this)">
+																				<span class="red"></span>
+																			</div>
+																		</div>
+
+
+																	</div>
+																	<div class="col-sm-12 margin-top-20 ">
+
+																		<div class="col-sm-6 no-padding-left">
+																			<label  class="col-sm-2  no-padding-left" style="line-height: 30px;" >邮箱</label>
+																			<div class="col-sm-9 no-padding-left"  >
+																				<div >
+																					<input type="text" class="form-control " data="Isempty" placeholder="输入接口人邮箱" id="interface_b_Email" onblur="fnValidate(this)">
+																					<span class="red"></span>
+																				</div>
+																			</div>
+																		</div>
+
+																		<div class="col-sm-6 no-padding-right">
+																			<label  class="col-sm-2 no-padding-left" style="line-height: 30px;" >单位</label>
+																			<div class="col-sm-10 no-padding-right">
+																				<input type="text" class="form-control " data="Isempty" placeholder="输入接口人所在单位" id="interface_b_Depart" onblur="fnValidate(this)">
+																				<span class="red"></span>
+																			</div>
+																		</div>
+																	</div>
+
+																</div>
+															</div>-->
+															<div class="form-group  padding-top-30 padding-bottom-20">
+																<label  class="col-sm-2 control-label">发布方式<span class="red padding-left-5">*</span></label>
+															  <div class="col-sm-8 no-padding-left">
+																	<div class="col-sm-8 no-padding-left" id="ci">
+                                    <div class="col-lg-4 col-sm-6 col-xs-6 ">
+                                      <div class="radio">
+                                        <label>
+                                          <input name="form-radio" type="radio" class="colored-blue" value="true">
+                                          <span class="text">持续集成</span>
+                                        </label>
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12 col-xs-12 no-padding-left">
+                                      <div class="radio" >
+                                        <label>
+                                          <input name="form-radio" type="radio" checked class="colored-blue" value="false">
+                                          <span class="text">本地上传</span>
+                                        </label>
+                                      </div>
+                                    </div>
+																		<div class="col-lg-4 col-sm-12 col-xs-12 no-padding-left">
+																			<div class="radio" >
+																				<label>
+																					<input name="form-radio" type="radio" class="colored-blue" value="2">
+																					<span class="text">镜像发布</span>
+																				</label>
+																			</div>
+																		</div>
+																  </div>
+																	<div class="col-sm-12 no-padding-left ci_detail" style="margin-top: 15px;display:none">
+																		<div class="col-lg-6 col-sm-6 col-xs-6 ">
+																			<label style="padding-left: 15px">请输入路径:<span class="red padding-left-5">*</span></label>
+																			<div class="col-sm-12 no-padding-right">
+																				<input type="text" class="form-control" id="package_path"  placeholder="请输入路径" data=''>
+																				<span class="red"></span>
+																			</div>
+																		</div>
+																		<div class="col-lg-6 col-sm-6 col-xs-6 ">
+																			<label style="padding-left: 15px">请输入包名:<span class="red padding-left-5">*</span></label>
+																			<div class="col-sm-12 no-padding-right">
+																				<input type="text" class="form-control"  id="package_name" placeholder="请输入包名" data=''>
+																				<span class="red"></span>
+																			</div>
+																		</div>
+																	</div>
+                                </div>
+															</div>
+														</div>
+
+														<div class="step-pane" id="wiredstep2">
+
+
+															<div class="form-group padding-top-30 padding-bottom-20">
+																<div class="row no-margin">
+																	<label  class="col-sm-2 control-label">镜像<span class="red padding-left-5">*</span></label>
+																	<div class="col-sm-8 no-padding-left">
+																		<div class="col-sm-8 padding-left-30">
+																			<div class="buttons-preview">
+																				<div class="btn-group btn-group-justified" id="image">
+																					<!--<a href="javascript:;" class="btn  btn-info" value="common">通用镜像</a>-->
+																					<a href="javascript:;" class="btn btn-info" value="special">专用镜像</a>
+																					<a href="javascript:;" class="btn btn-default" value="private">自有镜像</a>
+
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col-sm-10" id="add_image" style="display:none">
+																			<div class="col-sm-12 padding-top-20 ">
+																			<div class="empty-state server-state">
+                                        <div class="empty-state-title text-align-center" style="font-size:14px">
+                                        <a href="javascript:;" class="darkgray" onclick="fnaddimageshow()">
+                                          <i class="fa fa-plus padding-right-5"></i>添加镜像</a>
+                                         </div>
+                                      </div>
+																			</div>
+																		</div>
+																		<!--<div class="col-sm-10 padding-top-20 padding-left-30" id="showaddimg" style="display:none">
+																			<select class="form-control" id="show_img">
+																			</select>
+																		</div>-->
+																		<div class="col-sm-12 padding-top-20" id="com_spe">
+																			<div class="col-sm-5 no-padding-right">
+																				<select class="form-control" id="image_name" onchange="fnChangeImgName()">
+																				</select>
+																			</div>
+																			<div class="col-sm-5">
+																				<select class="form-control" id="image_version">
+																				</select>
+																			</div>
+																			<div class="col-sm-2 padding-top-5" style="font-size:14px" id="img_config"><a href="javascript:;" class="darkgray" onclick="showcongig()"><i class="fa fa-cog"></i></a></div>
+																		</div>
+																		<div class="col-sm-12 padding-left-30" style="display:none" id="config">
+																			<div class="form-title margin-top-20"><strong>线程值配置</strong></div>
+																			<div class="col-sm-6">
+																				<div class="form-group ">
+
+																					<label >最小线程<a href="javascript:void(0);" class="padding-left-5 tooltip-info" data-container="body"  data-toggle="popover-hover" data-placement="top" data-title="" data-content="<h6><strong>minSpareThreads</strong><h6><p>初始线程数，即最小空闲线程数</p>"><i class="fa  fa-question-circle-o"></i></a>
+
+																					</label>
+																					<input type="text" class="form-control"  placeholder="300" data="Isempty" id="img_min_thread">
+																					<span class="red"></span>
+																				</div>
+																			</div>
+
+
+																			<div class="col-sm-6 ">
+																				<div class="form-group ">
+																					<label >最大线程数<a href="#" class="padding-left-5 tooltip-info"   data-container="body" data-toggle="popover-hover"  data-placement="top" data-title="" data-content="<h6><strong>maxThreads</strong><h6><p>线程池的最大线程数</p>"><i class="fa  fa-question-circle-o"></i></a></label>
+																					<input type="text" class="form-control"  placeholder="800" data="Isempty" id="img_max_thread">
+																					<span class="red"></span>
+																				</div>
+																			</div>
+
+
+
+																			<div class="col-sm-12 no-padding">
+
+																				<div class="form-title margin-top-10"><strong>请求队列配置</strong></div>
+
+																			</div>
+																			<div class="col-sm-6">
+																				<div class="form-group ">
+																					<label >请求队列长度<a href="#" class="padding-left-5 tooltip-info" data-container="body" data-toggle="popover-hover"  data-placement="top" data-title="" data-content="<h6><strong>accept Count</strong><h6><p>当所有可以使用的处理请求的线程数都被使用时，可以放到处理队列中的请求数，超过这个数的请求将不予处理.默认100</p>"><i class="fa  fa-question-circle-o"></i></a></label>
+																					<input type="text" class="form-control"  placeholder="1000" data="Isempty" id="img_acceptCount">
+																					<span class="red"></span>
+																				</div>
+																			</div>
+
+																			<div class="col-sm-6">
+																				<div class="form-group ">
+																					<label >连接超时<a href="#" class="padding-left-5 tooltip-info" data-toggle="popover-hover"  data-placement="top" data-title="" data-content="<h6><strong>connection Timeout</strong><h6><p>在Connector接受一个连接以后，等待发生第一个请求的时间，单位毫秒</p>"><i class="fa  fa-question-circle-o"></i></a></label>
+																					<input type="text" class="form-control"  placeholder="20" data="Isempty" id="img_timeout">
+																					<span class="red"></span>
+																				</div>
+																			</div>
+
+																			<div class="col-sm-12 no-padding">
+
+																				<div class="form-title margin-top-10"><strong>JVM内存配置</strong></div>
+
+																			</div>
+
+																			<div class="col-sm-6 ">
+																				<div class="form-group ">
+																					<label >堆内存最小值<a href="#" class="padding-left-5" data-toggle="popover-hover"  data-placement="top" data-title="" data-content="<h6><strong>-Xms</strong><h6><p>虚拟机初始化时的最小堆内存</p>"><i class="fa  fa-question-circle-o"></i></a></label>
+																					<input type="text" class="form-control"  placeholder="2048m" data="Isempty" id="imgXms">
+																					<span class="red"></span>
+																				</div>
+																			</div>
+
+																			<div class="col-sm-6 ">
+																				<div class="form-group ">
+																					<label >堆内存最大值<a href="#" class="padding-left-5" data-toggle="popover-hover"  data-placement="top" data-title="" data-content="<h6><strong>-Xmx</strong><h6><p>虚拟机可使用的最大堆内存。 -Xms与-Xmx设成一样的值，避免JVM因为频繁的GC导致性能大起大落</p>"><i class="fa  fa-question-circle-o"></i></a></label>
+																					<input type="text" class="form-control"  placeholder="2048m" data="Isempty" id="imgXmx">
+																					<span class="red"></span>
+																				</div>
+																			</div>
+
+																			<div class="col-sm-6  padding-top-10">
+																				<div class="form-group ">
+																					<label >非堆内存最小值<a href="#" class="padding-left-5" data-toggle="popover-hover"  data-placement="top" data-title="" data-content="<h6><strong>-XX:PermSize</strong><h6><p>设置非堆内存初始值</p>"><i class="fa  fa-question-circle-o"></i></a></label>
+																					<input type="text" class="form-control"  placeholder="2048m" data="Isempty" id="img_PermSize">
+																					<span class="red"></span>
+																				</div>
+																			</div>
+
+																			<div class="col-sm-6  padding-top-10">
+																				<div class="form-group ">
+																					<label >非堆内存最大值<a href="#" class="padding-left-5" data-toggle="popover-hover"  data-placement="top" data-title="" data-content="<h6><strong>-XX:MaxPermSize</strong><h6><p>新生代占整个堆内存的最大值</p>"><i class="fa  fa-question-circle-o"></i></a></label>
+																					<input type="text" class="form-control"  placeholder="2048m" data="Isempty" id="img_MaxPermSize">
+																					<span class="red"></span>
+																				</div>
+																			</div>
+
+																		</div>
+																	</div>
+																	<!--<div class="col-sm-2 no-padding-left margin-top-10">
+                                    <a href="javascript:;" class="darkgray" onclick="showcongig()">参数配置</a>
+                                  </div>-->
+																</div>
+															</div>
+
+															<div class="form-group  padding-top-30 padding-bottom-20">
+																<label class="col-sm-2 control-label ">容器规格<span class="red padding-left-5">*</span></label>
+																<div class="col-sm-8  list-jd padding-top-10" id="con_configure">
+																	<div class="col-sm-12 ">
+																		<div class="con_configureX">
+																		<a class="jd pull-left margin-right-10 " href="javascript:;">
+																			<div class="panel panel-default con_configure active" data-val="0.5/3" onclick="fnSelectConfigure(this)">
+																				<div class="panel-heading text-center cpu_mem" >
+																					0.5核/3GB
+																				</div>
+																				<div class="panel-body text-center  darkgray" style="padding:10px 30px">
+																					最低配置
+																				</div>
+																			</div>
+																		</a>
+
+																		<a class="jd pull-left margin-right-10" href="javascript:;">
+																			<div class="panel panel-default con_configure" data-val="1/4" onclick="fnSelectConfigure(this)">
+																				<div class="panel-heading text-center cpu_mem">
+																					1核/4GB
+																				</div>
+																				<div class="panel-body text-center darkgray" style="padding:10px 30px">
+																					标准配置
+																				</div>
+																			</div>
+																		</a>
+																		<a class="jd pull-left margin-right-10" href="javascript:;">
+																			<div class="panel panel-default con_configure" data-val="1.5/4" onclick="fnSelectConfigure(this)">
+																				<div class="panel-heading text-center cpu_mem">
+																					1.5核/4GB
+																				</div>
+																				<div class="panel-body text-center darkgray" style="padding:10px 30px">
+																					最高配置
+																				</div>
+																			</div>
+																		</a>
+
+																		</div>
+																		<a class="jd pull-left margin-right-10" href="javascript:;">
+																			<div class="panel panel-default con_configure" onclick="fnSelectConfigure(this)">
+																				<div class="panel-heading text-center" style="padding:10px 30px;font-size:21px">
+																					<i class="glyphicon glyphicon-plus"></i>
+																					<h6 class="no-margin-bottom">自定义</h6>
+																				</div>
+
+																			</div>
+																		</a>
+
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group padding-top-30 padding-bottom-20">
+																<label  class="col-sm-2 control-label">实例数<span class="red padding-left-5">*</span></label>
+																<div class="col-sm-8">
+																	<div class="col-sm-12">
+																		<input type="text" class="form-control"  placeholder="请填写实例数" data='Isempty'
+																					 onkeyup="value=value.replace(/[^\d.]/g,'')" id="instances">
+																		<span class="red"></span>
+																	<!--	<p>实例数是允许用户最大并发访问量的容器数，最大实例数是根据容器规格CPU和内存相乘得出最大值</p>-->
+																		</div>
+
+																</div>
+															</div>
+
+															<div class="form-group padding-top-30 padding-bottom-20">
+																<label  class="col-sm-2 control-label">环境变量</label>
+																<div class="envContentX col-sm-8 no-padding">
+																	<div class="col-sm-12 envContent no-padding-right">
+																		<div class="col-sm-4">
+																			<input type="text" class="form-control env_key" placeholder="键">
+																		</div>
+																		<div class="pull-left margin-top-10 " style="width:3%">
+																			<i class="fa fa-minus"></i>
+																		</div>
+																		<div class="pull-left padding-right-10" style="width:40%">
+																			<input type="text" class="form-control env_value" placeholder="值">
+																		</div>
+																		<div class="col-sm-1">
+																			<div class="form-group header-buttons" >
+																				<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-plus"></i></a>
+																			</div>
+																		</div>
+																		<div class="col-sm-1 no-padding-left">
+																			<div class="form-group header-buttons" >
+																				<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-minus"></i></a>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-sm-12 envContent no-padding-right" style="margin-top:10px;">
+																		<div class="col-sm-4">
+																			<input type="text" class="form-control env_key" placeholder="键">
+																		</div>
+																		<div class="pull-left margin-top-10 " style="width:3%">
+																			<i class="fa fa-minus"></i>
+																		</div>
+																		<div class="pull-left padding-right-10" style="width:40%">
+																			<input type="text" class="form-control env_value" placeholder="值" >
+																		</div>
+																		<div class="col-sm-1">
+																			<div class="form-group header-buttons" >
+																				<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-plus"></i></a>
+																			</div>
+																		</div>
+																		<div class="col-sm-1 no-padding-left">
+																			<div class="form-group header-buttons">
+																				<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-minus"></i></a>
+																			</div>
+																		</div>
+																	</div>
+																<div class="col-sm-12 envContent no-padding-right" style="margin-top:10px;">
+																	<div class="col-sm-4">
+																		<input type="text" class="form-control env_key" placeholder="键" >
+																	</div>
+																	<div class="pull-left margin-top-10 " style="width:3%">
+																		<i class="fa fa-minus"></i>
+																	</div>
+																	<div class="pull-left padding-right-10" style="width:40%">
+																		<input type="text" class="form-control env_value" placeholder="值" >
+																	</div>
+																	<div class="col-sm-1">
+																		<div class="form-group header-buttons" >
+																			<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-plus"></i></a>
+																		</div>
+																	</div>
+																	<div class="col-sm-1 no-padding-left">
+																		<div class="form-group header-buttons" >
+																			<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-minus"></i></a>
+																		</div>
+																	</div>
+																</div>
+																	<div class="col-sm-12 envContent no-padding-right" style="margin-top:10px;">
+																		<div class="col-sm-4">
+																			<input type="text" class="form-control env_key" placeholder="键">
+																		</div>
+																		<div class="pull-left margin-top-10 " style="width:3%">
+																			<i class="fa fa-minus"></i>
+																		</div>
+																		<div class="pull-left padding-right-10" style="width:40%">
+																			<input type="text" class="form-control env_value" placeholder="值">
+																		</div>
+																		<div class="col-sm-1">
+																			<div class="form-group header-buttons" onclick="fnAddenv()">
+																				<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-plus"></i></a>
+																			</div>
+																		</div>
+																		<div class="col-sm-1 no-padding-left">
+																			<div class="form-group header-buttons" onclick="fnCutenv(this)">
+																				<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-minus"></i></a>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+
+
+															<div class="form-group padding-top-30 padding-bottom-20">
+																<label  class="col-sm-2 control-label">启动命令</label>
+																<div class="col-sm-8">
+																	<div class="col-sm-12">
+																		<input type="text" class="form-control" id="start_command" >
+																		<!--<span class="red"></span>placeholder="sh /app/tomcat/bin/startup.sh"-->
+																	</div>
+
+																</div>
+															</div>
+														</div>
+														<div class="step-pane" id="wiredstep3">
+															<div id="createkey">
+															<div class="form-group padding-top-20 padding-bottom-20">
+																<label  class="col-sm-2 control-label">负载均衡</label>
+																<div class="col-sm-8 no-padding-left">
+																	<div class="col-sm-4 no-padding-left" id="loadBalance">
+																		<div class="col-lg-6 col-sm-6 col-xs-6 ">
+																			<div class="radio">
+																				<label onclick="fnLoadBalance(this)">
+																					<input name="form-field-radio" type="radio" class="colored-blue" value="1">
+																					<span class="text">是</span>
+																				</label>
+																			</div>
+																		</div>
+																		<div class="col-lg-6 col-sm-6 col-xs-6 no-padding-left">
+																			<div class="radio">
+																				<label onclick="fnLoadBalance(this)">
+																					<input name="form-field-radio" type="radio" class="colored-blue" checked="checked" value="0">
+																					<span class="text">否</span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="col-sm-12 margin-top-30 padding-left-30" id="loadbalancetext" style="display:none;">
+																		<label >请输入域名:</label>
+                                    <div class="col-sm-12 no-padding-left">
+																		<div class="col-sm-6 no-padding-left">
+																			<input type="text" class="form-control">
+																		</div>
+                                    <div class="col-sm-6 no-padding-left">
+                                      <select type="text" class="form-control" id="lburl_type">
+                                        <option value=".yw.zj.chinamobile.com">yw.zj.chinamobile.com</option>
+                                        <option value=".dc.zj.chinamobile.com">dc.zj.chinamobile.com</option>
+                                      </select>
+                                    </div>
+                                    </div>
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group padding-top-30 padding-bottom-20">
+																<label  class="col-sm-2 control-label">共享目录</label>
+																<div class="volumesContentX col-sm-8 no-padding">
+																<div class="col-sm-12 volumesContent">
+																	<div class="col-sm-6">
+																		<input type="text" class="form-control volume_url" placeholder="共享存储路径">
+																	</div>
+																	<div class="col-sm-1 margin-top-10">
+																		<i class="fa fa-minus"></i>
+																	</div>
+																	<div class="col-sm-4">
+																		<select class="form-control volume_auth" ><option value="RW">读写</option><option value="RO">只读</option></select>
+																	</div>
+																	<div class="pull-left padding-left-10">
+																		<div class="form-group header-buttons" onclick="fnAddvolume()">
+																			<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-plus"></i></a>
+																		</div>
+																	</div>
+																	<div class="pull-right" style="margin-left:-10px;">
+																		<div class="form-group header-buttons" onclick="fnCutvolume(this)">
+																			<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-minus"></i></a>
+																		</div>
+																	</div>
+																</div>
+																</div>
+
+															</div>
+
+
+															<div class="form-group padding-top-30 padding-bottom-20">
+																<label  class="col-sm-2 control-label">服务绑定</label>
+																<div class="col-sm-8">
+																	<div class="col-sm-12 margin-top-10" id="serverinfo">
+																		<div class="col-sm-4 no-padding-left">
+																			<div class="databox radius-bordered" style="border:1px solid #ddd">
+																				<div class="databox-left" style="border-right:1px solid #ddd">
+																					<div class="databox-piechart">
+																						<img src="assets/img/img/mysql1.png" style="padding-top:5px;height:45px">
+																					</div>
+																				</div>
+																				<div class="databox-right">
+																					<div class="databox-text darkgray padding-top-10 padding-left-5">mysql-aaa<span class="blue">√</span>
+																					</div>
+
+																				</div>
+																			</div>
+
+																		</div>
+																		<div class="col-sm-4 no-padding-left">
+																			<div class="databox radius-bordered" style="border:1px solid #ddd">
+																				<div class="databox-left" style="border-right:1px solid #ddd">
+																					<div class="databox-piechart">
+																						<img src="assets/img/img/redis1.png" style="padding-top:5px;height:45px">
+																					</div>
+																				</div>
+																				<div class="databox-right">
+																					<div class="databox-text darkgray padding-top-10 padding-left-5">redis-ccc</div>
+
+																				</div>
+																			</div>
+
+																		</div>
+
+
+																	</div>
+																	<div class="col-sm-12 ">
+																		<table class="table table-hover" style="border:1px solid #ddd">
+																			<thead style="background-color:#eee">
+																			<tr>
+																				<th>用户名</th>
+																				<th>密码</th>
+																				<th>访问地址</th>
+
+																			</tr>
+
+																			</thead>
+																			<tbody id="serverdetail"></tbody>
+																		</table>
+																		<div class="empty-state server-state sever-dash"><div class="empty-state-title">您还没有绑定服务</div></div>
+																	</div>
+
+																</div>
+
+															</div>
+
+															<div class="form-group padding-top-20 no-padding-bottom">
+																<div class="col-sm-offset-2 col-sm-8">
+																	<a href="javascript:;" onclick="Showmore()"><i class="fa fa-angle-double-down padding-right-10"></i>显示高级配置</a>
+																</div>
+
+															</div>
+
+															<div style="display:none" id="more">
+																<hr class="wide" style="display:none">
+																<div class="col-sm-12 no-padding">
+
+																	<div class="form-title padding-top-20"><strong style="margin-left: 8%;">Docker配置</strong></div>
+
+																</div>
+
+																<div class="form-group padding-top-30 padding-bottom-20 portconfigure">
+																	<label class="col-sm-2 control-label">端口配置</label>
+																	<div class="col-sm-8 netContentX">
+																		<div class="col-sm-12 padding-bottom-20">
+
+																			<div class="empty-state"><div class="empty-state-title"> 定义容器和端口映射关系</div></div>
+																		</div>
+
+																		<div class="col-sm-11 no-padding  margin-bottom-20 padding-bottom-10" style="border-bottom:1px solid #ddd">
+
+																			<div class="col-sm-4" name="port">容器端口</div>
+																			<div class="col-sm-4" name="network" style="display:none;">网络</div>
+																			<div class="col-sm-4">协议</div>
+																			<div class="col-sm-4">网络模式</div>
+																			<!--<div class="empty-state"><div class="empty-state-title">您还没有添加网络</div></div>-->
+
+																		</div>
+
+																		<div class="netContent">
+																		<div class="col-sm-10 no-padding" style="margin-bottom:10px;">
+																			<div class="col-sm-4" name="port">
+                                        <input type="text" class="form-control net_port">
+                                      </div>
+																			<div class="col-sm-4" name="network" style="display:none;">
+																				<select class="form-control network">
+																					<option value="">TCP</option>
+																					<option value="">UDP</option>
+																				</select>
+																			</div>
+																			<div class="col-sm-4">
+																				<select class="form-control protocol">
+																					<option value="TCP">TCP</option>
+																					<option value="UDP">UDP</option>
+																				</select>
+																			</div>
+																			<div class="col-sm-4">
+																				<select class="form-control net_mode" >
+																					<option value="BRIDGE">BRIDGE</option>
+																					<option value="HOST">HOST</option>
+																					<option value="USER">USER</option>
+																				</select>
+																			</div>
+																			<!--<div class="empty-state"><div class="empty-state-title">您还没有添加网络</div></div>-->
+																		</div>
+																		<div class="pull-left padding-left-10">
+																			<div class="form-group header-buttons" onclick="fnAddnetwork()">
+																				<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-plus"></i></a>
+																			</div>
+																		</div>
+																		<div class="pull-right" style="margin-right:10%;">
+																			<div class="form-group header-buttons" onclick="fnCutnetwork(this)">
+																				<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-minus"></i></a>
+																			</div>
+																		</div>
+																		</div>
+																	</div>
+
+																</div>
+																<hr class="wide">
+																<div class="form-group padding-top-10 padding-bottom-20 listhide" style="border:none">
+																	<label class="col-sm-2 control-label">目录映射</label>
+																	<div class="listContentX col-sm-8 ">
+																		<div class="listContent">
+																			<div class="col-sm-10 no-padding" style="margin-bottom:10px;">
+																				<div class="col-sm-4">
+																					<input type="text" class="form-control list_key" placeholder="键">
+																				</div>
+																				<div class="col-sm-4 ">
+																					<input type="text" class="form-control list_value" placeholder="值">
+																				</div>
+																				<div class="col-sm-4">
+																					<select class="form-control list_auth">
+																						<option value="RW">读写</option>
+																						<option value="RO">只读</option>
+																					</select>
+																				</div>
+
+																			</div>
+																			<div class="pull-left padding-left-10" >
+																				<div class="form-group header-buttons" onclick="fnAddvolumn()">
+																					<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-plus"></i></a>
+																				</div>
+																			</div>
+																			<div class="pull-right" style="margin-right:10%;">
+																				<div class="form-group header-buttons" onclick="fnCutvolumn(this)">
+																					<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-minus"></i></a>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+
+																</div>
+																<hr class="wide">
+																<div class="form-group padding-top-10 padding-bottom-20 dockerconfigure" style="border:none">
+																	<label class="col-sm-2 control-label">docker参数</label>
+																	<div class="dockerContentX col-sm-8">
+																	<div class="dockerContent">
+																	<div class="col-sm-10 no-padding" style="margin-bottom:10px;">
+																		<div class="col-sm-6">
+																			<input type="text" class="form-control docker_key" placeholder="键">
+																		</div>
+																		<div class="col-sm-1 margin-top-10">
+																			<i class="fa fa-minus"></i>
+																		</div>
+																		<div class="col-sm-5">
+																			<input type="text" class="form-control docker_value" placeholder="值">
+																		</div>
+
+																	</div>
+																	<div class="pull-left padding-left-10" >
+																		<div class="form-group header-buttons" onclick="fnAdddocker()">
+																			<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-plus"></i></a>
+																		</div>
+																	</div>
+																	<div class="pull-right" style="margin-right:10%;">
+																		<div class="form-group header-buttons" onclick="fnCutdocker(this)">
+																			<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-minus"></i></a>
+																		</div>
+																	</div>
+																	</div>
+																		<div class="dockerContent">
+																			<div class="col-sm-10 no-padding" style="margin-bottom:10px;">
+																				<div class="col-sm-6">
+																					<input type="text" class="form-control docker_key" placeholder="键">
+																				</div>
+																				<div class="col-sm-1 margin-top-10">
+																					<i class="fa fa-minus"></i>
+																				</div>
+																				<div class="col-sm-5">
+																					<input type="text" class="form-control docker_value" placeholder="值">
+																				</div>
+
+																			</div>
+																			<div class="pull-left padding-left-10" >
+																				<div class="form-group header-buttons" onclick="fnAdddocker()">
+																					<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-plus"></i></a>
+																				</div>
+																			</div>
+																			<div class="pull-right" style="margin-right:10%;">
+																				<div class="form-group header-buttons" onclick="fnCutdocker(this)">
+																					<a href="javascript:;" class="tooltip-primary"><i class="glyphicon glyphicon-minus"></i></a>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+
+																</div>
+																<hr class="wide">
+
+																<div class="col-sm-12 no-padding ">
+
+																	<div class="form-title"><strong style="padding-left: 8%;">Marathon配置</strong></div>
+
+																</div>
+
+																<div class="form-group padding-top-30 padding-bottom-20" style="border:none;margin-top:60px">
+																	<label  class="col-sm-2 control-label">应用ID</label>
+																	<div class="col-sm-8">
+																		<div class="col-sm-12" >
+																			<input type="text" class="form-control" id="app_id" data-value="">
+																	</div>
+																</div>
+																</div>
+
+																<div class="form-group padding-top-30 padding-bottom-20 centerconfigure" >
+																	<label  class="col-sm-2 control-label">数据中心</label>
+																	<div class="col-sm-8 ">
+																		<div class="col-sm-12 " id="data_center">
+																			<div class="col-sm-12 no-padding-left">
+																			<table class="table  table-no-bordered table-hover col-sm-12" id="dataCenterTable" style="width: 100%">
+
+																			</table>
+																			</div>
+																		</div>
+
+																		<div class="mara_conX"></div>
+																	</div>
+																</div>
+
+																<div class="form-group padding-top-10 padding-bottom-20" ><!--style="border:none"-->
+																<label class="col-sm-2 control-label">健康检测</label>
+																<div class="col-sm-8">
+
+																	<div class="healthContentX">
+																		<div class="healthContent">
+																			<div class="col-sm-12">
+																				<div class="col-sm-6">
+																					<div class="form-group">
+																						<label>协议</label>
+																						<select class="form-control " name="hprotocol" onchange="fnchangehealth(this)"
+																										data-value="empty">
+																							<option value="" >请选择</option>
+																							<option value="COMMAND" >COMMAND</option>
+																							<option value="HTTP" selected>HTTP</option>
+																							<option value="TCP" >TCP</option></select>
+																					</div>
+																				</div>
+																				<div class="col-sm-2 margin-top-20">
+																					<span class="btn btn-sm btn-danger" onclick="fnCutHealth(this)">删除</span>
+																				</div>
+																			</div>
+
+																			<div class="COMMANDdiv" style="display:none;">
+																				<div class="col-sm-12 margin-top-10">
+																					<div class="">
+																						<label>COMMAND</label>
+																						<input type="text" class="form-control" name='command' value="ls" data-value="">
+																					</div>
+																				</div>
+																			</div>
+																			<div class="Pathdiv" >
+																				<div class="col-sm-12 margin-top-10">
+																					<div>
+																						<label>Path</label>
+																						<input type="text" class="form-control" value="/test/" name='http_path' data-value="">
+																					</div>
+																				</div>
+																			</div>
+																			<div>
+																				<div class="col-sm-12 margin-top-10" style="margin-right:0;margin-left:0;">
+																					<div class="col-sm-3">
+																						<div class="form-group">
+																							<label>宽限期</label>
+																							<input min="0" step="1" class="form-control form-control-inverse mousetrap" name="gracePeriodSeconds"
+																										 value="300" onkeyup="value=value.replace(/[^\d.]/g,'')" type="number" data-value="empty"
+																										 onblur="fnIfEmpty(this)">
+																						</div>
+																					</div>
+
+																					<div class="col-sm-3">
+																						<div class="form-group">
+																							<label>间隔</label>
+																							<input type="number" name="interval" class="form-control" onkeyup="value=value.replace(/[^\d.]/g,'')"
+																										value="60" data-value="empty" onblur="fnIfEmpty(this)">
+																						</div>
+																					</div>
+
+																					<div class="col-sm-3">
+																						<div class="form-group">
+																							<label>超时</label>
+																							<input type="number" name="timeout" class="form-control" onkeyup="value=value.replace(/[^\d.]/g,'')"
+																										value="20" data-value="empty" onblur="fnIfEmpty(this)">
+																						</div>
+																					</div>
+
+																					<div class="col-sm-3">
+																						<div class="form-group">
+																							<label>连续失败最大次数</label>
+																							<input type="number" name="max_failures" class="form-control" onkeyup="value=value.replace(/[^\d.]/g,'')"
+																										value="3" data-value="empty" onblur="fnIfEmpty(this)">
+																						</div>
+																					</div>
+																				</div>
+																				<div class="col-sm-12 margin-top-10 no-padding margin-bottom-20">
+																				<div class="col-sm-6 port_indexdiv">
+																					<div class="">
+																						<label>端口索引</label>
+																						<input type="number" name="port_index" class="form-control" onkeyup="value=value.replace(/[^\d.]/g,'')"
+																									value="0" data-value="" >
+																					</div>
+																				</div>
+																				<!--<div class="col-sm-6 port_number " style="display:none">
+																					<div class="">
+																						<label>端口号</label>
+																						<input type="number" name="port_number" class="form-control" onkeyup="value=value.replace(/[^\d.]/g,'')"
+																									 data-value="">
+																					</div>
+																				</div>-->
+																				<div class="col-sm-6 port_typediv ">
+																					<div class="">
+																						<label>端口类型</label>
+																						<select  name="port_type" class="form-control" onchange="fnChangePortType(this)">
+																							<option value="port_index">端口索引</option>
+																							<option value="port_number">端口号</option>
+																						</select>
+																					</div>
+																				</div>
+																			</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="row ">
+																		<div class="col-sm-12  margin-top-20">
+																			<div class="form-group">
+																				<a class="btn btn-block btn-default" onclick="fnaddhealth()">添加其他健康检测</a>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																</div>
+															</div>
+															</div>
+														</div>
+
+													</div>
+
+													<div class="actions actions-footer padding-20 text-align-center" id="WiredWizard-actions">
+
+														<button type="button" class="btn btn-default " style="width:200px" id="_prevBtn"> <i class="fa fa-angle-left"></i>上一步</button>
+														<button type="button" class="btn btn-azure"  style="width:200px" data-last="" id="_NextBtn">下一步<i class="fa fa-angle-right"></i></button>
+
+													</div>
+
+												</form>
+												<div id="createResult" style="display:none"><!---->
+													<div id="createslider">
+														<h6>正在<span name="create">创建</span>中，请稍等</h6>
+														<div class="progress progress-striped">
+															<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+																<span>已完成20%</span>
+															</div>
+														</div>
+													</div>
+													<div id="resultlog" style="background-color: #000;width: 100%;height: 300px;color:#fff;padding:30px 25px;overflow-y:scroll;"></div>
+													<div id="operating" style="background-color: #fff;display:none;margin-top:30px;">
+														<div class="row">
+															<div class="col-lg-12 col-sm-12 col-xs-12">
+																<div class="panel-body" style="border: 1px solid #ddd;">
+																	<!--<div class="col-sm-3 border-right"  id="success"  style="border-right:1px dashed #777;">
+
+																		<div class="show-zero2 zeromodal-icon zeromodal-success zeromodal-borderd" style="background-color: #56C350;border-color: #56C350;">
+																			<span class="line tip" style="background-color:#fff;"></span><span class="line long" style="background-color:#fff;"></span>
+																			<div class="placeholder"></div>
+																		</div>
+																		<h5 style="color:#398C08;text-align: center;"><strong>应用<span name="create">创建</span>成功</strong></h5>
+
+																	</div>-->
+																	<div class="col-sm-12" id="info">
+																		<div  id="ciinfo" >
+																			<div class="col-sm-12" style="color:#398C08;margin-left:15px;"><h5><strong>持续集成包存放地址：</strong></h5></div>
+																			<div class="col-sm-12">
+																				<div class="col-sm-4 no-margin-top"><h6 ><strong>服务器IP：</strong></h6><span id="ftp_ip"></span></div>
+																				<div class="col-sm-4 no-margin-top"><h6><strong>服务器端口：</strong></h6><span id="ftp_port"></span></div>
+																				<div class="col-sm-4 no-margin-top"><h6><strong>文件名：</strong></h6><span id="filename"></span></div>
+																			</div>
+																			<div class="col-sm-12 padding-bottom-10" style="border-bottom: 1px solid #ddd;">
+																				<div class="col-sm-4 no-margin-top"><h6><strong>存放路径：</strong></h6><span id="ftp_path"></span></div>
+																				<div class="col-sm-4 no-margin-top"><h6><strong>服务器用户名：</strong></h6><span id="ftp_username"></span></div>
+																				<div class="col-sm-4 no-margin-top"><h6><strong>服务器密码：</strong></h6><span id="ftp_passwd"></span></div>
+																			</div>
+																		</div>
+																		<div  id="lbinfo">
+																			<div class="col-sm-12" style="color:#398C08;margin-left:15px;"><h5 class="no-margin-bottom"><strong>应用访问入口：</strong></h5></div>
+																			<div class="col-sm-12">
+																				<div class="col-sm-8"><h6 ><strong class="pull-left">域名：</strong></h6><span id="handle_url"></span></div>
+																				<div class="col-sm-4"><h6 ><strong class="pull-left">VIP：</strong></h6><span id="handle_ip"></span></div>
+																			</div>
+																			<div class="col-sm-12">
+																				<p class="col-sm-12 margin-top-5" style="color:#398C08;font-weight:bold;">可以根据域名进行解析，也可以根据VIP进行访问</p>
+																			</div>
+																		</div>
+																		<div class="col-sm-12" style="margin-left:15px;width:200px">
+																			<!--<p class="col-sm-12" style="text-align: center;" id="tipmsg">可以点击下面按钮跳转到应用详情页面，对该应用进行发布等操作</p>-->
+																			<!--<button class="btn btn-success" id="appdetailbtn">好的，我已了解</button>-->
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+													<div style="text-align: center;margin-top: 20px;">
+													<button type="button" class="btn btn-default" disabled style="width:200px" onclick="fnReCreate()" id="recreatebtn">重新创建</button>
+													<button type="button" class="btn btn-azure"  style="width:200px" onclick="fnHref()">确定</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+
+
+
+    <!--应用发布-->
+
+
+		<!--  添加容器配置-->
+		<div class="modal fade" id="addConfigureModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+				 data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog " >
+				<div class="modal-content">
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title">容器配置自定义</h4>
+					</div>
+					<form id="configureForm" method="post"  novalidate="novalidate" class="form-horizontal">
+
+						<div class="modal-body">
+
+							<div class="form-group">
+								<label  class="col-sm-2 control-label">CPU</label>
+								<div class="col-sm-9 margin-top-10">
+                  <div class="col-sm-11 no-padding-left" style="margin-top:-10px;" id="con_CPU">
+                    <div class="input-group" style="display:none;">
+                      <input type="text" class="form-control" id="dataTypei" name="type" placeholder="输入CPU" onkeyup="value=value.replace(/[^\d.]/g,'')"
+                             data-bv-field="type"><i class="form-control-feedback" data-bv-field="type" style="display: none;"></i>
+                      <span class="input-group-btn">
+				                    <button class="btn btn-default" type="button" onclick="closeInput(this);">
+				                      <i class="fa fa-remove"></i>
+				                    </button>
+				                  </span>
+                    </div>
+                    <select class="form-control" style="width:100%">
+                      <option value="0.5">0.5</option>
+                      <option value="1">1</option>
+                      <option value="1.5">1.5</option>
+                      <!--<option value="">新增</option>-->
+                    </select>
+                  </div>
+									<!--<div class="col-sm-8 no-padding-left">
+										<div id="sample-onehandle4" class="slider-xs" name="con_CPU"></div>
+									</div>-->
+									<!--<div class="col-sm-12  no-padding-right">
+										<input type="text" value="0" id="con_CPU" onkeyup="change(this,'15')" />
+									</div>-->
+									<div class="col-sm-1" style="margin-top:-5px">
+										<p class="no-padding-left">核</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label  class="col-sm-2 control-label">内存</label>
+								<div class="col-sm-9 margin-top-10">
+                  <div class="col-sm-11 no-padding-left" style="margin-top:-10px;" id="con_mem">
+                    <div class="input-group" style="display:none;">
+                      <input type="text" class="form-control"  name="type" placeholder="输入内存" onkeyup="value=value.replace(/[^\d.]/g,'')"
+                             data-bv-field="type"><i class="form-control-feedback" data-bv-field="type" style="display: none;"></i>
+                      <span class="input-group-btn">
+				                    <button class="btn btn-default" type="button" onclick="closeInput(this);">
+				                      <i class="fa fa-remove"></i>
+				                    </button>
+				                  </span>
+                    </div>
+                    <select  class="form-control" style="width:100%">
+                      <option value="0.25">0.25</option>
+                      <option value="0.5">0.5</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <!--<option value="">新增</option>-->
+                    </select>
+                  </div>
+									<!--<div class="col-sm-8 no-padding-left">
+										<div id="sample-onehandle5" class="slider-xs" name="con_mem"></div>
+									</div>
+									<div class="col-sm-3  no-padding-right" style="margin-top:-10px">
+										<input type="text" class="form-control" value="0" id="con_mem" onkeyup="change(this,'40')" />
+									</div>-->
+									<div class="col-sm-1" style="margin-top:-5px">
+										<p class="no-padding-left">GB</p>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-azure"  data-dismiss="modal" id="createCPUmem">确定</button>
+						</div>
+
+					</form>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+
+
+		<!--  创建镜像新 -->
+		<div class="modal fade in" id="creatDataModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+         data-backdrop="static" data-keyboard="false" style="display:none">
+			<div class="modal-dialog " style="width:800px">
+				<div class="modal-content">
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" >创建镜像</h4>
+					</div>
+					<form id="accountForm" method="post" novalidate="novalidate" class="form-horizontal">
+						<div class="modal-body">
+              <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right">镜像名称<span class="padding-left-5 darkorange">*</span></label>
+                <div class="col-sm-9">
+                  <input class="form-control" id="createImg" onchange="checkImg()" onkeyup="value=value.replace(/[\u4e00-\u9fa5/]/g,'')">
+									<p class="red"></p>
+                </div>
+              </div>
+							<div class="form-group margin-top-20">
+								<label class="col-sm-2 control-label no-padding-right">选择镜像<span class="padding-left-5 darkorange">*</span></label>
+								<div class="col-sm-9">
+                  <div class="col-sm-6 no-padding">
+                    <select class="form-control" id="common_image" onchange="fnGetCreateImgVer()"></select>
+                  </div>
+                  <div class="col-sm-6 no-padding-right">
+                    <select class="form-control" id="comImgVer"></select>
+                  </div>
+							</div>
+							</div>
+							<div class="form-group margin-top-20">
+								<label class="col-sm-2 control-label no-padding-right">上传程序包</label>
+
+								<div class="col-sm-9">
+									<div class="col-md-12 no-padding" style="margin-top:-10px">
+										 <!--<input type="file" id="fileinput" multiple="multiple" accept="image/*" />-->
+										<div id="uploadfilebtn"></div>
+										<!--<span class="uploadSuccess">文件将上传至/app/data目录下</span>-->
+									</div>
+
+								</div>
+							</div>
+							<div class="form-group margin-top-20">
+								<label class="col-sm-2 control-label no-padding-right">上传启动脚本</label>
+
+								<div class="col-sm-9">
+									<div class="col-md-12 no-padding" style="margin-top:-10px">
+										<!--<input type="file" id="fileinput" multiple="multiple" accept="image/*" />-->
+										<div id="uploadbtn"></div>
+										<!--<span class="uploadSuccess">文件将上传至/app/data目录下</span>-->
+									</div>
+
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label no-padding-right">dockerfile</label>
+								<div class="col-sm-9">
+									<textarea class="form-control" rows="3" placeholder="dockerfile" id="img_remark" style="height: 200px;"></textarea>
+
+								</div>
+							</div>
+							<div class="form-group hidden">
+								<label class="col-sm-2 control-label no-padding-right">镜像描述</label>
+								<div class="col-sm-9">
+									<textarea class="form-control" rows="3" placeholder="填写镜像描述信息" id="img_remark1"></textarea>
+
+								</div>
+							</div>
+							<div class="form-group hidden">
+								<label class="col-sm-2 control-label no-padding-right">配置信息</label>
+								<div class="col-sm-9">
+									<textarea class="form-control" rows="3" placeholder="填写配置信息" id="img_remark2"></textarea>
+
+								</div>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-azure"disabled data-dismiss="modal" id="create_btn">创建</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal fade" id="tips" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+				 style="display: none;" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+					<div class="modal-body" style="font-size:15px;font-weight:bold">
+						<span name="create">创建</span>中, 请稍候...<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+						<span class="sr-only"></span>
+					</div>
+
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		<div class="modal modal-message modal-info in" id="successmodal"  aria-hidden="true"
+				 style="display:none;" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+						<div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+					</div>
+					<div class="modal-body" >
+						<p class="title1" id="success_msg"><span name="create">创建</span>成功</p>
+					</div>
+					<!--<div class="modal-body" >
+						<span id="tipsSpan" class="title1"></span>
+						<div id="ciFtp" class="padding-left-30 padding-right-30 padding-top-20">
+							<div class="padding-bottom-20"><span id="createAppId" class="info hidden"></span>持续集成的环境配置信息为:</div>
+							<ul class="list-group">
+                <li class="list-group-item row no-margin">
+                  <div class="col-sm-6"><strong>应用ID:</strong><span id="createapp_id1" class="padding-left-5"></span></div>
+                  <div class="col-sm-6"><strong>应用名称:</strong><span id="createapp_name1" class="padding-left-5"></span></div>
+                </li>
+								<li class="list-group-item row no-margin">
+									<div class="col-sm-6"><strong>服务器IP:</strong><span id="ftp_ip1" class="padding-left-5"></span></div>
+									<div class="col-sm-6"><strong>服务器端口:</strong><span id="ftp_port1" class="padding-left-5"></span></div>
+								</li>
+								<li class="list-group-item row no-margin">
+									<div class="col-sm-6"><strong>文件名:</strong><span id="filename1" class="padding-left-5"></span></div>
+									<div class="col-sm-6"><strong>存放路径:</strong><span id="ftp_path1" class="padding-left-5"></span></div>
+								</li>
+								<li class="list-group-item row no-margin">
+									<div class="col-sm-6"><strong>服务器用户名:</strong><span id="ftp_username1" class="padding-left-5"></span></div>
+									<div class="col-sm-6"><strong>服务器密码:</strong><span id="ftp_passwd1" class="padding-left-5"></span></div>
+								</li>
+
+							</ul>
+						</div>
+						<p id="vipurl"></p>
+					</div>-->
+					<div class="modal-footer padding-bottom-20"><!--onclick="fnCancelUrl('successmodal')"-->
+						<button type="button" class="btn btn-azure" data-dismiss="modal" id="btntext">好的，我知道了</button>
+					</div>
+
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		<div class="modal modal-message modal-info  in" id="failmodal"  aria-hidden="true"
+				 style="display:none;" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+					</div>
+					<div class="modal-body" >
+						<p class="title1" id="failmgs"><span name="create">创建</span>失败</p>
+						<p id="failSpan" style="background-color: #000;color:#fff"></p>
+
+					</div>
+					<div class="modal-footer padding-bottom-20"><!-- onclick="fnCancelUrl('failmodal')"-->
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="failnone">取消</button>
+						<!--<button type="button" class="btn btn-info" data-dismiss="modal">重新创建</button>-->
+
+					</div>
+
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		<div class="modal modal-message modal-info  in" id="appfailmodal"  aria-hidden="true"
+				 style="display:none;" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/img/sad.png"></div>
+
+					</div>
+					<div class="modal-body" >
+						<p class="title1" id="appfailmgs"><span name="create">创建</span>失败</p>
+						<p id="appfailSpan">点击“返回修改参数”按钮，可修改该应用的配置；点击“不再<span name="create">创建</span>”按钮，返回应用列表页面</p>
+					</div>
+					<div class="modal-footer padding-bottom-20"><!-- onclick="fnCancelUrl('failmodal')"-->
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="updateconfige">返回修改参数</button>
+						<button type="button" class="btn btn-info" data-dismiss="modal" onclick="window.location.href = '#/webcontent/Application/Applist.html'">不再<span name="create">创建</span></button>
+					</div>
+
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+    <!--<div class="modal " id="showCiModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true"
+         style="display: none;" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header">
+           &lt;!&ndash; <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>&ndash;&gt;
+            <h4 class="modal-title" id="myLargeModalLab">是否接通ADCLOUD</h4>
+            <span class="hidden"  value=""></span>
+          </div>
+          <div class="modal-body">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-azure" data-dismiss="modal">确定</button>
+          </div>
+        </div>&lt;!&ndash; /.modal-content &ndash;&gt;
+      </div>&lt;!&ndash; /.modal-dialog &ndash;&gt;
+    </div>-->
+		<div class="modal " id="showCreateModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+				 aria-hidden="true" style="display: none;" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header" style="border-bottom:1px solid #000;">
+						 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<div style="width: 100px;background-color: #000; padding: 10px;margin-bottom: -10px;" id="applogTitle"><span name="create">创建</span>应用日志</div>
+						<span class="hidden"  value=""></span>
+					</div>
+					<div class="modal-body" style="background-color: #000;color:#fff;"id="appendlog">
+
+					</div>
+					<!--<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						&lt;!&ndash;<button type="button" class="btn btn-azure" data-dismiss="modal">确定</button>&ndash;&gt;
+					</div>-->
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div>
+    <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="plugin/uploadify/jquery.Huploadify.js"></script>
+    <script src="assets/js/bootstrap-filestyle.min.js"></script>
+    <script src="assets/js/bootstrap-select.js"></script>
+     <script src="assets/js/select2/select2.min.js"></script>
+		<script src="assets/js/fuelux/wizard/wizard-custom.js"></script>
+   <!--  <script src="../../assets/js/fuelux/spinner/fuelux.spinner.min.js"></script>-->
+     <script src="assets/js/validation/bootstrapValidator.js"></script>
+		<script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+		<script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+		<script src="assets/js/codemirror/codemirror.js"></script>
+	<!--	<script src="assets/js/codemirror/python.js"></script>-->
+		<script src="assets/js/slider/jquery.nouislider.js"></script>
+		<script src="assets/js/skins.min.js"></script>
+		<script src="assets/js/beyond.min.js"></script>
+
+		<script src="./webcontent/Application/js/CreatApplication.js"></script>
+<script type="text/javascript">
+
+  jQuery(function ($) {
+    $('#tabbedwizard').wizard().on('finished', function (e) {
+      Notify('Thank You! All of your information saved successfully.', 'bottom-right', '5000', 'blue', 'fa-check', true);
+    });
+    $('#WiredWizard').wizard();
+  });
+
+</script>
+
+
+<!--  /Body -->
+

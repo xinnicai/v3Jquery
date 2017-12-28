@@ -1,0 +1,411 @@
+<link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+<link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                    	
+                        <li>
+                           
+                       <a href="#/webcontent/server/servercluster.html" > 服务集成</a>
+                        </li>
+                         
+                        <li class="active">Redis</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Body -->
+                <div class="page-body">
+                	<div class="row">	
+                	   <div class="col-sm-12">
+                		  <div class="widget">
+                            <div class="widget-header bg-lightinfo">
+                                <span >Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。</span>
+                            </div>
+                         <div class="widget-body padding-30">
+                              <div>
+                                 <form id="accountForm1" method="post" class="form-horizontal bv-form" novalidate="novalidate" role="form">
+
+                                   <div class="form-group padding-bottom-10">
+                                     <label  class="col-sm-2 control-label">资源池</label>
+                                     <div class="col-lg-9 col-md-10 col-sm-10 col-xs-10  col-xs-10" id="ResourcesPool">
+                                     </div>
+                                   </div>
+                                   <div class="form-group padding-bottom-10">
+                                     <label  class="col-sm-2 control-label">集群</label>
+                                     <div class="col-lg-9 col-md-10 col-sm-10 col-xs-10  col-xs-10" id="cluster">
+                                     </div>
+                                   </div>
+                                   <div class="form-group padding-bottom-10">
+                                     <label  class="col-sm-2 control-label">系统名称</label>
+                                     <div class="col-sm-10">
+                                       <div class="col-sm-3 no-padding-left">
+                                         <select   id="firstResource" name="selectcheck" style="width:100%">
+                                         </select>
+                                       </div>
+                                       <div class="col-sm-3">
+                                         <select  id="secondResource" name="selectcheck" style="width:100%">
+                                         </select>
+                                       </div>
+                                       <div class="col-sm-3">
+                                         <select  id="thirdResource" name="selectcheck" style="width:100%">
+                                         </select>
+                                       </div>
+                                     </div>
+                                   </div>
+                                   <div class="form-group padding-bottom-10">
+                                         <label  class="col-sm-2 control-label">节点信息</label>
+                                         <div class="col-lg-9 col-md-10 col-sm-10 col-xs-10  col-xs-10" id="slave_info">
+                                           <a class="btn btn-info cpunum">单节点</a>
+                                           <a class="btn btn-default">多节点</a>
+                                         </div>    
+                                      </div>
+                                   <!-- <div class="form-group cluster hidden">
+                                     <label  class="col-sm-2 control-label">发布集群</label>
+                                      <div class="col-sm-8">
+                                        <select class="form-control" id="resource_name">
+                                          <option value="test1">test1</option>
+                                        </select>  
+                                        <input type="hidden" id="marathon_name" value="">
+                                        <input type="hidden" id="zk_hosts" value="">
+                                      </div> 
+                                   </div> -->
+                                        <div class="form-group version padding-bottom-10">
+                                           <label  class="col-sm-2 control-label ">选择版本</label>
+                                          <div class="col-sm-8 ">
+                                            <div class="col-sm-10 no-padding">
+                                              <div class="col-sm-12 no-padding">
+                                                <select id="server-version" class="control-select" style="margin-left:0;">
+                                                  <option value="2.8.24">redis-2.8.24</option>
+                                                  <option value="system">redis-5</option>
+                                                </select>
+                                              </div>
+
+                                              <div class="col-sm-12 no-padding margin-top-20" style="display: none;" id="config">
+                                                <!--<div class="form-title margin-top-20"><strong>线程值配置</strong></div>-->
+                                                <div class="col-sm-4 no-padding">
+                                                    <label>安全认证<a href="javascript:void(0);" class="padding-left-5 tooltip-info" data-container="body" data-toggle="popover-hover" data-placement="top" data-title="" data-content="<h6><strong>requirepass password</strong><h6><p>开启安全认证，默认未开启</p>" data-original-title="" title=""><i class="fa  fa-question-circle-o"></i></a>
+
+                                                    </label>
+                                                    <select class="form-control">
+                                                      <option>开启</option>
+                                                      <option>关闭</option>
+                                                    </select>
+
+                                                </div>
+
+
+                                                <div class="col-sm-4 no-padding-right">
+                                                    <label>开启aof持久化<a href="#" class="padding-left-5 tooltip-info" data-container="body" data-toggle="popover-hover" data-placement="top" data-title="" data-content="<h6><strong>appendonly</strong><h6><p>开启aof持久化，系统默认no</p>" data-original-title="" title=""><i class="fa  fa-question-circle-o"></i></a></label>
+                                                    <select class="form-control">
+                                                      <option>开启</option>
+                                                      <option>关闭</option>
+                                                    </select>
+
+                                                </div>
+
+
+                                                <div class="col-sm-4 no-padding-right">
+                                                    <label>appendfsync<a href="#" class="padding-left-5 tooltip-info" data-container="body" data-toggle="popover-hover" data-placement="top" data-title="" data-content="<h6><strong>appendfsync</strong><h6><p>no:表示等操作系统进行数据缓存同步到磁盘;
+always:表示每次更新操作后手动调用fsync()将数据写到磁盘;
+everysec:表示每秒同步一次（默认值）.
+</p>" data-original-title="" title=""><i class="fa  fa-question-circle-o"></i></a></label>
+                                                    <select class="form-control">
+                                                      <option>everysec</option>
+                                                      <option>always</option>
+                                                      <option>no</option>
+                                                    </select>
+                                                </div>
+
+                                              </div>
+                                            </div>
+                                            <div class="col-sm-2 padding-top-5" style="font-size:14px"><a hredf="javascript:;" class="darkgray" onclick="showcongig()"><i class="fa fa-cog"></i></a></div>
+
+
+
+                                          </div>
+                                        </div>
+
+                                   <div class="form-group padding-botttom-10">
+                                     <label  class="col-sm-2 control-label">容器配置</label>
+                                     <div class="col-sm-8  list-jd " id="con_configure">
+                                       <div class="col-sm-12 no-padding">
+                                         <div class="con_configureX">
+                                           <a class="jd pull-left margin-right-10 " href="javascript:;">
+                                             <div class="panel panel-default con_configure active" onclick="fnSelectConfigure(this)">
+                                               <div class="panel-heading text-center cpu_mem">
+                                                 2核/4GB
+                                               </div>
+                                               <div class="panel-body text-center  darkgray" style="padding:10px 30px">
+                                                 最低配置
+                                               </div>
+                                             </div>
+                                           </a>
+
+                                           <a class="jd pull-left margin-right-10" href="javascript:;">
+                                             <div class="panel panel-default con_configure" onclick="fnSelectConfigure(this)">
+                                               <div class="panel-heading text-center cpu_mem">
+                                                 3核/6GB
+                                               </div>
+                                               <div class="panel-body text-center darkgray" style="padding:10px 30px">
+                                                 标准配置
+                                               </div>
+                                             </div>
+                                           </a>
+                                           <a class="jd pull-left margin-right-10" href="javascript:;">
+                                             <div class="panel panel-default con_configure" onclick="fnSelectConfigure(this)">
+                                               <div class="panel-heading text-center cpu_mem">
+                                                 4核/8GB
+                                               </div>
+                                               <div class="panel-body text-center darkgray" style="padding:10px 30px">
+                                                 最高配置
+                                               </div>
+                                             </div>
+                                           </a>
+                                         </div>
+
+                                         <a class="jd pull-left margin-right-10" href="javascript:;">
+                                           <div class="panel panel-default con_configure" onclick="fnSelectConfigure(this)">
+                                             <div class="panel-heading text-center" style="padding:10px 30px;font-size:21px">
+                                               <i class="glyphicon glyphicon-plus"></i>
+                                               <h6 class="no-margin-bottom">自定义</h6>
+                                             </div>
+
+                                           </div>
+                                         </a>
+                                       </div>
+                                     </div>
+                                     <!--<div class="col-lg-9 col-md-10 col-sm-10 col-xs-10  col-xs-10" id="CPU">
+                                       <a class="btn btn-default">2C</a>
+                                       <a class="btn btn-info cpunum">3C</a>
+                                       <a class="btn btn-default">4C</a>
+                                       <a class="btn btn-default">5C</a>
+                                       <a class="btn btn-default">6C</a>
+                                       <a class="btn btn-default">7C</a>
+                                       <a class="btn btn-default">8C</a>
+                                       <a class="btn btn-default">9C</a>
+                                       <a class="btn btn-default">10C</a>
+                                       <a class="btn btn-default">11C</a>
+                                       <a class="btn btn-default">12C</a>
+                                     </div>-->
+                                   </div>
+
+                                        <div class="form-group">
+                                            <label  class="col-sm-2 control-label">磁盘</label>
+                                          <div class="col-sm-8">
+                                            <div class="col-sm-10 no-padding">
+                                              <input type="text" class="form-control" id="disk">
+                                            </div>
+
+                                            <div class="col-sm-2" style="margin-top:5px">
+                                              <p class="no-padding-left">GB</p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-8 padding-bottom-30">
+                                            <button type="button" class="btn btn-azure btn-block" onclick="fnajax()">创建</button>
+                                        </div>
+                                      </div> 
+                                      
+                                  </form>
+                                </div>
+                            </div>
+                        </div>
+		          </div>   
+              </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+
+    
+    <!-- 忙等待 -->
+<div class="modal in" id="tips" style="display:none">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body" style="font-size:15px;font-weight:bold;margin-top:250px">
+				<span></span><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+				<span class="sr-only"></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--提示框-->
+<div class="modal in" id="MsgAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h4 id="MsgAlertTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <h6 id="MsgAlertContent"></h6>
+      </div>
+      <div class="modal-footer">
+      <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">确定</button>
+      </div>
+    </div>
+  </div>
+</div><!--成功提示框-->
+<!--成MsgAlertModal功提示信息-->
+<div class="modal modal-message modal-info in" id="successmodal"  aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header no-padding-bottom">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+        <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+      </div>
+      <div class="modal-body" >
+        <p class="title1">redis服务创建成功</p>
+        <p >服务地址：<span class="info" id="sever_address"></span></p>
+        <!--<p >用户名：<span class="info" id="sever_user"></span></p>
+        <p >密码：<span class="info" id="sever_Password"></span></p>-->
+        <p class="hidden"><span class="info" id="sever_id"></span></p>
+
+      </div>
+      <div class="modal-footer padding-bottom-20">
+
+        <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="fnHerf()">好的，我知道了</button>
+
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!--错误失败提示信息-->
+<div class="modal modal-message modal-info in" id="failmodal"  aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header no-padding-bottom">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+        <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+      </div>
+      <div class="modal-body" >
+        <p class="title1">服务创建失败</p>
+        <p id="failSpan"></p>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--  自定义配置-->
+<div class="modal fade" id="addConfigureModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+     data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog " >
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">容器配置自定义</h4>
+      </div>
+      <form id="configureForm" method="post"  novalidate="novalidate" class="form-horizontal">
+
+        <div class="modal-body">
+          <div class="form-group">
+            <label  class="col-sm-2 control-label">CPU</label>
+            <div class="col-sm-9 margin-top-10">
+              <div class="col-sm-11 no-padding-left" style="margin-top:-10px;" id="con_CPU">
+                <div class="input-group" style="display:none;">
+                  <input type="text" class="form-control" id="dataTypei" name="type" placeholder="输入CPU" onkeyup="value=value.replace(/[^\d.]/g,'')"
+                         data-bv-field="type"><i class="form-control-feedback" data-bv-field="type" style="display: none;"></i>
+                  <span class="input-group-btn">
+				                    <button class="btn btn-default" type="button" onclick="closeInput(this);">
+				                      <i class="fa fa-remove"></i>
+				                    </button>
+				                  </span>
+                </div>
+                <select class="form-control" style="width:100%">
+                  <option value="0.5">0.5</option>
+                  <option value="1">1</option>
+                  <option value="1.5">1.5</option>
+                  <!--<option value="">新增</option>-->
+                </select>
+              </div>
+              <div class="col-sm-1" style="margin-top:-5px">
+                <p class="no-padding-left">核</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label  class="col-sm-2 control-label">内存</label>
+            <div class="col-sm-9 margin-top-10">
+              <div class="col-sm-11 no-padding-left" style="margin-top:-10px;" id="con_mem">
+                <div class="input-group" style="display:none;">
+                  <input type="text" class="form-control"  name="type" placeholder="输入内存" onkeyup="value=value.replace(/[^\d.]/g,'')"
+                         data-bv-field="type"><i class="form-control-feedback" data-bv-field="type" style="display: none;"></i>
+                  <span class="input-group-btn">
+				                    <button class="btn btn-default" type="button" onclick="closeInput(this);">
+				                      <i class="fa fa-remove"></i>
+				                    </button>
+				                  </span>
+                </div>
+                <select  class="form-control" style="width:100%">
+                  <option value="0.25">0.25</option>
+                  <option value="0.5">0.5</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <!--<option value="">新增</option>-->
+                </select>
+              </div>
+              <!--<div class="col-sm-8 no-padding-left">
+                <div id="sample-onehandle5" class="slider-xs" name="con_mem"></div>
+              </div>
+              <div class="col-sm-3  no-padding-right" style="margin-top:-10px">
+                <input type="text" class="form-control" value="0" id="con_mem" onkeyup="change(this,'40')" />
+              </div>-->
+              <div class="col-sm-1" style="margin-top:-5px">
+                <p class="no-padding-left">GB</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-azure"  data-dismiss="modal" id="createCPUmem">确定</button>
+        </div>
+
+      </form>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+
+<!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/validation/bootstrapValidator.js"></script>
+    <script src="assets/js/skins.min.js"></script>
+    <script src="assets/js/beyond.min.js"></script>
+    <script src="assets/js/bootstrap-select.js"></script>
+    <script src="assets/js/select2/select2.min.js"></script>
+    <script src="assets/js/datetime/bootstrap-datepicker.js"></script>
+    <script src="assets/js/slider/jquery.nouislider.js"></script>
+   <script src="webcontent/server/js/Redis.js"></script>
+
+<script>
+  function showcongig(){
+    if($('#config').is(':hidden')){//如果当前隐藏
+      $('#config').show();//那么就显示div
+    }else{//否则
+      $('#config').hide();//就隐藏div
+    }
+  }
+
+
+</script>
+

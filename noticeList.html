@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<!-- Head -->
+    <meta charset="utf-8" />
+    <title>公告信息</title>
+
+    <link href="assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <!--main.css-->
+     <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+     <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+<link href="assets/css/font-awesome.min.css" rel="stylesheet"/>
+<link href="assets/css/main.css" rel="stylesheet" type="text/css"/>
+     <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+     <style>
+     	
+     </style> 
+
+<!-- /Head -->
+<!-- Body -->
+
+
+	<div class="row">
+		<!-- <div class="page-header">
+			<div class="header-title "><h1><span class="padding-left-10">公告信息</span></h1></div>
+		</div> -->
+	<div class="page-body" style="padding:20px 24px;">
+		<div class="container-fluid">
+			<div id="include-message">
+				<div id="sessionExpiredAlertBlock" class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none;">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+				  	<span>会话失效，请重新登录! <a class="btn btn-danger" href="/iMonitor/login.jsp">登录</a></span>
+				</div>
+	
+				<div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+					<button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">×</span></button>
+					<span id="warningMsg"></span>
+				</div>
+	
+				<div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+					<button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">×</span></button>
+				   	<span id="successMsg"></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="widget">
+                                <div class="padding-10" style="background-color:#e4eaec">
+
+                                    公告信息历史记录
+                                </div><!--Widget Header-->
+                                <div class="widget-body" >
+                                    <div class="widget-main no-padding">
+                                        <div class="task-container">
+                                            <div class="task-search">
+                                                <span class="input-icon">
+                                                    <input type="text" class="form-control" placeholder="请输入公告名称" onkeyup="fnSearch(this)">
+                                                    <i class="fa fa-search gray"></i>
+                                                </span>
+                                            </div>
+                                            <div class="row margin-top-10" id="info_list">
+                                              <div class="col-xs-4">
+                                              <div class="panel panel-default">
+                                              <div class="panel-body">
+                                                暂无通知信息
+                                              </div>
+                                              </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div><!--Widget Main Container-->
+                                </div><!--Widget Body-->
+                            </div>
+
+                        </div>
+			 </div>
+			</div>
+		</div>		
+	   </div>
+
+
+    <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/datetime/moment.min.js"></script>
+    <script src="assets/js/datetime/bootstrap-datepicker.js"></script>
+     <script src="assets/js/datetime/bootstrap-datetimepicker.min.js"></script>
+     <!-- <script src="../../assets/js/datetime/bootstrap-datetimepicker.zh-CN.js"></script> -->
+     <script src="assets/js/bootstrap-select.js"></script>
+     <script src="assets/js/select2/select2.min.js"></script>
+   <script src="assets/js/validation/bootstrapValidator.js"></script>
+ <!--   <script src="../../assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script> -->
+   <script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+
+
+
+
+<!--  /Body -->
+<script>
+
+  function getCookie(name)
+  {
+    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+
+    if(arr=document.cookie.match(reg))
+
+      return (arr[2]);
+    else
+      return null;
+  }
+  var _URL_INTERFACE = 'http://20.26.28.187:6060/v3.0/';
+  var token = getCookie('token');
+fnGetNoticeData();
+function fnGetNoticeData(){
+	$.ajax({
+    type: 'get',
+    url: _URL_INTERFACE+"platform/notice",
+    headers: {
+      "token": token
+    },
+		dataType: 'json',
+		success:function (result) {
+				var data=result.data;
+				if(data){
+					fnHandleNoticeData(data);
+					
+			}
+		},
+    error:function (XMLHttpRequest, textStatus, errorThrown) {
+      if(XMLHttpRequest.status === 401){
+        window.location.href = '/index.html';
+      }else{
+        //alert('添加失败！（例子）');//其他操作
+      }
+    }
+	});
+}
+function fnHandleNoticeData(data){
+	$('#info_list').empty();
+	var content = "";
+	if(data && data.length>0){
+		for (var i = 0; i < data.length; i++) {
+			content +='<div  class="col-sm-4">';
+			content +='<div class="well bordered-top bordered-info">';
+			content +='<div class="panel-headding data-info="'+data[i].notice_title+'">'
+			content +='<h2  data="title" class="text-align-center">';
+			content +=data[i].notice_title;
+			content +='</h2>';
+			
+			content +='</div>';
+			content +='<div class="padding-20" style="word-wrap:break-word;height:100px">'+data[i].notice_content+'</div>';
+			content +='<div class="padding-10 info text-align-right">'+data[i].username ;
+			content +='<span class=" padding-left-10 sonic-silver">'+data[i].create_time+'</span>';
+			
+			content +='</div></div></div>';
+			
+		}
+		$('#info_list').append(content);
+	}else{
+		content += '<tr>暂无查询记录</tr>';
+	}
+
+	
+}
+
+function fnSearch(obj){
+	var txt = $(obj).val();
+	if (txt == '') {
+		$("#info_list li").show();
+	} else {
+		$("li").hide();
+		$("h2:contains('" + txt + "')").parents("#info_list li").show();
+	}
+}
+</script>
+</html>

@@ -1,0 +1,492 @@
+<!--Basic Styles-->
+<link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+<link href="assets/css/font-awesome.min.css" rel="stylesheet"/>
+<!--main.css-->
+<link href="assets/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/dist.css" rel="stylesheet" type="text/css"/>
+
+<!-- Page Breadcrumb -->
+<div class="page-breadcrumbs  breadcrumbs-fixed">
+  <ul class="breadcrumb">
+    <li>
+      <i class="fa fa-home"></i>
+      <a href="#/webcontent/Cluster/Clusterlist.html">集群管理</a>
+    </li>
+    <li class="active">创建集群</li>
+  </ul>
+</div>
+<!-- /Page Breadcrumb -->
+
+<!-- Page Body -->
+<div class="page-body">
+  <div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+      <div id="simplewizard" class="wizard" data-target="#simplewizard-steps">
+        <ul class="steps">
+          <li data-target="#simplewizardstep1" class="active"><span class="step">1</span>基本配置<span
+              class="chevron"></span></li>
+          <li data-target="#simplewizardstep2"><span class="step">2</span>Master<span class="chevron"></span></li>
+          <li data-target="#simplewizardstep3"><span class="step">3</span>Marathon<span class="chevron"></span></li>
+          <li data-target="#simplewizardstep4"><span class="step">4</span>Haproxy<span class="chevron"></span></li>
+          <!--<li data-target="#simplewizardstep5"><span class="step">5</span>Nginx<span class="chevron"></span></li>-->
+          <li data-target="#simplewizardstep6"><span class="step">5</span>配置确认<span class="chevron"></span></li>
+          <li data-target="#simplewizardstep7"><span class="step">6</span>完成<span class="chevron"></span></li>
+        </ul>
+      </div>
+      <div class="step-content" id="simplewizard-steps">
+        <div class="step-pane active" id="simplewizardstep1">
+
+          <div class="form-horizontal" role="form">
+            <div class="form-group" data-master="true">
+              <label class="col-sm-2 control-label no-padding-right">资源池<span
+                      class="padding-left-5 danger">*</span></label>
+              <div class="col-sm-8">
+                <select id="ResourcesPool" class="form-control" onchange="selectChangeaaa()">
+                  <option value="">请选择</option>
+                  <option value="1">1</option>
+                  <option value="3">3</option>
+                  <option value="5">5</option>
+                </select>
+
+                <span style="color:#858585" class="masterNote">资源池的名称，例如：生产</span>
+                <span class="warning"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">集群名称<span
+                  class="padding-left-5 danger">*</span></label>
+              <div class="col-sm-8">
+                <input class="form-control" id="cluster_name">
+                <span style="color:#858585">集群名称</span>
+                <span class="warning"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">集群标签<span
+                  class="padding-left-5 danger">*</span></label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="_ClusterAddLabel"
+                       placeholder="请输入集群标签">
+                <span style="color:#858585">用来标识该集群。例：production</span>
+                <span class="warning"></span>
+              </div>
+            </div>
+
+
+            <div class="form-group" data-master="true">
+              <label class="col-sm-2 control-label no-padding-right">Master节点数量<span
+                  class="padding-left-5 danger">*</span></label>
+              <div class="col-sm-8">
+                <select id="_ClusterAddMasterNum" class="form-control" onchange="selectChange()">
+                  <option value="">请选择</option>
+                  <option value="1">1</option>
+                  <option value="3">3</option>
+                  <option value="5">5</option>
+                </select>
+
+                <span style="color:#858585" class="masterNote">Master节点的数量</span>
+                <span class="warning"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">镜像仓库地址<span class="padding-left-5 danger">*</span></label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="imgageaddr"
+                       placeholder="镜像仓库地址">
+                <span style="color:#858585">若有多个镜像库地址用“，”分割</span>
+                <span class="warning"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">程序包仓库地址<span class="padding-left-5 danger">*</span></label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="PackageAddr"
+                       placeholder="程序包仓库地址">
+                <span style="color:#858585">若有多个代码包库地址用“，”分割</span>
+                <span class="warning"></span>
+              </div>
+            </div>
+            <!-- <div class="form-group hidden" data-slave="true">
+              <label class="col-sm-2 control-label no-padding-right">归属集群<span class="padding-left-5 danger">*<span></label>
+              <div class="col-sm-8">
+                <select class="form-control" id="_ClusterAddResp"></select>
+              </div>
+            </div>
+            <div class="form-group hidden" data-slave="true">
+              <label class="col-sm-2 control-label no-padding-right">节点数量<span class="padding-left-5 danger">*<span></label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="_ClusterAddSlaveNum" placeholder="请输入节点数量" />
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <div class="step-pane" id="simplewizardstep2">
+          <div class="form-horizontal" role="form">
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">Master</label>
+              <div class="col-sm-8">
+                <select id="e2" multiple="multiple" style="width: 100%;">
+                  <!-- <option value="AL" />192.168.1.13
+                  <option value="AK" />192.168.1.15
+                  <option value="AZ" />192.168.1.16
+                  <option value="AR" />192.168.1.18
+                  <option value="CA" />192.168.1.20 -->
+
+                </select>
+                <span style="color:#858585">Master节点主机IP列表</span>
+                <span class="warning"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-pane" id="simplewizardstep3">
+          <div id="registration-form2">
+            <form role="form">
+              <div class="row Marathon_main">
+                <div class="col-sm-3">
+
+                  <div class="form-group">
+                    <label>目标主机</label>
+                    <select id="Marathon1" style="width: 100%;" aimip="destination_host" onfocus=""></select>
+                    <!-- <input type="text" class="form-control destination_host"  placeholder="输入IP地址">   -->
+                    <span style="color:#858585">Marathon的主机IP</span>
+                    <span class="warning"></span>
+                  </div>
+                </div>
+                <span class="Marathon_spanMain">
+                                     <div class="col-sm-3">
+                                     <div class="form-group">
+                                         <label>端口</label>
+                                             <input type="number" class="form-control port checkport inputindex"
+                                                    placeholder="只能输入数字"
+                                                    onkeyup="this.value=this.value.replace(/\D/g,'')">
+                                             <span style="color:#858585">Marathon的服务端口</span>  
+                                    		<span class="warning"></span>
+                                     </div>
+                                     </div>
+                               
+                                 <div class="col-sm-3">
+                                     <div class="form-group">
+                                         <label>Marathon ID</label>
+                                             <input type="text" class="form-control path inputindex">
+                                             <span style="color:#858585">Marathon的ID，<span style="color:red">若ID一致，则同属于一个Marathon集群</span></span>
+                                             <span class="warning"></span> 
+                                     </div>
+                                 </div>
+                  <!-- <div class="col-sm-2">
+                      <div class="form-group">
+                          <label>用户名</label>
+                              <input type="text" class="form-control user_name inputindex" >
+                              <span class="warning"></span>
+                      </div>
+                  </div>
+                  <div class="col-sm-2">
+                      <div class="form-group">
+                          <label>密码</label>
+                              <input type="password" class="form-control user_password inputindex" style="" >
+                          <span class="warning"></span>
+                      </div>
+                  </div>
+              </div>-->
+                      		</span>
+
+              </div>
+              <div class="row " onclick="addMarathon(this);return false;">
+                <label class="col-sm-12" data-toggle="collapse" data-target="#containerTemplate">
+                  <a class="btn btn-block btn-info" style=""><i class="fa fa-plus padding-right-5"></i>添加目标主机</a>
+                </label>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="step-pane" id="simplewizardstep4">
+          <div id="registration-form1">
+            <form role="form">
+
+              <div class="form-bg" style="padding:10px 25px;">
+                <div class="row Haproxy_main">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label>目标主机</label>
+                        <select id="Haproxy1" style="width: 100%;" Ha_host="Ha_host"></select>
+                        <span style="color:#858585">Haproxy的主机IP</span>
+                        <span class="warning"></span>
+                      </div>
+                    </div>
+                    <span class="Haproxy_spanMain">
+                                     <div class="col-sm-3">
+                                     <div class="form-group">
+                                         <label>服务端口</label>
+                                             <input type="number" class="form-control checkport sever_port inputindex"
+                                                    onkeyup="this.value=this.value.replace(/\D/g,'')"
+                                                    placeholder="只能输入数字">
+                                              <span style="color:#858585">Haproxy的服务端口</span>  
+                                    		<span class="warning"></span>
+                                     </div>
+                                     </div>
+                               
+                                 <div class="col-sm-3">
+                                     <div class="form-group">
+                                         <label>状态端口</label>
+                                             <input type="number" class="form-control checkport state_port inputindex"
+                                                    onkeyup="this.value=this.value.replace(/\D/g,'')"
+                                                    placeholder="只能输入数字">
+                                             <span style="color:#858585">Haproxy的状态查询端口</span>  
+                                   			<span class="warning"></span>
+                                     </div>
+                                 </div>
+                                 <div class="col-sm-3">
+                                     <div class="form-group">
+                                         <label>Bamboo端口</label>
+                                             <input type="number" class="form-control checkport Bambooport inputindex"
+                                                    onkeyup="this.value=this.value.replace(/\D/g,'')"
+                                                    placeholder="只能输入数字">
+                                             <span style="color:#858585">Bamboo的服务端口</span>     
+                                    	<span class="warning"></span>
+                                     </div>
+                                 </div>
+
+                  </div>
+
+                  <div class="row Bamboomrrow">
+                    <!-- <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>用户名</label>
+                                <input type="text" class="form-control MarathonUser inputindex" >
+                                <span class="warning"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>密码</label>
+                                <input type="password" class="form-control MarathonPass inputindex" >
+                            <span class="warning"></span>
+                        </div>
+                    </div> -->
+                    <div class="col-sm-9">
+                      <div class="form-group">
+                        <label>Marathon地址</label>
+                        <!-- <input type="text" class="form-control MarathonIp inputindex" >  -->
+                        <select id="MarathonIp" class="MarathonIp" style="width: 100%;paddig:2px 0;"
+                        ></select>
+                        <span style="color:#858585">Haproxy的Marathon地址</span>
+                        <span class="warning"></span>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label>HaproxyID</label>
+                        <input type="text" class="form-control hapath inputindex">
+                        <span style="color:#858585">Haproxy的ID</span>
+                        <span class="warning"></span>
+                      </div>
+                    </div>
+                  </div>
+                  </span>
+
+                </div>
+              </div>
+
+
+              <div class="row" onclick="addHaproxy(this);return false;">
+                <label class="col-sm-12" data-toggle="collapse" data-target="#containerTemplate">
+                  <a class="btn btn-block btn-info" style=""><i class="fa fa-plus padding-right-5"></i>添加目标主机</a>
+                </label>
+              </div>
+
+
+            </form>
+          </div>
+
+
+        </div>
+        <!--<div class="step-pane" id="simplewizardstep5">-->
+          <!--<div id="registration-form">-->
+            <!--<form role="form">-->
+              <!--<div class="row ">-->
+                <!--<div class="Nginx_main">-->
+                  <!--<div class="col-sm-4">-->
+
+                    <!--<div class="form-group">-->
+                      <!--<label>目标主机</label>-->
+                      <!--<select id="Nginx1" style="width: 100%;" data-host="NginxIp"></select>-->
+                      <!--<span style="color:#858585">Nginx的主机IP</span>-->
+                      <!--<span class="warning"></span>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<span class="Nginx_spanMain">-->
+                                     <!--<div class="col-sm-4">-->
+                                     <!--<div class="form-group">-->
+                                         <!--<label>上传端口</label>-->
+                                             <!--<input type="number" class="form-control checkport uploadPort inputindex"-->
+                                                    <!--onkeyup="this.value=this.value.replace(/\D/g,'')"-->
+                                                    <!--placeholder="只能输入数字">-->
+                                    		<!--<span style="color:#858585">Nginx的上传端口</span> -->
+                                    		<!--<span class="warning"></span>-->
+                                     <!--</div>-->
+                                     <!--</div>-->
+                               <!---->
+                                 <!--<div class="col-sm-3">-->
+                                     <!--<div class="form-group">-->
+                                         <!--<label>下载端口</label>-->
+                                             <!--<input type="number" class="form-control checkport loadPort inputindex"-->
+                                                    <!--onkeyup="this.value=this.value.replace(/\D/g,'')"-->
+                                                    <!--placeholder="只能输入数字">-->
+                                     		<!--<span style="color:#858585">Nginx的下载端口</span> -->
+                                     		<!--<span class="warning"></span>-->
+                                     <!--</div>-->
+                                 <!--</div>-->
+                                 <!--</span>-->
+                <!--</div>-->
+
+                <!--&lt;!&ndash; <div class="col-sm-1 no-padding-right" style="margin-top:25px">-->
+                <!--<button class="btn btn-default" onclick="addParameter();return false;"><i class="glyphicon glyphicon-minus"></i></button>-->
+                <!--</div>  &ndash;&gt;-->
+              <!--</div>-->
+
+              <!--<div class="row " onclick="addNginx(this);return false;">-->
+                <!--<label class="col-sm-12" data-toggle="collapse" data-target="#containerTemplate">-->
+                  <!--<a class="btn btn-block btn-info" style=""><i class="fa fa-plus padding-right-5"></i>添加目标主机</a>-->
+                <!--</label>-->
+              <!--</div>-->
+
+
+            <!--</form>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <div class="step-pane" id="simplewizardstep6">
+          <div id="registration-form3">
+            <form role="form">
+              <ul class="list-group">
+                <li class="list-group-item row no-margin">
+                  <h5 class="col-sm-2 no-padding-left">Master:</h5>
+                  <table class="col-sm-10 table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                      <th>主机列表</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <td id="Master_ZK"></td>
+                    </tbody>
+                  </table>
+                </li>
+
+                <li class="list-group-item row no-margin">
+                  <h5 class="col-sm-2 no-padding-left">Marathon:</h5>
+                  <table class="col-sm-10 table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                      <th>目标主机</th>
+                      <th>端口</th>
+                      <th>MarathonID</th>
+                    </tr>
+                    </thead>
+                    <tbody id="Marathon_info"></tbody>
+                  </table>
+                </li>
+
+                <li class="list-group-item row no-margin">
+                  <h5 class="col-sm-2 no-padding-left">Haproxy:</h5>
+                  <table class="col-sm-10 table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                      <th>目标主机</th>
+                      <th>服务端口</th>
+                      <th>状态端口</th>
+                      <th>bamboo端口</th>
+                      <th>Marathon地址</th>
+                      <th>HaproxyID</th>
+                    </tr>
+                    </thead>
+                    <tbody id="Haproxy_info"></tbody>
+                  </table>
+                </li>
+
+                <!--<li class="list-group-item row no-margin">-->
+                  <!--<h5 class="col-sm-2 no-padding-left">Nginx:</h5>-->
+                  <!--<table class="col-sm-10 table table-bordered table-hover">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                      <!--<th>目标主机</th>-->
+                      <!--<th>上传端口</th>-->
+                      <!--<th>下载端口</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody id="Nginx_info"></tbody>-->
+                  <!--</table>-->
+                <!--</li>-->
+              </ul>
+
+            </form>
+          </div>
+        </div>
+
+
+        <div class="step-pane" id="simplewizardstep7">
+          <h2 class="text-center success"><i class="glyphicon glyphicon-check"></i>集群创建成功</h2>
+        </div>
+      </div>
+      <div class="actions actions-footer" id="simplewizard-actions">
+        <div class="btn-group">
+          <button type="button" class="btn btn-default  btn-prev" id="_ReturnBtn" disabled onclick="changeNbtn()"><i
+              class="fa fa-angle-left"></i>上一步
+          </button>
+          <button type="button" class="btn btn-default" id="_NextBtn">下一步<i
+              class="fa fa-angle-right" data-last="完成"></i></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /Page Body -->
+</div>
+
+<div class="modal fade" id="tips" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+     style="display: none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!--<div class="modal-header">-->
+      <!--&lt;!&ndash;<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>&ndash;&gt;-->
+      <!--<h4 class="modal-title">请稍候</h4>-->
+      <!--</div>-->
+      <div class="modal-body" style="font-size:15px;font-weight:bold;margin-top:250px">
+        集群创建中, 请稍候...<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span class="sr-only"></span>
+      </div>
+      <!--<div class="modal-footer">-->
+      <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+      <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+      <!--</div>-->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--Basic Scripts-->
+<script src="assets/js/jquery-2.0.3.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/select2/select2.min.js"></script>
+<script src="assets/js/echarts.common.min.js"></script>
+<script src="assets/js/fuelux/spinner/fuelux.spinner.min.js"></script>
+<script src="assets/js/validation/bootstrapValidator.js"></script>
+<script src="assets/js/fuelux/wizard/wizard-custom.js"></script>
+<script src="webcontent/Cluster/js/Createcluster.js"></script>
+
+<script type="text/javascript">
+  jQuery(function ($) {
+
+    $('#simplewizard').wizard();
+    $('#tabbedwizard').wizard().on('finished', function (e) {
+      Notify('Thank You! All of your information saved successfully.', 'bottom-right', '5000', 'blue', 'fa-check', true);
+    });
+    $('#WiredWizard').wizard();
+    initialLoad();
+  });
+</script>
+

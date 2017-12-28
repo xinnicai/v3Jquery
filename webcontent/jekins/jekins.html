@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<!-- Head -->
+<head>
+    <meta charset="utf-8" />
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--Basic Styles-->
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--main.css-->
+    <link href="../../assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/clusterserveice.css" rel="stylesheet" type="text/css" />
+     <script src="../../assets/js/skins.min.js"></script>
+     
+</head>
+<!-- /Head -->
+<!-- Body -->
+<body>
+    
+    <!-- Navbar -->
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="navbar-container">
+                <!-- Navbar Barnd -->
+                <div class="navbar-header pull-left">
+                    <a href="#" class="navbar-brand">
+                        <small>
+                            SDDCOS云平台
+                        </small>
+                    </a>
+                </div>
+                <!-- /Navbar Barnd -->
+
+                <!-- Sidebar Collapse -->
+                <div class="sidebar-collapse" id="sidebar-collapse">
+                    <i class="collapse-icon fa fa-bars"></i>
+                </div>
+                <!-- /Sidebar Collapse -->
+                <!-- Account Area and Settings --->
+                <div class="navbar-header pull-right">
+                    <div class="navbar-account">
+                         <ul class="account-area"> 
+                            <li>
+                                <a class="wave in dropdown-toggle" data-toggle="dropdown" title="Help" href="#">
+                                    <i class="icon fa fa-bell-o"></i>
+                                    <span class="badge badge-danger" style="left:20px">3</span>
+                                </a> 
+                            </li>
+                            
+                            <li>
+                                <a class=" dropdown-toggle" data-toggle="dropdown" title="Help" href="#">
+                                    <i class="icon fa fa-warning"> <span class="font-50">帮助</span> </i>
+                                                                  
+                                </a>
+                                <!--Notification Dropdown-->
+                                <ul class="pull-right dropdown-menu dropdown-arrow dropdown-notifications">
+                                    <li>
+                                        <a href="#">
+                                            <div class="clearfix">
+                                                <div class="notification-icon">
+                                                    <i class="fa fa-calendar-o"></i>
+                                                    <span class="title">版本信息</span>
+                                                    <span class="silver padding-left-5">v3（618）</span>
+                                                </div>       
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="clearfix">
+                                                <div class="notification-icon">
+                                                    <i class="fa fa-book"></i>
+                                                     <span class="title">操作手册</span>
+                                                    <span class="silver padding-left-5">V3.0</span>
+                                                </div>
+                                              
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="clearfix">
+                                                <div class="notification-icon">
+                                                    <i class="fa fa-phone"></i>
+                                                </div>
+                                                <div class="notification-body">
+                                                    <span class="title">值班电话</span>
+                                                    <span class="description">13588982424/0571-665594</span>
+                                                </div>
+                                               
+                                            </div>
+                                        </a>
+                                    </li>
+                                  
+                                </ul>
+                                <!--/Notification Dropdown-->
+                            </li>
+
+                          
+                            <li>
+                                <a class=" dropdown-toggle" data-toggle="dropdown" title="Help" href="#">
+                                    <span class="icon font-50">云管理员</span> 
+                                                                  
+                                </a>
+                                <!--Login Area Dropdown-->
+                                <ul class="pull-right dropdown-menu dropdown-arrow dropdown-notifications">
+                                   
+                                  <li class="edit">
+                                        <a href="profile.html" class="dropdown-toggle"  data-toggle="dropdown"><i class="fa fa-key padding-right-5 font-120"></i>更改密码</a>
+                                      
+                                    </li>
+                                    
+                                  
+                                    <!--/Theme Selector Area-->
+                                    <li class="edit">
+                                        <a href="login.html">
+                                      <i class="fa fa-sign-out padding-right-5 font-120"></i>退出
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!--/Login Area Dropdown-->
+                            </li>  
+                        </ul>
+                    </div>
+                </div>
+                <!-- /Account Area and Settings -->
+            </div>
+        </div>
+    </div>
+    <!-- /Navbar -->
+    <!-- Main Container -->
+    <div class="main-container container-fluid">
+        <!-- Page Container -->
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            <div class="page-sidebar  sidebar-fixed" id="sidebar">
+                <!-- Page Sidebar Header-->
+               
+                   <!-- Sidebar Menu -->
+                <ul class="nav sidebar-menu">
+                    <!--Dashboard-->
+                    <li >
+                        <a href="../../index.html">
+                            <i class="menu-icon fa fa-dashboard"></i>
+                            <span class="menu-text"> Dashboard </span>
+                        </a>
+                    </li>
+                    <!--应用管理-->
+                    <li class="active">
+                        <a href="applist.html">
+                            <i class="menu-icon fa fa-codepen"></i>
+                            <span class="menu-text"> 应用管理</span>
+                        </a>
+                    </li>
+                     <!--集群管理-->
+                    <li >
+                        <a href="../cluster/clusterlist.html">
+                            <i class="menu-icon fa fa-th"></i>
+                            <span class="menu-text"> 集群管理 </span>
+                        </a>
+                    </li>
+                    <!--镜像管理-->
+                    <li >
+                        <a href="../image/harborlist.html" >
+                            <i class="menu-icon fa fa-clone"></i>
+                            <span class="menu-text"> 镜像管理 </span>
+                           
+                        </a>  
+                    </li>
+                    <!--服务集成-->
+                    <li >
+                        <a href="../server/servercluster.html">
+                            <i class="menu-icon fa fa-tasks"></i>
+                            <span class="menu-text"> 服务集成 </span> 
+                        </a>
+
+                      
+                    </li>
+                    <!--网络管理-->
+                    <li >
+                        <a href="../Network/Network.html">
+                            <i class="menu-icon fa fa-ravelry"></i>
+                            <span class="menu-text"> 网络管理</span> 
+                        </a>
+
+                    </li>
+                    <!--存储管理-->
+                    <li>
+                        <a href="../Volume/Volume.html" >
+                            <i class="menu-icon fa fa-hdd-o"></i>
+                            <span class="menu-text"> 存储管理 </span>   
+                        </a>   
+                    </li>
+                      <!--监控管理-->
+                     <li>
+                        <a href="../alarm/alarmlist.html" >
+                            <i class="menu-icon fa fa-eye"></i>
+                            <span class="menu-text"> 监控管理 </span>   
+                        </a>   
+                    </li>
+                     <!--日志管理-->
+                     <li >
+                        <a href="../Volume/Volume.html" >
+                            <i class="menu-icon fa fa-file-text-o"></i>
+                            <span class="menu-text"> 日志管理 </span>   
+                        </a>   
+                    </li>
+                   
+                     <!--平台管理-->
+                    <li>
+                        <a href="#">
+                            <i class="menu-icon fa fa-gears"></i>
+                            <span class="menu-text">平台管理</span>
+                        </a>
+                    </li>  
+                </ul>
+                <!-- /Sidebar Menu -->
+            </div>
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="../../applist.html">应用列表</a>
+                        </li>
+                        <li> zstest</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Body -->
+                <div class="page-body">
+                   <div class="row">
+                	  <div class="col-sm-12">
+                	  	<div class="widget">  
+                	  		<div class="widget-header bg-lightinfo ">项目列表里面可以查询项目名称、类型、创建时间、构建状态等信息</div>
+                          	<div class="widget-body">
+                          		<div class="row">
+                          			<div class="col-sm-6  margin-bottom-10 ">
+                        			<a class="btn btn-azure">创建maven程序包项目</a>
+                        			<a class="btn btn-azure">创建镜像项目</a>
+                        		    </div>
+                          			<div class="col-sm-6  margin-bottom-10 ">
+                        			<input class="form-control" placeholder="search..." type="text">
+                        		    </div>
+                        		<div class="col-sm-12">
+                        			<table class=" table table-hover table-striped table-bordered">
+                        				<thead>
+                        				<tr>	
+                        				<th>名称</th>
+                        				<th>项目构建类型</th>
+                        				<th>自动构建</th>
+                        				<th>创建时间</th>
+                        				<th>上次状态</th>
+                        				<th>代码源</th>
+                        				<th>所属用户</th>
+                        				<th>操作</th>
+                        				</tr>
+                        				</thead>
+                        				<tbody>
+                        					<tr>
+                                                <td>dev1</td>
+                                                <td>maven</td>
+                                                 <td>√</td>
+                                                <td>2017-01-22 16:53</td>
+                                                <td><span class="label label-default label-sm">未知</span></td>
+                                                <td>http://172.24.6.123/root/dcos-demon-maven.git</td>
+                                                <td>admin</td>
+                                                <td>
+                                                	<div class="btn-group">
+			                                        <a class="btn btn-azure btn-sm " href="javascript:void(0);"><i class="fa  fa-check-square-o"></i>项目构建</a>
+			                                        <a class="btn btn-azure btn-sm  dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><i class="fa fa-angle-down"></i></a>
+			                                        <ul class="dropdown-menu">
+			                                           
+			                                            <li>
+			                                                <a href="javascript:void(0);">日志</a>
+			                                            </li>
+			                                            <li>
+			                                                <a href="javascript:void(0);">删除</a>
+			                                            </li>
+			                                           
+			                                        </ul>
+			                                    </div>
+                                                </td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>dev1</td>
+                                                <td>maven</td>
+                                                 <td>√</td>
+                                                <td>2017-01-22 16:53</td>
+                                                <td><span class="label label-default label-sm">未知</span></td>
+                                                <td>http://172.24.6.123/root/dcos-demon-maven.git</td>
+                                                <td>admin</td>
+                                                 <td>
+                                                	<div class="btn-group">
+			                                        <a class="btn btn-azure btn-sm " href="javascript:void(0);"><i class="fa  fa-check-square-o"></i>项目构建</a>
+			                                        <a class="btn btn-azure btn-sm  dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><i class="fa fa-angle-down"></i></a>
+			                                        <ul class="dropdown-menu">
+			                                           
+			                                            <li>
+			                                                <a href="javascript:void(0);">日志</a>
+			                                            </li>
+			                                            <li>
+			                                                <a href="javascript:void(0);">删除</a>
+			                                            </li>
+			                                           
+			                                        </ul>
+			                                    </div>
+                                                </td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                 <td>dev1</td>
+                                                <td>maven</td>
+                                                 <td>√</td>
+                                                <td>2017-01-22 16:53</td>
+                                                <td><span class="label label-success label-sm">成功</span></td>
+                                                <td>http://172.24.6.123/root/dcos-demon-maven.git</td>
+                                                <td>admin</td>
+                                                 <td>
+                                                	<div class="btn-group">
+			                                        <a class="btn btn-azure btn-sm " href="javascript:void(0);"><i class="fa  fa-check-square-o"></i>项目构建</a>
+			                                        <a class="btn btn-azure btn-sm  dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><i class="fa fa-angle-down"></i></a>
+			                                        <ul class="dropdown-menu">
+			                                           
+			                                            <li>
+			                                                <a href="javascript:void(0);">日志</a>
+			                                            </li>
+			                                            <li>
+			                                                <a href="javascript:void(0);">删除</a>
+			                                            </li>
+			                                           
+			                                        </ul>
+			                                    </div>
+                                                </td>
+                                               
+                                            </tr>
+                                             <tr>
+                                                <td>dev1</td>
+                                                <td>maven</td>
+                                                 <td>√</td>
+                                                <td>2017-01-22 16:53</td>
+                                                <td><span class="label label-warning label-sm">失效</span></td>
+                                                <td>http://172.24.6.123/root/dcos-demon-maven.git</td>
+                                                <td>admin</td>
+                                                 <td>
+                                                	<div class="btn-group">
+			                                        <a class="btn btn-azure btn-sm " href="javascript:void(0);"><i class="fa fa-check-square-o"></i>项目构建</a>
+			                                        <a class="btn btn-azure btn-sm  dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><i class="fa fa-angle-down"></i></a>
+			                                        <ul class="dropdown-menu">
+			                                            <li>
+			                                                <a href="javascript:void(0);">构建</a>
+			                                            </li>
+			                                            <li>
+			                                                <a href="javascript:void(0);">日志</a>
+			                                            </li>
+			                                            <li>
+			                                                <a href="javascript:void(0);">删除</a>
+			                                            </li>
+			                                           
+			                                        </ul>
+			                                    </div>
+                                                </td>
+                                                
+                                            </tr>
+                        				</tbody>
+                        			</table>
+                        		</div>
+                          		</div>
+                          	</div>
+                          </div>
+                         
+                                  
+                                </div>
+                            </div>
+                	  	</div>
+                	  </div>
+                
+                	
+                	
+                <!-- /Page Body -->
+          
+            <!-- /Page Content -->
+        </div>
+        <!-- /Page Container -->
+        <!-- Main Container -->
+        
+        
+       <div class="modal fade" id="creattask" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog " style="width:700px">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">创建任务</h4>
+                </div>
+                  <form id="accountForm" method="post"  novalidate="novalidate" class="form-horizontal">
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">任务名称<span class="darkorange padding-left-5">* </span></label>
+                     <div class="col-sm-8">
+            	     <input class="form-control" id="_ClusterType" placeholder="请输入任务名称">
+                 </div>
+                 </div>
+                 
+                 <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">选择镜像<span class="darkorange padding-left-5">* </span></label>
+                     <div class="col-sm-8">
+            	     <select class="form-control">
+            	     	<option>192.168.1.13:/3232323332/img1</option>
+            	     	<option>192.168.1.15:/3232323332/img2</option>
+            	     </select>
+                 </div>
+                 </div>
+                 
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">选择版本<span class="darkorange padding-left-5">* </span></label>
+                     <div class="col-sm-8">
+            	     <select class="form-control">
+            	     	<option>2017 1-19 12:00</option>
+            	     	<option>V2017 1-19 16:00</option>
+            	     </select>
+                 </div>
+                 </div>
+                 
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">选择程序包<span class="darkorange padding-left-5">* </span></label>
+                     <div class="col-sm-8">
+            	     <select class="form-control">
+            	     	<option>6bcded05e114426f9544ef6885a8c3d6.war </option>
+            	     	<option>fca2ee7b6e7d4d74b303ff16849c6ce9.zip </option>
+            	     </select>
+                 </div>
+                 </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">备注<span class="darkorange padding-left-5">* </span></label>
+                     <div class="col-sm-8">
+            	    <textarea class="form-control" rows="10"></textarea>
+                 </div>
+                 </div>
+                 
+                </div>
+                  <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="button" class="btn btn-azure" data-dismiss="modal">创建</button>
+                </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>  
+
+    </div>
+
+    <!--Basic Scripts-->
+    <script src="../../assets/js/jquery-2.0.3.min.js"></script>
+    <script src="../../assets/js/bootstrap.min.js"></script>
+
+    <!--Beyond Scripts-->
+    <script src="../../assets/js/beyond.min.js"></script>
+ 
+    <script src="../../assets/js/echarts.common.min.js"></script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('CPUused'));
+        
+    option = {
+   
+    tooltip: {
+        trigger: 'axis'
+    },
+    toolbox: {
+        show: true,
+        
+    },
+    xAxis:  {
+        type: 'category',
+        boundaryGap: false,
+        data: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
+    },
+    yAxis: {
+        type: 'value',
+        axisLabel: {
+            formatter: '{value} %'
+        }
+    },
+    visualMap: {
+        show: false,
+        dimension: 0,
+        pieces: [{
+            lte: 6,
+            color: 'green'
+        }, {
+            gt: 6,
+            lte: 8,
+            color: 'green'
+        }, {
+            gt: 8,
+            lte: 14,
+            color: 'green'
+        }, {
+            gt: 14,
+            lte: 17,
+            color: 'red'
+        }, {
+            gt: 17,
+            color: 'green'
+        }]
+    },
+    series: [
+        {
+            name:'CPU使用率',
+            type:'line',
+            smooth: true,
+            data: [30, 28, 25, 26, 27, 30, 55, 50, 40, 39, 38, 39, 40, 50, 60, 75, 80, 70, 60, 40],
+            
+        }
+    ]
+};
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+       
+    </script>
+    
+    
+</body>
+<!--  /Body -->
+</html>

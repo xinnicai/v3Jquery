@@ -1,0 +1,399 @@
+﻿
+<!--Basic Styles-->
+<link href="assets/css/jquery.fileupload.css" rel="stylesheet" />
+<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+<link href="plugin/uploadify/Huploadify.css" rel="stylesheet" />
+<link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+<link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+<!--main.css-->
+<link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+
+
+<div class="page-breadcrumbs breadcrumbs-fixed">
+    <ul class="breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            SDDCOS
+        </li>
+        <li class="active">集群管理</li>
+    </ul>
+</div>
+<div class="page-body">
+
+    <div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+        <button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span id="warningMsg"></span>
+    </div>
+
+    <div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+        <button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span id="successMsg"></span>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="widget">
+                <div class="widget-header bg-lightinfo">
+                    <span>集群管理页面可以创建集群、查看集群拓扑</span>
+                </div>
+                <div class="widget-body">
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs" id="myTab11">
+                            <li class="active">
+                                <a data-toggle="tab" href="#tab1">
+                                    集群列表
+                                </a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#tab2" onclick="fnGetFreeHost()">
+                                    空闲主机列表
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content tabs-flat">
+                            <div id="tab1" class="tab-pane in active">
+                                <div class="col-sm-6 no-padding-left margin-bottom-10">
+                                    <a class="btn btn-default" href="#/webcontent/Cluster/Clustercreast.html" ><i class="fa fa-plus"></i>创建集群</a>
+                                </div>
+
+                                <table class="table  table-hover table-bordered" id="editabledatatable">
+                                </table>
+
+                            </div>
+
+                            <div id="tab2" class="tab-pane">
+                                <div class="col-sm-6 no-padding-left margin-bottom-10">
+
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <span class="glyphicon glyphicon-plus ok-icon"></span>
+                                        添加主机 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a  onclick="fnHostAddModal()">
+                                                <span class="glyphicon glyphicon-plus"></span> 单台添加
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a  onclick="fnHostImpAddModal()">
+                                                <span class="fa fa-upload"></span> 批量添加</a>
+
+                                        </li>
+                                    </ul>
+
+
+                                </div>
+                                <div class="col-sm-6 no-padding-right margin-bottom-10">
+                                    <input class="form-control" placeholder="search..." type="text" onkeyup="fnSearch(this)"/>
+                                </div>
+                                <table class="table  table-hover table-bordered" id="hostdatatable">
+                                    <!-- <thead>
+                                        <tr role="row">
+                                            <th>主机IP</th>
+                                            <th>CPU(核)</th>
+                                            <th> 内存(GB)</th>
+                                            <th>磁盘空间(GB)</th>
+                                             <th>创建时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td>192.168.2.26</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td >400</td>
+                                            <td > 2017-01-04 12：50</td>
+                                            <td><a class="btn btn-sm"><i class="fa fa-trash-o"></i>删除</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>192.168.2.26</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td >400</td>
+                                            <td > 2017-01-04 12：50</td>
+                                            <td><a class="btn btn-sm"><i class="fa fa-trash-o"></i>删除</a></td>
+                                        </tr>
+                                    </tbody> -->
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="creatApplition" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+     style="display: none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " style="width:700px">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myLargeModalLabel">创建集群（slave）</h4>
+            </div>
+            <form id="accountForm"  class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">集群名称<span class="darkorange padding-left-5">* </span></label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="_ClusterName" id="_ClusterName" placeholder="请输入集群名称">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">集群标签<span class="darkorange padding-left-5">* </span></label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="_ClusterAddLabel" id="_ClusterAddLabel" placeholder="请输入集群标签，例：dcos:app">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">归属集群<span class="darkorange padding-left-5">* </span></label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="_ClusterAddResp" name="_ClusterAddResp">
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">目标主机<span class="darkorange padding-left-5">* </span></label>
+                        <div class="col-sm-8">
+                            <select name="e2" id="e2" multiple="multiple" style="width: 100%;">
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">备注<span class="darkorange padding-left-5">* </span></label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="slaveramark" id="slaveramark">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-azure" onclick="createMenu()">创建</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="_HostAddModal" tabindex="-1" role="dialog" aria-hidden="true"
+     style="display: none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h4>添加主机</h4></div>
+            <form id="accountForm1" method="post"  novalidate="novalidate" class="form-horizontal">
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">主机IP</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="HostIp" name="HostIp"placeholder="请输入主机IP" >
+                            <!--<p class="red"></p>-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">备注</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="_Hostremark" placeholder="请输入备注">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-azure" id="_HostCreate">添加</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- 删除 主机 -->
+<div id="DeleteData" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true"
+     data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+            </div>
+            <div class="modal-body">
+                <span class="title1" id="modaltext"></span>
+                <span class="title1 info" id="modalip" ></span>
+                <span class="title1" class="padding-left-5">?</span>
+
+            </div>
+            <span id="deleteID" class="hidden"></span><span id="modaltype" class="hidden"></span>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="deleteData()">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div> <!-- / .modal-content -->
+    </div> <!-- / .modal-dialog -->
+</div>
+
+
+<!--成功提示  -->
+<div class="modal modal-message modal-info fade in" id="successModal"  aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+                <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+            </div>
+            <div class="modal-body" >
+                <span id="SucessTitle" class="title1"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--失败提示-->
+
+<div class="modal modal-message modal-info  in" id="failmodal"  aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+            </div>
+            <div class="modal-body" >
+                <p class="title1" id="failtitle"></p>
+                <p id="failInfo"></p>
+
+            </div>
+            <div class="modal-footer padding-bottom-20">
+                <button type="button" class="btn btn-info" data-dismiss="modal">好的，我了解了！</button>
+
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!-- 警告提示-->
+<div class="modal modal-message modal-info  in" id="warningmodal"  aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/warn.svg"></div>
+
+            </div>
+            <div class="modal-body" >
+                <span class="title1" id="warningtitle"></span>
+                <!--<p id="warningInfo"></p>-->
+
+            </div>
+            <div class="modal-footer padding-bottom-20">
+                <button type="button" class="btn btn-info" data-dismiss="modal">好的，我了解了！</button>
+
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="tips" tabindex="-1" role="dialog" aria-hidden="false" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body" style="font-size:15px;font-weight:bold;">
+                <span id="tipsText">正在删除, 请稍候...</span><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                <span class="sr-only"></span>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- 导入主机Modal -->
+<div class="modal fade" id="_HostImpAddModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+     aria-labelledby="myLargeModalLabel" aria-hidden="false" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h4>导入主机</h4></div>
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                    <p class="help-block">请将需要导入的主机IP地址写入txt文本文件，每个IP地址之间需用";"分隔。</p>
+                    <div class="form-group">
+             <span class="btn btn-success fileinput-button" style="margin-left:10px;">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>选择上传文件...</span>
+            <input id="_HostUpload" type="file" name="attach" accept="text/plain" onchange="upload(this)" >
+            </span>
+                        <span class="uploadSuccess"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button id="mutipleUpload"type="button" class="btn btn-azure" data-dismiss="modal" onclick="fnAddIps()" disabled>确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="tipsCreate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+     style="display: none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!--<div class="modal-header">-->
+            <!--&lt;!&ndash;<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>&ndash;&gt;-->
+            <!--<h4 class="modal-title">请稍候</h4>-->
+            <!--</div>-->
+            <div class="modal-body" style="font-size:15px;font-weight:bold;">
+                集群创建中, 请稍候...<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                <span class="sr-only"></span>
+            </div>
+            <!--<div class="modal-footer">-->
+            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+            <!--</div>-->
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--Basic Scripts-->
+<script src="assets/js/jquery-2.0.3.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="plugin/uploadify/jquery.Huploadify.js"></script>
+<script src="assets/js/jquery-ui.min.js"></script>
+<script src="assets/js/jquery.fileupload.js"></script>
+<script src="assets/js/bootstrap-filestyle.min.js"></script>
+<script src="assets/js/select2/select2.min.js"></script>
+<script src="assets/js/validation/bootstrapValidator.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script src="assets/js/userPwoer.js"></script>
+<script src="webcontent/Cluster/js/Clusterlist.js"></script>

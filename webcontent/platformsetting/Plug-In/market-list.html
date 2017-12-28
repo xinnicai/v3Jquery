@@ -1,0 +1,397 @@
+
+    <!--Basic Styles-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+     <link href="assets/css/vs.css" rel="stylesheet" />
+    <link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+    <!--main.css-->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+     <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+     <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+      <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+
+
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+
+                <!-- Page Breadcrumb -->
+               <div class="page-breadcrumbs  breadcrumbs-fixed">
+                 
+                       
+                       <ul class="breadcrumb">
+                      
+                        <li>
+                            
+                            <a href="#/webcontent/platformsetting/Plug-In/market.html">插件市场</a>
+                        </li>
+                        <li id="Pluginname"></li>
+                    </ul>
+                    
+                </div>
+                <!-- /Page Breadcrumb -->
+                <
+                <!-- Page Body -->
+                <div class="page-body" >
+                 <div id="sessionExpiredAlertBlock" class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		     			<span>会话失效，请重新登录! <a class="btn btn-danger" href="/iMonitor/login.jsp">登录</a></span>
+					</div>
+			
+					<div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			     		<span id="warningMsg"></span>
+					</div>
+				
+					<div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				     	<span id="successMsg"></span>
+					</div>
+                    <div class="row">
+          	         <div class="col-sm-12">
+    		              <div class="row">
+                           
+                       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  
+                       <div class="well">
+					 	<div class="row">
+                       <div class="col-lg-2 col-md-2 col-sm-12" id="imgAvatarSrc">
+                       	<img class="header-avatar" src="assets/img/img/cj.jpg" >
+                       </div> 
+                       
+                       <div class="col-lg-10 col-md-10 col-sm-12 no-padding-left ">
+                       <div class="col-lg-7 col-md-6 col-sm-6  col-xs-12" ><h2 id="filename"></h2></div>
+                       <div class="col-lg-5 col-md-6 col-sm-6  col-xs-12 text-right">
+                         <a class="btn btn-azure btn-sm"  onclick="fnShowPluginModal()"><i class="fa  fa-play-circle-oo"></i>执行插件</a>
+                       	<!--   <a class="btn btn-azure  btn-sm" data-toggle="modal" data-target="#creatApplition"><i class="fa  fa-cog"></i>高级设置</a> -->
+						
+                       <div class="btn-group">
+                                    <a class="btn  btn-azure btn-sm" href="javascript:void(0);"><i class="fa fa fa-th"></i>更多操作</a>
+                                    <a class="btn  btn-azure btn-sm dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><i class="fa fa-angle-down"></i></a>
+                                    <ul class="dropdown-menu">
+                                       
+                                        <li  onclick="fnhandleupdate()">
+                                        
+                                            <a href="#"  id="updatemarket"><i class="padding-right-5 fa  fa-edit"></i>编辑</a>
+                                        </li>
+                                        <li  onclick="downloadTextFile()">
+                                            <a href="javascript:void(0);" data-toggle="modal" data-target="#doScaleApp"><i class="padding-right-5 fa fa-exchange"></i>导出</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"  onclick="showDeleteModal()"><i class="padding-right-5 fa fa-trash-o"></i>删除</a>
+                                        </li>
+                                       
+                                    </ul>
+                                </div>
+                       </div>
+                       <div id="plugindetail">
+                       <div class="col-sm-12" >
+                     
+                       	<div class="col-sm-3 no-padding-left"><strong class="padding-right-10">分类：</strong><span ></span></div>
+                       <div class="col-sm-6">
+                       	 <strong>作者:</strong>
+                         <span class="padding-left-10"></span> 
+                       </div>  
+                       </div>
+                       
+                       <div class="col-sm-12  margin-top-10">
+                       	<div class="col-sm-3 no-padding-left">
+                       	<strong>语言：</strong><span class="padding-left-5" id="passCode"></span>
+                       </div>
+                        <div class="col-sm-6">
+                          <strong>说明:</strong><span class="padding-left-5" id="remark"></span> 
+                        </div>
+                       </div>
+                       </div>
+                       
+                       </div>
+                       
+					   
+					   
+                       </div>
+					 
+                     </div>
+					 
+					 
+					 <div class="col-sm-12 no-padding">
+                	  	<div class="well">
+                	  		<div class="tabbable">
+                                <ul class="nav nav-tabs tabs-flat">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#tab1">
+                                         脚本
+                                        </a>
+                                    </li>
+                                  
+                                    <li>
+                                        <a data-toggle="tab" href="#tab2">
+                                          输入
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#tab3">
+                                         历史记录
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content tabs-flat">
+                                    <div id="tab1" class="tab-pane active">
+									<div class="row">
+                                       <div class="col-lg-12 col-sm-12 col-xs-12">
+                                       <div id="pluginContent">
+                                       
+                                       
+                                       
+                                       </div>
+                                     
+                                </div> 
+                                </div>
+								
+                              </div>
+                           
+                                    
+                          <div id="tab2" class="tab-pane">
+                          <div class="row">
+                          <div class="col-sm-12">
+                          <div class="pull-left padding-top-5"><h6><strong>输入：</strong></h6></div> 
+                            <div class="pull-left padding-left-10" >
+                            <table class="table table-hover">
+                                         <thead class="bordered-blueberry">
+	                                        <tr>
+	                                            <th> #</th>
+	                                            <th>参数名 </th>
+	                                            <th>参数标题</th>
+	                                             <th>辅助说明</th>
+	                                             <th>默认值</th>
+	                                        </tr>
+                                         </thead>
+                                         <tbody >
+	                                       
+                                   <tbody id="show_param">
+                                    <tr>
+                                    <td class="index">1</td>
+                                    <td class="param_key">sssssshhhhhhh</td>
+                                    <td class="param_name">222</td>
+                                    <td class="remark"></td>
+                                    <td class="param_def">444</td>
+                                    </tr>
+                                    </tbody> 
+                                </table>
+                             <span></span>
+                             <span></span>
+                            </div> 
+                          </div>
+                              
+                         <!--     <p id="PluginOutput">输出:
+                             <span>hello3</span>
+                             <span>hello4</span>
+                             </p>   -->
+                                
+                          </div>
+                          </div>
+                          
+                           <div id="tab3" class="tab-pane warningcontainer">
+                           <div class="row">
+                           <!--   <div class="col-sm-6 no-padding-left margin-bottom-10">
+                               	<a class="btn btn-default">一天</a>
+                               	<a class="btn btn-default">一周</a>
+                               	<a class="btn btn-default">一月</a>
+                               	<a class="btn btn-default">自定义</a>
+                               </div> -->
+                                     
+                           
+							              <table class="table table-hover" id="editabledatatable">
+                              
+                                           </table>  
+							 
+                                    
+                                 
+                                    </div>          
+                          </div>
+                                    
+                                </div>
+                            </div>
+                	  	</div>
+                	  </div>
+                 </div>
+               </div>	
+          	</div>
+          </div>
+            <!-- /Page Content -->
+        </div>
+        <!-- /Page Container -->
+        <!-- Main Container -->
+
+ <div id="DeleteData" class="modal modal-message modal-info " style="display: none;" aria-hidden="true"
+      data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+                </div>
+                 <div class="modal-body"><span class="title1">确定要删除该插件?</span></div>
+              
+               
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="deleteData1()">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+        
+        
+        
+         <!--  执行-->
+     <div class="modal fade" id="ExecuteModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+     data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">执行插件</h4>
+                </div>
+                 <form id="accountForm" method="post"  novalidate="novalidate" >
+                
+                                   
+                <div class="modal-body">
+	                  <div class="form-group">
+	                      <label >执行目标主机ip <span class="red padding-left-5">*</span></label>
+	                      <textarea class="form-control" rows="3" placeholder="多个ip用逗号分隔" name="ip" id="ip"></textarea>  
+	                  </div>
+	                  
+	                   <div class="form-group">
+	                      <a class="btn btn-default" onclick="fnShowIP()"><i class="fa fa-plus padding-right-5"></i>从CMDB中筛选IP</a>
+	                  </div>
+	                  
+	                  <div class="form-group">
+	                      <label >执行用户</label>
+	                      <input type="text" class="form-control" id="user" placeholder="root" name="user">
+	                  </div>
+	                   <div class="form-group" id="Plugin_showInExec">
+	                  
+	                  </div>
+	                       
+                    </div>
+               
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure"  id="createExecuteModal">执行</button>
+                 </div>
+                  </form>
+                
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+        
+      <!-- 添加参数 -->
+      <div class="modal fade" id="creatDataModal3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+     data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel1">添加从 CMDB 中筛选主机列</h4>
+                </div>
+                
+                 
+                <div class="modal-body">
+                 
+                  <div class="col-sm-12 margin-top-10">
+                  <table class="table table-borderd" >
+                 <thead>
+                  <tr>
+                  <td></td>
+                  <td>IP</td>
+                    <td>集群标签</td>
+                    
+                        <td></td>
+                  </tr>
+                  </thead>
+                  <tbody id="host_table">
+                 
+                  </tbody> 
+                  </table>
+                  </div>
+                 
+                        
+                           
+                           
+                    </div>
+               
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure"  onclick="fn_append()">添加</button>
+                 </div>
+                 
+            
+                </div>
+            </div><!-- /.modal-content -->
+        </div>
+
+    <!--成功提示信息-->
+    <div class="modal modal-message modal-info in" id="successmodal"  aria-hidden="true"
+         style="display:none;" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header no-padding-bottom">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+            <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+          </div>
+          <div class="modal-body" >
+            <div class="title1" id="successTitle"></div>
+
+          </div>
+          <div class="modal-footer padding-bottom-20">
+
+            <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!--错误失败提示信息-->
+    <div class="modal modal-message modal-info in" id="failmodal"  aria-hidden="true"
+         style="display:none;" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header no-padding-bottom">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+            <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+          </div>
+          <div class="modal-body" >
+            <p class="title1" id="failTitle"></p>
+            <div id="failSpan"></div>
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+        
+        
+    <!--Basic Scripts-->
+     <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/select2/select2.min.js"></script>
+     <script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+     <script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+      <script src="assets/js/validation/bootstrapValidator.js"></script>
+      <script src="assets/js/fileDownload/fileCreateDownload.js"></script>
+      <script src="assets/js/highlight/highlight.pack.js"></script>
+
+   <script src="./webcontent/platformsetting/js/market-list.js"></script>
+  
+	
+             

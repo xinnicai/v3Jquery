@@ -1,0 +1,717 @@
+
+<link href="assets/css/bootstrap-table.min.css" rel="stylesheet"/>
+<link href="assets/css/dataTables.bootstrap.css" rel="stylesheet"/>
+
+<link href="plugin/uploadify/Huploadify.css" rel="stylesheet"/>
+<link href="assets/css/dist.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+  .uploadify-progress {
+    width: 535px;
+  }
+</style>
+<!-- Page Breadcrumb -->
+<div class="page-breadcrumbs breadcrumbs-fixed">
+  <ul class="breadcrumb">
+    <li>
+      <i class="fa fa-home"></i>
+      <a href="#/webcontent/image/imagelist.html">镜像管理</a>
+    </li>
+    <li>
+      <a href="#/webcontent/image/harborlist.html">项目列表</a>
+    </li>
+    <li id="title_projname">
+    </li>
+  </ul>
+</div>
+<!-- /Page Breadcrumb -->
+<!-- Page Body -->
+<div class="page-body">
+  <input type="hidden" id="info_projid" value="">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="well">
+        <div class="row">
+          <div class="col-sm-12 no-padding-right">
+            <h2 id="header_projname"></h2>
+            <div class="col-sm-10 no-padding-left" style="padding-top:15px">
+              <strong class="padding-right-5">镜像仓库:</strong><span class="padding-right-20" id="info_repocnt"></span>
+              <strong class="padding-right-5">角色:</strong><span id="info_ownername"></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12">
+      <div class="well">
+        <div class="tabbable">
+          <ul class="nav nav-tabs tabs-flat" id="myTab11">
+            <li class="active">
+              <a data-toggle="tab" href="#tab1">
+                镜像仓库
+              </a>
+            </li>
+
+            <li>
+              <a data-toggle="tab" href="#tab2">
+                复制
+              </a>
+            </li>
+            <li>
+              <a data-toggle="tab" href="#tab3">
+                用户
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content tabs-flat">
+            <div id="tab1" class="tab-pane active">
+              <div class="row">
+                <input id="images-infos-page" type="hidden" value="1">
+                <div id="images-infos" class="panel">
+                </div>
+              </div>
+
+            </div>
+
+
+            <div id="tab2" class="tab-pane">
+              <div class="col-sm-6 no-padding-left margin-bottom-10">
+                <a class="btn btn-azure" onclick="$('#ADDtactics').modal('show')"><i class="fa fa-plus"></i>新增策略</a>
+              </div>
+              <div class="col-sm-6 no-padding-right margin-bottom-10">
+                <input class="form-control" placeholder="search..." type="text">
+              </div>
+              <table id="policy-list-table" class="table table-bordered table-hover">
+              </table>
+            </div>
+
+            <div id="tab3" class="tab-pane">
+
+              <div class="row no-margin">
+                <div class="col-sm-6 no-padding-left margin-bottom-10">
+                  <a class="btn btn-azure"  onclick="$('#ADDuserModal').modal('show')"><i class="fa fa-plus"></i>新增成员</a>
+                </div>
+                <div class="col-sm-6 no-padding-right margin-bottom-10">
+                  <input class="form-control" placeholder="search..." type="text">
+                </div>
+              </div>
+              <div class="row no-margin">
+                <div class="panel">
+                  <div class="panel-body">
+                    <table class="table table-hover" id="member-list-table">
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Page Body -->
+
+  <!-- /Page Content -->
+
+  <!-- Main Container -->
+  <div class="modal fade in" id="ADDtactics" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+       aria-hidden="false" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+              class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel1">新增策略</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-title">一般设置</div>
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">名称</label>
+              <div class="col-sm-8">
+                <input name="policy_name" type="text" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">描述</label>
+              <div class="col-sm-8">
+                <textarea id="policy_desc"
+                          class="form-control form-control-custom ng-pristine ng-valid ng-empty ng-touched"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">是否启用</label>
+              <div class="col-sm-9 no-padding-left">
+                <div class="col-sm-3 no-padding-left">
+                  <div class="checkbox">
+                    <label>
+                      <input id="is_enabled" type="checkbox" class="colored-success">
+                      <span class="text">启用</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-title">目标设置</div>
+            <div id="objective">
+              <div class="form-group">
+                <label class="col-sm-3 control-label">名称</label>
+                <div class="col-sm-9 ">
+                  <div id="target_name_wrap" class="col-sm-8 no-padding">
+                    <select id="target_name" class="col-sm-12" onchange="fnFullInfo()">
+                      <option value="1">213123</option>
+                      <option value="2">213123213</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-4 no-padding-left">
+                    <!--<p class="text"><a href="javascript:;">新建目标</a></p>-->
+                    <div class="checkbox">
+                      <label>
+                        <input name="is_new_target" type="checkbox" onchange="fnselect()">
+                        <span class="text">新建目标</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">目标url</label>
+                <div class="col-sm-8">
+                  <input name="target_url" type="text" class="form-control" placeholder="http://ip_address" disabled="disabled">
+                  <span class="hidden"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">用户名</label>
+                <div class="col-sm-8">
+                  <input name="target_username" type="text" class="form-control" disabled="disabled">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">密码</label>
+                <div class="col-sm-8">
+                  <input name="target_password" type="password" class="form-control" disabled="disabled">
+                </div>
+              </div>
+              <div class="form-group">
+                  <div class="col-sm-offset-3 col-sm-9">
+                    <button id="ping_target" type="button" class="btn btn-default" onclick="fnPingTest()">连接测试</button>
+                      <p></p>
+                  </div>
+
+                <!--
+                        <p id="ping_result" class="col-sm-offset-3 help-block">测试连接目标失败，请检查设置。:dial tcp 192.168.1.21:443: getsockopt: connection refused</p>
+                -->
+                <p id="ping_result" class="col-sm-offset-3 help-block"></p>
+              </div>
+
+            </div>
+            <div id="objectivewrite" style="display:none">
+              <div class="form-group">
+                <label class="col-sm-3 control-label">名称</label>
+                <div class="col-sm-8">
+                  <div class="col-sm-9 no-padding-left">
+                    <input type="text" class="form-control">
+                  </div>
+
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">目标url</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">用户名</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">密码</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-8">
+                  <button class="btn btn-default" type="submit" disabled="disabled">连接测试</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button id="addPolicy" type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" onclick="fnSelectMethod()">新增
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--新增成员-->
+  <div class="modal in" id="ADDuserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false"
+       style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+              class="sr-only">Close</span></button>
+          <h4 id="myModalLabel">新增用户</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">用户名</label>
+              <div class="col-sm-8">
+                <input name="user_name" type="text" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">角色</label>
+              <div class="col-sm-9 no-padding-left">
+                <div class="col-sm-4 no-padding-left">
+                  <div class="radio">
+                    <label>
+                      <input name="role_select" type="radio" value="1">
+                      <span class="text">项目管理员</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="radio">
+                    <label>
+                      <input name="role_select" type="radio" value="2">
+                      <span class="text">开发人员</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="radio">
+                    <label>
+                      <input name="role_select" type="radio" value="3">
+                      <span class="text">访客</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
+          <button id="add-user-2proj" type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确认
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="creatimage" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+       aria-hidden="true" style="display: none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " style="width:700px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title" id="myLargeModalLabel">创建镜像(旧版本)</h4>
+        </div>
+        <form id="accountForm" method="post" novalidate="novalidate" class="form-horizontal">
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">选择项目</label>
+              <div class="col-sm-10">
+                <input class="selectpicker form-control" title="请选择项目"
+                        data-actions-box="true" data-live-search="true" name="select_project" id="select_project">
+
+                </input>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">镜像名称<span
+                  class="padding-left-5 darkorange">*</span></label>
+              <div class="col-sm-10">
+                <input id="create_img_name" name="create_img_name" class="form-control pull-left" placeholder="镜像名">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">上传程序包</label>
+              <div class="col-sm-10">
+                <div class="col-md-12 no-padding" style="margin-top:-10px">
+                  <div id="uploadfilebtn1"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">上传启动脚本</label>
+              <div class="col-sm-10">
+                <div class="col-md-12 no-padding" style="margin-top:-10px">
+                  <div id="uploadfilejb1"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">dockerfile<span
+                  class="padding-left-5 darkorange">*</span></label>
+              <div class="col-sm-10">
+                <textarea id="create_img_dockerfile_u" name="create_img_dockerfile" class="form-control" rows="3" placeholder="dockerfile" style="height: 200px"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group hidden">
+              <label class="col-sm-2 control-label no-padding-right">镜像描述</label>
+              <div class="col-sm-10">
+                <textarea id="create_img_info" class="form-control" rows="3" placeholder="填写镜像描述信息"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group hidden">
+              <label class="col-sm-2 control-label no-padding-right">配置信息</label>
+              <div class="col-sm-10">
+                <textarea id="create_img_config" class="form-control" rows="3" placeholder="填写配置信息"></textarea>
+              </div>
+            </div>
+            <!--<div class="form-group">-->
+            <!--<label class="col-sm-2 control-label no-padding-right">环境变量</label>-->
+            <!--<div class="col-sm-10">-->
+            <!--<textarea id="create_img_env" class="form-control" rows="3" placeholder="填写环境变量信息"></textarea>-->
+            <!--</div>-->
+            <!--</div>-->
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-azure" id="imageCreateButton">创建</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<!--编辑modal-->
+  <div class="modal fade" id="updateimage" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+       aria-hidden="true" style="display: none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " style="width:700px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title" id="myLargeModalLabel_u">创建镜像</h4>
+        </div>
+        <form id="accountForm_u" method="post" novalidate="novalidate" class="form-horizontal">
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">项目</label>
+              <div class="col-sm-10">
+                <input  id="select_project_U" class="form-control pull-left" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">镜像名称<span
+                      class="padding-left-5 darkorange">*</span></label>
+              <div class="col-sm-10">
+                <input id="create_img_name_u"  class="form-control pull-left" placeholder="镜像名" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">选择镜像<span
+                      class="padding-left-5 darkorange">*</span></label>
+              <div class="col-sm-10">
+                <div class="col-sm-6 no-padding">
+                  <select class="form-control" id="create_image_si" onchange="fnGetCreateImgVer()"></select>
+                </div>
+                <div class="col-sm-6 no-padding-right">
+                  <select class="form-control" id="comImgVer"></select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">上传程序包</label>
+              <div class="col-sm-10">
+                <div class="col-md-12 no-padding" style="margin-top:-10px">
+                  <div id="uploadfilebtn"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">上传启动脚本</label>
+              <div class="col-sm-10">
+                <div class="col-md-12 no-padding" style="margin-top:-10px">
+                  <div id="uploadfilejb"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">dockerfile<span
+                      class="padding-left-5 darkorange">*</span></label>
+              <div class="col-sm-10">
+                <textarea id="create_img_dockerfile" name="create_img_dockerfile" class="form-control" rows="3" placeholder="dockerfile"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">镜像描述</label>
+              <div class="col-sm-10">
+                <textarea id="create_img_info_u" class="form-control" rows="3" placeholder="填写镜像描述信息"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">配置信息</label>
+              <div class="col-sm-10">
+                <textarea id="create_img_config_u" class="form-control" rows="3" placeholder="填写配置信息"></textarea>
+              </div>
+            </div>
+            <!--<div class="form-group">-->
+            <!--<label class="col-sm-2 control-label no-padding-right">环境变量</label>-->
+            <!--<div class="col-sm-10">-->
+            <!--<textarea id="create_img_env" class="form-control" rows="3" placeholder="填写环境变量信息"></textarea>-->
+            <!--</div>-->
+            <!--</div>-->
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-azure" id="imageUpdateButton" onclick="fnUpdateImage()">创建</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 查看应用 -->
+  <div class="modal fade" id="searchapplication" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+       aria-hidden="true" style="display: none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " style="width:700px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title" id="myLargeModalLabel">查看应用</h4>
+        </div>
+
+        <div class="modal-body">
+          <table class="table  table-hover table-bordered" id="searchapplicationtable">
+            <thead>
+              <tr role="row">                
+                  <th > 系统名称</th>
+                  <th > 应用名称</th>
+                  <th > 状态</th>
+                  <th > 操作</th>
+              </tr> 
+            </thead>         
+          </table>                 
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--修改成员-->
+  <div class="modal in" id="UpdateMemberModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+       aria-hidden="false" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+              class="sr-only">Close</span></button>
+          <h4 id="updateMemberLabel">修改用户</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">用户名</label>
+              <div class="col-sm-8">
+                <input name="update-user-name" type="text" class="form-control" disabled="disabled">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">角色</label>
+              <div class="col-sm-9 no-padding-left">
+                <div class="col-sm-4 no-padding-left">
+                  <div class="radio">
+                    <label>
+                      <input name="update-role-select" type="radio" value="1">
+                      <span class="text">项目管理员</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="radio">
+                    <label>
+                      <input name="update-role-select" type="radio" value="2">
+                      <span class="text">开发人员</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="radio">
+                    <label>
+                      <input name="update-role-select" type="radio" value="3">
+                      <span class="text">访客</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
+          <button id="update-user-2proj" type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+            确认
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--删除成员-->
+  <div class="modal in" id="DelAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+       aria-hidden="false" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+              class="sr-only">Close</span></button>
+          <h4 id="DelAlertTitle"></h4>
+        </div>
+        <div class="modal-body">
+          <h6 id="DelAlertMsg"></h6>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
+          <button id="delete-btn" type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确认
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--删除提示-->
+  <div id="DelAlertModal1" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true"
+       data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header ">
+          <div class="zeromodal-icon show-zero2 zeromodal-icon-question">？</div>
+        </div>
+        <div class="modal-body">确定要删除该版本镜像?</div>
+        <span id="DelAlertMsg" class="hidden"></span>
+        <div class="modal-footer">
+          <button type="button" id="delete-btn" class="btn btn-azure" data-dismiss="modal">确定</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+      </div> <!-- / .modal-content -->
+    </div> <!-- / .modal-dialog -->
+  </div>
+
+
+  <!-- 忙等待 -->
+  <div class="modal in" id="tips" style="display:none">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="font-size:15px;font-weight:bold;margin-top:250px">
+          <span></span><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+          <span class="sr-only"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--成功提示  -->
+  <div class="modal modal-message modal-info fade in" id="tipsmodal"  aria-hidden="true"
+       style="display:none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+          <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+        </div>
+        <div class="modal-body" >
+          <span id="tipsSpan" class="title1"></span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+        </div>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <!--失败提示-->
+
+  <div class="modal modal-message modal-info  in" id="failmodal"  aria-hidden="true"
+       style="display:none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+        </div>
+        <div class="modal-body">
+          <p class="title1" id="failTitle"></p>
+          <div id="failSpan" style="background-color: #000;color:#fff;" ></div>
+        </div>
+        <div class="modal-footer padding-bottom-20">
+          <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我了解了！</button>
+
+        </div>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  <!--提示框-->
+  <div class="modal in" id="MsgAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+       aria-hidden="false" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+              class="sr-only">Close</span></button>
+          <h4 id="MsgAlertTitle"></h4>
+        </div>
+        <div class="modal-body">
+          <h6 id="MsgAlertContent"></h6>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Basic Scripts-->
+<script src="assets/js/jquery-2.0.3.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<script src="assets/js/echarts.common.min.js"></script>
+<script src="plugin/uploadify/jquery.Huploadify.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script src="assets/js/validation/bootstrapValidator.js"></script>
+<script src="./webcontent/image/js/util_image.js"></script>
+<script src="./webcontent/image/js/util_harbor.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    initProjectInfo();
+    bindTabsBtns();
+    bindProjOpsBtns();
+    $('a[href="#tab1"]').click();
+    fnupload();
+    fnupload_jb();
+  });
+</script>
+
+

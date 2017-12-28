@@ -1,0 +1,476 @@
+﻿<!DOCTYPE html>
+<html>
+<!-- Head -->
+
+<link href="assets/css/dashboard.css" rel="stylesheet" type="text/css" />
+
+
+
+<!-- /Head -->
+<!-- Body -->
+
+<!-- /Page Sidebar -->
+
+<!-- Page Breadcrumb -->
+<div class="page-breadcrumbs  breadcrumbs-fixed">
+    <ul class="breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="#/webcontent/Application/task.html">
+
+                业务系统管理
+            </a>
+        </li>
+        <li class="active" id="systemName"></li>
+    </ul>
+</div>
+<!-- /Page Breadcrumb -->
+
+<!-- Page Body -->
+<div class="page-body">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-3 col-sm-6 col-xs-12 no-padding-left">
+                <div class="databox">
+                    <div class="databox-left bg-white">
+                        <div class="databox-sparkline padding-5" style="border:1px solid #ddd">
+                            <i class="fa fa-th-large primary"></i>
+                        </div>
+
+                    </div>
+                    <div class="databox-right bg-white">
+                        <span class="databox-number blueberry"><span id="module"></span></span>
+                        <div class="databox-text darkgray">应用数</div>
+                        <div class="databox-stat radius-bordered">
+                            <a href="javascript:;">
+                            <div class="stat-text" style="font-size:20px;border:1px solid #d9edf7;color:#4374e0;padding:5px 10px;border-radius:100%">
+                                <i class="fa fa-plus" onclick="fnCreateBusiness()"></i>
+                            </div>
+
+                        </a>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-xs-12 no-padding-left">
+            <div class="databox">
+                <div class="databox-left bg-white">
+                    <div class="databox-sparkline padding-5" style="border:1px solid #ddd">
+                        <i class="fa fa-cube purple"></i>
+                    </div>
+
+                </div>
+                <div class="databox-right bg-white">
+                    <span class="databox-number purple" id="containernum">2</span>
+                    <div class="databox-text darkgray">容器总数</div>
+                    <!-- <div class="databox-stat bg-lightred radius-bordered">
+                              <div class="stat-text">
+                                  <span>异常</span>
+                                  <span>0</span>
+                              </div>
+
+                          </div>  -->
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-3 col-sm-6 col-xs-12 no-padding-left">
+            <div class="databox">
+                <div class="databox-left bg-white">
+                    <div class="databox-sparkline padding-5" style="border:1px solid #ddd">
+                        <i class="fa fa-life-buoy sky"></i>
+                    </div>
+
+                </div>
+                <div class="databox-right bg-white">
+                    <span class="databox-number sky" style="width:100px"><span id="totalCPU"></span>核</span>
+                    <div class="databox-text darkgray">CPU总数</div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-xs-12 no-padding">
+            <div class="databox">
+                <div class="databox-left bg-white">
+                    <div class="databox-sparkline padding-5" style="border:1px solid #ddd">
+                        <i class="fa fa-floppy-o themeprimary"></i>
+                    </div>
+
+                </div>
+                <div class="databox-right bg-white">
+                    <span  class="databox-number themeprimary"><span id="totalMem">0</span>GB</span>
+                    <div class="databox-text darkgray">内存总数</div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 no-padding">
+
+        <div class="col-sm-12">
+            <div class="panel panel-default" >
+                <div class="panel-heading">
+                    CPU平均使用率
+                </div>
+                <div class="panel-body ">
+                    <div class="pull-left" style="width:18%;height:120px;border-right:1px solid #ddd">
+                        <div class="progress  progress-striped progress-vertical progress-bottom " id="CPUused">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="height: 40%">
+                                        <span>
+                                            40%
+                                        </span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="pull-right no-padding-top"  style="width:82%;height:120px">
+                        <p style="width:30%;height:5px;float:right;margin-top:-12px">单位%</p>
+                        <div id="CPUhistory" style="height:130px"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">磁盘使用情况</div>
+                <div class="panel-body">
+                    <div id='DiskUsed' style="height:120px"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 no-padding">
+        <div class="col-sm-12 no-padding-left">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    内存平均使用率
+                </div>
+                <div class="panel-body">
+                    <div class="pull-left" style="width:18%;height:120px;border-right:1px solid #ddd">
+                        <div class="progress  progress-striped progress-vertical progress-bottom " id="MerryUsed">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="height: 50%">
+                                        <span>
+                                            40%
+                                        </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" pull-right no-padding-top"  style="width:82%;height:120px">
+                        <p style="width:30%;height:5px;float:right;margin-top:-12px">单位%</p>
+                        <div id="Memhistory" style="height:130px"></div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 no-padding-left">
+            <div class="panel panel-default">
+                <div class="panel-heading">资源使用情况</div>
+                <div class="panel-body text-align-center no-padding-top" id="resourceUsed">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 no-padding">
+        <div class="panel panel-default">
+            <div class="panel-heading">应用状态</div>
+            <div class="databox databox-xxlg databox-vertical  bg-white radius-bordered padding-5" style="border:none">
+                <div class="databox-top padding-top-20">
+                    <div class="databox-row row-12" id="sys_count">
+                        <div class="databox-cell cell-3 text-center">
+                            <div class="databox-number number-xxlg sonic-silver">0</div>
+                            <div class="databox-text storm-cloud">总数</div>
+                        </div>
+                        <div class="databox-cell cell-9 text-align-center">
+                            <div class="databox-row row-6 text-left">
+                                <span class="badge badge-palegreen badge-empty margin-left-5"></span>
+                                <span class="databox-inlinetext uppercase darkgray margin-left-5">0正常</span>
+                                <span class="badge badge-yellow badge-empty margin-left-30"></span>
+                                <span class="databox-inlinetext uppercase darkgray margin-left-5">0异常</span>
+                            </div>
+                            <div class="databox-row row-6">
+                                <div class="progress bg-gray progress-no-radius">
+                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="databox-bottom">
+                    <div class="databox-row row-12">
+                        <div class="panel-body2 margin-top-10 margin-bottom-10">
+                            <div class="databox-cell cell-12 text-center no-padding-left" id='sya_status'>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-sm-12 col-xs-12 no-padding">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    告警信息 <span><a href="#webcontent/Alarm/Alarmlist.html"
+                                  class="pull-right">查看更多</a></span>
+                </div>
+                <div class="panel-body task-container padding-10 margin-bottom-10" style="height:350px;overflow:auto;" >
+                    <ul class="tasks-list" id="alarminfo">
+                        <!--<li class="task-item margin-bottom-10" id="dangerInfo">
+                           <div class="label label-info">关注</div>
+                           <div class="task-body">
+                             <p><a href="javascript:;" class="sonic-silver" data-container="body" data-toggle="popover-hover" data-placement="top" data-content="<p>2017-07-13 12:44:26,vd21slave03,账户中心crm_ams_scrm注册状态,CRITICAL,ip 10.78.220.73:31896 register to marathon not in zk</p>">2017-07-13 12:44:26,vd21slave03,账户中心crm_ams_scrm注册状态,CRITICAL,ip 10.78.220.73:31896 register to marathon not in zk</a></p>
+                           </div>
+                           <div class="task-creator info">vd21slave03</div>
+                         </li>-->
+                    </ul>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--mesos-->
+
+
+
+
+
+
+    <div class="col-sm-9 ">
+        <div class="widget">
+            <div class="widget-header bg-whitesmoke" style="border-bottom:1px solid #ddd">
+                <div class="row">
+                    <div class="col-sm-11">
+                        <select style="width:300px" id="selectSysname" onchange="fnsys_appEchart()">
+                            <option value="">选择要查看的应用名称</option>
+                        </select>
+                    </div>
+                    <!--<div class="col-sm-1 padding-top-10">-->
+                    <!--<a href="javascript:" data-toggle="modal" data-target="#Containsetting">-->
+                    <!--<i class="fa fa-cog silver" style="font-size:16px"></i>-->
+                    <!--</a>-->
+                    <!--</div>-->
+                </div>
+
+            </div>
+            <div class="widget-body padding-bottom-30" >
+
+                <div id="Containscount" style="width:100%;height:400px"></div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
+        <div class="panel panel-default">
+            <div class="panel-heading">操作事件<a href="#" onclick="changeMenu(this, '/webcontent/Platformlog/Platformlog.html')" class="pull-right">查看更多</a></div>
+
+            <div class="panel-body" style="height:460px">
+                <ul class id="eventlist">
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- /Page Container -->
+<!-- Main Container -->
+
+<!--<div class="modal fade" id="Containsetting" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"-->
+<!--style="display: none;" data-backdrop="static" data-keyboard="false">-->
+<!--<div class="modal-dialog" style="width:800px">-->
+<!--<div class="modal-content">-->
+
+<!--<div class="modal-header">-->
+<!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+<!--<h4 class="modal-title" id="myLargeModalLabel1">应用显示</h4>-->
+<!--</div>-->
+<!--<div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">-->
+<!--<button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+<!--<span id="warningMsg"></span>-->
+<!--</div>-->
+
+<!--<div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">-->
+<!--<button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+<!--<span id="successMsg"></span>-->
+<!--</div>-->
+<!--<form class="form-horizontal">-->
+<!--<div class="modal-body">-->
+<!--<div class="col-sm-5">-->
+<!--<div class="panel panel-default">-->
+<!--<div class="form-title padding-left-10">-->
+<!--系统组-->
+<!--</div>-->
+<!--<div class="panel-body2" style="height:100px">-->
+<!--<ul class="list-unstyled sys-ul" id="sysname">-->
+<!--<li>台州微信</li>-->
+<!--<li>浙江移动手机营业厅系统</li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--<div class="form-title padding-left-10 margin-top-10" >-->
+<!--模块组-->
+<!--</div>-->
+<!--<div class="col-sm-12 no-padding margin-bottom-10">-->
+<!--<input type="text" class="form-control" placeholder="输入您要查找的模块名称" onkeyup="fnSearch(this,'#appname')">-->
+<!--</div>-->
+
+<!--<div class="panel-body2 set" style="height:150px">-->
+<!--<ul class="list-unstyled sys-ul" id="appname">-->
+
+<!--</ul>-->
+
+
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-sm-2 text-align-center" style="margin-top:200px">-->
+<!--<a class="btn btn-default" onclick="addShowApp()">添加<i class="fa fa-angle-double-right padding-left-5"></i></a>-->
+<!--<a class="btn btn-default margin-top-10" onclick="cutShowApp()"><i class="fa fa-angle-double-left padding-right-5"></i>删除</a>-->
+<!--</div>-->
+<!--<div class="col-sm-5">-->
+<!--<div class="panel panel-default">-->
+<!--<div class="form-title padding-left-10" >-->
+<!--显示模块-->
+<!--</div>-->
+<!--<div class="col-sm-12 no-padding margin-bottom-10">-->
+<!--<input type="text" class="form-control" placeholder="输入您要查找的模块名称" onkeyup="fnSearch(this,'#showapp')">-->
+<!--</div>-->
+
+<!--<div class="panel-body2">-->
+<!--<ul class="list-unstyled sys-ul" id="showapp">-->
+
+<!--</ul>-->
+
+<!--</div>-->
+<!--</div>-->
+
+<!--</div>-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>-->
+<!--<button type="button" class="btn btn-azure" data-dismiss="modal" onclick="fnPostData()">确定</button>-->
+<!--</div>-->
+<!--</form>-->
+<!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+<!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>-->
+
+
+</div>
+
+<div id="modal-info" class="modal  fade" style="display: none;" aria-hidden="true"
+     data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="text-align:center;font-size:18px">
+                公告信息
+            </div>
+            <div class="modal-body">
+                <div class="tickets-container text-align-left" >
+
+                    <ol class="tasks-list margin-10" id="info_list" style="padding-left: 16px;">
+                        <li style="font-size:16px"><a href="javascript:" onclick=""></a><p id="content_info" style="word-wrap:break-word;display:none">
+
+                        </p ></li>
+                    </ol>
+                </div>
+                <span id="info_id" class="hidden"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-azure" data-dismiss="modal" id="info_more">查看更多</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="info_sure">取消</button>
+
+            </div>
+        </div> <!-- / .modal-content -->
+    </div> <!-- / .modal-dialog -->
+</div>
+<div class="modal " id="showMoreModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+     style="display: none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myLargeModalLabel"><span id="ComponentType">组件</span>详细信息</h4>
+                <span class="hidden" id="echartSpan" value=""></span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <table class="table  table-hover table-bordered">
+                                <thead>
+                                <tr role="row">
+                                    <th >应用名称</th>
+                                    <th >状态</th>
+                                </tr>
+                                </thead>
+
+                                <tbody id="table_detail_status">
+                                <!-- <tr>
+                                    <td>营业厅</td>
+                                    <td><a href="Application.html">浙江移动手机营业厅</a></td>
+                                </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+<!--Basic Scripts-->
+<script src="assets/js/jquery-2.0.3.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/echarts.common.min.js"></script>
+
+<script src="./webcontent/Application/js/taskReport.js"></script>
+
+<script type="text/javascript">
+
+
+
+    // 基于准备好的dom，初始化echarts实例
+
+
+
+
+</script>
+<script>
+
+</script>
+
+
+</html>

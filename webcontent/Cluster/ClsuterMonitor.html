@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<!--Basic Styles-->
+<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+<link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
+<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+<link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+<!--main.css-->
+<link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+<!--集群css-->
+<link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+<link href="webcontent/Cluster/js/tuopu/vis.css" rel="stylesheet" type="text/css" />
+
+<style>
+
+
+  .node {
+    cursor: pointer;
+  }
+
+  .node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+
+  .node text {
+    font: 10px sans-serif;
+  }
+
+  .link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+  }
+
+</style>
+<div class="page-breadcrumbs breadcrumbs-fixed">
+  <ul class="breadcrumb">
+    <li>
+      <i class="fa fa-home"></i>
+      <a href="#/webcontent/Cluster/Clusterlist.html" >集群列表</a>
+    </li>
+    <li id="clusterName"> </li>
+  </ul>
+</div>
+<!-- /Page Breadcrumb -->
+<!-- Page Body -->
+<div class="page-body">
+
+  <div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+    <button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <span id="warningMsg"></span>
+  </div>
+
+  <div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+    <button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <span id="successMsg"></span>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="well">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 no-padding-left ">
+            <div class="col-lg-6 col-md-6 col-sm-4"><h2 id="clustername"></h2></div>
+            <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 no-padding-right margin-bottom-10 text-align-right" id="more">
+
+              <a href="javascript:void(0);"  class="btn btn-azure btn-sm"  onclick="fnAppMove()">集群间应用迁移</a>
+              <a href="javascript:void(0);"  class="btn btn-azure btn-sm"  onclick="fnUpModalAll('')"><i class="fa fa-arrow-up"></i>升级弹性扩缩</a>
+              <a href="javascript:void(0);"  class="btn btn-azure btn-sm"  onclick="fnStartStopAll('','stop')"><i class="fa fa-pause"></i>暂停弹性扩缩</a>
+              <a href="javascript:void(0);"  class="btn btn-azure btn-sm"  onclick="fnStartStopAll('','start')" style="display:none"><i class="fa fa-play"></i>启动弹性扩缩</a>
+              <div class="btn-group" >
+                <a class="btn  btn-azure btn-sm" href="javascript:void(0);"><i class="fa fa fa-th"></i>仓库配置</a>
+                <a class="btn  btn-azure btn-sm dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><i class="fa fa-angle-down"></i></a>
+                <ul class="dropdown-menu">
+
+                  <li>
+                    <a href="javascript:void(0);"  onclick="fnshowpackage()">程序包仓库配置</a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);"  onclick="fnshowimage()" >镜像仓库配置</a>
+                  </li>
+
+
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 no-padding-left ">
+            <div class="col-lg-8 col-md-6 col-sm-4">
+              <span id="cluster_status"></span>
+              (
+              <span> <i class="fa fa-heartbeat success"></i></span>
+              <span class=" darkgray" id="health_host"></span>
+              <span class=" darkgray">健康主机</span>
+
+              <!-- <span class="padding-left-20"> <i class="fa fa-heartbeat gray"></i></span>
+              <span class=" darkgray" id="close_host">0</span>
+              <span class=" darkgray " >关机主机</span> -->
+
+              <span class="padding-left-20"> <i class="fa fa-heartbeat danger"></i></span>
+              <span class=" darkgray" id="unhealth_host"></span>
+              <span class=" darkgray " >异常主机</span> )
+            </div>
+
+          </div>
+          <div class="col-sm-12 margin-top-10">
+            <!--<strong class="padding-right-10">集群类型:</strong>-->
+            <span class="padding-left-5 silver padding-right-20" id="clustertype" hidden>master</span>
+
+            <strong >主机数量:</strong>
+            <span class="padding-left-5 silver padding-right-20" id="hostnum">3</span>
+
+            <strong >管理节点数量:</strong>
+            <span class="padding-left-5 silver padding-right-20" id="masagenodes">3</span>
+
+            <strong>创建时间:</strong><span class="padding-left-5 silver padding-right-20" id="createtime">2016-12-10 20:56</span>
+
+          </div>
+
+          <div class="col-sm-12 margin-top-10">
+            <strong class="padding-right-10">程序包仓库地址:</strong>
+            <span class="silver padding-right-20" id="packageadd">暂未配置</span>
+
+            <strong class="padding-right-10">镜像仓库地址:</strong>
+            <span class="silver padding-right-20" id="harboradd">暂未配置</span>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="well">
+        <div class="tabbable">
+          <ul class="nav nav-tabs tabs-flat" id="myTab11">
+            <li class="active">
+              <a data-toggle="tab" href="#tab1">性能监控</a>
+            </li>
+            <li >
+              <a data-toggle="tab" href="#tab2">集群配置</a>
+            </li>
+
+            <li >
+              <a data-toggle="tab" href="#tab3">计算节点 </a>
+            </li>
+            <li >
+              <a data-toggle="tab" href="#tab4">应用列表 </a>
+            </li>
+            <li >
+              <a data-toggle="tab" href="#tab5">集群拓扑</a>
+            </li>
+            <!-- <li >
+               <a data-toggle="tab" href="#tab5">系统信息</a>
+           </li> -->
+          </ul>
+          <div class="tab-content tabs-flat">
+            <div id="tab1" class="tab-pane active">
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">容器平均CPU</div>
+                    <div class="panel-body">
+                      <div id="clusterCPUused" style="height:260px"></div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">容器平均内存</div>
+                    <div class="panel-body">
+                      <div id="memused" style="height:260px"></div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-12" id="zkshow">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">ZK连接数</div>
+                    <div class="panel-body">
+                      <div id="ZK" style="height:260px"></div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="tab2" class="tab-pane">
+              <div class="col-sm-6 no-padding-left margin-bottom-10">
+                <a class="btn btn-default" href="javascript:;" onclick="fnCreateMasterModal()" id="addtoo"><i class="fa fa-plus"></i>添加组件</a>
+              </div>
+              <!-- <div class="col-sm-6 no-padding-right margin-bottom-10">
+                <input class="form-control" placeholder="search..." type="text" onkeyup="fnSearch(this)"/>
+              </div> -->
+
+              <table class="table table-bordered table-hover" id="masterdatatable">
+              </table>
+            </div>
+
+
+            <div id="tab3" class="tab-pane">
+              <div class="col-sm-6 no-padding-left margin-bottom-10">
+                <a class="btn btn-default" onclick="fnCreateSlaveNode()" id="add"><i class="fa fa-plus"></i>添加节点</a>
+              </div>
+              <!-- <div class="col-sm-6 no-padding-right margin-bottom-10">
+                <input class="form-control" placeholder="search..." type="text" onkeyup="fnSearch(this)"/>
+              </div> -->
+
+              <table class="table table-bordered table-hover" id="editabledatatable">
+
+              </table>
+            </div>
+            <div id="tab4" class="tab-pane">
+              <div class="col-sm-6 no-padding-right margin-bottom-10">
+
+              </div>
+              <div class="col-sm-6 no-padding-right margin-bottom-10">
+                <input id="sys-search-input" class="form-control" placeholder="请输入应用名称" onchange="fnSearchAppList(this)" autocomplete="off"/>
+              </div>
+              <table class="table  table-hover table-bordered" id="applisttable">
+              </table>
+            </div>
+            <!--over tab3-->
+            <div id="tab5" class="tab-pane">
+              <canvas width="1000" height="400" id="canvas"></canvas>
+              <!--<div id="chart-container" style="width: 100%;height:800px;border: 1px solid lightgray;"></div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 集群配置-->
+
+<div class="modal fade" id="addMasterModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true" style="display:none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:700px">
+      <div class="modal-header">添加组件</div>
+      <form class="form-horizontal" role="form" id="addmasterform">
+        <div class="modal-body">
+
+
+
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label no-padding-right">选择组件</label>
+            <div class="col-sm-10" id="cluster_id">
+              <select class="form-control" name="country"  onchange="fnchangeCluster()">
+                <option value="marathon" selected>Marathon</option>
+                <option value="haproxy">Haproxy</option>
+                <!--<option value="nginx">Nginx</option>-->
+
+              </select>
+              <input type="text" class="form-control" value="slave" disabled style="display:none;">
+            </div>
+          </div>
+          <div class="form-group staic">
+            <label class="col-sm-2 control-label no-padding-right">主机IP</label>
+            <div class="col-sm-10">
+              <!-- <select  class=" selectpicker" ></select>   -->
+
+              <select class="selectpicker show-tick" data-live-search="true" id="hostIp" title="请选择" style="width: 100%;margin-left:0px;">
+              </select>
+              <span class="warning"></span>
+            </div>
+          </div>
+
+          <div id="marathonlist">
+            <!-- <div class="form-group" >
+             <label class="col-sm-2 control-label no-padding-right">主机IP</label>
+             <div class="col-sm-10">
+             <input type="text" class="form-control">
+             </div>
+           </div>  -->
+            <div class="form-group" >
+              <label class="col-sm-2 control-label no-padding-right">端口</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control port" data-blur="port" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                       placeholder="只能输入数字" onblur="">
+                <span class="warning"></span>
+              </div>
+            </div>
+            <div class="form-group" >
+              <label class="col-sm-2 control-label no-padding-right">MarathonID</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control path" data-blur="path" onblur="">
+                <span class="warning"></span>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div id="Haproxylist"  style="display:none;">
+            <div class="form-group" >
+              <label class="col-sm-2 control-label no-padding-right" >服务端口</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control port inputVal" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                       data-blur="port" placeholder="只能输入数字" onblur="">
+                <span class="warning"></span>
+              </div>
+            </div>
+            <div class="form-group" >
+              <label class="col-sm-2 control-label no-padding-right" >状态端口</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control stat_port inputVal" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                       data-blur="port" placeholder="只能输入数字" onblur="">
+                <span class="warning"></span>
+              </div>
+            </div>
+            <div class="form-group" >
+              <label class="col-sm-2 control-label no-padding-right" >Marathon地址</label>
+              <div class="col-sm-10">
+                <!-- <input type="text" class="form-control marathon_endpoint" placeholder="" onblur="check(this)">  -->
+                <select class="selectpicker show-tick  marathon_endpoint" multiple data-live-search="true" id="MarathonIp" title="请选择" style="width: 100%;margin-left:0px;">
+                </select>
+                <span class="warning"></span>
+              </div>
+            </div>
+
+            <div class="form-group" >
+              <label class="col-sm-2 control-label no-padding-right" >Bamboo端口</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control bamboo_endpoint inputVal" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                       data-blur="port" placeholder="8000" value="8000" onblur="">
+                <span class="warning"></span>
+              </div>
+            </div>
+            <div class="form-group" >
+              <label class="col-sm-2 control-label no-padding-right" >HaproxyID</label>
+              <div class="col-sm-10">
+                <input type="" class="form-control path inputVal" data-blur="path" placeholder="" onblur="">
+                <span class="warning"></span>
+              </div>
+            </div>
+            <!-- <div class="col-sm-12 margin-top-10">
+          <div class="col-sm-offset-2 col-sm-4">  <label for="exampleInputEmail2">Marathon地址</label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+           <div class="col-sm-3">
+               <label >用户名</label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+            <div class="col-sm-3">
+               <label for="exampleInputEmail2">密码</label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+            </div>  -->
+
+          </div>
+          <div id="Nginxlist"  style="display:none;">
+            <!-- <div class="form-group" >
+             <label class="col-sm-2 control-label no-padding-right">主机IP</label>
+             <div class="col-sm-10">
+             <input type="text" class="form-control">
+             </div>
+           </div>  -->
+            <div class="form-group" >
+              <label class="col-sm-2 control-label no-padding-right">上传端口</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control up_port" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                       data-blur="port" placeholder="80" onblur="">
+                <span class="warning"></span>
+              </div>
+            </div>
+            <div class="form-group" >
+              <label class="col-sm-2 control-label no-padding-right">下载端口</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control down_port" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                       data-blur="port" placeholder="81" onblur="">
+                <span class="warning"></span>
+              </div>
+            </div>
+          </div>
+
+
+          <!--<div id="Mesos-slavelist"  >-->
+          <!--&lt;!&ndash; <div class="form-group" >-->
+          <!--<label class="col-sm-2 control-label no-padding-right">主机IP</label>-->
+          <!--<div class="col-sm-10">-->
+          <!--<input type="text" class="form-control">-->
+          <!--</div>-->
+          <!--</div>  &ndash;&gt;-->
+          <!--&lt;!&ndash; <div class="form-group" >-->
+          <!--<label class="col-sm-2 control-label no-padding-right">约束</label>-->
+          <!--<div class="col-sm-10">-->
+          <!--<input type="text" class="form-control attributes" placeholder="例：dcos:app" data-blur="attributes" onblur="check(this)">-->
+          <!--<span class="warning"></span>-->
+          <!--</div>-->
+          <!--</div>  &ndash;&gt;-->
+          <!---->
+          <!--</div>-->
+          <!---->
+          <!---->
+          <!--&lt;!&ndash;  &ndash;&gt;-->
+          <!--</div>-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-azure" data-dismiss="modal"  id="finishCreate">添加
+          </button>
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- 添加slave -->
+<div class="modal fade" id="creatApplition" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+     style="display: none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog " style="width:700px">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myLargeModalLabel">添加节点（slave）</h4>
+      </div>
+      <form id="accountForm"  class="form-horizontal">
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">集群标签<span class="darkorange padding-left-5">* </span></label>
+            <div class="col-sm-8">
+              <div class="position-relative">
+                        <span class="control-main">
+                          <select id="clusterlabel-select" class="control-select" onclick="$('#_ClusterAddLabel').val($(this).val())">
+                          </select>
+                        </span><input type="text" class="control-input" style="width:95%;"  name="_ClusterAddLabel" id="_ClusterAddLabel" placeholder="请输入集群标签，例：dcos:app">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group staic">
+            <label class="col-sm-3 control-label no-padding-right">目标主机<span class="darkorange padding-left-5">* </span></label>
+            <div class="col-sm-8">
+              <select class="selectpicker show-tick form-group" multiple="multiple" data-live-search="true" id="hostIpSlave"
+                      title="请选择" style="width: 100%;margin-left:0px;">
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-azure" onclick="createMenu()">添加</button>
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="tipsCreate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+     style="display: none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!--<div class="modal-header">-->
+      <!--&lt;!&ndash;<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>&ndash;&gt;-->
+      <!--<h4 class="modal-title">请稍候</h4>-->
+      <!--</div>-->
+      <div class="modal-body" style="font-size:15px;font-weight:bold;margin-top:250px">
+        主机添加中, 请稍候...<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span class="sr-only"></span>
+      </div>
+      <!--<div class="modal-footer">-->
+      <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+      <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+      <!--</div>-->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- 删除 主机/组件 -->
+<div id="deleteSingleCluster" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true"
+     data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+      </div>
+      <div class="modal-body"><div class="title1" id="returnMsg">确定要删除节点?</div></div>
+      <div class="hidden" id="deletedata"></div>
+      <div class="hidden" id="deletetype"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal" onclick="deleteCluster();">确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div> <!-- / .modal-content -->
+  </div> <!-- / .modal-dialog -->
+</div>
+
+<!-- autoscale -->
+<div class="modal fade" id="autoscale" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:700px">
+      <div class="modal-header"><h4 class="modal-title" id="">升级弹性扩缩</h4></div>
+      <span class="hidden" id="autoname"></span>
+      <form class="form-horizontal" role="form" id="addslaveform">
+        <div class="modal-body">
+
+          <div id="Mesos-slavelist"  >
+
+            <div class="form-group" >
+              <label class="col-sm-2 control-label no-padding-right">镜像地址</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control"  placeholder="" onblur="" id="marathon_image">
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-azure"  data-dismiss="modal" >升级
+          </button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- 程序仓库配置 -->
+<div class="modal fade" id="packagehorbor" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:700px">
+      <div class="modal-header"><h4 class="modal-title">程序包仓库配置</h4></div>
+
+      <form class="form-horizontal" role="form" >
+        <div class="modal-body">
+
+
+
+            <div class="form-group" >
+              <label class="col-sm-2 control-label no-padding-right">程序包仓库</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control"  placeholder="" onblur="" id="warehouse">
+              </div>
+            </div>
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-azure"  data-dismiss="modal" onclick="fnSetProgramBar()">确定</button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- 镜像仓库配置 -->
+<div class="modal fade" id="imagehorbor" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:700px">
+      <div class="modal-header"><h4 class="modal-title">镜像仓库配置</h4></div>
+
+      <form class="form-horizontal" role="form" >
+        <div class="modal-body">
+
+
+
+          <div class="form-group" >
+            <label class="col-sm-2 control-label no-padding-right">镜像仓库地址</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control"  placeholder="" onblur="" id="imageWareHouse">
+            </div>
+          </div>
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" >取消</button>
+          <button type="button" class="btn btn-azure"  data-dismiss="modal" onclick="fnSetImageBar()">确定
+          </button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--再次确定-->
+<div id="sure_again" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true"
+     data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+      </div>
+      <div class="modal-body">确定要进行<span id="keywords"></span>操作?</div>
+      <div class="hidden" id="cluster_name"></div>
+      <div class="hidden" id="marathon_name"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal" >确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div> <!-- / .modal-content -->
+  </div> <!-- / .modal-dialog -->
+</div>
+
+<div class="modal fade" id="tips" tabindex="-1" role="dialog" aria-hidden="false" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body" style="font-size:15px;font-weight:bold;margin-top:250px">
+        <span id="tipsText">正在删除, 请稍候...</span><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span class="sr-only"></span>
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--成功提示  -->
+<div class="modal modal-message modal-info fade in" id="success"  aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+        <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+      </div>
+      <div class="modal-body" >
+        <span id="tipsSpan" class="title1"></span>
+        <p id="tipsSpan1" class="title1"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--失败提示-->
+
+<div class="modal modal-message modal-info  in" id="failmodal"  aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+      </div>
+      <div class="modal-body" >
+        <p class="title1" id="failtitle"></p>
+        <p id="failInfo"></p>
+
+      </div>
+      <div class="modal-footer padding-bottom-20">
+        <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="$('#docreate').attr('disabled',false)">好的，我了解了！</button>
+
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal" id="movemodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+     style="display: none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">集群迁移</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group ">
+          <div class="form-title">选择你要迁移到的集群</div>
+          <div class="row" name="reset_cluster">
+            <div class="col-lg-3 col-sm-3 col-xs-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" class="colored-blue">
+                  <span class="text">资源池3</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="fnMoveCluster()">确定</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+<!--Basic Scripts-->
+<script src="assets/js/jquery-2.0.3.min.js"></script>
+<script src="assets/js/jtopo-0.4.8-min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap-select.js"></script>
+<script src="assets/js/echarts.common.min.js"></script>
+<script src="assets/js/validation/bootstrapValidator.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script src="webcontent/Cluster/js/tuopu/vis.min.js"></script>
+<script src="assets/js/userPwoer.js"></script>
+<script src="./webcontent/Cluster/js/Clustermonitor.js"></script>

@@ -1,0 +1,135 @@
+
+    <!--Basic Styles-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+    <!--main.css-->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+     <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+     <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+    <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+
+
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                        <li>        
+                            <a class=" dropdown-toggle" data-toggle="dropdown"  href="#">
+                           <span>平台配置 <i class="fa fa-sort-desc"></i> </span>  </a>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <a href="#/webcontent/platformsetting/setting.html">用户管理</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/roleManage.html" >角色管理</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/note_info.html" >公告信息</a>
+                            </li>
+
+                            <li>
+                              <a href="#/webcontent/platformsetting/appReport.html" >统计报表</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/menuManage.html" >菜单管理</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/baseData.html" >字典维护</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/model.html" >功能列表</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/quotas.html" >配额管理</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/Plug-In/market.html" >插件市场</a>
+                            </li>
+                              <li>
+                                  <a href="#/webcontent/platformsetting/powerGroupManage.html" >权限组管理</a>
+                              </li>
+                            <!-- <li>
+                               <a href="javascript:void(0);">插件市场</a>
+                           </li>-->
+                          </ul>
+                        </li>
+                        <li>统计报表</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                
+                <!-- Page Body -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                        <div class="widget">
+                        	<div class="widget-header bg-lightinfo">
+                        		统计报表可以查看CPU、内存、网络 read/write、I/O read/write的趋势图
+                        	</div>
+                        	<div class="widget-body warningcontainer">
+                        		
+                        		
+                        		<!-- <div class="col-sm-12 no-padding margin-bottom-10">
+                        			<input class="form-control" placeholder="search..." type="text" id="searchUser" onkeyup="fnSearch(this)"/>
+                        	
+                        		</div> -->
+                        		<table class="table  table-hover table-bordered" id="editabledatatable">
+                                       
+                                    </table>	
+                                   
+                        	</div>
+                        </div>  
+                        
+                          
+                   
+                    </div>
+                  
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+        <!-- /Page Container -->
+        <!-- Main Container -->
+
+   
+<div class="modal " id="showMoreModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" 
+ style="display: none;" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel"><span id="moretype"></span>趋势图</h4>
+                    <span class="hidden" id="echartSpan" value=""></span>
+                </div>
+                <div class="modal-body">
+                
+                   <div class="form-group"> 
+                	<div class="form-group">
+                		<div id="moreEchart" style="height:240px;"></div>
+                	 </div>
+                </div>
+                </div>
+                <!--<div class="modal-footer">-->
+                    <!---->
+                     <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                    <!---->
+                <!--</div>-->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+      <script src="assets/js/echarts.common.min.js"></script>
+     <script src="assets/js/select2/select2.min.js"></script>
+   <script src="assets/js/validation/bootstrapValidator.js"></script>
+   <!--  -->
+   <script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+   <script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+  <script src="./webcontent/platformsetting/js/appReport.js"></script>
+	    
+

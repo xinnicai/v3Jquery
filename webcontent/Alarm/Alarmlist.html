@@ -1,0 +1,463 @@
+﻿    <!--Basic Styles-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+     <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+    <!--main.css-->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+    
+    <style>
+    .btn-group{vertical-align:inherit}
+    .panel{padding:10px}
+    </style>
+
+    
+    <!-- Navbar -->
+
+
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            SDDCOS
+                        </li>
+                        <li class="active">监控管理</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                
+                <!-- Page Body -->
+                <div class="page-body">
+                <div id="sessionExpiredAlertBlock" class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		     			<span>会话失效，请重新登录! <a class="btn btn-danger" href="/iMonitor/login.jsp">登录</a></span>
+					</div>
+			
+					<div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			     		<span id="warningMsg"></span>
+					</div>
+				
+					<div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				     	<span id="successMsg"></span>
+					</div>
+                 <div class="row">
+                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                     <div class="widget-body">
+                     <div class="col-sm-6 pull-right ">
+									<a class="btn btn-default  btn-sm  pull-right primary" data-toggle="modal" data-target="#appwarning"><i class=""></i>统一监控</a>
+									</div>
+                       <div class="widget-main ">
+                        <div class="tabbable">
+	                        <ul class="nav nav-tabs tabs-flat" id="myTab11">
+	                            <li class="active">
+	                                <a data-toggle="tab" href="#tab1">
+	                                                               容器启停事件监控
+	                                </a>
+	                            </li>
+	                            <li>
+	                                <a data-toggle="tab" href="#tab2">
+	                                                        告警事件监控
+	                                </a>
+	                            </li>
+	                              <li>
+	                                <a data-toggle="tab" href="#tab3">
+	                                                        维护人信息列表
+	                                </a>
+	                            </li>
+	                        </ul>
+                            <div class="tab-content tabs-flat">
+                            	
+                             <div id="tab1" class="tab-pane in active">
+                             	 <div class="row">
+                             	 	<div class="col-sm-12">
+                             	 		<div class="panel panel-default">
+                             	 			 <div class="panel-heading" style="background-color: #fff;">
+                 	 			 	<div class="row">
+                 	 			 	<!-- <div class="col-sm-4 no-padding-left">
+                 	 			 		<div class="col-sm-3">
+                 	 			 			<select style="width:100%">
+                 	 			 				<option>选择应用</option>
+                 	 			 				<option>测试应用1</option>
+                 	 			 				<option>测试应用2</option>
+                 	 			 				<option>测试应用3</option>
+                 	 			 			</select>
+                 	 			 		</div>
+                 	 			 		
+                 	 			 		
+                 	 			 	</div>	 -->
+                 	 			  <div class="col-sm-6 ">
+                 	 			  	 <a class="btn btn-default" onclick="fnGetEchartData('1')" >一小时</a>
+                 	 			    <a class="btn btn-default" onclick="fnGetEchartData('24')">一天</a>
+                 	 			   <!--  <a class="btn btn-default">一周</a> -->
+                 	 			    <a class="btn btn-default" onclick="fnGetEchartData('744')" >一月</a>
+                 	 			    </div>
+                 	 			    <div class="col-sm-6 text-align-right">
+                                    <input type="text"   placeholder="开始时间"  name="empty" id="startTime" style="width:180px;height:30px; padding:15px">
+                                    <input type="text"   placeholder="结束时间"  name="empty" id="endTime" style="width:180px;height:30px;padding:15px" >
+                                    <button  type="button" class="btn-sm btn-azure" onclick="fnGetEchartData('111')">查询</button>
+                                <!-- <input type="text" placeholder="search..." name="empty" id="endTime">  -->
+                 	 			    </div>
+                 	 			    </div>
+                 	 			 </div>	
+                     	 			<div class="panel-body">
+                     	 			
+				                      	<div class="panel-body">
+	                            	      <div id="main" style="width:100%;height:400px;"></div>
+	                                    </div>
+	                                    </div>
+	                                    <div class="panel panel-default">
+	                                      <div class="panel-heading" style="background-color:#fff">启停事件列表</div>	
+	                                    	<div class="panel-body warningcontainer">
+	                                    	
+	                                    	<!-- <div class="col-sm-12 no-padding margin-bottom-10">
+                        					<input class="form-control" placeholder="search..." type="text" onkeyup="fnSearch(this)">
+                        	
+                        				</div> -->
+                        				
+	                                        <table class="table table-bordered table-hover" id="editabledatatable">
+				                            <div class="margin-top-10">  
+				                          </div>
+		                                 </table>
+		                                
+		                                 </div>
+		                                 </div> 
+                                        </div>
+                                      </div>
+                                     </div>
+                                   </div>  	
+                              
+
+
+                            <div id="tab2" class="tab-pane">
+                            	<div class="row">
+                               <div class="col-sm-12">
+                            		<div class="panel panel-default">
+                             	 	   <div class="panel-heading" style="background-color: #fff;">
+                 	 			 	<div class="row">
+                 	 			 	<div class="col-sm-4">
+                 	 			 		 <a class="btn btn-default" onclick="getEchartData('1')">一小时</a>
+                 	 			    <a class="btn btn-default" onclick="getEchartData('24')">一天</a>
+                 	 			   <!--  <a class="btn btn-default">一周</a> -->
+                 	 			    <a class="btn btn-default" onclick="getEchartData('744')">一月</a>
+                 	 			 	</div>	
+                 	 			  <div class="col-sm-8 text-align-right">
+                 	 			  	
+                 	 			 	 <input type="text"   placeholder="开始时间"  name="empty" id="start" style="width:180px;height:30px; padding:15px">
+                                    <input type="text"   placeholder="结束时间"  name="empty" id="end" style="width:180px;height:30px;padding:15px" >
+                                    <button  type="button" class="btn-sm btn-azure" onclick="getEchartData('222')">查询</button>
+                 	 			    </div>
+                 	 			    </div>
+                 	 			 </div>	
+                             	 <div class="panel-body">
+                             	 				
+						             <div class="panel-body">
+						                      		
+			                        <div id="alarm" style="width:1010px;height:400px;"></div>
+			                            	     
+			                          </div>
+	                                    <div class="panel panel-default">
+	                                      <div class="panel-heading" style="background-color:#fff">告警事件列表</div>	
+	                                    	<div class="panel-body warningcontainer">
+	                                    
+	                                    	<!-- <div class="col-sm-12 no-padding margin-bottom-10">
+                        					<input class="form-control" placeholder="search..." type="text" onkeyup="fnSearch(this)">
+                        	
+                        				</div> -->
+	                                        <table class="table  table-hover" id="controlTable">
+				                             
+					                         
+			                                 </table>
+			                             </div>
+			                           </div> 
+                                   </div>
+	                          </div>
+                           </div>
+                        </div>       
+                      </div>
+                          
+                       <div id="tab3" class="tab-pane">
+                       	<div class="widget" style="border:1px solid #ddd">
+                       		<div class="widget-header bg-lightinfo">
+                        		<span>可以通过查看信息按钮查看相应的人维护有哪些应用，告警状态开通之后，当这些应用发生告警信息之后，相应的负责人会收到短信通知</span>
+                        	</div>
+                        	<div class="widget-body">
+                        		<div class="col-sm-6 no-padding-left margin-bottom-10">
+                        			<a class="btn btn-azure" onclick="fnCreateMonitor()"data-target="#creatDataModal"><i class="fa fa-user"></i>添加维护人</a>
+                        		</div>
+                        		<!-- <div class="col-sm-6 no-padding-right margin-bottom-10">
+                        			<input class="form-control" placeholder="search..." type="text" onkeyup="fnSearch(this)">
+                        	
+                        		</div> -->
+		                       	<table class="table table-bordered table-hover" id="handle_table">
+		                             
+		                          
+		                         </table>
+		                        </div>
+                            </div>
+                          </div>   
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>           
+      </div>
+    <!-- /Page Body -->
+   </div>
+   <!-- /Page Content -->
+
+
+     
+     
+    <!--查看告警信息--> 
+    <div class="modal fade" id="Watchlramuser" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog " style="width:700px">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel1">维护人维护内容查看</h4>
+                </div>
+                  <form id="accountForm1" method="post"  novalidate="novalidate" class="form-horizontal">
+                <div class="modal-body">
+                 	<div class="widget" style="border:1px solid #ddd">
+                       		<div class="widget-header bg-lightinfo">
+                        		<span>可以查看自己所负责的应用名称与应用ID，同时可快速搜索</span>
+                        	</div>
+                        	<div class="widget-body">
+                        		<div class="col-sm-6 no-padding-left margin-bottom-10">
+                        			<label class="label label-azure">
+                        		      <span  id=username_m>林福森</span> 
+                        		      <span class="padding-left-10">/应用数：</span>
+                        		      <span class="padding-left-10"><span  id=appnum>应用数：4</span></span>
+                        			</label>
+                        		</div>
+                        		<!-- <div class="col-sm-6 no-padding-right margin-bottom-10">
+                        			<input class="form-control" placeholder="search..." type="text" onkeyup="fnSearch(this)">
+                        	
+                        		</div> -->
+		                       	<table class="table table-bordered table-hover" id="showMonitor_table">
+		                              
+		                          
+		                         </table>
+		                        </div>
+                            </div>
+                 
+                
+                 
+                 
+                 
+                </div>
+
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>   
+   </div>
+    <!--  创建 -->
+     <div class="modal fade" id="creatDataModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+     data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">新增告警维护人</h4>
+                </div>
+                 <form id="accountForm" method="post"  novalidate="novalidate" class="form-horizontal">
+                 
+                <div class="modal-body">
+                     
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">维护人姓名</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="name" id="username">
+                                <!-- <p class="help-block">由字母跟汉字组合.</p> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">维护人电话</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control"  name="telephone" id="telephone"> 
+                            </div>
+                        </div>    
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">告警范围</label>
+                            <div class="col-sm-9 staic">
+                                <select class="selectpicker form-control" multiple   title="请选择告警范围"
+				                      data-actions-box="true" data-live-search="true" name="alarmScope" id="alarmScope">
+				                <option></option>
+				                </select>
+                            </div>
+                        </div>         
+                    </div>
+               
+                  <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure"  id="createUser">创建</button>
+                </div>
+                 
+                </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      <!-- 关闭告警 -->
+     <div id="lockUser" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true"
+     	data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question">？</div>  
+                </div>
+                <div class="modal-body">确定要关闭告警?</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="lock()">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+    <!-- 开通告警-->
+     <div id="unlockUser" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true"
+     	data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question">？</div>  
+                </div>
+                <div class="modal-body">确定要开通告警?</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="unlock()">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+       <!-- 删除 用户 -->
+     <div id="DeleteUser" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true" 
+      data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question">？</div>  
+                </div>
+                <div class="modal-body">确定删除该联系人?</div>
+                <span id="deleteID" class="hidden"></span>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="deleteData()">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+    </div>
+    <!--自定义时间-->
+        <!--  <div class="modal fade" id="creatDateTime" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+        data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="LargeModalLabel">自定义时间</h4>
+                    <span id="basedataid" class="hidden"></span>
+                </div>
+                 <form id="accountForm" method="post"  novalidate="novalidate" class="form-horizontal">
+                 
+                <div class="modal-body">
+                     
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">开始时间</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control"  name="empty" id="startTime">
+                                <input type="text" class="form-control"  name="empty" id="startTime"> 
+                            </div>
+                        </div>      
+                       <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">结束时间</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control"  name="empty" id="endTime">
+                                <input type="text" class="form-control"  name="empty" id="endTime"> 
+                            </div>
+                        </div>   
+                         
+                    </div>
+               
+               
+                  <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure"  id="createUser">创建</button>
+                </div> -->
+      <!--  编辑  -->
+        <div class="modal fade" id="updateDataModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+        data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="LargeModalLabel">维护人信息编辑</h4>
+                    <span id="basedataid" class="hidden"></span>
+                  
+                </div>
+                 <form id="updateForm" method="post"  novalidate="novalidate" class="form-horizontal">
+                 
+                <div class="modal-body">
+                     
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">维护人姓名</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="name" id="name_U">
+                                <!-- <p class="help-block">由字母跟汉字组合.</p> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">维护人电话</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control"  name="telephone" id="telephone_U"> 
+                            </div>
+                        </div>    
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">告警范围</label>
+                            <div class="col-sm-9">
+                                <select class="selectpicker form-control" multiple   title="请选择告警范围"
+				                      data-actions-box="true" data-live-search="true" name="alarmScope" id="alarmScope_U">
+				                <option></option>
+				                </select>
+                            </div>
+                        </div>         
+                    </div>
+                  <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure"  id="updateUser">更新</button>
+                </div>
+                 
+                </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+   
+
+    <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+     <script src="assets/js/bootstrap-select.js"></script>
+      <script src="assets/js/validation/bootstrapValidator.js"></script>
+      <script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+       <script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+    <script src="assets/js/echarts.common.min.js"></script>
+     <script src="assets/js/datetime/moment.min.js"></script>
+     <script src="assets/js/datetime/bootstrap-datepicker.js"></script>
+      <script src="assets/js/datetime/bootstrap-datetimepicker.min.js"></script>
+    <script src="./webcontent/Alarm/Alarm.js"></script>
+
+

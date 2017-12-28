@@ -1,0 +1,441 @@
+<link href="assets/css/tips.min.css"  rel="stylesheet"/>
+<link href="assets/css/dashboard.css" rel="stylesheet" type="text/css"/>
+<style>
+  .databox{border:none}
+</style>
+
+<div class="page-breadcrumbs  breadcrumbs-fixed">
+  <ul class="breadcrumb">
+    <li>
+      <i class="fa fa-home"></i>
+      Home
+    </li>
+    <li class="active">Dashboard</li>
+  </ul>
+</div>
+<!-- /Page Breadcrumb -->
+
+<!-- Page Body -->
+<div class="page-body">
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+      <a href="http://20.26.28.36:9080/iCloud/view/dataCenterViewPoints.html" class="databox radius-bordered databox-shadowed databox-graded">
+        <div class="databox-left bg-themesecondary">
+          <div class="databox-piechart">
+
+            <img src="assets/img/svg/xts.svg" height="30px"></img>
+          </div>
+        </div>
+        <div class="databox-right">
+          <span class="databox-number themesecondary" id="centerNum"></span>
+          <div class="databox-text darkgray">中心数</div>
+          <div class="databox-stat themesecondary radius-bordered">
+
+          </div>
+        </div>
+      </a>
+    </div>
+    <!--over col-sm-12-->
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+      <div class="databox radius-bordered databox-shadowed databox-graded">
+        <div class="databox-left bg-blueberry">
+          <div class="databox-piechart">
+
+            <img src="assets/img/svg/552ce379f2888.svg" height="25px"></img>
+          </div>
+        </div>
+        <div class="databox-right">
+          <span class="databox-number blueberry"><span id="sysnum"></span>/<span id="module"></span></span>
+          <div class="databox-text darkgray">系统数/应用数</div>
+
+        </div>
+      </div>
+    </div>
+    <!--over col-sm-12-->
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+      <div class="databox radius-bordered databox-shadowed databox-graded">
+        <div class="databox-left bg-info">
+          <div class="databox-piechart">
+            <i class="fa fa-sitemap font-180 padding-top-10"></i>
+          </div>
+        </div>
+        <div class="databox-right">
+          <span class="databox-number info" id="slave"></span>
+          <div class="databox-text darkgray">计算节点</div>
+        </div>
+      </div>
+    </div>
+    <!--over col-sm-12-->
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+      <div class="databox radius-bordered databox-shadowed databox-graded">
+        <div class="databox-left bg-themeprimary">
+          <div class="databox-piechart">
+            <i class="fa fa-cubes font-180 padding-top-10"></i>
+          </div>
+        </div>
+        <div class="databox-right">
+          <span class="databox-number themeprimary" id="containernum"></span>
+          <div class="databox-text darkgray">容器总数</div>
+        </div>
+      </div>
+      <!--over col-sm-12-->
+    </div>
+
+
+    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+      <div class="col-sm-12 no-padding">
+        <div class="row no-margin">
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 no-padding-left">
+            <div class="databox databox-xlg bg-white databox-vertical">
+              <div class="databox-top">
+                <span class="databox-header">CPU使用率</span>
+              </div>
+              <div id="CPUused" style="height:160px"></div>
+              <div class="databox-bottom no-padding text-align-center">
+                                            <span class="databox-text lightcarbon no-margin padding-top-10">已使用:
+                                            <span name="used"></span>/<span name="total"></span>(核)</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-4 col-sm-6 col-xs-12 no-padding-left">
+            <div class="databox databox-xlg bg-white databox-vertical">
+              <div class="databox-top">
+                <span class="databox-header">内存使用率</span>
+              </div>
+              <div id="MerryUsed" style="height:160px"></div>
+              <div class="databox-bottom no-padding text-align-center">
+                                            <span class="databox-text lightcarbon no-margin padding-top-10">已使用:
+                                            <span name="used"></span>/<span name="total"></span>(GB)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-sm-6 col-xs-12 no-padding">
+            <div class="databox databox-xlg bg-white databox-vertical">
+              <div class="databox-top">
+                <span class="databox-header">存储使用率</span>
+              </div>
+
+              <div id="DiskUsed" style="height:160px"></div>
+              <div class="databox-bottom no-padding text-align-center">
+                                            <span class="databox-text lightcarbon no-margin padding-top-10">已使用:
+                                            <span name="used"></span>/<span name="total"></span>(GB)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-sm-12 no-padding">
+        <!--mesos-->
+        <div class="col-sm-3 no-padding-left">
+          <div class="thumbnail">
+            <div class="caption">
+              <h6 class="caption-text">
+                Mesos
+                <a href="javascript:;" class="slate-gray">
+                <span class="pull-right padding-right-10" onclick="fnHealthDetail('Mesos')">
+			        			<span hea_status="health">0<i class="fa fa-heartbeat info padding-left-5"></i></span>
+			        			<span class="padding-left-20" hea_status="unhealth">0<i
+                        class="fa fa-heartbeat gray padding-left-5"></i></span>
+			        		</span>
+                </a>
+              </h6>
+            </div>
+          </div>
+        </div>
+
+        <!--Marathon-->
+        <div class="col-sm-3 no-padding-left">
+          <div class="thumbnail">
+            <div class="caption">
+              <h6 class="caption-text">Marathon
+                <a href="javascript:;" class="slate-gray">
+                <span class="pull-right padding-right-10" onclick="fnHealthDetail('Marathon')">
+			        			<span hea_status="health">0<i class="fa fa-heartbeat info padding-left-5"></i></span>
+			        			<span class="padding-left-20" hea_status="unhealth">0<i
+                        class="fa fa-heartbeat gray padding-left-5"></i></span>
+			        		</span>
+                </a>
+              </h6>
+            </div>
+          </div>
+        </div>
+
+        <!--Zookeeper -->
+        <div class="col-sm-3 no-padding-left">
+          <div class="thumbnail">
+            <div class="caption">
+              <h6 class="caption-text">Zookeeper
+                <a href="javascript:;" class="slate-gray">
+                <span class="pull-right padding-right-10" onclick="fnHealthDetail('Zookeeper')">
+			        			<span hea_status="health">0<i class="fa fa-heartbeat info padding-left-5"></i></span>
+			        			<span class="padding-left-20" hea_status="unhealth">0<i
+                        class="fa fa-heartbeat gray padding-left-5"></i></span>
+			        		</span>
+                </a>
+              </h6>
+            </div>
+          </div>
+        </div>
+
+        <!--Zookeeper -->
+        <div class="col-sm-3 no-padding-left no-padding-right">
+          <div class="thumbnail">
+            <div class="caption">
+
+              <h6 class="caption-text">HAProxy
+                <a href="javascript:;" class="slate-gray">
+                <span class="pull-right padding-right-10" onclick="fnHealthDetail('HAProxy')">
+			        			<span hea_status="health">0<i class="fa fa-heartbeat info padding-left-5"></i></span>
+			        			<span class="padding-left-20" hea_status="unhealth">0<i
+                        class="fa fa-heartbeat gray padding-left-5"></i></span>
+			        		</span>
+                </a>
+              </h6>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 no-padding">
+        <div class="panel panel-default">
+          <div class="padding-10" style="border-bottom:1px solid #ddd">
+            <div class="row">
+              <div class="col-sm-11">
+                <select style="width:300px" id="selectSysname" onchange="fnsys_appEchart()">
+                  <option value="">选择要查看的系统名称</option>
+                </select>
+              </div>
+              <div class="col-sm-1 padding-top-10">
+                <a href="javascript:" class="silver" onclick="$('#Containsetting').modal('show')">
+                  <i class="fa fa-cog" style="font-size:16px"></i>
+                </a>
+              </div>
+            </div>
+
+          </div>
+          <div class="panel-body padding-bottom-30">
+            <div id="Containscount" style="width:100%;height:360px"></div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+      <div class="col-lg-12 col-sm-12 col-xs-12 no-padding">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            告警信息 <span><a onclick="otherSetActive(this)" href="#/webcontent/Alarm/Alarmlist.html"
+                          class="pull-right">查看更多</a></span>
+          </div>
+          <div class="panel-body task-container padding-10 margin-bottom-10" style="height:300px;overflow:auto;" >
+            <ul class="tasks-list" id="alarminfo">
+             <!--<li class="task-item margin-bottom-10" id="dangerInfo">
+                <div class="label label-info">关注</div>
+                <div class="task-body">
+                  <p><a href="javascript:;" class="sonic-silver" data-container="body" data-toggle="popover-hover" data-placement="top" data-content="<p>2017-07-13 12:44:26,vd21slave03,账户中心crm_ams_scrm注册状态,CRITICAL,ip 10.78.220.73:31896 register to marathon not in zk</p>">2017-07-13 12:44:26,vd21slave03,账户中心crm_ams_scrm注册状态,CRITICAL,ip 10.78.220.73:31896 register to marathon not in zk</a></p>
+                </div>
+                <div class="task-creator info">vd21slave03</div>
+              </li>-->
+            </ul>
+
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-12 col-sm-12 col-xm-12 no-padding">
+        <div class="panel panel-default">
+          <div class="panel-heading">操作事件<a onclick="otherSetActive(this)" href="#/webcontent/Platformlog/Platformlog.html"
+                                            class="pull-right">查看更多</a></div>
+          <div class="panel-body" style="height:420px">
+            <ul class="timeline" id="eventlist">
+
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Page Body -->
+  </div>
+  <!-- /Page Content -->
+</div>
+<!-- /Page Container -->
+<!-- Main Container -->
+
+<div class="modal fade" id="Containsetting" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true"
+     style="display: none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" style="width:800px">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myLargeModalLabelw">应用显示</h4>
+      </div>
+      <div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert"
+           style="display:none;">
+        <button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <span id="warningMsg"></span>
+      </div>
+
+      <div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert"
+           style="display:none;">
+        <button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <span id="successMsg"></span>
+      </div>
+      <form class="form-horizontal">
+        <div class="modal-body">
+          <div class="col-sm-5">
+            <div class="panel panel-default">
+              <div class="padding-top-10 padding-bottom-10 padding-left-10" style="border-bottom:1px solid #ddd">
+                业务系统
+              </div>
+              <div class="panel-body2" style="height:100px">
+                <ul class="list-unstyled sys-ul" id="sysname">
+
+                </ul>
+              </div>
+              <div class="padding-left-10 padding-top-10" style="border-top:1px solid #ddd">
+                应用列表
+              </div>
+              <div class="col-sm-12 padding-5" style="border-bottom:1px solid #ddd">
+                <span class="input-icon">
+                    <input type="text" class="form-control input-sm" placeholder="输入您要查找的应用名称" onkeyup="fnSearch(this,'#appname')">
+                    <i class="glyphicon glyphicon-search blue"></i>
+                </span>
+
+              </div>
+
+              <div class="panel-body2 set" style="height:150px">
+                <ul class="list-unstyled sys-ul" id="appname">
+
+                </ul>
+
+
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2 text-align-center" style="margin-top:200px">
+            <a class="btn btn-default" onclick="addShowApp()">添加<i
+                class="fa fa-angle-double-right padding-left-5"></i></a>
+            <a class="btn btn-default margin-top-10" onclick="cutShowApp()"><i
+                class="fa fa-angle-double-left padding-right-5"></i>删除</a>
+          </div>
+          <div class="col-sm-5">
+            <div class="panel panel-default">
+              <div class="padding-top-10 padding-left-10">
+                显示应用列表
+              </div>
+              <div class="col-sm-12 padding-5"  style="border-bottom:1px solid #ddd">
+                <span class="input-icon">
+                    <input type="text" class="form-control input-sm" placeholder="输入您要查找的应用名称" onkeyup="fnSearch(this,'#showapp')">
+                    <i class="glyphicon glyphicon-search blue"></i>
+                </span>
+              </div>
+
+              <div class="panel-body2" style="height:290px">
+                <ul class="list-unstyled sys-ul" id="showapp">
+                  <!-- <li>台州微信系统</li>
+                  <li>浙江移动手机营业厅系统</li> -->
+                </ul>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer text-align-center">
+          <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="fnPostData()" style="width:200px">保存</button>
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+</div>
+
+<div id="modal-info" class="modal  fade" style="display: none;" aria-hidden="true"
+     data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog invoice-container">
+    <div class="modal-content">
+      <div class="modal-header" style="text-align:center;font-size:18px">
+        公告信息
+      </div>
+      <div class="modal-body">
+        <div class="tickets-container text-align-left">
+
+          <ul class="tasks-list margin-10" id="info_list" style="padding-left: 16px;">
+            <li style="font-size:16px"><a href="javascript:" onclick=""></a>
+              <p id="content_info" style="word-wrap:break-word;display:none;font-size:13px">
+
+              </p></li>
+          </ul>
+        </div>
+        <span id="info_id" class="hidden"></span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default info" data-dismiss="modal" id="info_more">查看更多</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="info_sure">取消</button>
+
+      </div>
+    </div> <!-- / .modal-content -->
+  </div> <!-- / .modal-dialog -->
+</div>
+
+<div class="modal " id="showMoreModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true"
+     style="display: none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myLargeModalLabel"><span id="ComponentType">组件</span>详细信息</h4>
+        <span class="hidden" id="echartSpan" value=""></span>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+              <table class="table  table-hover table-bordered">
+                <thead>
+                <tr role="row">
+                  <th>主机IP</th>
+                  <!--<th>leader</th>-->
+                  <th>状态</th>
+                </tr>
+                </thead>
+
+                <tbody id="table_detail_status">
+                <!-- <tr>
+                    <td>营业厅</td>
+                    <td><a href="Application.html">浙江移动手机营业厅</a></td>
+                </tr> -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+<script src="assets/js/echarts.common.min.js"></script>
+<script src="assets/js/skins.min.js"></script>
+<script src="assets/js/beyond.min.js"></script>
+<script src="index-dash.js"></script>

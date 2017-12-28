@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html>
+<!-- Head -->
+<head>
+  <meta charset="utf-8"/>
+  <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <!--Basic Styles-->
+
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="assets/css/font-awesome.min.css" rel="stylesheet"/>
+  <!--main.css-->
+  <link href="assets/css/main.css" rel="stylesheet" type="text/css"/>
+
+
+</head>
+<!-- /Head -->
+<!-- Body -->
+<body>
+
+<!-- Navbar -->
+<div class="navbar  navbar-fixed-top" style="display: none;">
+  <div class="navbar-inner">
+
+  </div>
+</div>
+<!-- /Navbar -->
+<!-- Main Container -->
+<div class="main-container container-fluid">
+  <!-- Page Container -->
+  <div class="page-container">
+    <!-- Page Sidebar -->
+    <div class="page-sidebar sidebar-fixed" id="sidebar">
+      <!-- Page Sidebar Header-->
+
+      <!-- Sidebar Menu id="choMenu"-->
+      <ul class="nav sidebar-menu">
+      </ul>
+      <!-- /Sidebar Menu -->
+    </div>
+    <!-- /Page Sidebar -->
+    <!-- Page Content -->
+    <div class="page-content">
+      <!-- Page Breadcrumb -->
+    </div>
+  </div>
+  <!--Basic Scripts-->
+
+
+</div>
+
+<!--Beyond Scripts-->
+<script src="assets/js/jquery-2.0.3.min.js"></script>
+<script src="assets/js/director.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/cloud.common.js"></script>
+<script src="assets/js/config.router.js"></script>
+<script src="assets/js/wwd.router.js"></script>
+<script src="assets/js/cj.router.js"></script>
+<script src="assets/js/zhy.router.js"></script>
+<script src="assets/js/hl.router.js"></script>
+<script>
+  (function () {
+    if(getCookie('4a')===null){
+      initPage();
+    }else{
+     initPage4A();
+    }
+  })();
+  function clearTime() {
+    if(typeof (cleanTime) !== 'undefined'){
+    clearTimeout(cleanTime);
+    cleanTime = undefined;
+    }
+
+    if(typeof (cleanApp) !== 'undefined'){
+      clearTimeout(cleanApp);
+      cleanApp = undefined;
+    }
+
+    if(typeof (cleanApp1) !== 'undefined'){
+      clearTimeout(cleanApp1);
+      cleanApp1 = undefined;
+    }
+
+    if(typeof (cleanCreateApp1) !== 'undefined'){
+      clearTimeout(cleanCreateApp1);
+      cleanCreateApp1 = undefined;
+    }
+    if(typeof (cleanCreateApp2) !== 'undefined'){
+      clearTimeout(cleanCreateApp2);
+      cleanCreateApp2 = undefined;
+    }
+    if(typeof (clearCreateApp) !== 'undefined'){
+      clearTimeout(clearCreateApp);
+      clearCreateApp = undefined;
+    }
+    if(typeof (clearCreateImg) !== 'undefined'){
+      clearTimeout(clearCreateImg);
+      clearCreateImg = undefined;
+    }
+    if(typeof (clearDataCenter) !== 'undefined'){
+      clearTimeout(clearDataCenter);
+      clearDataCenter = undefined;
+    }
+    if(typeof (clearService) !== 'undefined'){
+      clearTimeout(clearService);
+      clearService = undefined;
+    }
+    if(typeof (clearHealthy) !== 'undefined'){
+      clearTimeout(clearHealthy);
+      clearHealthy = undefined;
+    }
+    if(typeof (clearUpdateImg) !== 'undefined'){
+      clearTimeout(clearUpdateImg);
+      clearUpdateImg = undefined;
+    }
+  }
+  function Applicationparams() {
+      if(typeof(Applicationparams)!== 'undefined'){
+          clearInterval(Applicationparams);
+          Applicationparams = undefined;
+      }
+      if(typeof(DatalInterval)!== 'undefined'){
+          clearInterval(DatalInterval);
+          DatalInterval = undefined;
+      }
+    if(typeof(cleanAppStatus)!== 'undefined'){
+      clearInterval(cleanAppStatus);
+      cleanAppStatus = undefined;
+    }
+    if(getCookie('cmp')){
+      $('.page-sidebar.sidebar-fixed').css('top','0');
+      if(getCookie('menus')){
+        $('.page-breadcrumbs.breadcrumbs-fixed').css('display','none');
+        $('.page-sidebar.sidebar-fixed').css('display','none');
+        $('.page-content').css('margin-left',0);
+      }
+      setTimeout(function () {
+        $('.page-breadcrumbs.breadcrumbs-fixed').css('top','0');
+        $('.page-body').css('padding-top','13px');
+      },100);
+    }
+  }
+
+  var router = Router(routes);
+  router.configure({
+    on:[clearTime,Applicationparams]
+  });
+  router.init();
+</script>
+</body>
+
+</html>

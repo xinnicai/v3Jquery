@@ -1,0 +1,168 @@
+<!--Basic Styles-->
+<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+<!--main.css-->
+<link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+<link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+
+<link href="assets/css/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+
+<!-- Page Breadcrumb -->
+<div class="page-breadcrumbs breadcrumbs-fixed">
+  <ul class="breadcrumb">
+    <li>
+      <i class="fa fa-home"></i>
+      <a href="#/webcontent/server/servercluster.html">部署更新</a>
+    </li>
+   <!-- <li > 创建服务</li>-->
+  </ul>
+</div>
+<!-- /Page Breadcrumb -->
+
+<!-- Page Body -->
+<div class="page-body">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="widget-body">
+        <div class="widget-main padding-20">
+          <div class="tabbable">
+            <div class="row pricing-container">
+              <div class="successmodal">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                  <a href="#/webcontent/Deploy/deployTask.html?name=Redis&&cpu=2&&mem=2&&disk=2&&version=mysql-5.6" name="Redis">
+                    <div class="plan">
+                      <div class="pull-left padding-10">
+                        <img  src="assets/img/img/redis.jpg" >
+                      </div>
+                      <div class="box-info">
+                        <h3 class="title">Redis</h3>
+                        <p>CPU:2,内存:2,磁盘:2</p>
+                        <p class="version hidden">mysql-5.7.19</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <!--<div class="col-xs-12 col-sm-6 col-md-4">
+                  <a href="#/webcontent/server/Elasticsearch.html" name="mysql" >
+                    <div class="plan">
+                      <div class="pull-left padding-10">
+                        <img  src="assets/img/img/mysql.jpg" >
+                      </div>
+                      <div class="box-info">
+                        <h3 class="title">Mysql</h3>
+                        <p>最流行，最好用的数据库</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>-->
+              </div>
+
+
+              <div class="col-xs-12 col-sm-6 col-md-4">
+
+                  <div class="plan" style="border:none;">
+                    <button type="button" class="btn btn-default" style="margin-top: 30px;" id="addbtn">添加模板</button>
+                  </div>
+
+              </div>
+
+            </div>
+            <!---->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Page Body -->
+</div>
+
+
+
+<!--  创建 模板-->
+<div class="modal fade" id="creatModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+     data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog " >
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myLargeModalLabel">创建模板</h4>
+      </div>
+      <form id="modalForm" method="post"  novalidate="novalidate" class="form-horizontal">
+
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label  class="col-sm-2 control-label no-padding-right">模板名称</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="modalname" id="modalname">
+              <!-- <p class="help-block">由字母跟汉字组合.</p> -->
+            </div>
+          </div>
+          <div class="form-group">
+            <label  class="col-sm-2 control-label no-padding-right">版本号</label>
+            <div class="col-sm-9">
+              <select type="text" class="form-control" name="version" id="version">
+                <option value="mysql-5.7.19">mysql-5.7.19</option>
+                <option value="mysql-8.0.2">mysql-8.0.2</option>
+                <option value="redis-4.0.1">redis-4.0.1</option>
+                <option value="redis-4.0.2">redis-4.0.2</option>
+                <option value="oracle-10.2.0.3">oracle-10.2.0.3</option>
+                <option value="oracle-10.2.0.4">oracle-10.2.0.4</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label  class="col-sm-2 control-label no-padding-right">CPU</label>
+            <div class="col-sm-8 no-padding-right">
+              <input type="number" class="form-control"  name="CPU" id="CPU">
+            </div>
+            <div class="col-sm-1" style="margin-top: 6px;">核</div>
+          </div>
+          <div class="form-group">
+            <label  class="col-sm-2 control-label no-padding-right">内存</label>
+            <div class="col-sm-8 no-padding-right">
+              <input type="number" class="form-control"  name="mem" id="mem">
+            </div>
+            <div class="col-sm-1" style="margin-top: 6px;">GB</div>
+          </div>
+          <div class="form-group">
+            <label  class="col-sm-2 control-label no-padding-right">磁盘</label>
+            <div class="col-sm-8 no-padding-right">
+              <input type="number" class="form-control"  name="disk" id="disk">
+            </div>
+            <div class="col-sm-1" style="margin-top: 6px;">GB</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="submit" class="btn btn-azure"  id="createmodal">创建</button>
+        </div>
+
+      </form>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+
+
+<!--Basic Scripts-->
+<script src="assets/js/jquery-2.0.3.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/validation/bootstrapValidator.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script src="webcontent/Deploy/js/deploy.js"></script>
+
+<script type="text/javascript">
+ /* $(document).ready(function(){
+    initServiceListTable();
+  });*/
+</script>
+
+
+</body>
+<!--  /Body -->
+</html>

@@ -1,0 +1,494 @@
+
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	  <!--Basic Styles-->
+     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+     <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+     <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+     <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+    <!--main.css-->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+
+
+
+			<div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            SDDCOS
+                        </li>
+                        <li class="active">策略管理</li>
+                    </ul>
+                </div>
+			<div class="page-body">
+				 <div id="sessionExpiredAlertBlock" class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		     			<span>会话失效，请重新登录! <a class="btn btn-danger" href="/iMonitor/login.jsp">登录</a></span>
+					</div>
+			
+					<div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			     		<span id="warningMsg"></span>
+					</div>
+				
+					<div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				     	<span id="successMsg"></span>
+					</div>
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="widget">
+						
+							<div class="widget-body">
+							<div class="tabbable">
+								<ul class="nav nav-tabs tabs-flat">
+									<li class="active"><a data-toggle="tab" data-name="evt" href="#tab1">应用告警</a></li>
+									<li><a data-toggle="tab" data-name="alarm" href="#tab2">日志告警</a></li>
+								</ul>
+								<div class="tab-content tabs-flat">
+								 <div id="tab1" class="tab-pane in active">		
+								 <div class="col-sm-6 pull-right ">
+									<a class="btn btn-azure pull-right  position-relative" onclick="fnAppShow()" style="right:20px;bottom:5px"><span class="glyphicon glyphicon-plus"></span>创建应用告警策略</a>
+									</div>
+									<div class="tabbable">
+										<ul class="nav nav-tabs tabs-flat">
+											<li class="active"><a data-toggle="tab" data-name="evt" href="#tab3">策略</a></li>
+											<li><a data-toggle="tab" data-name="alarm" href="#tab4">告警信息</a></li>
+										</ul>
+										
+								<div class="tab-content tabs-flat">
+									<div id="tab3" class="tab-pane in active">
+									<div class="panel panel-default">
+									<div class="panel-heading">应用告警策略列表</div>
+									<div class="panel-body warningcontainer">
+									
+
+									
+									<table class="table table-hover  table-striped table-bordered " id="editabledatatable">
+
+									</table>
+									 
+									</div>
+									
+									</div>
+									
+									</div>
+									<div id="tab4" class="tab-pane">
+										<div class="panel panel-default">
+									<div class="panel-heading">应用告警信息列表</div>
+									<div class="panel-body">
+									<form >
+									<div class="form-group  has-feedback">
+									<input id="scaleRuleSearch1" class="form-control" placeholder="search..." onkeyup="fnSearch(this)" type="text" style="width:100%">
+									
+									</div>
+									</form>
+									<table class="table table-hover  table-striped table-bordered ">
+									<thead>
+									<tr>
+									<th>策略Id</th>
+									<th>应用名称</th>
+									<th>级别</th>
+									<th>实例</th>
+									<th>监控周期（分钟）</th>	
+									<th>时间</th>
+									<th>关键字</th>
+									<th>出现次数</th>
+									</tr>
+									</thead>
+									<tbody>
+									<td>3</td>
+									<td>wordpress</td>
+									<td></td>
+									<td>3</td>
+									<td>8</td>
+									<td>2016-12-24 20:0</td>
+									<td>calm</td>
+									<td>6</td>
+									</tr>
+									</tbody>
+									</table>
+									 
+									</div>
+									
+									</div>	
+										
+									</div>
+								</div>
+							</div>
+									
+									</div>
+									<div id="tab2" class="tab-pane">
+									 <div class="col-sm-6 pull-right">
+									<a class="btn btn-azure pull-right position-relative" onclick="fnLogModal()" style="right:20px;bottom:5px"><span class="glyphicon glyphicon-plus"></span>创建日志告警策略</a>
+									</div>	
+									<div class="tabbable">
+										<ul class="nav nav-tabs tabs-flat">
+											<li class="active"><a data-toggle="tab" data-name="evt" href="#tab5">策略</a></li>
+											<li><a data-toggle="tab" data-name="alarm" href="#tab6">告警信息</a></li>
+										</ul>
+								<div class="tab-content tabs-flat">
+									<div id="tab5" class="tab-pane in active">
+									<div class="panel panel-default">
+									<div class="panel-heading">日志告警策略列表</div>
+									<div class="panel-body warningcontainer">
+										<!-- <form >
+									<div class="form-group  has-feedback">
+									<input id="scaleRuleSearch" class="form-control" placeholder="search..." onkeyup="fnSearch(this)" type="text" style="width:100%">
+									
+									</div>
+									</form> -->
+									<table class="table table-hover  table-striped table-bordered " id="Logpolicydatatable">
+
+									</table>
+									</div>
+									</div>
+									</div>
+									<div id="tab6" class="tab-pane">
+										<div class="panel panel-default">
+									<div class="panel-heading">日志告警信息列表</div>
+									<div class="panel-body">
+										<form >
+									<div class="form-group  has-feedback">
+									<input id="scaleRuleSearch" class="form-control" placeholder="search..." onkeyup="fnSearch(this)" type="text" style="width:100%">
+									
+									</div>
+									</form>
+									<table class="table table-hover  table-striped table-bordered ">
+									<tr>
+									<th>策略Id</th>
+									<th>应用名称</th>
+									<th>级别</th>
+									<th>实例</th>
+									<th>监控周期（分钟）</th>	
+									<th>时间</th>
+									<th>关键字</th>
+									<th>出现次数</th>
+									
+									</tr>
+									<tr>
+									<td>3</td>
+									<td>wordpress</td>
+									<td></td>
+									<td>3</td>
+									<td>8</td>
+									<td>2016-12-24 20:0</td>
+									<td>calm</td>
+									<td>6</td>
+									
+									</tr>
+									
+									</table>
+									</div>
+									</div>		
+									</div>
+								</div>
+							</div>
+									
+									
+										
+									</div>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+<!-- 创建应用告警 -->
+<div class="modal" id="appwarningcreate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;"
+data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 id="appmodaltitle">创建应用告警策略</h4>
+      </div>
+    <form class="form-horizontal" role="form" id="appForm" method="POST">
+      <div class="modal-body">
+	      <div class="form-group">
+	         <label  class="col-sm-2 control-label no-padding-right">应用名称</label>
+	         <div class="col-sm-8">
+<!-- 	             <input  class="form-control" type="text"  > -->
+	            <select id="app_name" name="app_name" style="width: 100%;" class="selectpicker show-tick show-menu-arrow" title="请选择..."
+											data-live-search="true">
+							</select>
+	         </div>
+	     </div>
+	     <div class="form-group">
+	         <label  class="col-sm-2 control-label no-padding-right">告警级别</label>
+	         <div class="col-sm-8">
+	            <select  class="form-control" type="text" id="alert_level" name="alert_level">
+	              	<option value="1">严重</option>
+	              	<option value="2">关注</option>
+	              	<option value="3">恢复</option>
+	            </select>
+	             
+	         </div>
+	     </div>
+	        <div class="form-group">
+	         <label  class="col-sm-2 control-label no-padding-right">告警规则</label>
+	         <div class="col-sm-10">
+	         <div class="col-sm-4 no-padding-left">
+	          <select  class="form-control" type="text" id="policytype" name="policytype">
+	          <option value="mem">内存</option>
+	           <option value="cpu">CPU使用</option>
+	            <option value="disk">磁盘读取</option>
+	          </select>
+	          </div>
+	          <div class="col-sm-3"> 
+	          <select  class="form-control" type="text" id="policyrule" name="policyrule">
+	          <option value=">">大于</option>
+	           <option value="<">小于</option>
+	           
+	          </select>
+	          </div>
+	          <div class="col-sm-3"> <input  class="form-control" type="text" id="policyvalue" name="policyvalue"></div> 
+	           <div class="col-sm-2 no-padding"> <p class="padding-top-5 font-size-16">%</p></div>    
+	         </div>
+	     </div>
+	      
+	      <div class="form-group">
+	         <label  class="col-sm-2 control-label no-padding-right">监控周期</label>
+	         <div class="col-sm-10 no-padding-left">
+	         <div class="col-sm-10"> <input  class="form-control" type="text" id="period" name="period"></div> 
+	         <div class="col-sm-2 no-padding"> <p class="padding-top-5 font-size-16">分钟</p></div>        
+	         </div>
+	     </div>
+	      <div class="form-group">
+	         <label  class="col-sm-2 control-label no-padding-right">阈值</label>
+	         <div class="col-sm-10  no-padding-left">
+	         <div class="col-sm-10"> <input  class="form-control" type="text" id="thresh" name="thresh"></div> 
+	         <div class="col-sm-2 no-padding"> <p class="padding-top-5 font-size-16">次数</p></div>        
+	         </div>
+	     </div>
+	      <div class="form-group">
+	         <label  class="col-sm-2 control-label no-padding-right">告警联系人</label>
+	         <div class="col-sm-8">
+	        
+				  <select class="selectpicker form-control" title="请选择联系人" multiple  data-actions-box="true" data-live-search="true" id="persons" name="persons">
+			</select>
+	          <!--  <select class=" form-control" multiple id="persons" name="persons"></select> -->
+	             <!-- <p>多个联系人请用逗号分隔</p> -->
+	         </div>
+	     </div>
+	     <!-- <div class="form-group">
+	         <label  class="col-sm-2 control-label no-padding-right">是否扩缩</label>
+	         <div class="col-xs-4">
+<label>
+ <input class="colored-blue" type="checkbox" id="switch">
+<span class="text"></span>
+
+</label>
+</div>
+	     </div> -->
+	    
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
+    	<button type="submit" class="btn btn-azure" id="submitapp">创建</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>  
+<!-- 删除 应用-->
+     <div id="DeleteData" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true" 
+      data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+                </div>
+                <div class="modal-body"><span class="title1">确定要删除</span><span id="deletename" class="title1 info"></span>的<span id="deletetype" class="title1 info"></span>策略?</div>
+                <span id="app_id" class="hidden"></span>
+                <span id="deleteID" class="hidden"></span>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="deleteData()">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+    
+    <!-- 暂停应用-->
+     <div id="stopappmodal" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true" 
+      data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+                </div>
+                <div class="modal-body"><span class="title1">确定要</span><span id="start" class="title1"></span><span id="stopapp" class="info title1"></span>?</div>
+                <span id="stopdata" class="hidden"></span>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="stopData()">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+<!-- 创建日志告警 -->
+<div class="modal" id="policyLogWarningCreate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 id="logmodaltitle">创建日志告警策略</h4>
+      </div>
+    <form class="form-horizontal" role="form" id="logForm" method="POST">
+      <div class="modal-body">
+	      <div class="form-group">
+	         <label  class="col-sm-2 control-label no-padding-right">应用名称</label>
+	         <div class="col-sm-8">
+	               <select id="log_app" name="app_name" style="width: 100%;" class="selectpicker show-tick show-menu-arrow" title="请选择..."
+											data-live-search="true">
+							</select>
+	         </div>
+	     </div>
+	     <div class="form-group">
+	         <label  class="col-sm-2 control-label no-padding-right">告警级别</label>
+	         <div class="col-sm-8">
+	            <select  class="form-control" type="text" id="log_level" name="log_level">
+	            	<option value="1">严重</option>
+	              	<option value="2">关注</option>
+	              	<option value="3">恢复</option>
+	            </select>
+	             
+	         </div>
+	     </div>
+	        <div class="form-group">
+	         <label  class="col-sm-2 control-label no-padding-right">监控关键字</label>
+	          <div class="col-sm-8">
+	            <input class="form-control"  type="text" value="内存" size="25"  data-role="tagsinput"
+	             placeholder="输入关键字，按Enter键添加" id="log_keyword" name="log_keyword"/>   
+	         </div>
+	     </div>
+	      
+	      <div class="form-group">
+	         <label  class="col-sm-2 control-label no-padding-right">监控周期</label>
+	         <div class="col-sm-10 no-padding-left">
+	         <div class="col-sm-10"> <input  class="form-control" type="text" id="log_period" name="log_period"></div> 
+	         <div class="col-sm-2 no-padding"> <p class="padding-top-5 font-size-16">分钟</p></div>        
+	         </div>
+	     </div>
+	      <div class="form-group">
+	         <label  class="col-sm-2 control-label no-padding-right">阈值</label>
+	         <div class="col-sm-10  no-padding-left">
+	         <div class="col-sm-10"> <input  class="form-control" type="text" id="log_thresh" name="log_thresh"></div> 
+	         <div class="col-sm-2 no-padding"> <p class="padding-top-5 font-size-16">次数</p></div>        
+	         </div>
+	     </div>
+	      <div class="form-group">
+	         <label  class="col-sm-2 control-label no-padding-right">告警联系人</label>
+	         <div class="col-sm-8">
+	         <select class="selectpicker form-control" title="请选择联系人" multiple  data-actions-box="true" data-live-search="true" id="log_person" name="persons">
+			</select>
+	            
+	         </div>
+	     </div>
+	     <!-- <div class="form-group">
+	         <label  class="col-sm-2 control-label no-padding-right">是否扩缩</label>
+	         <div class="col-xs-4">
+<label>
+ <input class="colored-blue" type="checkbox" id="log_switch">
+<span class="text"></span> 
+
+</label>
+</div>
+	     </div> -->
+	    
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
+    	<button type="submit" class="btn btn-azure" id="submitlog">创建</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- 删除 日志-->
+     <div id="DeleteLogData" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true" 
+      data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+                </div>
+                <div class="modal-body"><span class="title1">确定要删除</span><span id="logname" class="title1 info"></span>的<span  id="deletelogID" class="title1 info"></span>策略?</div>
+                <span id="log_id" class="hidden"></span>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="deleteLogData()">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+
+	<!--成功提示信息-->
+	<div class="modal modal-message modal-info in" id="successmodal"  aria-hidden="true"
+			 style="display:none;" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header no-padding-bottom">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+					<div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+				</div>
+				<div class="modal-body" >
+					<div class="title1" id="successTitle"></div>
+
+				</div>
+				<div class="modal-footer padding-bottom-20">
+
+					<button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+				</div>
+
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<!--错误失败提示信息-->
+	<div class="modal modal-message modal-info in" id="failmodal"  aria-hidden="true"
+			 style="display:none;" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header no-padding-bottom">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+					<div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+				</div>
+				<div class="modal-body" >
+					<p class="title1" id="failTitle"></p>
+					<div id="failSpan"></div>
+				</div>
+				<div class="modal-footer">
+
+					<button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+				</div>
+
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+  <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap-select.js"></script>
+    <script src="assets/js/select2/select2.min.js"></script>
+	  <script src="assets/js/validation/bootstrapValidator.js"></script>
+     <script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+     <script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+	  <script src="./webcontent/appwarning/warninglist.js"></script>
+  
+</body>
+
+</html>

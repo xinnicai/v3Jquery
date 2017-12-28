@@ -1,0 +1,469 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>集群管理 | DCOS云管理平台 用户手册</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="DCOS云管理平台用户手册涵盖了DCOS云管理平台产品介绍、上线发布、服务启停、资源监控、日志排错和持续集成等，力争简洁清晰地表述DCOS云管理平台产品的相关信息，使用户更加容易方便地使用DCOS云管理平台产品。  ">
+        <meta name="generator" content="GitBook 2.6.6">
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="./gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="./gitbook/images/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="../gitbook/style.css">
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        <link rel="prev" href="../help/content_management/application_management.html"/>
+        <link rel="next" href="../help/content_management/image_management.html"/>
+        
+    </head>
+    <body>
+            
+    <div class="book"
+        data-level="0"
+        data-chapter-title="集群管理"
+        data-filepath="README.md"
+        data-basepath="."
+        data-revision="Mon Jan 04 2016 19:21:16 GMT+0800 (CST)"
+        data-innerlanguage="">
+    
+	    <div class="book-summary">
+		    <nav role="navigation">
+		        <ul class="summary">
+		        	
+		        <li class="chapter " data-level="1" data-path="index.html">
+		          <a href="../index.html">
+		            <i class="fa fa-check"></i> 
+		            <b>1.</b>
+		                                    平台介绍
+		          </a>
+		          
+		          <ul>
+		          <li class="chapter " data-level="1.1" data-path="platform_introduction/sys_login.html">
+			            <a href="../platform_introduction/sys_login.html">
+			              <i class="fa fa-check"></i>
+			                <b>1.1.</b>
+			                                                        系统登录
+			            </a>
+			          </li>
+			          </ul>
+		        </li>
+		        
+		        
+		        <li class=" chapter" data-level="2." data-path="content_management/index.html">
+		          <a href="../content_management/index.html">
+		            <i class="fa fa-check"></i> 
+		            <b>2.</b>
+		                                    内容管理
+		          </a>
+		          
+		          <ul>
+		          <li class="chapter " data-level="2.1" data-path="content_management/Dashboard.html">
+			            <a href="../content_management/Dashboard.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.1.</b>
+			                Dashboard
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.2" data-path="content_management/application_management.html">
+			            <a href="../content_management/application_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.2.</b>
+			                                             应用管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter active" data-level="2.3" data-path="content_management/cluster_management.html">
+			            <a href="../content_management/cluster_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.3.</b>
+			                                             集群管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.4" data-path="content_management/image_management.html">
+			            <a href="../content_management/image_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.4.</b>
+			                                             镜像管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.5" data-path="content_management/service_integration.html">
+			            <a href="../content_management/service_integration.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.5.</b>
+			                                             服务集成
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.6" data-path="content_management/network_management.html">
+			            <a href="../content_management/network_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.6.</b>
+			                                             网络管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.7" data-path="content_management/volume_management">
+			            <a href="../content_management/volume_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.7.</b>
+			                                             存储管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.8" data-path="content_management/monitoring_management.html">
+			            <a href="../content_management/monitoring_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.8.</b>
+			                                             监控管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.9" data-path="content_management/log_management.html">
+			            <a href="../content_management/log_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.9.</b>
+			                                             日志管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.10" data-path="content_management/policy_management.html">
+			            <a href="../content_management/policy_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.10.</b>
+			                                             策略管理
+			            </a>
+			          </li>
+			          </ul>
+		        </li>
+		        
+		        
+		        <li class="chapter " data-level="3" data-path="platform_management/index.html">
+		          <a href="../platform_management/index.html">
+		            <i class="fa fa-check"></i> 
+		            <b>3.</b>
+		                                    平台管理
+		          </a>
+		          
+		          <ul>
+		          <li class="chapter " data-level="3.1" data-path="platform_management/user_management.html">
+			            <a href="../platform_management/user_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.1.</b>
+			                                                        用户管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.2" data-path="platform_management/role_management.html">
+			            <a href="../platform_management/role_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.2.</b>
+			                                                        角色管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.3" data-path="platform_management/notice_info.html">
+			            <a href="../platform_management/notice_info.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.3.</b>
+			                                                        公告信息
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.4" data-path="platform_management/statistical_statement.html">
+			            <a href="../platform_management/statistical_statement.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.4.</b>
+			                                                        统计报表
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.5" data-path="platform_management/menu_management.html">
+			            <a href="../platform_management/menu_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.5.</b>
+			                                                        菜单管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.6" data-path="platform_management/dictionary_maintenance.html">
+			            <a href="../platform_management/dictionary_maintenance.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.6.</b>
+			                                                        字典维护
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.7" data-path="platform_management/basic_functions.html">
+			            <a href="../platform_management/basic_functions.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.7.</b>
+			                                                        功能列表
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.8" data-path="platform_management/quotas_management.html">
+			            <a href="../platform_management/quotas_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.8.</b>
+			                                                        配额管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.9" data-path="platform_management/plug-in.html">
+			            <a href="../platform_management/plug-in.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.9.</b>
+			                                                        插件市场
+			            </a>
+			          </li>
+			          </ul>
+		        </li>
+		        
+		        
+		       
+		         
+		        
+		        
+		        
+		        <li class="divider"></li>
+		        
+		        <li>
+		          <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+		          Published with GitBook
+		          </a>
+		        </li>
+		        </ul>
+		    </nav>
+	    </div>
+
+	    <div class="book-body">
+	      <div class="body-inner">
+	        <div class="book-header" role="navigation">
+			    <!-- Actions Left -->
+			    
+			    <!-- Title -->
+			    <h1>
+			      <i class="fa fa-circle-o-notch fa-spin"></i>
+			        <a>DCOS云管理平台 用户手册</a>
+			    </h1>
+	        </div>
+	
+	        <div class="page-wrapper" tabindex="-1" role="main">
+	          <div class="page-inner">
+	            <section class="normal" id="section-">
+	          
+	              <h1 id="DCOS云管理平台用户手册">集群管理</h1>
+	              <p>功能介绍：集群管理界面主要为用户提供DCOS系统中所有集群的概要信息。</p>
+	              <h4>集群列表</h4>
+	              <p>在集群列表中，展示了每一个集群的集群名称、集群类型、标签、节点数量、所属资源池、创建人、状态、创建时间等信息。图2.3.1</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.1.png" /></p>
+	              <p style="text-align: center;">图2.3.1</p>  
+
+	              <p><b>删除集群：</b> 当用户在集群列表中选中master资源池后，点击操作下的“删除”按钮后，系统会检查该资源池中是否有应用运行，如果有则不允许删除该资源池；当用户选中slave集群后，点击操作下的“删除”按钮后，系统会检查该集群中是否有应用运行，如果有则不允许删除该集群。</p>
+	              
+	              <h4>空闲主机列表</h4>
+	              <p>在空闲主机列表中，展示了每一个空闲主机的主机IP、CPU（核）、内存（GB）、磁盘空间（GB）、创建时间等信息。图2.3.2-1</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.2-1.png" /></p>
+	              <p style="text-align: center;">图2.3.2-1</p>  
+
+	              <p><b>添加主机-单台添加：</b>在空闲主机列表中，点击“添加主机”按钮，可以选择“单台添加”或者“批量添加”。点击“单台添加”按钮后，系统弹出主机IP的输入框，用户输入主机IP与备注信息后，点击确认按钮，即可添加一台主机。图2.3.2-2</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.2-2.png" /></p>
+	              <p style="text-align: center;">图2.3.2-2</p>  
+
+	              <p><b>添加主机-批量添加：</b>点击“批量添加”按钮后，系统弹出批量添加主机的弹窗，在弹窗中点击“选择上传文件“按钮后，在本地文件中选择用户需上传的txt文件（上传文件格式需符合平台要求），上传完成后，点击确定按钮，系统即可将txt文件中的所有主机添加进空闲主机列表。图2.3.2-3</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.2-3.png" /></p>
+	              <p style="text-align: center;">图2.3.2-3</p>  
+
+	              <p><b>空闲主机列表搜索：</b>用户在空闲主机列表的“search”框中输入主机信息后，主机列表中即可显示出所有匹配该信息的主机。</p>
+	              
+	              <h4>Master资源池</h4>
+	              <p>用户在集群列表中点击master类型的集群名称后，进入Master资源池信息页面。页面中展示了集群的集群名称、运行状态、健康主机、异常主机、集群类型、主机数量、管理节点数量、创建时间等信息。图2.3.3-1</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.3-1.png" /></p>
+	              <p style="text-align: center;">图2.3.3-1</p>  
+
+	              <p><b>Master资源池-性能监控：</b>在页面下方的性能监控页面，展示了matser资源池的容器平均CPU、容器平均内存、ZK连接数这三个统计图（以下以容器平均CPU和容器平均内存为例）。图2.3.3-2</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.3-2.png" /></p>
+	              <p style="text-align: center;">图2.3.3-2</p>  
+	              
+	              <p><b>Master资源池-主机列表：</b>在页面下方的主机列表页面，展示了所有组件的服务类型、标签名称、主机IP、端口等信息。图2.3.3-3</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.3-3.png" /></p>
+	              <p style="text-align: center;">图2.3.3-3</p>  
+
+	              <p><b>添加组件-Marathon：</b>用户在主机列表中点击“添加组件”按钮后，系统弹出添加Master资源池组件的弹窗，当选择组件为“Marathon”时，需输入主机IP、端口、MarathonID等信息，输入完成后，点击“添加”按钮，即可在Master资源池中添加一个Marathon组件。图2.3.3-4</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.3-4.png" /></p>
+	              <p style="text-align: center;">图2.3.3-4</p>  
+
+	              <p><b>添加组件-HaProxy：</b>用户选择添加组件为“Haproxy”时，需输入主机IP、服务端口、状态端口、Marathon地址、Bamboo端口、HaproxyID等信息，输入完成后，点击“添加”按钮，即可在Master资源池中添加一个HaProxy组件。图2.3.3-5</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.3-5.png" /></p>
+	              <p style="text-align: center;">图2.3.3-5</p>  
+
+	              <p><b>添加组件-Nginx</b>用户选择添加组件为“Nginx”时，需输入主机IP、上传端口、下载端口等信息，输入完成后，点击“添加”按钮，即可在Master资源池中添加一个Nginx组件。图2.3.3-6</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.3-6.png" /></p>
+	              <p style="text-align: center;">图2.3.3-6</p> 
+	              
+	              <p><b>删除组件</b>根据系统设计与要求，zookeeper、mesos-master组件不得删除；Nginx可以正常删除（当Master资源池中只剩一个Nginx时，则不得删除）；marathon可以正常删除（当marathon上还有应用运行时，请确认是否删除，确认后，可以继续删除）；haproxy可以正常删除。</p>
+	             
+	              <p><b>弹性扩缩启停：</b>根据平台设计，系统中以单个marathon组件和一个集群为单位，提供弹性扩缩一键启停功能。</p>
+	              
+	              <p><b>弹性扩缩升级：</b>根据平台设计，系统中以单个marathon组件和一个集群为单位，提供弹性扩缩一键升级功能。图2.3.3-7</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.3-7.png" /></p>
+	              <p style="text-align: center;">图2.3.3-7</p> 
+	              
+	              <p><b>主机列表搜索：</b>在主机列表的“search”框中输入主机信息后，主机列表中即可搜索出所有匹配该信息的主机。</p>
+	              
+	              <h4>Slave集群</h4>
+	              <p>用户在集群列表中点击slave类型的集群名称后，进入slave集群信息页面。展示了集群的集群名称、运行状态、健康主机、异常主机、集群类型、主机数量、管理节点数量、创建时间等信息。图2.3.4-1</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.4-1.png" /></p>
+	              <p style="text-align: center;">图2.3.4-1</p>  
+
+	              <p><b>Slave集群-性能监控：</b>在页面下方的性能监控中，可以查看slave集群的容器平均CPU、容器平均内存趋势图。图2.3.4-2</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.4-2.png" /></p>
+	              <p style="text-align: center;">图2.3.4-2</p>  
+	              
+	              <p><b>Slave集群-主机列表：</b>在页面下方的主机列表中，展示了每个主机的服务类型、标签名称、主机IP、端口等信息。图2.3.4-3</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.4-3.png" /></p>
+	              <p style="text-align: center;">图2.3.4-3</p> 
+	              
+	              <p><b>主机列表-添加组件：</b>点击主机列表的”添加按钮“后，系统弹出添加主机的弹窗，用户需选择一个或多个主机，选择主机完成后，点击”添加“按钮后，即可在这个slave集群中添加选择的主机。图2.3.4-4</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.4-4.png" /></p>
+	              <p style="text-align: center;">图2.3.4-4</p>  
+
+	              <p><b>主机列表-删除组件：</b>在主机列表中，选中一个slave主机后，点击操作下的“删除组件”按钮后，系统可以正常删除slave主机（当该slave集群中只剩一个slave主机时，如果删除，应用将无法正常运行，不得删除）。</p>
+	              
+	              <h4>创建资源池</h4>
+	              <p><b>创建资源池第1步：</b>用户在集群管理列表中，点击“创建资源池”按钮后，系统弹出创建资源池的弹窗，在第1步“创建资源池”中，用户需输入资源池名称、资源池标签、选择节点数量、镜像仓库地址等信息，输入完成后，点击“下一步”按钮。图2.3.5-1</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.5-1.png" /></p>
+	              <p style="text-align: center;">图2.3.5-1</p>  
+	              
+	              <p><b>创建资源池第2步：</b>用户进入创建Master页面，需选择Matser主机IP，选择完成后，点击“下一步”按钮。图2.3.5-2</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.5-2.png" /></p>
+	              <p style="text-align: center;">图2.3.5-2</p>  
+
+	              <p><b>创建资源池第3步：</b>用户进入创建Marathon页面，需选择目标主机，输入端口、MarathonID等信息，点击“添加目标主机”按钮，可以再添加一个或多个Marathon组件，Marathon信息输入完成后，点击“下一步”按钮。图2.3.5-3</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.5-3.png" /></p>
+	              <p style="text-align: center;">图2.3.5-3</p>  
+	              
+	              <p><b>创建资源池第4步：</b>用户进入创建Haproxy页面，需选择目标主机，输入服务端口、状态端口、BamBoo端口、选择Marathon地址、输入HaproxyID等信息后，可以点击”添加目标主机”按钮，添加一个或多个Haproxy组件，输入信息完成后，点击“下一步”按钮。图2.3.5-4</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.5-4.png" /></p>
+	              <p style="text-align: center;">图2.3.5-4</p> 
+	              
+	              <p><b>创建资源池第5步：</b>用户进入创建Nginx页面，需选择目标主机，输入上传端口、下载端口端口后，可以点击”添加目标主机”按钮，添加一个或多个Nginx组件，输入信息完成后，点击“下一步”按钮。图2.3.5-5</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.5-5.png" /></p>
+	              <p style="text-align: center;">图2.3.5-5</p> 
+	              
+	              <p><b>创建资源池第6步：</b>用户进入配置确认页面，页面中展示了Master、Marathon、Haproxy、Nginx组件的配置信息，用户检查信息无误后，可以点击“创建”按钮，系统即开始创建Master资源池。图2.3.5-6</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.5-6.png" /></p>
+	              <p style="text-align: center;">图2.3.5-6</p> 
+	              
+	              <h4>创建slave集群</h4>
+	              <p><b>创建资源池第1步：</b>用户在集群管理列表中，点击“创建集群（slave）”按钮后，系统弹出创建slave集群的弹窗，用户需输入集群名称、集群标签、归属集群、目标主机、备注等信息后，点击”创建”按钮，系统即开始创建一个slave集群。图2.3.6</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.3.6.png" /></p>
+	              <p style="text-align: center;">图2.3.6</p>  
+	              
+
+
+
+
+
+
+	              
+	              
+	              
+	              
+	              
+	              
+	              
+	              
+	              
+	              
+	              
+	              
+	              
+	              
+	              
+	              
+	              
+	              
+	              
+	              
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+
+	              
+	            </section>
+	          </div>
+	        </div>
+	      </div>
+	      <a href="../content_management/application_management.html" class="navigation navigation-prev " aria-label="Previous page: 应用管理"><i class="fa fa-angle-left"></i></a>
+	      <a href="../content_management/image_management.html" class="navigation navigation-next " aria-label="Next page: 镜像管理"><i class="fa fa-angle-right"></i></a>
+	      
+	       </div>
+    </div>
+    <script src="../gitbook/app.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
+    <script>
+	    require(["gitbook"], function(gitbook) {
+	      var config = {"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"livereload":{}};
+	      gitbook.start(config);
+	    });
+    </script>
+    </body>
+</html>

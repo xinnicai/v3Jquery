@@ -1,0 +1,371 @@
+﻿
+    <!--Basic Styles-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--main.css-->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+     <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+     <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                        <li>        
+                            <a class=" dropdown-toggle" data-toggle="dropdown" href="#">
+                           <span>平台配置 <i class="fa fa-sort-desc"></i> </span>  </a>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <a href="#/webcontent/platformsetting/setting.html">用户管理</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/roleManage.html" >角色管理</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/note_info.html" >公告信息</a>
+                            </li>
+
+                            <li>
+                              <a href="#/webcontent/platformsetting/appReport.html" >统计报表</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/menuManage.html" >菜单管理</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/baseData.html" >字典维护</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/model.html" >功能列表</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/quotas.html" >配额管理</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/Plug-In/market.html" >插件市场</a>
+                            </li>
+                              <li>
+                                  <a href="#/webcontent/platformsetting/powerGroupManage.html" >权限组管理</a>
+                              </li>
+                            <!-- <li>
+                               <a href="javascript:void(0);">插件市场</a>
+                           </li>-->
+                          </ul>
+                        </li>
+                        <li>配额管理</li> 
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                
+                <!-- Page Body -->
+                <div class="page-body">
+                <div id="sessionExpiredAlertBlock" class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		     			<span>会话失效，请重新登录! <a class="btn btn-danger" href="/iMonitor/login.jsp">登录</a></span>
+					</div>
+			
+					<div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			     		<span id="warningMsg"></span>
+					</div>
+				
+					<div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				     	<span id="successMsg"></span>
+					</div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                        <div class="widget">
+                        	<div class="widget-header bg-lightinfo">
+                        		可以对业务系统进行资源配额并进行修改，同时可以查看该业务组下的各个模块分配情况，
+                        	</div>
+                        	<div class="widget-body">
+                        		
+                        		<div class="col-sm-6 no-padding-left margin-bottom-10">
+                        			<a class="btn btn-default" onclick="fnCreateResource()" data-target="#creatDataModal"><i class="fa fa-plus"></i>创建资源配额</a>
+                        		</div>
+                        		<!-- <div class="col-sm-6 no-padding-right margin-bottom-10">
+                        			<input class="form-control" placeholder="search..." type="text" id="searchUser" onkeyup="fnSearch(this)"/>
+                        	
+                        		</div> -->
+                        		<table class="table table-hover" id="editabledatatable">
+                                        <thead>
+                                            <tr>
+                                            	<th>系统组</th>
+                                                <th> CPU(核)</th>
+                                                 <th>内存（MB）</th>
+                                                  <th>磁盘（MB）</th>
+                                                  <th>操作</th>     
+                                            </tr>
+                                        </thead>
+
+                                        
+                                    </table>	
+                                    
+                        	</div>
+                        </div>  
+                        
+                          
+                   
+                    </div>
+                  
+                </div>
+                <!-- /Page Body -->
+            </div>
+
+        <!-- /Page Container -->
+        <!-- Main Container -->
+     
+
+    
+   <!--  创建 -->
+     <div class="modal fade" id="creatDataModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+     data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">创建资源配额</h4>
+                </div>
+                 <form id="accountForm" method="post"  novalidate="novalidate" class="form-horizontal">
+                 
+                <div class="modal-body">
+                	<div class="form-group">
+                          <label  class="col-sm-2 control-label">系统名称</label>
+                         <div class="col-sm-9">
+                          	<input type="text" class="form-control"  name="dataKey" id="sysname"> 
+                          </div>    
+                      </div> 
+                      <div class="form-group">
+                          <label  class="col-sm-2 control-label">系统标签</label>
+                         <div class="col-sm-9">
+                          	<input type="text" class="form-control"  name="dataKey" id="syslable"> 
+                          </div>    
+                      </div>  
+                    <div class="form-group">
+                          <label  class="col-sm-2 control-label">CPU</label>
+                         <div class="col-sm-9 margin-top-10">
+                          	<div class="col-sm-8 no-padding-left">
+                          		  <div id="sample-onehandle" class="slider-xs" name="CPU"></div>
+                          	</div>
+                              <div class="col-sm-3  no-padding-right" style="margin-top:-10px">
+                          	<input type="number" class="form-control" value="0" id="CPU" onkeyup="change(this)" />
+                          </div>
+                           <div class="col-sm-1" style="margin-top:-5px">
+                          	<p class="no-padding-left">核</p>
+                          </div>
+                          </div>    
+                      </div>  
+                     
+                        <div class="form-group">
+                          <label  class="col-sm-2 control-label">内存</label>
+                         <div class="col-sm-9 margin-top-10">
+                          	<div class="col-sm-8 no-padding-left">
+                          		  <div id="sample-onehandle2" class="slider-xs" name="mem"></div>
+                          	</div>
+                              <div class="col-sm-3  no-padding-right" style="margin-top:-10px">
+                          	<input type="number" class="form-control" value="0" id="mem" onkeyup="change(this)" />
+                          </div>
+                           <div class="col-sm-1" style="margin-top:-5px">
+                          	<p class="no-padding-left">GB</p>
+                          </div>
+                          </div>    
+                      </div>  
+                        
+                         <div class="form-group">
+                          <label  class="col-sm-2 control-label">磁盘</label>
+                         <div class="col-sm-9 margin-top-10">
+                          	<div class="col-sm-8 no-padding-left">
+                          		  <div id="sample-onehandle3" class="slider-xs" name="disk"></div>
+                          	</div>
+                              <div class="col-sm-3  no-padding-right" style="margin-top:-10px">
+                          	<input type="number" class="form-control" value="0" id="disk" onkeyup="change(this)" />
+                          </div>
+                           <div class="col-sm-1" style="margin-top:-5px">
+                          	<p class="no-padding-left">GB</p>
+                          </div>
+                          </div>    
+                      </div>  
+                        
+                           
+                    </div>
+               
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure"  id="createUser">创建</button>
+                 </div>
+                 
+                </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+        
+  <!--  编辑 -->
+     <div class="modal fade" id="updateDataModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+     data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" >编辑资源配额</h4>
+                </div>
+                 <form id="updateForm" method="post"  novalidate="novalidate" class="form-horizontal">
+                 
+                <div class="modal-body">
+                	<div class="form-group">
+                          <label  class="col-sm-2 control-label">系统名称</label>
+                         <div class="col-sm-9">
+                          	<input type="text" class="form-control" disabled name="dataKey" id="sysname_U"> 
+                          </div>    
+                      </div> 
+                      <div class="form-group">
+                          <label  class="col-sm-2 control-label">系统标签</label>
+                         <div class="col-sm-9">
+                          	<input type="text" class="form-control" disabled  name="dataKey" id="syslable_U"> 
+                          </div>    
+                      </div>  
+                    <div class="form-group">
+                          <label  class="col-sm-2 control-label">CPU</label>
+                         <div class="col-sm-9 margin-top-10">
+                          	<div class="col-sm-8 no-padding-left">
+                          		  <div id="sample-onehandle_U" class="slider-xs" name="CPU_U"></div>
+                          	</div>
+                              <div class="col-sm-3  no-padding-right" style="margin-top:-10px">
+                          	<input type="number" class="form-control" value="0" id="CPU_U" onkeyup="change(this)" />
+                          </div>
+                           <div class="col-sm-1" style="margin-top:-5px">
+                          	<p class="no-padding-left">核</p>
+                          </div>
+                          </div>    
+                      </div>  
+                     
+                        <div class="form-group">
+                          <label  class="col-sm-2 control-label">内存</label>
+                         <div class="col-sm-9 margin-top-10">
+                          	<div class="col-sm-8 no-padding-left">
+                          		  <div id="sample-onehandle2_U" class="slider-xs" name="mem_U"></div>
+                          	</div>
+                              <div class="col-sm-3  no-padding-right" style="margin-top:-10px">
+                          	<input type="number" class="form-control" value="0" id="mem_U" onkeyup="change(this)" />
+                          </div>
+                           <div class="col-sm-1" style="margin-top:-5px">
+                          	<p class="no-padding-left">GB</p>
+                          </div>
+                          </div>    
+                      </div>  
+                        
+                         <div class="form-group">
+                          <label  class="col-sm-2 control-label">磁盘</label>
+                         <div class="col-sm-9 margin-top-10">
+                          	<div class="col-sm-8 no-padding-left">
+                          		  <div id="sample-onehandle3_U" class="slider-xs" name="disk_U"></div>
+                          	</div>
+                              <div class="col-sm-3  no-padding-right" style="margin-top:-10px">
+                          	<input type="number" class="form-control" value="0" id="disk_U" onkeyup="change(this)" />
+                          </div>
+                           <div class="col-sm-1" style="margin-top:-5px">
+                          	<p class="no-padding-left">GB</p>
+                          </div>
+                          </div>    
+                      </div>  
+                        
+                           
+                    </div>
+               
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure"  >编辑</button>
+                 </div>
+                 
+                </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog --> 
+        
+  
+    
+   
+    
+    <!-- 删除  -->
+     <div id="DeleteData" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true" 
+      data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+                </div>
+                <div class="modal-body"><span class="title1">确定要删除?</span></div>
+                <span id="deleteID" class="hidden"></span>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="deleteData()">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+
+    <!--成功提示信息-->
+    <div class="modal modal-message modal-info in" id="successmodal"  aria-hidden="true"
+         style="display:none;" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header no-padding-bottom">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+            <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+          </div>
+          <div class="modal-body" >
+            <div class="title1" id="successTitle"></div>
+
+          </div>
+          <div class="modal-footer padding-bottom-20">
+
+            <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!--错误失败提示信息-->
+    <div class="modal modal-message modal-info in" id="failmodal"  aria-hidden="true"
+         style="display:none;" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header no-padding-bottom">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+            <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+          </div>
+          <div class="modal-body" >
+            <p class="title1" id="failTitle"></p>
+            <div id="failSpan"></div>
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+   <script src="assets/js/validation/bootstrapValidator.js"></script>
+  <script src="assets/js/slider/jquery.nouislider.js"></script>
+   <script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+   <script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+   <script src="assets/js/slider/jquery.nouislider.js"></script>
+   <script src="./webcontent/platformsetting/js/quotas.js"></script>
+ 
+
+

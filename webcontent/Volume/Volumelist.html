@@ -1,0 +1,272 @@
+
+    <!--Basic Styles-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--main.css-->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="#/webcontent/Volume/Volume.html">存储管理</a>
+                        </li>
+                        <li id="Volumepage">
+                       Volume1
+                        </li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Body -->
+                <div class="page-body">
+                   <div class="row">
+                   	<div class="col-sm-12">
+					 <div class="well">
+					 	<div class="row">
+                       <div class="col-lg-2 col-md-2 col-sm-12">
+                       	<img class="header-avatar" src="assets/img/svg/disk.svg" id="imgAvatarSrc">
+                       </div> 
+                       
+                       <div class="col-lg-10 col-md-10 col-sm-12 no-padding-left ">
+                       <div class="col-lg-7 col-md-6 col-sm-6  col-xs-12"><h2 id="volumename"></h2></div>
+                       <div class="col-sm-12">
+                      
+                       	<div class="col-sm-4 no-padding-left"><strong class="padding-right-10">状态：</strong>
+                       	<span id="volumestatus"><span class="label label-sm label-success" ></span></span></div>
+                       <div class="col-sm-6">
+                       	 <strong>配置:</strong>
+                         
+                         <span class="padding-left-10">格式:</span><span class="padding-left-5" id="serviceCPU"></span>
+                         <span class="padding-left-10">大小:</span><span class="padding-left-5" id="serviceMem"></span>（G）
+                       	 
+                       </div>  
+                       </div>
+                       
+                       <div class="col-sm-12 margin-top-10">
+                       	<!-- <div class="col-sm-3 no-padding-left">
+                       	<strong>挂载主机：</strong><span class="padding-left-5" id="passCode">192.168.1.13</span>
+                       </div> -->
+                        <div class="col-sm-4 no-padding-left">
+                          <strong>挂载目录:</strong><span class="padding-left-5" id="hostpath"></span> 
+                        </div>
+                        <div class="col-sm-6   ">
+                            <strong>所属集群:</strong><span class="padding-left-5" id="cluster_name"></span>
+                       </div>
+                       </div>
+                           <div class="col-sm-12 margin-top-10">
+                               <!-- <div class="col-sm-3 no-padding-left">
+                               <strong>挂载主机：</strong><span class="padding-left-5" id="passCode">192.168.1.13</span>
+                           </div> -->
+                               <div class="col-sm-4 no-padding-left">
+                                   <strong>备注:</strong><span class="padding-left-5" id="vo_remark"></span>
+                               </div>
+                           </div>
+                       
+                       
+                       </div>
+                       
+                       </div>
+                     </div>		
+		            </div>
+                	  
+                	  <div class="col-sm-12">
+                	  	<div class="well">
+                	  		<div class="tabbable">
+                                <ul class="nav nav-tabs tabs-flat" id="myTab11">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#tab1">
+                                                                                                                      监控信息
+                                        </a>
+                                    </li>
+                                  
+                                    <li >
+                                        <a data-toggle="tab" href="#tab2">
+                                                                                                                      快照列表
+                                        </a>
+                                    </li>
+                                    
+                                      <li >
+                                        <a data-toggle="tab" href="#tab3">
+                                                                                                                      应用列表
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                                <div class="tab-content tabs-flat">
+                                    <div id="tab1" class="tab-pane active">
+                                        <p class="text-right">
+                                        	<a class="btn btn-default" onclick="fnGetMonitor('1h')">一小时</a>
+                                        	<a class="btn btn-default" onclick="fnGetMonitor('1d')">一天</a>
+                                        	<a class="btn btn-default" onclick="fnGetMonitor('1w')">一周</a>
+                                        	<a class="btn btn-default" onclick="fnGetMonitor()">自定义</a>
+                                        </p>
+                                    <div class="row">   
+                                    <div class="col-sm-12">
+                                       
+                                        <div id="monitorInfoCPU" style="height:260px"></div> 
+                                        
+                                    </div>
+                                    
+                                     <!-- <div class="col-sm-12">
+                                       <div class="databox databox-xlg bg-white databox-vertical">
+                                        <div id="monitorInfoMem" style="height:260px"></div> 
+                                        
+                                    </div>
+                                    </div> -->
+                                    </div> 
+                                    
+                                   </div>
+                           
+                                    
+                          <div id="tab2" class="tab-pane"> 
+                             <table class="table table-bordered table-hover">
+                               <thead>
+                                <tr>
+                                <!-- <th>快照名称</th>
+                                <th>快照容量（MB）</th> -->
+                                <th>创建时间</th>
+                                <!-- <th>描述</th> -->
+                                <!-- <th>操作</th> -->
+                                </tr>
+                               </thead>
+                            <tbody id="editabledatatable" >
+                               <!--  <tr>
+                                    
+                                    <td>
+                                      zstest
+                                    </td>
+                                    <td>1923</td>
+                                    
+                                    <td>2016-12-10 08:00</td>
+                                    <td >Michael_snapshot</td>
+                                    <td>
+                                    	 <a class="btn btn-sm btn-default" href="#" data-toggle="modal" data-target="#modal-info"><i class="fa   fa-mail-reply"></i>回滚</a>
+                        			     <a class="btn btn-sm btn-default" href="#" data-toggle="modal" data-target="#krvloume"><i class="fa  fa-trash-o"></i>删除</a>
+                                    </td>
+                                </tr>
+                                  
+                                
+                               
+                                </tbody> -->
+                            </table>          
+                          </div>
+                          
+                            <div id="tab3" class="tab-pane">
+                             <table class="table table-bordered table-hover" id="table_body">
+                              <!-- <thead>
+                                <tr>
+                                
+                                <th>模块名称</th>
+                                <th>模块类型</th>
+                                <th>存储使用率</th> 
+                                 <th>状态</th>
+                                </tr>
+                               </thead>
+                            <tbody >
+                               
+                               
+                              
+                                </tbody>-->
+                            </table>          
+                          </div>
+                                 
+                                    
+                                </div>
+                            </div>
+                	  	</div>
+                	  </div>
+                	</div>
+                	
+                	
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+            
+            
+       <div class="modal fade" id="creatApplition" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog " style="width:700px">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">创建快照</h4>
+                </div>
+                <form class="form-horizontal">
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label">卷名称</label>
+                    <div class="col-sm-8 padding-top-5">
+                        <span class="">volume1</span>
+                    </div>    
+                </div> 
+                
+               <div class="form-group">
+                    <label  class="col-sm-2 control-label">卷容量</label>
+                    <div class="col-sm-8 padding-top-5">
+                        <span class="">4000MB</span>
+                    </div>    
+                </div> 
+            
+                
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">快照名称</label>
+               <div class="col-sm-9 ">
+               	<input class="form-control" type="text" />
+                </div>    
+            </div> 
+            
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">快照描述</label>
+               <div class="col-sm-9 ">
+               	<input class="form-control" type="text" />
+                </div>    
+            </div> 
+                     
+            </div>
+            	<div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="button" class="btn btn-azure" data-dismiss="modal">创建</button>
+                </div>
+                
+            </form>    
+            <!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    </div>
+    
+    <div id="modal-info" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+                </div>
+                <div class="modal-body">确定要回滚到2017-12-10 20:08？</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-azure" data-dismiss="modal">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+
+        <!-- /Page Container -->
+        <!-- Main Container -->
+
+    <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/validation/bootstrapValidator.js"></script>
+	 <script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+    <script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+    <!--Beyond Scripts-->
+<!--     <script src="assets/js/beyond.min.js"></script> -->
+ 
+    <script src="assets/js/echarts.common.min.js"></script>
+    <script src="webcontent/Volume/js/Volumelist.js"></script>
+

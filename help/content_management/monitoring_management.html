@@ -1,0 +1,366 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>监控管理 | DCOS云管理平台 用户手册</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="DCOS云管理平台用户手册涵盖了DCOS云管理平台产品介绍、上线发布、服务启停、资源监控、日志排错和持续集成等，力争简洁清晰地表述DCOS云管理平台产品的相关信息，使用户更加容易方便地使用DCOS云管理平台产品。  ">
+        <meta name="generator" content="GitBook 2.6.6">
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="./gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="./gitbook/images/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="../gitbook/style.css">
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        <link rel="prev" href="../help/content_management/volume_management.html"/>
+        <link rel="next" href="../help/content_management/log_management.html"/>
+        
+    </head>
+    <body>
+            
+    <div class="book"
+        data-level="0"
+        data-chapter-title="监控管理"
+        data-filepath="README.md"
+        data-basepath="."
+        data-revision="Mon Jan 04 2016 19:21:16 GMT+0800 (CST)"
+        data-innerlanguage="">
+    
+	    <div class="book-summary">
+		    <nav role="navigation">
+		        <ul class="summary">
+		        	
+		        <li class="chapter " data-level="1" data-path="index.html">
+		          <a href="../index.html">
+		            <i class="fa fa-check"></i> 
+		            <b>1.</b>
+		                                    平台介绍
+		          </a>
+		          
+		          <ul>
+		          <li class="chapter " data-level="1.1" data-path="platform_introduction/sys_login.html">
+			            <a href="../help/platform_introduction/sys_login.html">
+			              <i class="fa fa-check"></i>
+			                <b>1.1.</b>
+			                                                        系统登录
+			            </a>
+			          </li>
+			          </ul>
+		        </li>
+		        
+		        
+		        <li class=" chapter" data-level="2." data-path="content_management/index.html">
+		          <a href="../content_management/index.html">
+		            <i class="fa fa-check"></i> 
+		            <b>2.</b>
+		                                    内容管理
+		          </a>
+		          
+		          <ul>
+		          <li class="chapter " data-level="2.1" data-path="content_management/Dashboard.html">
+			            <a href="../content_management/Dashboard.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.1.</b>
+			                Dashboard
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.2" data-path="content_management/application_management.html">
+			            <a href="../content_management/application_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.2.</b>
+			                                             应用管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.3" data-path="content_management/cluster_management.html">
+			            <a href="../content_management/cluster_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.3.</b>
+			                                             集群管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.4" data-path="content_management/image_management.html">
+			            <a href="../content_management/image_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.4.</b>
+			                                             镜像管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.5" data-path="content_management/service_integration.html">
+			            <a href="../content_management/service_integration.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.5.</b>
+			                                             服务集成
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.6" data-path="content_management/network_management.html">
+			            <a href="../content_management/network_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.6.</b>
+			                                             网络管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.7" data-path="content_management/volume_management">
+			            <a href="../content_management/volume_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.7.</b>
+			                                             存储管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter active" data-level="2.8" data-path="content_management/monitoring_management.html">
+			            <a href="../content_management/monitoring_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.8.</b>
+			                                             监控管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.9" data-path="content_management/log_management.html">
+			            <a href="../content_management/log_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.9.</b>
+			                                             日志管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.10" data-path="content_management/policy_management.html">
+			            <a href="../content_management/policy_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.10.</b>
+			                                             策略管理
+			            </a>
+			          </li>
+			          </ul>
+		        </li>
+		        
+		        
+		        <li class="chapter " data-level="3" data-path="platform_management/index.html">
+		          <a href="../platform_management/index.html">
+		            <i class="fa fa-check"></i> 
+		            <b>3.</b>
+		                                    平台管理
+		          </a>
+		          
+		          <ul>
+		          <li class="chapter " data-level="3.1" data-path="platform_management/user_management.html">
+			            <a href="../platform_management/user_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.1.</b>
+			                                                        用户管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.2" data-path="platform_management/role_management.html">
+			            <a href="../platform_management/role_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.2.</b>
+			                                                        角色管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.3" data-path="platform_management/notice_info.html">
+			            <a href="../platform_management/notice_info.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.3.</b>
+			                                                        公告信息
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.4" data-path="platform_management/statistical_statement.html">
+			            <a href="../platform_management/statistical_statement.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.4.</b>
+			                                                        统计报表
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.5" data-path="platform_management/menu_management.html">
+			            <a href="../platform_management/menu_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.5.</b>
+			                                                        菜单管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.6" data-path="platform_management/dictionary_maintenance.html">
+			            <a href="../platform_management/dictionary_maintenance.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.6.</b>
+			                                                        字典维护
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.7" data-path="platform_management/basic_functions.html">
+			            <a href="../platform_management/basic_functions.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.7.</b>
+			                                                        功能列表
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.8" data-path="platform_management/quotas_management.html">
+			            <a href="../platform_management/quotas_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.8.</b>
+			                                                        配额管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.9" data-path="platform_management/plug-in.html">
+			            <a href="../platform_management/plug-in.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.9.</b>
+			                                                        插件市场
+			            </a>
+			          </li>
+			          </ul>
+		        </li>
+		        
+		        
+		       
+		         
+		        
+		        
+		        
+		        <li class="divider"></li>
+		        
+		        <li>
+		          <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+		          Published with GitBook
+		          </a>
+		        </li>
+		        </ul>
+		    </nav>
+	    </div>
+
+	    <div class="book-body">
+	      <div class="body-inner">
+	        <div class="book-header" role="navigation">
+			    <!-- Actions Left -->
+			    
+			    <!-- Title -->
+			    <h1>
+			      <i class="fa fa-circle-o-notch fa-spin"></i>
+			        <a>DCOS云管理平台 用户手册</a>
+			    </h1>
+	        </div>
+	
+	        <div class="page-wrapper" tabindex="-1" role="main">
+	          <div class="page-inner">
+	            <section class="normal" id="section-">
+	          
+	              <h1 id="DCOS云管理平台用户手册">监控管理</h1>
+	              <p>功能介绍：监控管理界面主要为用户提供DCOS系统中所有应用监控的概要信息。</p>
+	              <h4>容器启停事件监控</h4>
+	              <p>在监控管理页面上方的容器启停事件统计图中，显示了平台中所有应用模块的容器启动、容器停止的事件数量信息。用户可以根据“一小时、一天、一周”或者自定义时间进行查看。图2.8.1-1</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.8.1-1.png" /></p>
+	              <p style="text-align: center;">图2.8.1-1</p>
+	              
+	              <p><b>启停事件列表：</b>在监控管理页面下方的启停事件列表中，展示了每条事件的应用ID、容器ID、主机IP、端口、事件类型、创建时间等信息。图2.8.1-2</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.8.1-2.png" /></p>
+	              <p style="text-align: center;">图2.8.1-2</p>
+	              
+	              <p><b>启停事件列表搜索：</b>在启停事件列表的“search”框中，输入容器启停信息后，下方的启停事件列表中会显示出所有匹配该信息的容器启停信息。</p>
+	              
+	              <h4>告警事件监控</h4>
+	              <p>在告警事件监控页面上方的监控告警事件统计中，显示了平台中所有的告警事件的严重、关注、恢复的事件数量信息。用户可以选择“一小时、一天、一周”的不同方式进行查看。图2.8.2-1</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.8.2-1.png" /></p>
+	              <p style="text-align: center;">图2.8.2-1</p>
+	              
+	              <p><b>告警事件列表：</b>在告警事件监控页面下方的告警事件列表中，展示了每条告警事件的模块名称、告警级别、告警主机、告警内容、告警时间等信息。图2.8.2-2</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.8.2-2.png" /></p>
+	              <p style="text-align: center;">图2.8.2-2</p>
+	              
+	              <h4>维护人信息列表</h4>
+	              <p>在维护人信息页面的维护人信息列表中，显示了所有维护人的姓名、联系电话、告警状态等信息。图2.8.3-1</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.8.3-1.png" /></p>
+	              <p style="text-align: center;">图2.8.3-1</p>
+	              
+	              <p><b>新增告警联系人:</b>在维护人信息列表中点击“添加联系人”按钮后，系统弹出“新增告警联系人”的弹窗，用户需输入联系人姓名、联系人电话、选择告警范围后，点击“创建”按钮，系统即可新增一个维护人。图2.8.3-2</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.8.3-2.png" /></p>
+	              <p style="text-align: center;">图2.8.3-2</p>
+	              
+	              <p><b>维护人列表搜索：</b>在维护人信息列表的”search“框中，输入维护人信息后，维护人列表中即会显示出所有匹配该信息的维护人。</p>
+	              
+	              <p><b>开通、关闭告警：</b>在维护人信息列表中，选中一个维护人信息后，点击操作下的”开通、关闭告警“按钮，可以对维护人的告警状态进行调整。</p>
+	              
+	              <p><b>查看监控：</b>在维护人信息列表中，选中一个维护人信息后，点击操作下的查看监控按钮，系统弹出维护人内容弹窗，可以查看维护人的姓名、模块名称和系统名称等信息。图2.8.3-3</p>
+	              
+	              <p><b>删除：</b>在维护人信息列表中，选中一个维护人信息后，点击操作下的”删除“按钮后，系统弹出删除联系人弹窗，用户点击”确定“按钮后，即可删除选中的联系人信息。</p>
+	              
+	              
+	              
+	              
+	              
+	            </section>
+	          </div>
+	        </div>
+	      </div>
+	      
+	      <a href="../content_management/volume_management.html" class="navigation navigation-prev " aria-label="Previous page: 平台介绍"><i class="fa fa-angle-left"></i></a>
+	      <a href="../content_management/log_management.html" class="navigation navigation-next " aria-label="Next page: 服务管理"><i class="fa fa-angle-right"></i></a>
+	        </div>
+    </div>
+    <script src="../gitbook/app.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
+    <script>
+	    require(["gitbook"], function(gitbook) {
+	      var config = {"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"livereload":{}};
+	      gitbook.start(config);
+	    });
+    </script>
+    </body>
+</html>
+

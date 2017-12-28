@@ -1,0 +1,432 @@
+﻿<!DOCTYPE html>
+<html>
+<!-- Head -->
+
+    <!--Basic Styles-->
+     <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+     <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+    <!--main.css-->
+    <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+
+<!-- /Head -->
+<!-- Body -->
+<div>
+    
+
+
+
+
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb font-120">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="#/webcontent/Network/Network.html" >网络管理</a>
+                        </li>
+                        <li id="currentnet">网络1
+                        </li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Body -->
+                <div class="page-body">
+                 <div id="sessionExpiredAlertBlock" class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none;">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	     			<span>会话失效，请重新登录! <a class="btn btn-danger" href="/iMonitor/login.jsp">登录</a></span>
+				</div>
+				<div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+					<button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		     		<span id="warningMsg"></span>
+				</div>
+				<div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+					<button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			     	<span id="successMsg"></span>
+				</div>
+					
+                   <div class="row">
+                   	<div class="col-sm-12">
+					 <div class="well" id="networklist">
+					 	<div class="row">
+                       <div class="col-lg-2 col-md-2 col-sm-12">
+                       	<img class="header-avatar" src="assets/img/svg/network.svg" id="imgAvatarSrc">
+                       </div> 
+                       
+                       <div class="col-lg-10 col-md-10 col-sm-12 no-padding-left ">
+                       <div class="col-lg-7 col-md-6 col-sm-6  col-xs-12"><h2 id="net_name"></h2></div>
+                       <div class="col-lg-5 col-md-6 col-sm-6  col-xs-12 text-right">
+                         <a class="btn btn-azure"  onclick="showrule()"><i class="fa  fa-camera-retro"></i>创建规则</a>
+                       	
+                       
+                       </div>
+                       
+                       <div class="col-sm-12">
+                      
+                       	<div class="col-sm-3 no-padding-left">
+                            <strong class="padding-right-10">状态：</strong>
+                            <span class="label label-sm label-success" id="">使用中</span>
+                        </div>
+                       <div class="col-sm-6">
+                       	 <strong>网段:</strong>
+                         <span class="padding-left-10" id="Net_subnet"></span> 
+                       </div>  
+                       </div>
+                       
+                       <div class="col-sm-12  margin-top-10">
+                       	<div class="col-sm-3 no-padding-left">
+                       	<strong>网络ID：</strong><span class="padding-left-5" id="net_id"></span>
+                       </div>
+                        <div class="col-sm-6">
+                            <strong>所属集群：</strong><span class="padding-left-5" id="cluster_name"></span>
+
+                        </div>
+                       </div>
+                           <div class="col-sm-12  margin-top-10">
+                               <div class="col-sm-3 no-padding-left">
+                                   <strong>创建时间:</strong><span class="padding-left-5" id="create_time"></span>
+
+                               </div>
+                           </div>
+                       
+                       </div>
+                       
+                       </div>
+                     </div>		
+		            </div>
+                	  
+                	  <div class="col-sm-12">
+                	  	<div class="well">
+                	  		<div class="tabbable">
+                                <ul class="nav nav-tabs tabs-flat" >
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#tab1">
+                                          监控信息
+                                        </a>
+                                    </li>
+
+                                    <li >
+                                        <a data-toggle="tab" href="#tab2">
+                                          规则列表
+                                        </a>
+                                    </li>
+                                 <!-- <li >
+                                    <a data-toggle="tab" href="#tab3">
+                                      事件查看
+                                    </a>
+                                  </li>-->
+                                    <li >
+                                        <a data-toggle="tab" href="#tab4">
+                                         	应用列表                                                                             
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content tabs-flat">
+                                    <div id="tab2" class="tab-pane ">
+                                    <div class="col-sm-12 no-padding margin-bottom-10">
+                        			<input class="form-control" placeholder="search..." type="text" id="searchUser" onkeyup="fnSearch(this)"//>
+                        	
+                        		</div>
+                             <table class="table table-hover" id="editabledatatable">
+                               <thead>
+                                <tr>
+                                <th>网络类型</th>
+                                <th>目标网络</th>
+                                <th>出网</th>
+                                <th>入网</th>
+                                <th>创建时间</th> 
+                                <th>操作</th>
+                                </tr>
+                               </thead>
+                            </table>          
+                          </div>
+                           
+                                    
+                          <div id="tab1" class="tab-pane active">
+                             <p class="text-right">
+                                      	<a class="btn btn-default" onclick="showMore('day')">一天</a>
+                                      	<a class="btn btn-default" onclick="showMore('week')">一周</a>
+                                      	<a class="btn btn-default" onclick="showMore('month')">一月</a>
+                                      	<!-- <a class="btn btn-default">自定义</a> -->
+                                      </p>
+                                  <div class="row">   
+                                  <div class="col-sm-12">
+                                     <!-- <div class="databox databox-xlg bg-white databox-vertical">
+                                      <div id="CPUused" style="height:260px"></div> 
+                                      
+                                  </div> -->
+                                  <div id="NetWorkCPU" style="height:260px"></div>
+                                  </div>
+                                  
+                                  <!-- <div class="col-sm-12">
+                                     <div class="databox databox-xlg bg-white databox-vertical">
+                                      <div id="NetWorkMerry" style="height:260px"></div>
+                                      
+                                 </div>
+                                </div>-->
+                               </div>       
+                          </div>
+
+                                  <!--事件查看-->
+
+                        <!--  <div id="tab3" class="tab-pane warningcontainer">
+                            <div class="tickets-container">
+                              <ul class="tickets-list">
+                                <table class="table table-hover table-no-bordered" id="Networkinfo" style="margin-top:-10px" >
+
+                                </table>
+                              </ul>
+
+                            </div>
+
+                          </div>-->
+
+                                  <div id="tab4" class="tab-pane">
+                             <table class="table table-bordered table-hover" id="appTable">
+                              
+                            </table>          
+                          </div>
+                                    
+                                </div>
+                            </div>
+                	  	</div>
+                	  </div>
+                	</div>
+                	
+
+
+            
+     <!-- 创建网络 -->       
+      <div class="modal fade" id="creatDataModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog " style="width:700px">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">创建网络规则</h4>
+                </div>
+              <form id="accountForm"  method="post"  novalidate="novalidate" class="form-horizontal">
+                <div class="modal-body">
+                      
+                
+                 <div class="form-group">
+                    <label  class="col-sm-3 control-label">网络类型</label>
+                    <div class="col-sm-8 padding-top-5">
+                       <select class="form-control"  id="net_type"  name="net_type" onchange="netTypeChange(this)">
+                       
+                       	<option  value="cidr" >cidr  (外部非容器网络)</option>
+                       	<option  value="tag" selected>tag  (已有容器网络)</option>
+                       </select>
+                       
+                   <input type="hidden"  class="form-control" value="" id="netid">  
+                    </div>    
+                </div> 
+                
+             <div class="form-group">
+                <label  class="col-sm-3 control-label">目标网络</label>
+                 <div class="col-sm-8 padding-top-5">
+	                 <select type="text" id="dest_net" name="dest_net"   class="form-control" onchange="netGoalChange(this)">
+	                 </select>  
+                	 <div class="hidden" id="typeinput">
+						<input type="text" class="form-control" id="dataTypei" name="type" placeholder="输入网段" data-bv-field="type">
+					</div>
+                  </div>
+              </div>
+               
+                  <div class="form-group">
+                    <label  class="col-sm-3 control-label">入网</label>
+                    <div class="col-sm-8 padding-top-5">
+                       <select class="form-control"  id="ingress"  name="ingress">
+                       <option  value="">请选择规则</option>
+                       	<option  value="1">允许</option>
+                       	<option  value="0">禁止</option>
+                       </select>
+                    </div>    
+                </div> 
+                
+               <div class="form-group">
+                    <label  class="col-sm-3 control-label">出网</label>
+                    <div class="col-sm-8 padding-top-5">
+                        <select class="form-control"  id="egress" name="egress">
+                        <option value="">请选择</option>
+                       	<option value="1">允许</option>
+                       	<option value="0">禁止</option>
+                       </select>
+                    </div>    
+               </div>       
+            </div>
+            	<div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure" id="createUser">创建</button>
+                </div>
+                
+            </form>    
+            <!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    </div>
+    
+    <!-- 更新网络策略 -->
+    <div class="modal fade" id="updateDataModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+        data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="LargeModalLabel">编辑网络规则</h4>
+                    <span id="basedataid" class="hidden"></span>
+                </div>
+                 <form id="updateForm" method="post"  novalidate="novalidate" class="form-horizontal">
+                 
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label  class="col-sm-3 control-label">网络类型</label>
+                    <div class="col-sm-8 padding-top-5">
+                       <select class="form-control"  id="net_type_U"  name="net_type" disabled="disabled" onchange="netTypeChange(this)">
+                       
+                       	<option  value="cidr" >cidr</option>
+                       	<option  value="tag">tag</option>
+                       </select>
+                       
+                   <input type="hidden"  class="form-control" value="" id="netid_U">  
+                    </div>    
+                 </div> 
+                 
+                       
+             <div class="form-group">
+                <label  class="col-sm-3 control-label">目标网络</label>
+                 <div class="col-sm-8 padding-top-5">
+                 <select type="text" id="dest_net_U" name="dest_net"   class="form-control" disabled="disabled" onchange="netGoalChange(this)">  
+                </select>
+                  <div class="hidden" id="typeinput_U">
+						<input type="text" class="form-control" id="dataTypei_U" name="type" disabled placeholder="输入网段" data-bv-field="type">
+					</div>
+                  </div>
+              </div>
+                 
+                  <div class="form-group">
+                    <label  class="col-sm-3 control-label">入网</label>
+                    <div class="col-sm-8 padding-top-5">
+                       <select class="form-control"  id="ingress_U"  name="ingress">
+                       <option  value="">请选择规则</option>
+                       	<option  value="1">允许</option>
+                       	<option  value="0">禁止</option>
+                       </select>
+                    </div>    
+                </div>    
+                           
+                   <div class="form-group">
+                    <label  class="col-sm-3 control-label">出网</label>
+                    <div class="col-sm-8 padding-top-5">
+                        <select class="form-control"  id="egress_U" name="egress">
+                        <option value="">请选择</option>
+                       	<option value="1">允许</option>
+                       	<option value="0">禁止</option>
+                       </select>
+                    </div>    
+                </div>          
+                         
+                 </div>
+                 
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure"  id="createUser">更新</button>
+                </div>
+                 
+                </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    
+     <!-- 删除 网络 -->
+     <div id="DeleteData" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true" 
+      data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+                </div>
+                <div class="modal-body"><span class="title1">确定要删除网络策略?</span></div>
+                <span id="deleteID" class="hidden"></span>
+                 <span id="_dest_net" class="hidden"></span>
+                 <span id="net_type" class="hidden"></span>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="deleteData()">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+
+                  <!--成功提示  -->
+                  <div class="modal modal-message modal-info fade in" id="successModal"  aria-hidden="true"
+                       style="display:none;" data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+                          <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+                        </div>
+                        <div class="modal-body" >
+                          <span id="SucessTitle" class="title1"></span>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+                        </div>
+
+                      </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                  </div><!-- /.modal -->
+
+
+                  <!--失败提示-->
+
+                  <div class="modal modal-message modal-info  in" id="failmodal"  aria-hidden="true"
+                       style="display:none;" data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+
+                          <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+                        </div>
+                        <div class="modal-body" >
+                          <p class="title1" id="failtitle"></p>
+                          <div id="failInfo"></div>
+
+                        </div>
+                        <div class="modal-footer padding-bottom-20">
+                          <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我了解了！</button>
+
+                        </div>
+
+                      </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                  </div><!-- /.modal -->
+
+<div class="modal fade" id="tips" tabindex="-1" role="dialog" aria-hidden="false" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+			<div class="modal-body" style="font-size:15px;font-weight:bold">
+				<span id="tipsText"></span><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+				<span class="sr-only"></span>
+			</div>
+			
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</div>
+    <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/echarts.common.min.js"></script>
+    <script src="assets/js/validation/bootstrapValidator.js"></script>
+     <script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+    <script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+    <script src="webcontent/Network/js/Networklist.js"></script>
+
+<!--  /Body -->
+</html>

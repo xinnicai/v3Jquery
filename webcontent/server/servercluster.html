@@ -1,0 +1,143 @@
+﻿
+<!--Basic Styles-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--main.css-->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+    
+    <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            SDDCOS
+                        </li>
+                        <li >  服务集成</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                
+                <!-- Page Body -->
+                <div class="page-body">
+                	<div class="row">
+                	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                	<div class="widget-header bg-lightinfo">
+                        		<span>服务集成页面可以创建Mysqle、Redis等服务以及查看谋服务的具体信息</span>
+                        	</div>
+                    <div class="widget-body">
+                    <div class="widget-main ">
+                    <div class="col-sm-6 no-padding-left margin-bottom-10">
+                        			<a class="btn btn-default" href="#/webcontent/server/serverCreate.html" ><i class="fa fa-plus"></i>创建服务</a>
+                        		</div>
+                         <div id="profile11" class="">
+                               <div class="">
+                                <!-- <div class="col-sm-12 no-padding margin-bottom-10">
+                                <input type="text" class="form-control" placeholder="search..." />	
+                                </div> -->
+                               <table id="service-list-table" class="table table-bordered table-hover">
+
+                            </table>
+                           </div>
+                          </div>
+                </div>
+            </div>
+           </div>
+           </div>
+                <!-- /Page Body -->
+         </div>
+            <!-- /Page Content -->
+
+        <!-- /Page Container -->
+        <!-- Main Container -->
+<!--删除-->
+<div id="delete-mysql-modal" class="modal modal-message modal-info" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+      </div>
+      <div class="modal-body">确定要删除该服务吗？</div>
+      <p class="hidden" id="seq_id"></p>
+      <p class="hidden"></p>
+      <div class="modal-footer">
+        <button id="delete-mysql" type="button" class="btn btn-azure" data-dismiss="modal">确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div> <!-- / .modal-content -->
+  </div> <!-- / .modal-dialog -->
+</div>
+<!-- 忙等待 -->
+<div class="modal in" id="tips" style="display:none">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" style="font-size:15px;font-weight:bold">
+        <span>正在删除,请稍后</span><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span class="sr-only"></span>
+      </div>
+    </div>
+  </div>
+</div>
+<!--成功提示  -->
+<div class="modal modal-message modal-info fade in" id="successmodal"  aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+        <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+      </div>
+      <div class="modal-body" >
+        <span id="tipsSpan" class="title1"></span>
+        <p id="tipsSpan1" class="title1"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--失败提示-->
+
+<div class="modal modal-message modal-info  in" id="failmodal"  aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+      </div>
+      <div class="modal-body" >
+        <p class="title1" id="failtitle"></p>
+        <p id="failInfo"></p>
+
+      </div>
+      <div class="modal-footer padding-bottom-20">
+        <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="$('#docreate').attr('disabled',false)">好的，我了解了！</button>
+
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+    <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+    <script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+    <script src="webcontent/server/js/service.js"></script>
+ 
+    <script type="text/javascript">
+        $(document).ready(function(){
+        	initServiceListTable();
+        });
+    </script>
+

@@ -1,0 +1,165 @@
+<link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
+<link href="plugin/uploadify/Huploadify.css" rel="stylesheet" />
+<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+<link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+<link href="assets/css/codemirror.css" rel="stylesheet" />
+<link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+<!--main.css-->
+<link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+
+<div class="page-breadcrumbs breadcrumbs-fixed">
+  <ul class="breadcrumb">
+    <li id="titleName">
+    </li>
+    <li class="active" id="pageType">创建应用</li>
+  </ul>
+</div>
+<div class="page-body">
+  <div id="operating" style="background-color: #C3DBB7;">
+  <div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+      <div class="panel-body" >
+        <div class="col-sm-3 border-right"  id="success"  style="border-right:1px dashed #777;">
+
+          <div class="show-zero2 zeromodal-icon zeromodal-success zeromodal-borderd" style="background-color: #56C350;border-color: #56C350;">
+            <span class="line tip" style="background-color:#fff;"></span><span class="line long" style="background-color:#fff;"></span>
+            <div class="placeholder"></div>
+          </div>
+          <h5 style="color:#398C08;text-align: center;"><strong>应用创建成功</strong></h5>
+
+        </div>
+        <div class="col-sm-8" id="info">
+          <div  id="ciinfo" >
+            <div class="col-sm-12" style="color:#398C08;margin-left:15px;"><h5><strong>持续集成包存放地址：</strong></h5></div>
+            <div class="col-sm-12">
+              <div class="col-sm-4 no-margin-top"><h6 class="pull-left"><strong>服务器IP：</strong></h6><span id="ftp_ip"></span></div>
+              <div class="col-sm-4 no-margin-top"><h6><strong>服务器端口：</strong></h6><span id="ftp_port"></span></div>
+              <div class="col-sm-4 no-margin-top"><h6><strong>文件名：</strong></h6><span id="filename"></span></div>
+            </div>
+            <div class="col-sm-12">
+              <div class="col-sm-4 no-margin-top"><h6><strong>存放路径：</strong></h6><span id="ftp_path"></span></div>
+              <div class="col-sm-4 no-margin-top"><h6><strong>服务器用户名：</strong></h6><span id="ftp_username"></span></div>
+              <div class="col-sm-4 no-margin-top"><h6><strong>服务器密码：</strong></h6><span id="ftp_passwd"></span></div>
+            </div>
+          </div>
+          <div  id="lbinfo">
+            <div class="col-sm-12" style="color:#398C08;margin-left:15px;"><h5 class="no-margin-bottom"><strong>应用访问入口：</strong></h5></div>
+            <div class="col-sm-12">
+              <div class="col-sm-4"><h6 ><strong class="pull-left">域名：</strong></h6><span id="handle_url"></span></div>
+              <div class="col-sm-4"><h6 ><strong class="pull-left">IP：</strong></h6><span id="handle_ip"></span></div>
+              <div class="col-sm-4"><h6 ><strong class="pull-left">端口：</strong></h6><span id="handle_port"></span></div>
+            </div>
+            <div class="col-sm-12">
+              <p class="col-sm-12 margin-top-5" style="color:#398C08;font-weight:bold;">可以根据域名进行解析，也可以根据IP+端口进行访问</p>
+            </div>
+          </div>
+          <div class="col-sm-12" style="margin-left:15px;width:200px">
+            <!--<p class="col-sm-12" style="text-align: center;" id="tipmsg">可以点击下面按钮跳转到应用详情页面，对该应用进行发布等操作</p>-->
+            <button class="btn btn-success" id="appdetailbtn">好的，我已了解</button>
+          </div>
+        </div>
+    </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/jquery-2.0.3.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="plugin/uploadify/jquery.Huploadify.js"></script>
+<script src="assets/js/bootstrap-filestyle.min.js"></script>
+<script src="assets/js/bootstrap-select.js"></script>
+<script src="assets/js/select2/select2.min.js"></script>
+<script src="assets/js/fuelux/wizard/wizard-custom.js"></script>
+<!--  <script src="../../assets/js/fuelux/spinner/fuelux.spinner.min.js"></script>-->
+<script src="assets/js/validation/bootstrapValidator.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script src="assets/js/codemirror/codemirror.js"></script>
+<!--	<script src="assets/js/codemirror/python.js"></script>-->
+<script src="assets/js/slider/jquery.nouislider.js"></script>
+<script src="assets/js/skins.min.js"></script>
+<script src="assets/js/beyond.min.js"></script>
+<script>
+
+  var app_id=getUrlParam('app_id');
+  fnGetIcloud();
+  fnGetArray();
+  function fnGetIcloud(){
+    if(getUrlParam('str')=='是'){
+      fnGetCiFtp();
+      $("#ciinfo").show();
+    }else{
+      $("#ciinfo").hide();
+    }
+  }
+  function fnGetCiFtp() {
+    $.ajax({
+      type: 'get',
+      url: _URL_INTERFACE + "apps/ftp",
+      headers: {
+        "token": token
+      },
+      //async:false,
+      dataType: 'json',
+      success: function (result) {
+        var deploy = result.data;
+        $('#ftp_ip').text(deploy.ftp_ip);
+        $('#ftp_port').text(deploy.ftp_port);
+        $('#filename').text(app_id);
+        $('#ftp_username').text(deploy.ftp_username);
+        $('#ftp_passwd').text(deploy.ftp_passwd);
+        $('#ftp_path').text(deploy.path);
+
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        if (XMLHttpRequest.status === 401) {
+          window.location.href = '#/login.html';
+        } else {
+          //alert('添加失败！（例子）');//其他操作
+        }
+      }
+    })
+  }
+  function fnGetArray(){
+    $.ajax({
+      type: 'get',
+      url: _URL_INTERFACE + "apps/detail?app_id="+app_id,
+      headers: {
+        "token": token
+      },
+      //async:false,
+      dataType: 'json',
+      success: function (result) {
+        var data = result.data;
+      if(data.dnsname!=''){
+        $("#lbinfo").show();
+        $("#handle_url").text(data.dnsname);
+        var vip=data.vip.split(':');
+        $("#handle_ip").text(vip[0]);
+        $("#handle_port").text(vip[1]);
+      }else{
+        if(getUrlParam('str')=='否'){
+          $("#info").hide();
+          $('#success').css('width','100%');
+          $('.border-right').css('border-right','none');
+        }else{
+          $("#lbinfo").hide();
+        }
+      }
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        if (XMLHttpRequest.status === 401) {
+          window.location.href = '#/login.html';
+        } else {
+          //alert('添加失败！（例子）');//其他操作
+        }
+      }
+    })
+  }
+  $("#appdetailbtn").click(function(){
+    window.location.href = '#/webcontent/Application/Application.html?&appid='+app_id;
+  })
+</script>

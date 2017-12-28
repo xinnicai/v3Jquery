@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<!-- Head -->
+<head>
+    <meta charset="utf-8" />
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--Basic Styles-->
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--main.css-->
+    <link href="../../assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/dist.css" rel="stylesheet" type="text/css" />
+     
+    <link href="../../assets/css/bootstrap-table.min.css" rel="stylesheet" type="text/css" />  
+
+</head>
+<!-- /Head -->
+<!-- Body -->
+<body>
+    
+    <!-- Navbar -->
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="navbar-container">
+                <!-- Navbar Barnd -->
+                <div class="navbar-header pull-left">
+                    <a href="#" class="navbar-brand">
+                        <small>
+                            SDDCOS云平台
+                        </small>
+                    </a>
+                </div>
+                <!-- /Navbar Barnd -->
+
+                <!-- Sidebar Collapse -->
+                <div class="sidebar-collapse" id="sidebar-collapse">
+                    <i class="collapse-icon fa fa-bars"></i>
+                </div>
+                <!-- /Sidebar Collapse -->
+                <!-- Account Area and Settings --->
+                <div class="navbar-header pull-right">
+                    <div class="navbar-account">
+                       <ul class="account-area"> 
+                            <li>
+                                <a class="wave in dropdown-toggle" data-toggle="dropdown" title="Help" href="#">
+                                    <i class="icon fa fa-bell-o"></i>
+                                    <span class="badge badge-danger" style="left:20px">3</span>
+                                </a> 
+                            </li>
+                            
+                            <li>
+                                <a class=" dropdown-toggle" data-toggle="dropdown" title="Help" href="#">
+                                    <i class="icon fa fa-warning"> <span class="font-50">帮助</span> </i>
+                                                                  
+                                </a>
+                                <!--Notification Dropdown-->
+                                <ul class="pull-right dropdown-menu dropdown-arrow dropdown-notifications">
+                                    <li>
+                                        <a href="#">
+                                            <div class="clearfix">
+                                                <div class="notification-icon">
+                                                    <i class="fa fa-calendar-o"></i>
+                                                    <span class="title">版本信息</span>
+                                                    <span class="silver padding-left-5">v3（618）</span>
+                                                </div>       
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="clearfix">
+                                                <div class="notification-icon">
+                                                    <i class="fa fa-book"></i>
+                                                     <span class="title">操作手册</span>
+                                                    <span class="silver padding-left-5">V3.0</span>
+                                                </div>
+                                              
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="clearfix">
+                                                <div class="notification-icon">
+                                                    <i class="fa fa-phone"></i>
+                                                </div>
+                                                <div class="notification-body">
+                                                    <span class="title">值班电话</span>
+                                                    <span class="description">13588982424/0571-665594</span>
+                                                </div>
+                                               
+                                            </div>
+                                        </a>
+                                    </li>
+                                  
+                                </ul>
+                                <!--/Notification Dropdown-->
+                            </li>
+                            <li>
+                                <a class=" dropdown-toggle" data-toggle="dropdown" title="Help" href="#">
+                                    <span class="icon font-50">云管理员</span> 
+                                                                  
+                                </a>
+                                <!--Login Area Dropdown-->
+                                <ul class="pull-right dropdown-menu dropdown-arrow dropdown-notifications">
+                                   
+                                  <li class="edit">
+                                        <a href="profile.html" class="dropdown-toggle"  data-toggle="dropdown"><i class="fa fa-key padding-right-5 font-120"></i>更改密码</a>
+                                      
+                                   </li>
+                                    <!--/Theme Selector Area-->
+                                    <li class="edit">
+                                        <a href="login.html">
+                                      <i class="fa fa-sign-out padding-right-5 font-120"></i>退出
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!--/Login Area Dropdown-->
+                            </li>  
+                        </ul>
+                    </div>
+                </div>
+                <!-- /Account Area and Settings -->
+            </div>
+        </div>
+    </div>
+    <!-- /Navbar -->
+    <!-- Main Container -->
+    <div class="main-container container-fluid">
+        <!-- Page Container -->
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            <div class="page-sidebar sidebar-fixed" id="sidebar">
+                <!-- Page Sidebar Header-->
+               
+                <!-- Sidebar Menu -->
+                  <ul class="nav sidebar-menu">
+                    <!--Dashboard-->
+                    <li >
+                        <a href="../../index.html">
+                            <i class="menu-icon fa fa-dashboard"></i>
+                            <span class="menu-text"> Dashboard </span>
+                        </a>
+                    </li>
+                    <!--应用管理-->
+                    <li >
+                        <a href="../Application/applist.html">
+                            <i class="menu-icon fa fa-codepen"></i>
+                            <span class="menu-text"> 应用管理</span>
+                        </a>
+                    </li>
+                     <!--集群管理-->
+                    <li >
+                        <a href="../cluster/clusterlist.html">
+                            <i class="menu-icon fa fa-th"></i>
+                            <span class="menu-text"> 集群管理 </span>
+                        </a>
+                    </li>
+                    <!--镜像管理-->
+                    <li >
+                        <a href="../image/imagelist.html" >
+                            <i class="menu-icon fa fa-clone"></i>
+                            <span class="menu-text"> 镜像管理 </span>
+                           
+                        </a>  
+                    </li>
+                    <!--服务集成-->
+                    <li class="active">
+                        <a href="servercluster.html">
+                            <i class="menu-icon fa fa-tasks"></i>
+                            <span class="menu-text"> 服务集成 </span> 
+                        </a>
+
+                      
+                    </li>
+                    <!--网络管理-->
+                    <li >
+                        <a href="../Network/Network.html">
+                            <i class="menu-icon fa fa-ravelry"></i>
+                            <span class="menu-text"> 网络管理</span> 
+                        </a>
+
+                    </li>
+                    <!--存储管理-->
+                    <li>
+                        <a href="../Volume/Volume.html" >
+                            <i class="menu-icon fa fa-hdd-o"></i>
+                            <span class="menu-text"> 存储管理 </span>   
+                        </a>    
+                    </li>
+                    <!--监控管理-->
+                     <li >
+                        <a href="../alarm/alarmlist.html" >
+                            <i class="menu-icon fa fa-eye"></i>
+                            <span class="menu-text"> 监控管理 </span>   
+                        </a>   
+                    </li>
+                     <!--日志管理-->
+                     <li >
+                        <a href="../platformlog/platformlog.html" >
+                            <i class="menu-icon fa fa-file-text-o"></i>
+                            <span class="menu-text"> 日志管理 </span>   
+                        </a>   
+                    </li>
+                     <!--平台管理-->
+                    <li>
+                        <a href="#">
+                            <i class="menu-icon fa fa-gears"></i>
+                            <span class="menu-text">平台管理</span>
+                        </a>
+                    </li>  
+                </ul>
+                <!-- /Sidebar Menu -->
+            </div>
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="servercluster.html#profile11">我的服务</a>
+                        </li>
+                        <li>
+                       centos
+                        </li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Body -->
+                <div class="page-body">
+                   <input id="service-app-id" type="hidden" value="">
+                   <input id="service-marathon-name" type="hidden" value="">
+                   <input id="service-zk-hosts" type="hidden" value="">
+                   <div class="row">
+                   	<div class="col-sm-12">
+					 <div class="well">
+					 	<div class="row">
+                       <div class="col-lg-2 col-md-2 col-sm-12">
+                       	<img class="header-avatar" src="../../assets/img/img/mysql.jpg" id="imgAvatarSrc">
+                       </div> 
+
+                       <div class="col-lg-10 col-md-10 col-sm-12 no-padding-left ">
+                       <div class="col-lg-7 col-md-6 col-sm-6  col-xs-12"><h2 id="service-name">Mysql</h2></div>
+                       <div class="col-lg-5 col-md-6 col-sm-6  col-xs-12 text-right">
+                         <a class="btn btn-azure" href="#" data-toggle="modal" data-target="#modal-info"><i class="fa  fa-keyboard-o"></i>服务重启</a>
+                       	<a class="btn btn-azure"><i class="fa  fa-pause"></i>服务停止</a>
+                       	 <div class="btn-group">
+                                    <a class="btn  btn-azure" href="javascript:void(0);"><i class="fa fa fa-th"></i>更多操作</a>
+                                    <a class="btn  btn-azure  dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><i class="fa fa-angle-down"></i></a>
+                                    <ul class="dropdown-menu">
+                                       
+                                        <li>
+                                            <a href="javascript:updateMysql();"><i class="padding-right-10 fa fa-arrow-up"></i>Websh</a>
+                                        </li>
+                                        <!-- <li>
+                                            <a href="javascript:scaleService();"><i class="padding-right-10 fa fa-exchange"></i>扩缩容</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="javascript:deleteMysql();"><i class="padding-right-10 fa fa-trash-o"></i>删除服务</a>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                       </div>
+                       
+                       <div class="col-sm-12">
+                      
+                       <div class="col-sm-3 no-padding-left"><strong class="padding-right-10">状态：</strong><span id="service-status" class="label label-sm label-success" >运行</span></div>
+                       <div class="col-sm-6">
+                       	 <strong>配置:</strong>
+                         
+                         <span class="padding-left-10">CPU(核):</span><span class="padding-left-5" id="service-cpus" >2</span>
+                         <span class="padding-left-10">内存(MB):</span><span class="padding-left-5" id="service-mem">250</span>
+                       	 <span class="padding-left-10">容器数：</span><span class="padding-left-5" id="service-inst-num">250</span>
+                       	
+                       </div>  
+                       </div>
+                       
+                       <div class="col-sm-12  margin-top-10">
+                       	<div class="col-sm-3 no-padding-left">
+                       	<strong>访问地址：</strong><span class="padding-left-5" id="service-ip">192.168.1.13</span>
+                       </div>
+                        <div class="col-sm-6">
+                          <strong>版本信息:</strong><span class="padding-left-5" id="service-image">20.26.17.137:5000/zookeeper:NODE-3</span> 
+                        </div>
+                       </div>
+                       
+                        <div class="col-sm-12  margin-top-10">
+                       	<div class="col-sm-3 no-padding-left">
+                       	<strong>用户名：</strong><span class="padding-left-5" id="service-username">192.168.1.13</span>
+                       </div>
+                        <div class="col-sm-4">
+                          <strong>密码:</strong><span class="padding-left-5" id="service-password">20.26.17.137:5000/zookeeper:NODE-3</span> 
+                        </div> 
+                       </div>
+                       </div>
+                       </div>
+                     </div>		
+		            </div>
+                	  
+                	  <div class="col-sm-12">
+                	  	<div class="well">
+                	  		<div class="tabbable">
+                                <ul class="nav nav-tabs tabs-flat" id="myTab11">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#tab1">
+                                                                                                                      监控信息
+                                        </a>
+                                    </li>
+                                  
+                                    <li >
+                                        <a data-toggle="tab" href="#tab3">
+                                                                                                                       容器列表
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content tabs-flat">
+                                    <div id="tab1" class="tab-pane active">
+                                        <p class="text-right">
+                                        	<a id="day-query" class="btn btn-default">一天</a>
+                                        	<a id="week-query" class="btn btn-default">一周</a>
+                                        	<a id="month-query" class="btn btn-default">一月</a>
+                                        </p>
+                                    <div class="row">   
+                                    <div class="col-sm-12">
+                                       <div class="panel">
+                                       	<div class="panel-body">
+                                        <div id="CPUused" style="height:260px;" class="col-sm-12"></div> 
+                                        </div>
+                                    </div>
+                                    </div>
+                                    
+                                     <div class="col-sm-12">
+                                       <div class="panel">
+                                       	<div class="panel-body">
+                                          <div id="MemUsed" style="height:260px;" class="col-sm-12"></div> 
+                                        </div>
+                                    </div>
+                                    </div>
+                                    
+                                     <div class="col-sm-12">
+                                       <div class="panel">
+                                       	<div class="panel-body">
+                                          <div id="MySQLConnect" style="height:260px;" class="col-sm-12"></div> 
+                                        </div>
+                                    </div>
+                                    </div>
+                                    
+                                    </div> 
+                                    
+                                   </div>
+                           
+                                    
+                          <div id="tab3" class="tab-pane">
+                             <table id="service-containers-table" class="table table-bordered table-hover">
+                            </table>          
+                          </div>
+                                    
+                                </div>
+                            </div>
+                	  	</div>
+                	  </div>
+                	</div>
+                	
+                  </div>
+                </div>
+              </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+        </div>
+        <!-- /Page Container -->
+        <!-- Main Container -->
+        
+        
+        <div id="modal-info" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question">？</div>  
+                </div>
+                <div class="modal-body">确定要将密码重置为123456789？</div>
+                <div class="modal-footer">
+                    <button id="reset-mysql-password" type="button" class="btn btn-info" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+        </div>
+
+        <div id="delete-mysql-modal" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question">？</div>  
+                </div>
+                <div class="modal-body">确定要删除该服务吗？</div>
+                <div class="modal-footer">
+                    <button id="delete-mysql" type="button" class="btn btn-info" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+        </div>
+        
+        <div class="modal modal-info fade" id="doScaleService" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">手动扩缩</h4>
+                </div>
+                <div class="modal-body">
+                	<form>
+                    <div class="form-group">
+                   <div class="form-title margin-left-20">
+                                    当前实例数<span class="blue padding-left-5" id="curentinstance">1</span>，可扩展最大实例数<span class="blue padding-left-5">10</span>
+                   </div>
+                   <div class="row">
+                   	<div class="form-group">
+                    <label class="col-sm-2 control-label margin-left-20 padding-top-10 text-align-right">目标实例数</label>
+                   <div class="col-sm-9 margin-top-10">
+                    	<div class="col-sm-8 no-padding-left">
+                    	 	<div id="slider-move" name="slider_value" class="slider-xs noUi-target noUi-ltr noUi-horizontal noUi-connect"></div>	
+                    	</div>
+                        <div class="col-sm-2  no-padding-right" style="margin-top:-10px">
+                    		<input type="text" class="form-control" value="4" id="slider-value" onkeyup="change(this)">
+	                    </div>
+	                     <div class="col-sm-2" style="margin-top:-5px">
+	                    	<p class="no-padding-left">个</p>
+	                    </div>
+                    </div>    
+                </div>
+                </div>
+                </div>
+                </form></div>
+                
+                <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button name="confirm" type="button" class="btn btn-azure" data-dismiss="modal">确定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+    <!--提示框-->
+    <div class="modal in" id="MsgAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 id="MsgAlertTitle"></h4>
+          </div>
+          <div class="modal-body">
+            <h6 id="MsgAlertContent"></h6>
+          </div>
+          <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--确认取消提示框-->
+    <div class="modal in" id="ConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 id="ConfirmTitle"></h4>
+          </div>
+          <div class="modal-body">
+            <h6 id="ConfirmContent"></h6>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button name="confirm" class="btn btn-default" data-dismiss="modal" aria-hidden="true">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--确认取消提示框-->
+    <div class="modal in" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 >版本升级:</h4>
+          </div>
+          <div class="modal-body">
+                <label class="col-sm-2"><h6>升级版本:</h6></label> 
+                <label class="col-sm-6">
+                  <select id="mysql-version-select" class="form-control">
+                    <option value="mysql-3">mysql-3</option>
+                    <option value="mysql-5">mysql-5</option>
+                  </select>
+                </label>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button name="confirm" class="btn btn-default" data-dismiss="modal" aria-hidden="true">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--删除成功提示框-->
+    <div class="modal in" id="alert-delete-success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4>提示:</h4>
+          </div>
+          <div class="modal-body">
+            <h6>删除服务成功！</h6>
+          </div>
+          <div class="modal-footer">
+          <button id="confirm-delete-success" class="btn btn-default" data-dismiss="modal" aria-hidden="true">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 忙等待 -->
+    <div class="modal in" id="tips" style="display:none">
+    	<div class="modal-dialog">
+    		<div class="modal-content">
+    			<div class="modal-body" style="font-size:15px;font-weight:bold;margin-top:250px">
+    				<span></span><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+    				<span class="sr-only"></span>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+
+    </div>
+
+    <!--Basic Scripts-->
+    <script src="../../assets/js/jquery-2.0.3.min.js"></script>
+    <script src="../../assets/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/echarts.common.min.js"></script>
+    <script src="../../assets/js/slider/jquery.nouislider.js"></script>
+    <script src="../../assets/js/bootstrap-table/bootstrap-table.js"></script>
+    <script src="../../assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+    <script src="js/service.js"></script>
+    <script type="text/javascript">
+        initServiceInfo();
+        bindResetMysqlPasswd();
+        bindConfirmDelMysql();
+        bindDateQueryBtns();
+        bindContainersBtn();
+    </script>
+
+    <script type="text/javascript">
+        setTimeout(function(){
+                     $('#day-query').click();
+                   },1000);
+    </script>
+    
+</body>
+<!--  /Body -->
+</html>

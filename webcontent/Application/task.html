@@ -1,0 +1,542 @@
+<link href="assets/css/bootstrap-select.min.css" rel="stylesheet"/>
+<link href="assets/css/dataTables.bootstrap.css" rel="stylesheet"/>
+<link href="assets/css/bootstrap-table.min.css" rel="stylesheet"/>
+<link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+<link href="assets/css/dashboard.css" rel="stylesheet" type="text/css"/>
+<!--main.css-->
+
+<link href="assets/css/dist.css" rel="stylesheet" type="text/css"/>
+
+<!-- /Head -->
+<!-- Body -->
+<!-- Page Breadcrumb -->
+<div class="page-breadcrumbs breadcrumbs-fixed">
+    <ul class="breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            SDDCOS
+        </li>
+        <li>业务系统</li>
+    </ul>
+</div>
+<!-- /Page Breadcrumb -->
+
+<!-- Page Body -->
+<div class="page-body">
+    <!--<div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert"-->
+         <!--style="display:none;">-->
+        <!--<button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span-->
+                <!--aria-hidden="true">&times;</span></button>-->
+        <!--<span id="warningMsg"></span>-->
+    <!--</div>-->
+
+    <!--<div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert"-->
+         <!--style="display:none;">-->
+        <!--<button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span-->
+                <!--aria-hidden="true">&times;</span></button>-->
+        <!--<span id="successMsg"></span>-->
+    <!--</div>-->
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="widget">
+                <div class="widget-header bg-lightinfo ">业务系统管理可以查看任务的状态，创建任务，以及对任务做些流程处理</div>
+                <div class="widget-body">
+
+                    <div class="col-sm-6 no-padding-left margin-bottom-10" >
+                        <div class="hidden" id="createBuiness">
+                        <a class="btn btn-default" onclick="fnCreateBusiness()" ><i class="fa fa-plus"></i>创建业务系统</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 no-padding-right margin-bottom-10">
+                        <input id="sys-search-input" class="form-control" placeholder="请输入业务系统名称" onchange="fnSearch(this)" autocomplete="off"/>
+                    </div>
+                    <div id="bussinessSearchBar">
+                    <table class="table  table-hover table-bordered" id="businessTable">
+                        <!--<thead style="background-color:#eee">
+                        <tr role="row">
+                            <th>业务系统</th>
+                            <th>一级域</th>
+                            <th>二级域</th>
+                            <th style="width:300px"> 操作 </th>
+                        </tr>
+                        </thead>-->
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Page Body -->
+
+<!--  创建系统 -->
+<div class="modal" id="creatproject" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+     showorhide="hide" style="display: none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " style="width:600px">
+        <div class="modal-content form-horizontal">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myLargeModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label no-padding-right">业务系统名称<span class="red padding-left-5">*</span></label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="businessName" name="businessName"
+                               onblur="fnAppNameUnique();" oninput="fnAppNameNotEmpty()"><span id="businessNameCheck"
+                                                                 class="icon-sever hidden bncTop"><i
+                            class="fa fa-check-square-o" style="font-size:18px"></i></span>
+                        <span class="red"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label no-padding-right">一级域<span class="red padding-left-5">*</span></label>
+                    <div class="col-sm-9">
+                        <select class="firstResourceDomain" name='selectcheck' style="width:100%">
+                        </select>
+                        <span class="red"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label no-padding-right">二级域<span class="red padding-left-5">*</span></label>
+                    <div class="col-sm-9">
+                        <select class="secondResourceDomain" name='selectcheck' style="width:100%">
+                        </select>
+                        <span class="red"></span>
+                    </div>
+                </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">甲方人员<span class="red padding-left-5">*</span></label>
+                        <div class="col-sm-9">
+                            <select class= "ownerDomian" name='selectpick' style="width:100%;max-height: 200px" id='selectpick'>
+                            </select>
+                            <span class="red"></span>
+                        </div>
+                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<label class="col-sm-2 control-label no-padding-right">维护人</label>-->
+                        <!--<div class="col-sm-9">-->
+                            <!--<select class="selectpicker form-control" multiple   title="请选择维护人"-->
+                                    <!--data-actions-box="true" data-live-search="true" name="admin_object" id="admin_object">-->
+                                <!--<option></option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">cpu</label>
+                    <div class="col-sm-9 margin-top-10">
+                        <div class="col-sm-3 no-padding-left  " style="margin-top:-10px">
+                            <input type="text" class="form-control" value="0" id="CPU" onkeyup="change(this)"/>
+                            <span class="red"></span>
+                        </div>
+                        <div class="col-sm-8 no-padding-right" style="margin-top: -10px;">
+                            <div id="sample-onehandle" class="slider-xs" name="CPU" color="blue" disabled>
+
+                            </div>
+                            <p style="margin-top: -10px;"></p>
+                        </div>
+                        <div class="col-sm-1" style="margin-top:-5px">
+                            <p class="no-padding-left">核</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">内存</label>
+                    <div class="col-sm-9 margin-top-10">
+                        <div class="col-sm-3  no-padding-left" style="margin-top: -10px;">
+                            <input type="text" class="form-control" value="0" id="mem" onkeyup="change(this)"/>
+                            <span class="red"></span>
+                        </div>
+                        <div class="col-sm-8 no-padding-right" style="margin-top: -10px;">
+                            <div id="sample-onehandle2" class="slider-xs" name="mem" disabled></div>
+                            <p style="margin-top:-10px;"></p>
+                        </div>
+                        <div class="col-sm-1" style="margin-top:-5px">
+                            <p class="no-padding-left">GB</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">磁盘</label>
+                    <div class="col-sm-9 margin-top-10">
+                        <div class="col-sm-3  no-padding-left" style="margin-top: -10px;">
+                            <input type="text" class="form-control" value="0" id="disk" onkeyup="change(this)"/>
+                            <span class="red"></span>
+                        </div>
+                        <div class="col-sm-8 no-padding-right" style="margin-top: -10px;">
+                            <div id="sample-onehandle3" class="slider-xs" name="disk" disabled></div>
+                            <p style="margin-top:-10px"></p>
+                        </div>
+
+                        <div class="col-sm-1" style="margin-top:-5px">
+                            <p class="no-padding-left">GB</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer" id="modalSelect">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-azure" onclick="fnCreateBusinessSys();" id="createButton" disabled>
+                    创建
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!--  修改系统 -->
+<div class="modal fade" id="updateproject" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true" showorhide="hide" style="display: none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " style="width:600px">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myLargeModalLabel1">修改业务系统</h4>
+            </div>
+            <form id="accountForm1" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">业务系统名称<span class="red padding-left-5">*</span></label>
+                        <div class="col-sm-9">
+                            <span id="saveIdSpan" hidden></span>
+                            <input type="text" class="form-control" id="businessName1" name="businessName1"
+                                   onblur="fnUpdateNameUnique();" oninput="fnUpdateCheckNotempty()"><span id="businessNameCheck1"
+                                                                        class="icon-sever hidden bncTop"><i
+                                class="fa fa-check-square-o" style="font-size:18px"></i></span>
+                            <span class="red"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">一级域<span class="red padding-left-5">*</span></label>
+                        <div class="col-sm-9">
+                            <select class="firstResourceDomain" name='selectcheck' style="width:100%">
+                            </select>
+                            <span class="red"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">二级域<span class="red padding-left-5">*</span></label>
+                        <div class="col-sm-9">
+                            <select class="secondResourceDomain" name='selectcheck' style="width:100%">
+                            </select>
+                            <span class="red"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">甲方人员<span class="red padding-left-5">*</span></label>
+                        <div class="col-sm-9">
+                            <div class="input-group" id="typeInput">
+                                <input type="text" class="form-control" id="dataTypei"  disabled>
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" id="switcher" type="button" onclick="closeInputSelect();">
+                                  <i class="fa fa-remove"></i>
+                                </button>
+                              </span>
+                            </div>
+                            <div class="hidden" id="typeSelect">
+                                <div class="col-sm-11" style="padding: 0px">
+                                    <select class= "ownerDomian1" name='selectpick1' style="width:100% max-height: 200px;display: inline-block;" id='selectpick1'></select>
+                                </div>
+                                <div class="col-sm-1" style="padding: 0px">
+                                    <span class="input-group-btn">
+                                    <button class="btn btn-default" id="switcher1" type="button" onclick="closeSelect();" style="height: 32px;width: 37px;">
+                                      <i class="fa fa-remove"></i>
+                                    </button>
+                              </span>
+                                </div>
+
+                            </div>
+                            <span class="red"></span>
+                        </div>
+                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<label class="col-sm-2 control-label no-padding-right">维护人</label>-->
+                        <!--<div class="col-sm-9">-->
+                            <!--<select class="selectpicker form-control" multiple   title="请选择维护人"-->
+                                    <!--data-actions-box="true" data-live-search="true" name="admin_object" id="admin_object1">-->
+                                <!--<option></option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">cpu</label>
+                        <div class="col-sm-9 margin-top-10">
+                            <div class="col-sm-3 no-padding-left  " style="margin-top:-10px">
+                                <input type="text" class="form-control" value="0" id="CPU1" onkeyup="change(this)"/>
+                                <span class="red"></span>
+                            </div>
+                            <div class="col-sm-8 no-padding-right" style="margin-top: -10px;">
+                                <div id="sample-onehandle1" class="slider-xs" name="CPU1" color="blue" disabled></div>
+                                <p style="margin-top: -10px;"></p>
+                            </div>
+                            <div class="col-sm-1" style="margin-top:-5px">
+                                <p class="no-padding-left">核</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">内存</label>
+                        <div class="col-sm-9 margin-top-10">
+                            <div class="col-sm-3  no-padding-left" style="margin-top:-10px">
+                                <input type="text" class="form-control" value="0" id="mem1" onkeyup="change(this)"/>
+                                <span class="red"></span>
+                            </div>
+                            <div class="col-sm-8 no-padding-right" style="margin-top: -10px;">
+                                <div id="sample-onehandle21" class="slider-xs" name="mem1" disabled></div>
+                                <p style="margin-top: -10px;"></p>
+                            </div>
+                            <div class="col-sm-1" style="margin-top:-5px">
+                                <p class="no-padding-left">GB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">磁盘</label>
+                        <div class="col-sm-9 margin-top-10">
+                            <div class="col-sm-3  no-padding-left" style="margin-top:-10px">
+                                <input type="text" class="form-control" value="0" id="disk1" onkeyup="change(this)"/>
+                                <span class="red"></span>
+                            </div>
+                            <div class="col-sm-8 no-padding-right" style="margin-top: -10px;">
+                                <div id="sample-onehandle31" class="slider-xs" name="disk1" disabled></div>
+                                <p style="margin-top: -10px;"></p>
+                            </div>
+
+                            <div class="col-sm-1" style="margin-top:-5px">
+                                <p class="no-padding-left">GB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer" id="modalSelect1">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-azure" onclick="fnUpdateCheck();" id="updateButton">修改</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+</div>
+
+
+<!-- 删除  -->
+<div id="DeletBusiness" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true"
+     data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/warn.svg"></div>
+            </div>
+            <div class="modal-body"><span class="title1" id="deleteapp"></span></br><span class="title1">确定删除<span id="deletename" class="info"></span>业务系统?</span>
+            </div>
+            <span id="deleteID" class="hidden"></span>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="fnDeleteSys()">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div> <!-- / .modal-content -->
+    </div> <!-- / .modal-dialog -->
+</div>
+
+
+<!--成功提示信息-->
+<div class="modal modal-message modal-info in" id="successmodal" aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding-bottom">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×
+                </button>
+                <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+            </div>
+            <div class="modal-body">
+                <p class="title1">创建成功</p>
+            </div>
+            <div class="modal-footer padding-bottom-20">
+
+                <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--成功提示  -->
+<div class="modal modal-message modal-info fade in" id="tips"  aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+                <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+            </div>
+            <div class="modal-body" >
+                <span id="tipsSpan" class="title1"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--失败提示-->
+
+<div class="modal modal-message modal-info  in" id="failmodal"  aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+            </div>
+            <div class="modal-body" >
+                <p class="title1" id="failtitle"></p>
+                <p id="failInfo"></p>
+
+            </div>
+            <div class="modal-footer padding-bottom-20">
+                <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我了解了！</button>
+
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" id="Containsetting" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true"
+     style="display: none;" data-backdrop="static" data-keyboard="false">
+    <span id="saveSysid" class="hidden"></span>
+    <div class="modal-dialog" style="width:800px">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myLargeModalLabelw">管理维护人</h4>
+            </div>
+            <div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert"
+                 style="display:none;">
+                <button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <span id="warningMsg"></span>
+            </div>
+
+            <div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert"
+                 style="display:none;">
+                <button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <span id="successMsg"></span>
+            </div>
+            <form class="form-horizontal">
+                <div class="modal-body">
+                    <div class="col-sm-5">
+                        <div class="panel panel-default">
+                            <div class="padding-top-10 padding-bottom-10 padding-left-10" style="border-bottom:1px solid #ddd">
+                                请选择业务系统维护人
+                            </div>
+                            <div class="col-sm-12 padding-5" style="border-bottom:1px solid #ddd">
+                                <span class="input-icon">
+                                    <input type="text" class="form-control input-sm" placeholder="输入您要查找的维护人" onkeyup="fnSearch1(this,'#sysname')">
+                                    <i class="glyphicon glyphicon-search blue"></i>
+                                </span>
+
+                            </div>
+                            <div class="panel-body2" style="height:100px">
+                                <ul class="list-unstyled sys-ul" id="sysname" style="height: 50px;list-style:none;">
+
+                                </ul>
+                            </div>
+                            <div class="padding-left-10 padding-top-10" style="border-top:1px solid #ddd">
+                                请选择权限组
+                            </div>
+                            <div class="col-sm-12 padding-5" style="border-bottom:1px solid #ddd">
+                                <span class="input-icon">
+                                    <input type="text" class="form-control input-sm" placeholder="输入您要查找的权限组" onkeyup="fnSearch1(this,'#appname')">
+                                    <i class="glyphicon glyphicon-search blue"></i>
+                                </span>
+
+                            </div>
+
+                            <div class="panel-body2 set" style="height:150px">
+                                <ul class="list-unstyled sys-ul" id="appname">
+
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-align-center" style="margin-top:200px">
+                        <a class="btn btn-default" onclick="addShowGroup()" id="addButton">添加<i
+                                class="fa fa-angle-double-right padding-left-5"></i></a>
+                        <a class="btn btn-default margin-top-10" onclick="cutShowGroup()"><i
+                                class="fa fa-angle-double-left padding-right-5"></i>删除</a>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="panel panel-default">
+                            <div class="padding-top-10 padding-left-10">
+                                现有维护人权限列表
+                            </div>
+                            <div class="col-sm-12 padding-5"  style="border-bottom:1px solid #ddd">
+                                <span class="input-icon">
+                                    <input type="text" class="form-control input-sm" placeholder="输入您要查找的内容" onkeyup="fnSearch1(this,'#showapp')">
+                                    <i class="glyphicon glyphicon-search blue"></i>
+                                </span>
+                            </div>
+
+                            <div class="panel-body2" style="height:290px">
+                                <ul class="list-unstyled sys-ul" id="showapp">
+                                    <!-- <li>台州微信系统</li>
+                                    <li>浙江移动手机营业厅系统</li> -->
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer text-align-right">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-azure" onclick="fnPostAdminData()" >确定</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
+<!--Basic Scripts-->
+<script src="assets/js/jquery-2.0.3.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap-select.js"></script>
+<script src="assets/js/select2/select2.min.js"></script>
+<script src="assets/js/slider/jquery.nouislider.js"></script>
+<!--  <script src="../../assets/js/fuelux/spinner/fuelux.spinner.min.js"></script>-->
+<script src="assets/js/validation/bootstrapValidator.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script src="./webcontent/Application/js/task.js"></script>
+
+

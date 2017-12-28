@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+<!-- Head -->
+<head>
+    <meta charset="utf-8" />
+    <title>Zookeeper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--Basic Styles-->
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--main.css-->
+    <link href="../../assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/dist.css" rel="stylesheet" type="text/css" />
+    
+     
+</head>
+<!-- /Head -->
+<!-- Body -->
+<body>
+    
+    <!-- Navbar -->
+    <div class="navbar  navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="navbar-container">
+                <!-- Navbar Barnd -->
+                <div class="navbar-header pull-left">
+                    <a href="#" class="navbar-brand">
+                        <small>
+                            SDDCOS云平台
+                        </small>
+                    </a>
+                </div>
+                <!-- /Navbar Barnd -->
+
+                <!-- Sidebar Collapse -->
+                <div class="sidebar-collapse" id="sidebar-collapse">
+                    <i class="collapse-icon fa fa-bars"></i>
+                </div>
+                <!-- /Sidebar Collapse -->
+                <!-- Account Area and Settings --->
+                <div class="navbar-header pull-right">
+                    <div class="navbar-account">
+                       <ul class="account-area">
+                            
+                            <li>
+                                <a class="wave in dropdown-toggle" data-toggle="dropdown" title="Help" href="#">
+                                    <i class="icon fa fa-bell-o"></i>
+                                    <span class="badge badge-danger" style="left:20px">3</span>
+                                </a>
+                               
+                               
+                            </li>
+                            
+                            <li>
+                                <a class=" dropdown-toggle" data-toggle="dropdown" title="Help" href="#">
+                                    <i class="icon fa fa-warning"> <span class="font-50">帮助</span> </i>
+                                                                  
+                                </a>
+                                <!--Notification Dropdown-->
+                                <ul class="pull-right dropdown-menu dropdown-arrow dropdown-notifications">
+                                    <li>
+                                        <a href="#">
+                                            <div class="clearfix">
+                                                <div class="notification-icon">
+                                                    <i class="fa fa-calendar-o"></i>
+                                                    <span class="title">版本信息</span>
+                                                    <span class="silver padding-left-5">v3（618）</span>
+                                                </div>
+                                                
+                                                    
+                                                
+                                                
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="clearfix">
+                                                <div class="notification-icon">
+                                                    <i class="fa fa-book"></i>
+                                                     <span class="title">操作手册</span>
+                                                    <span class="silver padding-left-5">V3.0</span>
+                                                </div>
+                                              
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="clearfix">
+                                                <div class="notification-icon">
+                                                    <i class="fa fa-phone"></i>
+                                                </div>
+                                                <div class="notification-body">
+                                                    <span class="title">值班电话</span>
+                                                    <span class="description">13588982424/0571-665594</span>
+                                                </div>
+                                               
+                                            </div>
+                                        </a>
+                                    </li>
+                                  
+                                </ul>
+                                <!--/Notification Dropdown-->
+                            </li>
+
+                          
+                            <li>
+                                <a class=" dropdown-toggle" data-toggle="dropdown" title="Help" href="#">
+                                    <span class="icon font-50">云管理员</span> 
+                                                                  
+                                </a>
+                                <!--Login Area Dropdown-->
+                                <ul class="pull-right dropdown-menu dropdown-arrow dropdown-notifications">
+                                   
+                                  <li class="edit">
+                                        <a href="" class="dropdown-toggle"  data-toggle="dropdown"><i class="fa fa-key padding-right-5 font-120"></i>更改密码</a>
+                                      
+                                    </li>
+                                    
+                                  
+                                    <!--/Theme Selector Area-->
+                                    <li class="edit">
+                                        <a href="login.html">
+                                      <i class="fa fa-sign-out padding-right-5 font-120"></i>退出
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!--/Login Area Dropdown-->
+                            </li>
+                           
+                          
+                        </ul>
+                       
+                    </div>
+                </div>
+                <!-- /Account Area and Settings -->
+            </div>
+        </div>
+    </div>
+    <!-- /Navbar -->
+    <!-- Main Container -->
+    <div class="main-container container-fluid">
+        <!-- Page Container -->
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            <div class="page-sidebar sidebar-fixed" id="sidebar">
+                <!-- Page Sidebar Header-->
+               
+                <!-- Sidebar Menu -->
+              <ul class="nav sidebar-menu">
+                    <!--Dashboard-->
+                    <li >
+                        <a href="../../index.html">
+                            <i class="menu-icon fa fa-dashboard"></i>
+                            <span class="menu-text"> Dashboard </span>
+                        </a>
+                    </li>
+                    <!--应用管理-->
+                    <li >
+                        <a href="../Application/applist.html">
+                            <i class="menu-icon fa fa-codepen"></i>
+                            <span class="menu-text"> 应用管理</span>
+                        </a>
+                    </li>
+                     <!--集群管理-->
+                    <li >
+                        <a href="../cluster/clusterlist.html">
+                            <i class="menu-icon fa fa-th"></i>
+                            <span class="menu-text"> 集群管理 </span>
+                        </a>
+                    </li>
+                    <!--镜像管理-->
+                    <li >
+                        <a href="../image/harborlist.html" >
+                            <i class="menu-icon fa fa-clone"></i>
+                            <span class="menu-text"> 镜像管理 </span>
+                           
+                        </a>  
+                    </li>
+                    <!--服务集成-->
+                    <li class="active">
+                        <a href="servercluster.html">
+                            <i class="menu-icon fa fa-tasks"></i>
+                            <span class="menu-text"> 服务集成 </span> 
+                        </a>
+
+                      
+                    </li>
+                    <!--网络管理-->
+                    <li >
+                        <a href="../Network/Network.html">
+                            <i class="menu-icon fa fa-ravelry"></i>
+                            <span class="menu-text"> 网络管理</span> 
+                        </a>
+
+                    </li>
+                    <!--存储管理-->
+                    <li>
+                        <a href="../Volume/Volume.html" >
+                            <i class="menu-icon fa fa-hdd-o"></i>
+                            <span class="menu-text"> 存储管理 </span>   
+                        </a>
+
+                        
+                    </li>
+                     <!--平台管理-->
+                    <li>
+                        <a href="#">
+                            <i class="menu-icon fa fa-gears"></i>
+                            <span class="menu-text">平台管理</span>
+                        </a>
+                    </li>  
+                </ul>
+                <!-- /Sidebar Menu -->
+            </div>
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                    	
+                        <li>
+                           
+                       <a href="servercluster.html"> 服务集成</a>
+                        </li>
+                         
+                        <li class="active">Zookeeper</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Body -->
+                <div class="page-body">
+                	<div class="row">	
+                	   <div class="col-sm-12">
+                		  <div class="widget">
+                            <div class="widget-header bg-lightinfo margin-bottom-10">
+                                <span >ZooKeeper是一个分布式的，开放源码的分布式应用程序协调服务，是Google的Chubby一个开源的实现，是Hadoop和Hbase的重要组件。它是一个为分布式应用提供一致性服务的软件，提供的功能包括：配置维护、域名服务、分布式同步、组服务等。</span>
+                            </div>
+                            <div class="widget-body padding-30">
+                              <div>
+                                 <form id="accountForm" method="post" class="form-horizontal bv-form" novalidate="novalidate" role="form">
+                                  <div class="form-group">
+                                            <label  class="col-sm-2 control-label ">服务名称</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control"   name="fullName" data-bv-field="fullName">   
+                                            </div>
+                                   </div>
+                                   <div class="form-group">
+                                           <label  class="col-sm-2 control-label">选择节点数</label>
+                                            <div class="col-sm-8">
+                                               <select class="form-control">
+                                       	    <option >3</option>
+                                       	    <option >5</option>
+                                            </select>  
+                                            </div> 
+                                     </div>
+                                        <div class="form-group">
+                                           <label  class="col-sm-2 control-label ">选择版本</label>
+                                        <div class="col-sm-8 no-padding-left">
+                                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 list-jd">
+                                        	<a class="jd" href="#">
+                                        	<div class="panel panel-default active">
+                                        		<div class="panel-heading text-center font-140">
+                                        			Node-3
+                                        		</div>
+                                        		<div class="panel-body text-center">
+                                        			<img src="../../assets/img/img/zk1.png"></img>
+                                        		</div>
+                                        		</div>
+                                        	</a>
+                                         </div>
+                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 list-jd">
+                                           <a class="jd" href="#">
+                                        	<div class="panel panel-default">
+                                        		<div class="panel-heading text-center font-140">
+                                        			Node-5
+                                        		</div>
+                                        		<div class="panel-body text-center">
+                                        			<img src="../../assets/img/img/zk1.png"></img>
+                                        		</div>
+                                        		</div>
+                                        	</a>
+                                        </div>   
+                                        </div> 
+                                        </div>
+                                        
+                                        
+                                         <div class="form-group">
+                                            <label  class="col-sm-2 control-label">端口</label>
+                                            <div class="col-sm-8">
+                                                 <input type="text" class="form-control" placeholder="0-65535" name="fullName" data-bv-field="fullName"/>
+                                                 <p class="help-block">默认端口为2181，用户可自行输入，仅支持输入4位数以上的数字</p>
+                                            </div>    
+                                        </div> 
+                                        
+                                        
+                                      
+                                         <div class="form-group">
+                                            <label  class="col-sm-2 control-label">CPU</label>
+                                            <div class="col-lg-9 col-md-10 col-sm-10 col-xs-10  col-xs-10">
+                                              <a class="btn btn-info">2C</a>
+                                              <a class="btn btn-default">3C</a>
+                                              <a class="btn btn-default">4C</a>
+                                              <a class="btn btn-default">5C</a>
+                                              <a class="btn btn-default">6C</a>
+                                              <a class="btn btn-default">7C</a>
+                                              <a class="btn btn-default">8C</a>
+                                              <a class="btn btn-default">9C</a>
+                                              <a class="btn btn-default">10C</a>
+                                              <a class="btn btn-default">11C</a>
+                                              <a class="btn btn-default">12C</a>
+                                            </div>    
+                                        </div>
+                                        
+                                         <div class="form-group">
+                                            <label  class="col-sm-2 control-label">内存</label>
+                                           <div class="col-sm-9 margin-top-10">
+                                            	<div class="col-sm-8 no-padding-left">
+                                            		  <div id="sample-onehandle" class="slider-xs"></div>
+                                            	</div>
+                                                <div class="col-sm-2  no-padding-right" style="margin-top:-10px">
+                                            	<input type="text" class="form-control" placeholder="40000"/>
+                                            </div>
+                                             <div class="col-sm-2" style="margin-top:-5px">
+                                            	<p class="no-padding-left">MB</p>
+                                            </div>
+                                            </div>    
+                                        </div>     
+                                        
+                                      <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-8 padding-bottom-30">
+                                            <button type="submit" class="btn btn-azure btn-block" disabled="disabled">确定</button>
+                                        </div>
+                                      </div> 
+                                      
+                                  </form>
+                                </div>
+                            </div>
+                        </div>
+		          </div>   
+              </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+        </div>
+        <!-- /Page Container -->
+        <!-- Main Container -->
+
+    </div>
+
+    <!--Basic Scripts-->
+    <script src="../../assets/js/jquery-2.0.3.min.js"></script>
+    <script src="../../assets/js/bootstrap.min.js"></script>
+
+  
+    
+    <script src="../../assets/js/validation/bootstrapValidator.js"></script>
+
+    <script src="../../assets/js/datetime/bootstrap-datepicker.js"></script>
+    <script src="../../assets/js/slider/jquery.nouislider.js"></script>
+   
+ 
+    <script>
+    	  $("#sample-onehandle").noUiSlider({
+            range: [20, 100],
+            start: 4,
+            step: 20,
+            handles: 1,
+            connect: "lower",
+            serialization: {
+                to: [$("#low"), 'html']
+            }
+        });
+    </script>
+    
+     <script>
+        $(document).ready(function () {
+
+            $("#registrationForm").bootstrapValidator();
+
+            $('#togglingForm').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                submitHandler: function (validator, form, submitButton) {
+                    // Do nothing
+                },
+                fields: {
+                    firstName: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The first name is required'
+                            }
+                        }
+                    },
+                    lastName: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The last name is required'
+                            }
+                        }
+                    },
+                    company: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The company name is required'
+                            }
+                        }
+                    },
+                    // These fields will be validated when being visible
+                    job: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The job title is required'
+                            }
+                        }
+                    },
+                    department: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The department name is required'
+                            }
+                        }
+                    },
+                    mobilePhone: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The mobile phone number is required'
+                            },
+                            digits: {
+                                message: 'The mobile phone number is not valid'
+                            }
+                        }
+                    },
+                    // These fields will be validated when being visible
+                    homePhone: {
+                        validators: {
+                            digits: {
+                                message: 'The home phone number is not valid'
+                            }
+                        }
+                    },
+                    officePhone: {
+                        validators: {
+                            digits: {
+                                message: 'The office phone number is not valid'
+                            }
+                        }
+                    }
+                }
+            })
+            .find('button[data-toggle]')
+            .on('click', function () {
+                var $target = $($(this).attr('data-toggle'));
+                // Show or hide the additional fields
+                // They will or will not be validated based on their visibilities
+                $target.toggle();
+                if (!$target.is(':visible')) {
+                    // Enable the submit buttons in case additional fields are not valid
+                    $('#togglingForm').data('bootstrapValidator').disableSubmitButtons(false);
+                }
+            });
+
+
+            $('#accountForm').bootstrapValidator({
+                // Only disabled elements are excluded
+                // The invisible elements belonging to inactive tabs must be validated
+                excluded: [':disabled'],
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                submitHandler: function (validator, form, submitButton) {
+                    // Do nothing
+                },
+                fields: {
+                    fullName: {
+                        validators: {
+                            notEmpty: {
+                                message: '服务名称不允许为空'
+                            }
+                        }
+                    },
+                    company: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The company name is required'
+                            }
+                        }
+                    },
+                    address: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The address is required'
+                            }
+                        }
+                    },
+                    city: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The city is required'
+                            }
+                        }
+                    }
+                }
+            });
+
+            $('#html5Form').bootstrapValidator();
+        });
+    </script>
+   
+   
+</body>
+<!--  /Body -->
+</html>

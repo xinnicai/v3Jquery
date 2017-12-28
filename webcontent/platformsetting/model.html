@@ -1,0 +1,316 @@
+
+    <!--Basic Styles-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+    <!--main.css-->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+     <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+     <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+      <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+
+
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+                <!-- Page Breadcrumb title="Help"-->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                        <li>        
+                            <a class=" dropdown-toggle" data-toggle="dropdown"  href="#">
+                           <span>平台配置 <i class="fa fa-sort-desc"></i> </span>  </a>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <a href="#/webcontent/platformsetting/setting.html">用户管理</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/roleManage.html" >角色管理</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/note_info.html" >公告信息</a>
+                            </li>
+
+                            <li>
+                              <a href="#/webcontent/platformsetting/appReport.html" >统计报表</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/menuManage.html" >菜单管理</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/baseData.html" >字典维护</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/model.html" >功能列表</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/quotas.html" >配额管理</a>
+                            </li>
+                            <li>
+                              <a href="#/webcontent/platformsetting/Plug-In/market.html" >插件市场</a>
+                            </li>
+                              <li>
+                                  <a href="#/webcontent/platformsetting/powerGroupManage.html" >权限组管理</a>
+                              </li>
+                            <!-- <li>
+                               <a href="javascript:void(0);">插件市场</a>
+                           </li>-->
+                          </ul>
+                        </li>
+                        <li>功能列表</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                
+                <!-- Page Body -->
+                <div class="page-body">
+                <div id="sessionExpiredAlertBlock" class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		     			<span>会话失效，请重新登录! <a class="btn btn-danger" href="/iMonitor/login.jsp">登录</a></span>
+					</div>
+			
+					<div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			     		<span id="warningMsg"></span>
+					</div>
+				
+					<div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				     	<span id="successMsg"></span>
+					</div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                        <div class="widget">
+                        	<div class="widget-header bg-lightinfo">
+                        		功能列表可以对功能进行新增/编辑/删除等管理
+                        	</div>
+                        	<div class="widget-body">
+                        		
+                        		<div class="col-sm-6 no-padding-left margin-bottom-10">
+                        			<a class="btn btn-default" onclick="fnCreateDataModal1()" data-target="#creatDataModal"><i class="fa fa-plus"></i>新增功能</a>
+                        			
+                        			
+                        	
+                        		</div>
+                        		<!-- <div class="col-sm-6 no-padding-right margin-bottom-10">
+                        			<input class="form-control" placeholder="search..." type="text" id="searchUser" onkeyup="fnSearch(this)"/>
+                        	
+                        		</div> -->
+                        		<table class="table  table-hover table-bordered" id="editabledatatable">
+                                        <thead>
+                                            <tr>
+                                                <th>对象别称</th>
+                                                <th> 对象路径</th>
+                                                 
+                                                  <th>操作</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                            	<td>服务重启</td>
+                                                <td>icloudAjax/restartService.dox</td>
+                                                <td>
+                                                <a class="btn btn-sm btn-default" data-toggle="modal" data-target="#resetPasswd"><i class="fa fa-keyboard-o"></i>编辑</a>
+                                                	<a class="btn btn-sm btn-default" data-toggle="modal" data-target="#DeleteUser"><i class="fa fa-trash-o"></i>删除</a>
+                                                </td>
+                                            </tr>
+                                           
+                                        </tbody>
+                                    </table>	
+                                   
+                        	</div>
+                        </div>  
+                        
+                          
+                   
+                    </div>
+                  
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+
+        <!-- /Page Container -->
+        <!-- Main Container -->
+     
+
+    
+   <!--  创建 -->
+     <div class="modal fade" id="creatDataModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+     data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">新增功能</h4>
+                </div>
+                 <form id="accountForm" method="post"  novalidate="novalidate" class="form-horizontal">
+                 
+                <div class="modal-body">
+
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">对象别称</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="objname" id="objname">
+                                <!-- <p class="help-block">由字母跟汉字组合.</p> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">对象路径</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control"  name="objurl" id="objurl"> 
+                            </div>
+                        </div>
+                    <div class="form-group" id="checkBlock">
+                        <label  class="col-sm-2 control-label no-padding-right ">功能类型</label>
+                        <div class="col-sm-7 ">
+                            <div class="col-lg-6 col-sm-6 col-xs-6 ">
+                                <div class="radio">
+                                    <label>
+                                        <input name="checkRadio" type="radio" class="colored-blue" aaaa="icloud" checked required="false">
+                                        <span class="text">平台</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-6 ">
+                                <div class="radio">
+                                    <label>
+                                        <input name="checkRadio" type="radio" class="colored-blue" aaaa="interface" required="false">
+                                        <span class="text">接口</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    </div>
+               
+                  <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure"  id="createUser1">创建</button>
+                </div>
+                 
+                </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+        
+      <!--  编辑  -->
+        <div class="modal fade" id="updateDataModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+        data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="LargeModalLabel">编辑功能</h4>
+                    <span class="hidden" id="basedataid"></span>
+                </div>
+                 <form id="updateForm" method="post"  novalidate="novalidate" class="form-horizontal">
+                 
+                <div class="modal-body">
+                     
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">对象别称</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="objname" id="objname_U">
+                                <!-- <p class="help-block">由字母跟汉字组合.</p> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">对象路径</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control"  name="objurl" id="objurl_U"> 
+                            </div>
+                        </div>   
+                    </div>
+               
+                  <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure"  id="createUser">更新</button>
+                </div>
+                 
+                </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+        
+        
+    <!-- 删除 用户 -->
+     <div id="DeleteData" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true" 
+      data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+                </div>
+                <div class="modal-body">确定要删除?</div>
+                <span id="deleteID" class="hidden"></span>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="deleteData()">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal" >取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+    <!--成功提示信息-->
+    <div class="modal modal-message modal-info in" id="successmodal"  aria-hidden="true"
+         style="display:none;" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header no-padding-bottom">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+            <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+          </div>
+          <div class="modal-body" >
+            <div class="title1" id="successTitle"></div>
+
+          </div>
+          <div class="modal-footer padding-bottom-20">
+
+            <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!--错误失败提示信息-->
+    <div class="modal modal-message modal-info in" id="failmodal"  aria-hidden="true"
+         style="display:none;" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header no-padding-bottom">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+            <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+          </div>
+          <div class="modal-body" >
+            <p class="title1" id="failTitle"></p>
+            <div id="failSpan"></div>
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+     <script src="assets/js/select2/select2.min.js"></script>
+   <script src="assets/js/validation/bootstrapValidator.js"></script>
+  <!--   -->
+   <script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+   <script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+   <script src="./webcontent/platformsetting/js/model.js"></script>
+

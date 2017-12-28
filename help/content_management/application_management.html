@@ -1,0 +1,461 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>应用管理 | DCOS云管理平台 用户手册</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="DCOS云管理平台用户手册涵盖了DCOS云管理平台产品介绍、上线发布、服务启停、资源监控、日志排错和持续集成等，力争简洁清晰地表述DCOS云管理平台产品的相关信息，使用户更加容易方便地使用DCOS云管理平台产品。  ">
+        <meta name="generator" content="GitBook 2.6.6">
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="./gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="./gitbook/images/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="../gitbook/style.css">
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        <link rel="prev" href="../help/content_management/Dashboard.html"/>
+        <link rel="next" href="../help/content_management/cluster_management.html"/>
+        
+    </head>
+    <body>
+            
+    <div class="book"
+        data-level="0"
+        data-chapter-title="应用管理"
+        data-filepath="README.md"
+        data-basepath="."
+        data-revision="Mon Jan 04 2016 19:21:16 GMT+0800 (CST)"
+        data-innerlanguage="">
+    
+	    <div class="book-summary">
+		    <nav role="navigation">
+		        <ul class="summary">
+		        	
+		        <li class="chapter " data-level="1" data-path="index.html">
+		          <a href="../index.html">
+		            <i class="fa fa-check"></i> 
+		            <b>1.</b>
+		                                    平台介绍
+		          </a>
+		          
+		          <ul>
+		          <li class="chapter " data-level="1.1" data-path="platform_introduction/sys_login.html">
+			            <a href="../platform_introduction/sys_login.html">
+			              <i class="fa fa-check"></i>
+			                <b>1.1.</b>
+			                                                        系统登录
+			            </a>
+			          </li>
+			          </ul>
+		        </li>
+		        
+		        
+		        <li class=" chapter" data-level="2." data-path="content_management/index.html">
+		          <a href="../content_management/index.html">
+		            <i class="fa fa-check"></i> 
+		            <b>2.</b>
+		                                    内容管理
+		          </a>
+		          
+		          <ul>
+		          <li class="chapter " data-level="2.1" data-path="content_management/Dashboard.html">
+			            <a href="../content_management/Dashboard.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.1.</b>
+			                Dashboard
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter active" data-level="2.2" data-path="content_management/application_management.html">
+			            <a href="../content_management/application_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.2.</b>
+			                                             应用管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.3" data-path="content_management/cluster_management.html">
+			            <a href="../content_management/cluster_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.3.</b>
+			                                             集群管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.4" data-path="content_management/image_management.html">
+			            <a href="../content_management/image_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.4.</b>
+			                                             镜像管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.5" data-path="content_management/service_integration.html">
+			            <a href="../content_management/service_integration.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.5.</b>
+			                                             服务集成
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.6" data-path="content_management/network_management.html">
+			            <a href="../content_management/network_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.6.</b>
+			                                             网络管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.7" data-path="content_management/volume_management">
+			            <a href="../content_management/volume_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.7.</b>
+			                                             存储管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.8" data-path="content_management/monitoring_management.html">
+			            <a href="../content_management/monitoring_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.8.</b>
+			                                             监控管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.9" data-path="content_management/log_management.html">
+			            <a href="../content_management/log_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.9.</b>
+			                                             日志管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.10" data-path="content_management/policy_management.html">
+			            <a href="../content_management/policy_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.10.</b>
+			                                             策略管理
+			            </a>
+			          </li>
+			          </ul>
+		        </li>
+		        
+		        
+		        <li class="chapter " data-level="3" data-path="platform_management/index.html">
+		          <a href="../platform_management/index.html">
+		            <i class="fa fa-check"></i> 
+		            <b>3.</b>
+		                                    平台管理
+		          </a>
+		          
+		          <ul>
+		          <li class="chapter " data-level="3.1" data-path="platform_management/user_management.html">
+			            <a href="../platform_management/user_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.1.</b>
+			                                                        用户管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.2" data-path="platform_management/role_management.html">
+			            <a href="../platform_management/role_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.2.</b>
+			                                                        角色管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.3" data-path="platform_management/notice_info.html">
+			            <a href="../platform_management/notice_info.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.3.</b>
+			                                                        公告信息
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.4" data-path="platform_management/statistical_statement.html">
+			            <a href="../platform_management/statistical_statement.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.4.</b>
+			                                                        统计报表
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.5" data-path="platform_management/menu_management.html">
+			            <a href="../platform_management/menu_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.5.</b>
+			                                                        菜单管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.6" data-path="platform_management/dictionary_maintenance.html">
+			            <a href="../platform_management/dictionary_maintenance.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.6.</b>
+			                                                        字典维护
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.7" data-path="platform_management/basic_functions.html">
+			            <a href="../platform_management/basic_functions.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.7.</b>
+			                                                        功能列表
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.8" data-path="platform_management/quotas_management.html">
+			            <a href="../platform_management/quotas_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.8.</b>
+			                                                        配额管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.9" data-path="platform_management/plug-in.html">
+			            <a href="../platform_management/plug-in.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.9.</b>
+			                                                        插件市场
+			            </a>
+			          </li>
+			          </ul>
+		        </li>
+		        
+		        
+		       
+		         
+		        
+		        
+		        
+		        <li class="divider"></li>
+		        
+		        <li>
+		          <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+		          Published with GitBook
+		          </a>
+		        </li>
+		        </ul>
+		    </nav>
+	    </div>
+
+	    <div class="book-body">
+	      <div class="body-inner">
+	        <div class="book-header" role="navigation">
+			    <!-- Actions Left -->
+			    
+			    <!-- Title -->
+			    <h1>
+			      <i class="fa fa-circle-o-notch fa-spin"></i>
+			        <a>DCOS云管理平台 用户手册</a>
+			    </h1>
+	        </div>
+	
+	        <div class="page-wrapper" tabindex="-1" role="main">
+	          <div class="page-inner">
+	            <section class="normal" id="section-">
+	          
+	              <h1 id="DCOS云管理平台用户手册">应用管理</h1>
+	              <p>功能介绍：应用管理界面主要为用户提供DCOS系统中所有应用模块的概要信息。</p>
+	              <p>在应用管理列表中，展示了每一个应用的系统名称、模块名称、CPU（核）、内存、容器数、扩缩容策略、状态、创建时间等信息。图2.2</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.2.png" /></p>
+	              <p style="text-align: center;">图2.2</p>  
+	              
+	              <p><b>删除应用：</b>当用户在应用管理列表中选中一个应用模块后，点击操作下的“删除应用”按钮，系统弹出“确定要删除该应用”的选项框，点击“确定”按钮后，即可在系统中删除这个应用。 </p>
+	              <p><b>搜索应用：</b>当用户在应用管理列表右上方的“search”框中，输入应用的信息后，系统即可查找出，所有匹配该信息的应用模块。 </p>
+	              
+	              <h4>应用详情</h4>
+	              <p>在应用管理列表中，选中一个应用模块后，点击所选应用的模块名称，进入应用管理详情页面。</p>
+	              <p>在应用详情页面中，展示了这个应用模块的模块名称、运行状态、运行实例数、应用ID、容器规格、创建时间、镜像地址、弹性扩缩、集群信息等内容。图2.2.1</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.2.1.png"/></p>
+	              <p style="text-align: center;">图2.2.1</p>  
+	              
+	              <h4>应用发布</h4>
+	              <p>用户点击应用详情界面上的“发布”按钮后，系统弹出应用发布的弹窗，弹窗中展示了每个应用版本包的文件名、版本号、文件大小、上传时间、操作者、状态、备注等信息；用户点击“发布”按钮后，即可对这个应用进行发布操作。图2.2.2</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.2.2.png" /></p>
+	              <p style="text-align: center;">图2.2.2</p>  
+	              
+	              <h4>创建新版本-应用上传</h4>
+	              <p>用户在“应用发布”的弹窗中，点击“创建新版本”的按钮后，系统弹出“创建版本”的弹窗，弹窗中展示了当前应用的程序包来源方式，用户可以选择“服务器下载”方式或是“本地上传”方式，上传一个程序文件。图2.2.3-1</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.3-1.png" width="500px" height="250px"/></p>
+	              <p style="text-align: center;">图2.2.3-1</p>  
+	              
+	              <p><b>本地上传：</b>当用户点击“本地上传”按钮时，在弹窗中，输入应用内部版本号、版本说明后，点击“选择文件”按钮，选中本地的一个程序包文件，进行上传，上传成功后，点击“确定”按钮，即可生成一个应用版本包，界面跳转至“应用发布”弹窗。 </p>
+	              <p><b>服务器下载：</b>当用户点击“服务器下载”按钮时，系统弹出“服务器下载”的弹窗，输入服务器ID、服务器端口、文件名、服务器用户名、服务器密码、存放路径等信息后，点击“确定”按钮后，即可生成一个应用版本包，界面跳转至“应用发布”弹窗。图2.2.3-2 </p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.3-2.png" width="500px" height="250px"/></p>
+	              <p style="text-align: center;">图2.2.3-2</p>  
+	              
+	              <h4>应用暂停</h4>
+	              <p>用户点击应用详情界面上的“暂停”按钮后，系统弹出“确认暂停”的提示框，用户点击“确定”按钮后，系统即成功暂停这个应用模块，此应用模块实例数会变为0。图2.2.4</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.4.png" /></p>
+	              <p style="text-align: center;">图2.2.4</p>  
+	              
+	              <h4>取消发布</h4>
+	              <p>用户点击应用详情界面上的“取消发布”按钮后，系统弹出“确认取消发布”的提示框，用户点击“确定”按钮后，系统即会根据此应用的运行状态进行判断，当应用运行正常时，系统提示“该应用运行正常，不需要取消发布”；当应用状态为deploying的时候，即会成功取消当前发布。图2.2.5</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.5.png" /></p>
+	              <p style="text-align: center;">图2.2.5</p>  
+	              
+	              <h4>更多操作-重启应用</h4>
+	              <p>用户点击应用详情界面“更多操作”下的“重启应用”按钮，系统弹出“应用重启”的弹窗，弹窗中显示了这个应用所在的资源池，用户选择了需要进行重启的资源池，点击“确定”按钮后，即可成功重启这个应用模块。图2.2.6</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.6.png" /></p>
+	              <p style="text-align: center;">图2.2.6</p>  
+	              
+	              <h4>更多操作-手动扩缩</h4>
+	              <p>用户点击应用详情界面“更多操作”下的“手动扩缩”按钮，系统弹出“手动扩缩”的弹窗，弹窗中显示了这个应用模块的“当前实例数”与“可扩展的最大实例数”，用户可以设置“目标实例数”，然后点击确定按钮，即可对这个应用模块进行扩缩操作。图2.2.7</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.7.png" /></p>
+	              <p style="text-align: center;">图2.2.7</p>  
+	              
+	              <h4>更多操作-弹性配置</h4>
+	              <p>用户点击应用详情界面“更多操作”下的“弹性配置”按钮，系统弹出“弹性配置”的弹窗，弹窗中显示了配置弹性策略的信息，用户需选择“是否自动扩缩”、“最小实例数”、“最大实例数”、“冷却时间”等信息，在”添加规则”的选项框中，可以选择”定时、CPU、内存、线程“等类型策略。图2.2.8-1</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.8-1.png" /></p>
+	              <p style="text-align: center;">图2.2.8-1</p>  
+	              
+	              <p><b>定时策略:</b>用户选择了“定时策略”后，弹窗中弹出“触发时间”与“实例数”的输入框，用户选择“是否启用”和输入触发时间与实例数后， 可以创建一条或者多条定时策略。图2.2.8-2 </p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.8-2.png"/></p>
+	              <p style="text-align: center;">图2.2.8-2</p>  
+	              
+	              <p><b>CPU策略:</b>用户选择了“CPU策略”后，弹窗中弹出“最小阈值、最大阈值、扩缩比例”的取值框，用户选择了“是否启用”和在取值框中输入以上信息后，可以创建一条CPU策略信息。图2.2.8-3</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.8-3.png"/></p>
+	              <p style="text-align: center;">图2.2.8-3</p>  
+	              
+	              <p><b>内存策略:</b>用户选择了“内存策略”后，弹窗中弹出“最小阈值、最大阈值、扩缩比例”的取值框，用户选择了“是否启用”和在取值框中输入以上信息后，可以创建一条内存策略信息。图2.2.8-4</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.8-4.png"/></p>
+	              <p style="text-align: center;">图2.2.8-4</p>  
+	              
+	              <p><b>线程策略:</b>用户选择了“线程策略”后，弹窗中弹出“最小阈值、最大阈值、扩缩比例”的取值框，用户选择了“是否启用”和在取值框中输入以上信息后，可以创建一条线程策略信息。图2.2.8-5</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.8-5.png"/></p>
+	              <p style="text-align: center;">图2.2.8-5</p>  
+	              
+	              <h4>性能监控</h4>
+	              <p>在应用详情界面中，用户可以查看下方页面的“性能监控”，性能监控中展示了这个应用的容器平均CPU、容器平均内存、JVM指标、线程数、并发数和容器数等六个趋势图，点击每个趋势图的右上角图标，系统弹出”按天、周、月统计“的监控信息趋势图（以下以cpu和内存为例）。图2.2.9</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.9.png" /></p>
+	              <p style="text-align: center;">图2.2.9</p>  
+	              
+	              <h4>事件查看</h4>
+	              <p>在应用详情界面中，用户可以查看下方页面的“事件查看”，事件查看中展示了这个应用的操作事件记录，每条事件中展示了操作事件、事件结果、操作详细信息与时间等信息。图2.2.10</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.10.png" /></p>
+	              <p style="text-align: center;">图2.2.10</p>  
+	              
+	              <h4>容器管理</h4>
+	              <p>在应用详情界面中，用户可以查看下方页面的”容器管理“，容器管理中展示了这个应用的所有容器，在容器列表中展示了每个容器的容器ID、节点、端口、所属集群、启动时间、运行状态等信息。图2.2.11-1</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.11-1.png" /></p>
+	              <p style="text-align: center;">图2.2.11-1</p>  
+	              
+	              <p><b>操作-性能监控：</b>用户点击容器管理操作下的“性能监控”后，系统弹出单个容器的性能监控趋势图，用户可以查看单个容器的cpu、内存、jvm、线程数、并发数等趋势图信息。图2.2.11-2 </p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.11-2.png" /></p>
+	              <p style="text-align: center;">图2.2.11-2</p>  
+	              
+	              <p><b>操作-重启：</b>用户点击容器管理操作下的“重启”后，系统弹出“容器重启”确认框，用户点击确认按钮后，即可对选中的容器进行重启操作。图2.2.11-3 </p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.11-3.png" /></p>
+	              <p style="text-align: center;">图2.2.11-3</p>  
+	              
+	              <p><b>操作-ThreadDump：</b>用户点击容器管理操作下的“ThreadDump”后，系统弹出显示ThreadDump日志的弹窗，用户可以查看容器的ThreadDump日志信息。图2.2.11-4</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.11-4.png" /></p>
+	              <p style="text-align: center;">图2.2.11-4</p>  
+	              
+	              <p><b>操作-查看日志： </b>用户点击容器管理操作下的“查看日志”后，系统弹出显示容器日志的弹窗，用户可以查看容器的日志信息。 </p>
+	              <p><b>操作-日志下载：</b>用户点击容器管理操作下的“日志下载”后，系统弹出显示容器日志列表的弹窗，用户可以点击日志名称，进行下载日志信息。 </p>
+	              
+	              <p><b>系统信息：</b>在应用详情界面中，用户可以查看下方页面的”系统信息“，系统信息中展示了这个应用配置的域名、检查地址、公网IP、私网IP、HaProxy服务类型、HaProxy服务端口、Bamboo节点、开通防火墙端口、接口人姓名、联系电话、邮箱地址、开发商等信息。图2.2.12</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.12.png" /></p>
+	              <p style="text-align: center;">图2.2.12</p>  
+	              
+	              <h4>创建应用</h4>
+	              <p>在应用管理页面中，点击“创建应用”按钮，系统即可弹出创建应用的弹窗。</p>
+	              <p><b>发布配置：</b>在创建应用的“发布配置”中，用户可以对发布环境进行选择，发布环境由平台配置中的基础数据列表中的ENV_TYPE配置而来；资源池列表中显示了系统中所有的资源池名称，用户可以选择一个资源池；发布构建方式中，系统提供“镜像上传”和“本地挂载”两种方式；程序包来源中提供“本地上传”和“服务器下载”两种方式。图2.2.13-1</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.13-1.png" /></p>
+	              <p style="text-align: center;">图2.2.13-1</p>  
+	              
+	              <p><b>应用配置：</b>在创建应用的“应用配置”中，系统名称列表中显示了DCOS系统中所有的系统名称，用户可以选择一个系统名称，也可以在输入框中输入一个系统名称；再输入模块名称和服务路由策略。图2.2.13-2</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.13-2.png" /></p>
+	              <p style="text-align: center;">图2.2.13-2</p>  
+	              
+	              <p><b>容器配置：</b>在创建应用的“容器配置”中，用户需要选择CPU、内存、磁盘空间和实例数等配置信息；在镜像地址的下拉框中，用户可以选择一个镜像地址，也可以手动输入一个镜像地址；用户需在命令的输入框中，输入启动命令；在docker参数配置中，输入“键、值”信息；在环境变量中，输入“键、值”信息；在约束中，选择一个约束信息。图2.2.13-3</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.13-3.png" /></p>
+	              <p style="text-align: center;">图2.2.13-3</p>  
+	              
+	              <p><b>网络配置：</b>在创建应用的“网络配置”中，用户需在三种网络模式“host、bridge、user”中选择一种，选择模式后，按照所选模式的要求，选择容器端口、主机端口与网络协议等信息。图2.2.13-4</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.13-4.png" /></p>
+	              <p style="text-align: center;">图2.2.13-4</p>  
+	              
+	              <p><b>存储配置：</b>在创建应用的“存储配置”中，用户需配置容器目录、主机目录与读写模式；在主机目录的下拉框中，显示的是系统中所有未挂载的卷名称。图2.2.13-5</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.13-5.png" /></p>
+	              <p style="text-align: center;">图2.2.13-5</p>  
+	              
+	              <p><b>健康检测：</b>在创建应用的”健康检测”中，用户需在三种协议”COMMAND、HTTP、TCP”中选择一种，并输入”COMMAND、宽限期、间隔、超时、连续失败最大次数“等信息。图2.2.13-6</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.13-6.png" /></p>
+	              <p style="text-align: center;">图2.2.13-6</p>  
+	              
+	              <p><b>其他可配置：</b>在创建应用的“其他可配置”中，用户可以输入接口人信息“姓名、联系方式、邮箱地址、开发商信息”，还可以输入系统配置信息“域名、公网ip、私网ip、bamboo节点、开通防火墙端口、健康检测地址、HaProxy服务类型、HaProxy地址端口”等信息。图2.2.13-7</p>
+	              <p style="text-align: center;" >  <img src="../gitbook/images/p2.2.13-7.png" /></p>
+	              <p style="text-align: center;">图2.2.13-7</p>  
+	              
+	              <p><b>创建：</b>用户输入了以上的创建应用必填项信息后，点击”创建“按钮，即可创建一个应用模块。创建完成后，系统跳转应用管理列表页面。</p>
+	              
+	              
+	              
+	            </section>
+	          </div>
+	        </div>
+	      </div>
+	      <a href="../content_management/Dashboard.html" class="navigation navigation-prev " aria-label="Previous page: dashboard"><i class="fa fa-angle-left"></i></a>
+	      <a href="../content_management/cluster_management.html" class="navigation navigation-next " aria-label="Next page: 集群管理"><i class="fa fa-angle-right"></i></a>
+	      
+	      </div>
+    </div>
+    <script src="../gitbook/app.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
+    <script>
+	    require(["gitbook"], function(gitbook) {
+	      var config = {"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"livereload":{}};
+	      gitbook.start(config);
+	    });
+    </script>
+    </body>
+</html>

@@ -1,0 +1,343 @@
+﻿<link href="plugin/uploadify/Huploadify.css" rel="stylesheet"/>
+<link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+<!--main.css-->
+<link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+<link href="assets/css/dataTables.bootstrap.css" rel="stylesheet"/>
+<link href="assets/css/bootstrap-table.min.css" rel="stylesheet"/>
+<link href="assets/css/bootstrap-select.min.css" rel="stylesheet"/>
+<link href="assets/css/dist.css" rel="stylesheet" type="text/css"/>
+
+
+<!-- jquery autocomplete plugin style configure-->
+<style type="text/css">
+  .uploadify-progress {
+    width: 535px;
+  }
+
+  .autocomplete-suggestions {
+    border: 1px solid #999;
+    background: #FFF;
+    overflow: auto;
+  }
+
+  .autocomplete-suggestion {
+    padding: 2px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .autocomplete-selected {
+    background: #F0F0F0;
+  }
+
+  .autocomplete-suggestions strong {
+    font-weight: normal;
+    color: #3399FF;
+  }
+
+  .autocomplete-group {
+    padding: 2px 5px;
+  }
+
+  .autocomplete-group strong {
+    display: block;
+    border-bottom: 1px solid #000;
+  }
+
+  .border-color {
+    border: 1px solid #6abce2
+  }
+</style>
+
+<!-- /Head -->
+<!-- Body -->
+
+<!-- Page Breadcrumb -->
+<div class="page-breadcrumbs breadcrumbs-fixed">
+  <ul class="breadcrumb">
+    <li>
+      <i class="fa fa-home"></i>
+      SDDCOS
+    </li>
+    <li class="active">镜像管理</li>
+  </ul>
+</div>
+<!-- /Page Breadcrumb -->
+
+<!-- Page Body -->
+<div class="page-body">
+  <div id="sessionExpiredAlertBlock" class="alert alert-danger alert-dismissible fade in" role="alert"
+       style="display:none;">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+    </button>
+    <span>会话失效，请重新登录! <a class="btn btn-danger" href="/iMonitor/login.jsp">登录</a></span>
+  </div>
+
+  <div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+    <button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span
+        aria-hidden="true">&times;</span></button>
+    <span id="warningMsg"></span>
+  </div>
+
+  <div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+    <button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span
+        aria-hidden="true">&times;</span></button>
+    <span id="successMsg"></span>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="widget">
+        <div class="widget-header bg-lightinfo">
+          镜像列表
+        </div>
+        <div class="widget-body">
+
+          <div class="col-sm-6 no-padding-left margin-bottom-10">
+            <a class="btn btn-default" onclick="showimageCreat()"><i class="fa fa-plus"></i>创建镜像</a>
+            <!--<a class="btn btn-default" onclick="showWS_D()"><i class="fa fa-plus"></i>查看日志</a>-->
+            <a class="btn btn-default primary" href="#/webcontent/image/harborlist.html">
+              <i class="fa fa-newspaper-o"></i>项目管理</a>
+          </div>
+          <div class="col-sm-6 no-padding-right margin-bottom-10">
+            <input id="image-search-input" class="form-control" placeholder="请输入镜像名" onkeyup="fnSearch(this)" autocomplete="off"/>
+          </div>
+          <table class="table  table-hover table-bordered" id="image-list-table"></table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="creatimage" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+       aria-hidden="true" style="display: none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " style="width:700px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title" id="myLargeModalLabel">创建镜像</h4>
+        </div>
+        <form id="accountForm" method="post" novalidate="novalidate" class="form-horizontal">
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">选择项目</label>
+              <div class="col-sm-10">
+                <select class="selectpicker form-control" title="请选择项目"
+                        data-actions-box="true" data-live-search="true" name="select_project" id="select_project_U">
+                  <option></option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">镜像名称<span
+                  class="padding-left-5 darkorange">*</span></label>
+              <div class="col-sm-10">
+                <input id="create_img_name" name="create_img_name" class="form-control pull-left" placeholder="镜像名">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">选择镜像<span
+                  class="padding-left-5 darkorange">*</span></label>
+              <div class="col-sm-10">
+                <div class="col-sm-6 no-padding">
+                  <select class="form-control" id="create_image_si" onchange="fnGetCreateImgVer()"></select>
+                </div>
+                <div class="col-sm-6 no-padding-right">
+                  <select class="form-control" id="comImgVer"></select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">上传程序包</label>
+              <div class="col-sm-10">
+                <div class="col-md-12 no-padding" style="margin-top:-10px">
+                  <div id="uploadfilebtn"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">上传启动脚本</label>
+              <div class="col-sm-10">
+                <div class="col-md-12 no-padding" style="margin-top:-10px">
+                  <div id="uploadfilejb"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">dockerfile<span
+                  class="padding-left-5 darkorange">*</span></label>
+              <div class="col-sm-10">
+                <textarea id="create_img_dockerfile" name="create_img_dockerfile" class="form-control" rows="3" placeholder="dockerfile" style="height: 200px;"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group hidden">
+              <label class="col-sm-2 control-label no-padding-right">镜像描述</label>
+              <div class="col-sm-10">
+                <textarea id="create_img_info" class="form-control" rows="3" placeholder="填写镜像描述信息"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group hidden">
+              <label class="col-sm-2 control-label no-padding-right">配置信息</label>
+              <div class="col-sm-10">
+                <textarea id="create_img_config" class="form-control" rows="3" placeholder="填写配置信息"></textarea>
+              </div>
+            </div>
+            <!--<div class="form-group">-->
+            <!--<label class="col-sm-2 control-label no-padding-right">环境变量</label>-->
+            <!--<div class="col-sm-10">-->
+            <!--<textarea id="create_img_env" class="form-control" rows="3" placeholder="填写环境变量信息"></textarea>-->
+            <!--</div>-->
+            <!--</div>-->
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-azure" id="create_btn" onclick="createImage()">创建</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!--删除提示-->
+  <div id="DelAlertModal" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true"
+       data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header ">
+          <div class="zeromodal-icon show-zero2 zeromodal-icon-question">？</div>
+        </div>
+        <div class="modal-body">确定要删除该镜像?</div>
+        <span id="DelAlertMsg" class="hidden"></span>
+        <div class="modal-footer">
+          <button type="button" id="delete-btn" class="btn btn-azure" data-dismiss="modal">确定</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+      </div> <!-- / .modal-content -->
+    </div> <!-- / .modal-dialog -->
+  </div>
+
+
+  <!-- 忙等待 -->
+  <div class="modal in" id="tips" style="display:none">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="font-size:15px;font-weight:bold;">
+          <span></span><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+          <span class="sr-only"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--提示框-->
+  <!-- <div class="modal in" id="MsgAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+     <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+           <h4 id="MsgAlertTitle"></h4>
+         </div>
+         <div class="modal-body">
+           <h6 id="MsgAlertContent"></h6>
+         </div>
+         <div class="modal-footer">
+         <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">确定</button>
+         </div>
+       </div>
+     </div>
+   </div>
+   </div>-->
+  <!--删除提示-->
+  <div id="showWS" class="modal fade" style="display: none;" aria-hidden="true"
+       data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">查看日志</h4>
+        </div>
+        <div class="modal-body" id="showD_WS"></div>
+
+      </div> <!-- / .modal-content -->
+    </div> <!-- / .modal-dialog -->
+  </div>
+
+
+  <!--错误失败提示信息-->
+  <div class="modal modal-message modal-info in" id="failmodal" aria-hidden="true"
+       style="display:none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header no-padding-bottom">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+          <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+        </div>
+        <div class="modal-body">
+          <p class="title1" id="failTitle"></p>
+          <div id="failSpan" style="background-color: #000;color:#fff;" ></div>
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="failnone">取消</button>
+
+        </div>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <!--成功提示信息-->
+  <div class="modal modal-message modal-info in" id="successmodal" aria-hidden="true"
+       style="display:none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header no-padding-bottom">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+          <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+        </div>
+        <div class="modal-body">
+          <div class="title1" id="successTitle"></div>
+
+        </div>
+        <div class="modal-footer padding-bottom-20">
+
+          <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+        </div>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</div>
+
+<!--Basic Scripts-->
+<script src="assets/js/jquery-2.0.3.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap-select.js"></script>
+<script src="assets/js/select2/select2.min.js"></script>
+<script src="plugin/uploadify/jquery.Huploadify.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script src="assets/js/validation/bootstrapValidator.min.js"></script>
+<!-- 自动补全 -->
+<script src="webcontent/image/js/jquery.autocomplete.min.js"></script>
+<script src="webcontent/image/js/util_image.js"></script>
+<script>
+  $(document).ready(function () {
+
+    initImageListTable();
+    loadProjNames();
+    initImageSearchAutocom();
+    /* fnupload();//文件上传*/
+    fnGetCreateImgType();
+    fnupload();
+    fnupload_jb();
+    selectProject();
+
+    imageValidator('#creatimage');
+  });
+</script>
+

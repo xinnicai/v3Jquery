@@ -1,0 +1,256 @@
+﻿
+    <!--Basic Styles-->
+    <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
+     <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+    <link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+    <!--main.css-->
+    <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+    
+    <style type="text/css">
+    .bootstrap-select .dropdown-menu{position:absolute}  
+    .app-list{position: relative;}
+    .app-list .drop-btn{position: absolute; top: 12px;right: 12px;width: 110px;height: 32px;} 
+    input[type='checkbox']{
+      opacity: 1;
+      position: relative;
+      left: 0px;
+    }
+    input.inputcheck{
+      opacity: 0;
+      position: absolute;
+      left: -99999px;
+    } 
+    #infomessage div{
+        position: relative;
+        padding: 8px 10px;
+        border-radius: 5px;
+        display: inline-block;
+        background: #5cadff;
+        color: #fff;
+        margin-right: 6px;
+    }
+    #applist .app-name{
+        display: inline-block;
+        color: #fff;
+        background: #5cadff;
+        padding: 2px;
+        border-radius: 2px;
+        margin-bottom: 4px;        
+    }
+    </style>
+    
+
+<!-- Page Breadcrumb -->
+<div class="page-breadcrumbs breadcrumbs-fixed">
+    <ul class="breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            SDDCOS
+        </li>
+        <li class="active">应用管理</li>
+    </ul>
+</div>
+<!-- /Page Breadcrumb -->
+
+<!-- Page Body -->
+<div class="page-body">
+    <div id="sessionExpiredAlertBlock" class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none;">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<span>会话失效，请重新登录! <a class="btn btn-danger" href="/iMonitor/login.jsp">登录</a></span>
+	</div>
+
+	<div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+		<button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+ 		<span id="warningMsg"></span>
+	</div>
+
+	<div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+		<button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+     	<span id="successMsg"></span>
+	</div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="widget">
+            	<div class="widget-header bg-lightinfo">
+            		<span>应用管理页面可以查看应用信息，创建应用，删除应用，同时可以通过点击某一个应用的应用名称进去查看详情</span>
+            	</div>
+            	<div class="widget-body app-list">                        		
+            		<div class="col-sm-6 no-padding-left margin-bottom-10" style="width:120px;">
+            			<a class="btn btn-default hidden" href="#/webcontent/Application/CreatApplication.html" id="createAppButton"><i class="fa fa-plus"></i>创建应用</a>
+            		</div>                                
+                    <div class="drop-btn btn-group" id="moreAppBtn">
+                        <a class="btn  btn-azure btn-sm" data-toggle="dropdown" href="javascript:void(0);"><i class="fa fa fa-th"></i>批量操作</a>
+                        <a class="btn  btn-azure btn-sm dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <!-- <li>
+                                <a href="javascript:void(0);" id="publish" ><i class="padding-right-5 fa fa-exchange hidden"></i>发布</a>
+                            </li> -->                                        
+                            <li>
+                                <a href="javascript:void(0);" id="restart"  ><i class="padding-right-5 fa  fa-random hidden"></i>重启</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" id="pause"  ><i class="padding-right-5 fa fa-edit hidden"></i>暂停</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" id="start"  ><i class="padding-right-5 fa fa-edit hidden"></i>启动</a>
+                            </li>                                         
+                        </ul>
+                    </div>                                
+            		<table class="table  table-hover table-bordered" id="editabledatatable"></table>
+            	</div>
+            </div>
+        </div>
+    </div>                
+    <div class="modal fade" id="Delvloume" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" showorhide="hide" style="display: none;" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " style="width:600px">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel1">提示</h4>
+                </div>
+                <form id="accountForm1" class="form-horizontal">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-sm-10 " style="margin-left: 30px; color:orange;">注意：应用删除操作需要业务系统联系人授权，请电话联系<span id="phoneName"></span>获得验证码。</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">验证码<span class="red padding-left-5">*</span></label>
+                            <div class="col-sm-8">
+                                <div class="col-sm-8 no-padding" >
+                                    <input type="text" id="checkCode" name="checkCode" style="width: 100%;height: 31px;" />
+                                </div>
+                                <div class="col-sm-4 no-padding-right">
+                                    <input id="btnSendCode" type="button" value="发送验证码"  onclick="sendMessage()" style="width: 100%;height: 31px;" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-10 " style="margin-left: 30px; color:red;"><span id="error"></span></label>
+                        </div>
+                    </div>
+                    <span id="deleteID" class="hidden"></span>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="deleteData()">确定</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</div>
+
+<!--成功提示信息-->
+<div class="modal modal-message modal-info in" id="successmodal"  aria-hidden="true"  style="display:none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header no-padding-bottom">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+          <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+        </div>
+        <div class="modal-body">
+          <div class="title1">删除成功啦</div>
+        </div>
+        <div class="modal-footer padding-bottom-20">
+
+          <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道啦</button>
+
+        </div>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- 错误提示 -->
+<div class="modal modal-message modal-info in" id="errormodal"  aria-hidden="true"  style="display:none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header no-padding-bottom">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+          <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+        </div>
+        <div class="modal-body" >
+          <p class="title1">删除失败</p>
+          <p id="errorinfo"></p>
+        </div>
+        <div class="modal-footer padding-bottom-20">
+          <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道啦</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--确定框-->  
+<div class="modal modal-message modal-info fade in" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+                <!--<h4 class="modal-title" id="">确认<span do-name="dohandle"></span></h4>-->
+            </div>
+            <div class="modal-body">
+                <div class="title1">确认要<span do-name="dohandle" class="info"></span>以下应用?</div>
+                <div id="infomessage" class="padding-top-5"></div>
+               <span id="parameter" class="hidden"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal" onclick="doConfirm()">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->    
+</div>
+<!-- 提示信息 -->
+<div class="modal modal-message modal-info in" id="wrongmodal"  aria-hidden="true" style="display:none;"  data-backdrop="static"  data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header no-padding-bottom">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>              
+        </div>
+        <div class="modal-body" >
+          <p class="title1"></p>
+          <p id="cuetitle1"></p>
+        </div>
+        <div class="modal-footer padding-bottom-20">
+          <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道啦</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->  
+
+<!--执行进度-->  
+<div class="modal modal-message modal-info fade in" id="scheduleModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <!-- <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div> -->
+                <!--<h4 class="modal-title" id="">确认<span do-name="dohandle"></span></h4>-->
+            </div>
+            <div class="modal-body">
+                <div class="title1"><span do-name="dotype"></span></div>
+                <div id="applist" class="padding-top-5">
+                    <div>
+                        <span class="app-name">app1</span>
+                        <span do-name="app1">正在操作...</span>
+                    </div>                        
+                </div>
+                <span id="parameter" class="hidden"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->    
+</div>
+
+<script src="assets/js/jquery-2.0.3.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap-select.js"></script>
+<script src="assets/js/select2/select2.min.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script src="assets/js/userPwoer.js"></script>
+<script src="webcontent/Application/js/Applist.js"></script>
+

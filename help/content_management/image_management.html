@@ -1,0 +1,398 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>镜像管理 | DCOS云管理平台 用户手册</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="DCOS云管理平台用户手册涵盖了DCOS云管理平台产品介绍、上线发布、服务启停、资源监控、日志排错和持续集成等，力争简洁清晰地表述DCOS云管理平台产品的相关信息，使用户更加容易方便地使用DCOS云管理平台产品。  ">
+        <meta name="generator" content="GitBook 2.6.6">
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="./gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="./gitbook/images/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="../gitbook/style.css">
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        <link rel="prev" href="../help/content_management/cluster_management.html"/>
+        <link rel="next" href="../help/content_management/service_integration.html"/>
+        
+    </head>
+    <body>
+            
+    <div class="book"
+        data-level="0"
+        data-chapter-title="镜像管理"
+        data-filepath="README.md"
+        data-basepath="."
+        data-revision="Mon Jan 04 2016 19:21:16 GMT+0800 (CST)"
+        data-innerlanguage="">
+    
+	    <div class="book-summary">
+		    <nav role="navigation">
+		        <ul class="summary">
+		        	
+		        <li class="chapter " data-level="1" data-path="index.html">
+		          <a href="../index.html">
+		            <i class="fa fa-check"></i> 
+		            <b>1.</b>
+		                                    平台介绍
+		          </a>
+		          
+		          <ul>
+		          <li class="chapter " data-level="1.1" data-path="platform_introduction/sys_login.html">
+			            <a href="../platform_introduction/sys_login.html">
+			              <i class="fa fa-check"></i>
+			                <b>1.1.</b>
+			                                                        系统登录
+			            </a>
+			          </li>
+			          </ul>
+		        </li>
+		        
+		        
+		        <li class=" chapter" data-level="2." data-path="content_management/index.html">
+		          <a href="../content_management/index.html">
+		            <i class="fa fa-check"></i> 
+		            <b>2.</b>
+		                                    内容管理
+		          </a>
+		          
+		          <ul>
+		          <li class="chapter " data-level="2.1" data-path="content_management/Dashboard.html">
+			            <a href="../content_management/Dashboard.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.1.</b>
+			                Dashboard
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.2" data-path="content_management/application_management.html">
+			            <a href="../content_management/application_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.2.</b>
+			                                             应用管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.3" data-path="content_management/cluster_management.html">
+			            <a href="../content_management/cluster_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.3.</b>
+			                                             集群管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter active" data-level="2.4" data-path="content_management/image_management.html">
+			            <a href="../content_management/image_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.4.</b>
+			                                             镜像管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.5" data-path="content_management/service_integration.html">
+			            <a href="../content_management/service_integration.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.5.</b>
+			                                             服务集成
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.6" data-path="content_management/network_management.html">
+			            <a href="../content_management/network_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.6.</b>
+			                                             网络管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.7" data-path="content_management/volume_management">
+			            <a href="../content_management/volume_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.7.</b>
+			                                             存储管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.8" data-path="content_management/monitoring_management.html">
+			            <a href="../content_management/monitoring_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.8.</b>
+			                                             监控管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.9" data-path="content_management/log_management.html">
+			            <a href="../content_management/log_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.9.</b>
+			                                             日志管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="2.10" data-path="content_management/policy_management.html">
+			            <a href="../content_management/policy_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>2.10.</b>
+			                                             策略管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+		        </li>
+		        
+		        
+		        <li class="chapter " data-level="3" data-path="platform_management/index.html">
+		          <a href="../platform_management/index.html">
+		            <i class="fa fa-check"></i> 
+		            <b>3.</b>
+		                                    平台管理
+		          </a>
+		          
+		          <ul>
+		          <li class="chapter " data-level="3.1" data-path="platform_management/user_management.html">
+			            <a href="../platform_management/user_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.1.</b>
+			                                                        用户管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.2" data-path="platform_management/role_management.html">
+			            <a href="../platform_management/role_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.2.</b>
+			                                                        角色管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.3" data-path="platform_management/notice_info.html">
+			            <a href="../platform_management/notice_info.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.3.</b>
+			                                                        公告信息
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.4" data-path="platform_management/statistical_statement.html">
+			            <a href="../platform_management/statistical_statement.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.4.</b>
+			                                                        统计报表
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.5" data-path="platform_management/menu_management.html">
+			            <a href="../platform_management/menu_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.5.</b>
+			                                                        菜单管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.6" data-path="platform_management/dictionary_maintenance.html">
+			            <a href="../platform_management/dictionary_maintenance.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.6.</b>
+			                                                        字典维护
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.7" data-path="platform_management/basic_functions.html">
+			            <a href="../platform_management/basic_functions.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.7.</b>
+			                                                        功能列表
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.8" data-path="platform_management/quotas_management.html">
+			            <a href="../platform_management/quotas_management.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.8.</b>
+			                                                        配额管理
+			            </a>
+			          </li>
+			          </ul>
+			          
+			          
+			          <ul>
+		          <li class="chapter " data-level="3.9" data-path="platform_management/plug-in.html">
+			            <a href="../platform_management/plug-in.html">
+			              <i class="fa fa-check"></i>
+			                <b>3.9.</b>
+			                                                        插件市场
+			            </a>
+			          </li>
+			          </ul>
+		        </li>
+		        
+		        
+		       
+		         
+		        
+		        
+		        
+		        <li class="divider"></li>
+		        
+		        <li>
+		          <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+		          Published with GitBook
+		          </a>
+		        </li>
+		        </ul>
+		    </nav>
+	    </div>
+
+	    <div class="book-body">
+	      <div class="body-inner">
+	        <div class="book-header" role="navigation">
+			    <!-- Actions Left -->
+			    
+			    <!-- Title -->
+			    <h1>
+			      <i class="fa fa-circle-o-notch fa-spin"></i>
+			        <a>DCOS云管理平台 用户手册</a>
+			    </h1>
+	        </div>
+	
+	        <div class="page-wrapper" tabindex="-1" role="main">
+	          <div class="page-inner">
+	            <section class="normal" id="section-">
+	          
+	              <h1 id="DCOS云管理平台用户手册">镜像管理</h1>
+	              <p>功能介绍：镜像管理界面主要为用户提供DCOS系统中所有镜像的概要信息。</p>
+	              <h4>镜像列表</h4>
+	              <p>在镜像列表中展示了每个镜像的镜像名称、所属环境、更新时间、版本数、最新版本等信息。图2.4.1-1</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.4.1-1.png" /></p>
+	              <p style="text-align: center;">图2.4.1-1</p>  
+	              
+	              <p><b>镜像搜索：</b>用户在镜像管理列表的搜索框中，输入镜像信息后，镜像列表中即可显示所有匹配该信息的镜像。 </p>
+	              
+	              <p><b>创建镜像：</b>用户在镜像管理列表中，点击“创建镜像”按钮后，系统弹出创建镜像的弹出，用户需选择一个镜像名称后，输入镜像名、所属环境、dockerfile、镜像描述、配置信息、环境变量等信息后，点击“创建”按钮，系统即开始创建一个镜像。图2.4.1-2</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.4.1-2.png" /></p>
+	              <p style="text-align: center;">图2.4.1-2</p>  
+	              
+	              <p><b>镜像详情：</b>用户在镜像管理列表中，选中一个镜像后，点击镜像名称，可以进入镜像的详情页面，页面上方展示了镜像的镜像名称、最新版本、所属环境、创建时间、拉取镜像等信息；页面下方的”概述“中显示了镜像的概述信息、dockerfile、配置目录、环境变量等信息（图2.4.1-3)；页面下方的“版本”中显示了每个版本的版本号、创建时间、使用状态等信息。图2.4.1-4</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.4.1-3.png" /></p>
+	              <p style="text-align: center;">图2.4.1-3</p>  
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.4.1-4.png" /></p>
+	              <p style="text-align: center;">图2.4.1-4</p>  
+	              
+	              <p><b>创建镜像新版本：</b>用户在镜像详情页面中点击“创建新版本”按钮后，系统弹出创建新版本的弹窗，弹窗中显示了镜像名称、所属环境、dockerfile、镜像描述、配置信息、环境变量等信息，用户可以编辑dockerfile、配置与环境变量等信息，编辑完成后，点击”创建“后，系统即可生成一个新的镜像版本。图2.4.1-5 </p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.4.1-5.png" /></p>
+	              <p style="text-align: center;">图2.4.1-5</p>  
+	              
+	              <p><b>删除版本：</b>用户在镜像详情页面的版本列表中，选中一个镜像版本后，点击操作下的“删除”按钮，系统弹出删除镜像版本确认信息，用户确认后，点击删除按钮，即可删除选中版本（当选中版本正在使用，则不得删除）。</p>
+	             
+	              <h4>项目管理</h4>
+	              <p><b>项目列表：</b>在项目列表中展示了每个项目的项目名称、镜像数量、角色、是否公开、更新时间等信息。图2.4.2-1</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.4.2-1.png" /></p>
+	              <p style="text-align: center;">图2.4.2-1</p>  
+	              
+	              <p><b>项目搜索：</b>用户在项目列表的搜索框中，输入项目信息后，项目列表中即可显示所有匹配该信息的项目。</p>
+	              
+	              <p><b>是否公开：</b>在项目列表中，选中一个项目后，可以对“是否公开”进行切换。</p>
+	              
+	              <p><b>删除：</b>在项目列表中，选中一个项目后，点击操作下的“删除”按钮后，系统弹出删除项目的确认框，用户点击”确认“按钮后，系统即会删除选中的项目（当项目中还有镜像在使用时，则不得删除）。</p>
+	              
+	              <p><b>项目详情：</b>用户在项目列表中，选中一个项目后，点击“项目名称”，即可进入项目的详情页面，项目详情页面中展示了项目的项目名称、镜像仓库数量、角色等信息。图2.4.2-2</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.4.2-2.png" /></p>
+	              <p style="text-align: center;">图2.4.2-2</p>  
+	              
+	              <p><b>项目-镜像仓库：</b>用户在项目详情页面的镜像仓库中，可以查看该项目下的所有项目名称，点击项目名称后的数字时，即可查看项目下这个镜像的版本号与pull命令。图2.4.2-3</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.4.2-3.png" /></p>
+	              <p style="text-align: center;">图2.4.2-3</p>  
+	              
+	              <p><b>项目-用户：</b>用户在项目详情页面的用户中，可以查看该项目下的所有用户的用户名与角色信息。图2.4.2-4</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.4.2-4.png" /></p>
+	              <p style="text-align: center;">图2.4.2-4</p>  
+	              
+	              <p><b>用户-新增成员：</b>在用户列表中，点击“新增成员”按钮后，系统弹出新增用户的弹窗，在弹窗中输入用户名、选择角色后（用户名须为平台管理-用户列表中的用户），点击“确认”按钮后，系统即可为该项目新增一个用户。图2.4.2-5</p>
+	              <p style="text-align: center;">  <img src="../gitbook/images/p2.4.2-5.png" /></p>
+	              <p style="text-align: center;">图2.4.2-5</p>  
+	              
+	              <p><b>用户-修改：</b>在用户列表中，选中一个用户后，点击操作下的“修改”按钮，系统弹出用户修改弹窗，用户可以对选中要修改的用户的角色进行修改。</p>
+	              
+	              <p><b>用户-删除：</b>在用户列表中，选中一个用户后，点击操作下的“删除”按钮，系统弹出用户删除弹窗，用户确认删除信息后，点击“确认”按钮后，即可对选中的用户进行删除。</p>
+	              
+	              <p><b>用户-搜索：</b>在用户列表的“search”框中，输入用户信息后，用户列表中即会显示出所有匹配该信息的用户。</p>
+	              
+	              
+	              
+	              
+	              
+	              
+
+
+
+
+
+
+
+
+
+
+	              
+	              
+	            </section>
+	          </div>
+	        </div>
+	      </div>
+	      <a href="../content_management/cluster_management.html" class="navigation navigation-prev " aria-label="Previous page: 集群管理"><i class="fa fa-angle-left"></i></a>
+	      <a href="../content_management/service_integration.html" class="navigation navigation-next " aria-label="Next page: 服务集成"><i class="fa fa-angle-right"></i></a>
+	      
+	       </div>
+    </div>
+    <script src="../gitbook/app.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
+    <script>
+	    require(["gitbook"], function(gitbook) {
+	      var config = {"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"livereload":{}};
+	      gitbook.start(config);
+	    });
+    </script>
+    </body>
+</html>

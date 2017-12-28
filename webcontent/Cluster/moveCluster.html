@@ -1,0 +1,251 @@
+<!--Basic Styles-->
+<link href="assets/css/jquery.fileupload.css" rel="stylesheet" />
+<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+<link href="plugin/uploadify/Huploadify.css" rel="stylesheet" />
+<link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+<link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+<!--main.css-->
+<link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+<link href="assets/css/dashboard.css" rel="stylesheet" type="text/css" />
+
+
+
+<div class="page-breadcrumbs breadcrumbs-fixed">
+  <ul class="breadcrumb">
+    <li>
+      <i class="fa fa-home"></i>
+      <a href="#/webcontent/Cluster/Clusterlist.html">集群列表</a>
+    </li>
+    <li class="active">集群迁移</li>
+  </ul>
+</div>
+<div class="page-body">
+
+  <div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+    <button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <span id="warningMsg"></span>
+  </div>
+
+  <div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+    <button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <span id="successMsg"></span>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="widget">
+        <div class="widget-header bg-lightinfo">
+          <span>集群迁移页面可以实现集群间的应用切换</span>
+        </div>
+        <div class="widget-body">
+          <div class="row">
+          <div class="col-sm-5">
+            <div class="panel panel-default">
+              <div class="panel-heading" style="text-align: center;font-size: 16px;" id="movecluster1">
+                三墩集群
+              </div>
+              <div class="panel-body">
+                <div class="row no-margin">
+              <div class="col-sm-12 padding-bottom-10 no-padding-left no-padding-right">
+                <span class="input-icon">
+                    <input type="text" class="form-control input-sm" placeholder="输入您要查找的系统名称" onkeyup="fnSearch(this,'#sysname1')">
+                    <i class="glyphicon glyphicon-search blue"></i>
+                </span>
+              </div>
+
+              <div class="col-sm-12 no-padding" style="height:200px ;border:1px solid #d5d5d5;margin-bottom: 10px;overflow:auto">
+                <ul class="list-unstyled sys-ul" id="sysname1">
+
+                </ul>
+              </div>
+
+              <div class="col-sm-12 padding-bottom-10 no-padding-left no-padding-right" style="">
+                <span class="input-icon">
+                    <input type="text" class="form-control input-sm" placeholder="输入您要查找的应用名称" onkeyup="fnSearch(this,'#appname1')">
+                    <i class="glyphicon glyphicon-search blue"></i>
+                </span>
+              </div>
+                  <div class="col-sm-12 no-padding" style="height:200px ;border:1px solid #d5d5d5;overflow:auto">
+                    <ul class="list-unstyled sys-ul" id="appname1">
+
+                    </ul>
+                  </div>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2 text-align-center" style="margin-top:290px">
+            <a class="btn btn-default addbtn" onclick="addShowApp()" style="display:block;">添加
+              <i class="fa fa-angle-double-right padding-left-5"></i><i class="fa fa-angle-double-right padding-left-5"></i></a>
+            <a class="btn btn-default margin-top-10 cutbtn" onclick="cutShowApp()" style="display:block;color:red;">
+              <i class="fa fa-angle-double-left padding-right-5"></i><i class="fa fa-angle-double-left padding-right-5"></i>移除</a>
+            <a class="btn btn-azure surebtn" onclick="fnSureModal()" style="display:block;margin-top:100px;">迁移</a>
+          </div>
+            <div class="col-sm-5">
+              <div class="panel panel-default">
+                <div class="panel-heading" style="text-align: center;font-size: 16px;" id="movecluster2">
+                  石桥集群
+                </div>
+                <div class="panel-body">
+                  <div class="row no-margin">
+                    <div class="col-sm-12 no-padding-left no-padding-right">
+                <span class="input-icon">
+                    <input type="text" class="form-control input-sm" value="系统名称" style="text-align:center;">
+                </span>
+                    </div>
+
+                    <div class="col-sm-12 no-padding" style="height:210px ;border:1px solid #d5d5d5;margin-bottom: 10px;overflow:auto;">
+                      <ul class="list-unstyled sys-ul" id="sysname2" >
+                        <!--<li style="background-color: rgb(217, 237, 247);"><a href="javascript:;">积分联盟</a></li>-->
+                      </ul>
+                    </div>
+
+                    <div class="col-sm-12 no-padding-left no-padding-right">
+                <span class="input-icon">
+                    <input type="text" class="form-control input-sm" value="应用名称" style="text-align:center;">
+                </span>
+                    </div>
+                    <div class="col-sm-12 no-padding" style="height:210px ;border:1px solid #d5d5d5">
+                      <ul class="list-unstyled sys-ul" id="appname2">
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+
+<!-- 确定 -->
+<div id="MoveSureData" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true"
+     data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+      </div>
+      <div class="modal-body">
+        <span class="title1" id="modalip" >确定将应用<span id="apps"></span>从<span id="comecluster"></span>
+          迁移到<span id="tocluster" class="info"></span></span>
+        <span class="title1" class="padding-left-5">?</span>
+
+      </div>
+      <span id="deleteID" class="hidden"></span><span id="modaltype" class="hidden"></span>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal" onclick="fnSure()">确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div> <!-- / .modal-content -->
+  </div> <!-- / .modal-dialog -->
+</div>
+
+
+<!--成功提示  -->
+<div class="modal modal-message modal-info in" id="successModal"  aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+        <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+      </div>
+      <div class="modal-body" >
+        <p id="SucessTitle" class="title1"></p>
+        <p id="Sucessmsg"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="window.location.href ='#/webcontent/Cluster/Clusterlist.html'">好的，我知道了</button>
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--失败提示-->
+
+<div class="modal modal-message modal-info  in" id="failmodal"  aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+      </div>
+      <div class="modal-body" >
+        <p class="title1" id="failtitle"></p>
+        <p id="failInfo"></p>
+
+      </div>
+      <div class="modal-footer padding-bottom-20">
+        <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我了解了！</button>
+
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!-- 警告提示-->
+<div class="modal modal-message modal-info  in" id="warningmodal"  aria-hidden="true"
+     style="display:none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/warn.svg"></div>
+
+      </div>
+      <div class="modal-body" >
+        <span class="title1" id="warningtitle"></span>
+        <!--<p id="warningInfo"></p>-->
+
+      </div>
+      <div class="modal-footer padding-bottom-20">
+        <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我了解了！</button>
+
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="tips" tabindex="-1" role="dialog" aria-hidden="false" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body" style="font-size:15px;font-weight:bold;">
+        <span id="tipsText">正在迁移, 请稍候...</span><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span class="sr-only"></span>
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--Basic Scripts-->
+<script src="assets/js/jquery-2.0.3.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="plugin/uploadify/jquery.Huploadify.js"></script>
+<script src="assets/js/jquery-ui.min.js"></script>
+<script src="assets/js/jquery.fileupload.js"></script>
+<script src="assets/js/bootstrap-filestyle.min.js"></script>
+<script src="assets/js/select2/select2.min.js"></script>
+<script src="assets/js/validation/bootstrapValidator.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+<script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script src="assets/js/userPwoer.js"></script>
+<script src="./webcontent/Cluster/js/moveCluster.js"></script>

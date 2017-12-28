@@ -1,0 +1,705 @@
+
+    <!--Basic Styles-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+   <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+     <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+      <link href="assets/css/codemirror.css" rel="stylesheet" />
+    <link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+    <!--main.css-->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+     
+      <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs  breadcrumbs-fixed">
+                 <ul class="breadcrumb">
+                  <li>
+                        <a href="#/webcontent/platformsetting/Plug-In/market.html" class="padding-left-20 ">
+                                                                          插件市场
+                        </a>
+                       </li>
+                       <li>  新建插件</li>
+                 </ul>
+                      
+                        
+                    
+                </div>
+              
+                <!-- /Page Breadcrumb -->
+              
+                <!-- Page Body -->
+                <div class="page-body" >
+                	<div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			     		<span id="warningMsg"></span>
+					</div>
+				
+					<div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				     	<span id="successMsg"></span>
+					</div>
+                    <div class="row">
+          	         <div class="col-sm-12">
+    		            <div class="row">  
+                      	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		                   <div class="widget-body">
+		                   <div class="widget-main padding-20">
+	                       <div class="tabbable">
+	                        <ul class="nav nav-tabs tabs-flat" id="myTab11">
+	                            <li class="active">
+	                                <a data-toggle="tab" href="#tab1">   基本信息 </a>
+	                            </li>
+	                            <li>
+	                                <a data-toggle="tab" href="#tab2"> 输入定义 </a>
+	                            </li>
+	                             <!-- <li>
+	                                <a data-toggle="tab" href="#tab3"> 输出定义 </a>
+	                            </li> -->
+	                             <li>
+	                                <a data-toggle="tab" href="#tab4"> 调试 </a>
+	                            </li>
+	                        </ul>
+	                          <form class="form-horizontal " id="savepluginInfo">
+                            <div class="tab-content tabs-flat">
+                              <div id="tab1" class="tab-pane active">
+                                 <div class="well bordered-left bordered-themeprimary margin-bottom-20">
+                                    <p><i class="fa fa-star yellow margin-right-5"></i><strong>插件是什么？</strong></p>
+                                     <p><i class="fa fa-star yellow margin-right-5"></i>插件是一个可以在目标机器上执行并完成特定任务的脚本代码。</p>   
+                                 </div>
+                             
+                                 <div class="row">
+                                  <div class="col-sm-8">
+                                     <div class="form-group">
+                                         <label >插件名称</label>
+                                         <span class="red padding-left-5">*</span>
+                                         <input type="text" class="form-control" id="filename" placeholder="请输入插件名称"  name="plugin_name">
+                                         
+                                     </div>    
+                                  </div>
+                                  <div class="col-sm-8">
+                                     <div class="form-group">
+                                       <label >类型名称<span class="red padding-left-5">*</span></label>
+                                         <div class="position-relative">  
+                                         
+		                                        <span class="control-main">  
+		                                         <select id="FROM_VALUE" class="control-select" onchange="this.parentNode.nextSibling.value=this.value">  
+		                                         <option value="aaaa">   aaaa   </option>  
+		                                           <option value="bbbb">   bbbb   </option>  
+		                                            <option value="cccc">   ccccc   </option>  
+		                                         </select></span><input name="FROM_VALUE" class="control-input" placeholder="请填写插件类型" id="type" > 
+		                                        
+                                        
+		                                         </div>
+                                     </div>
+                                  </div>
+                                    <div class="col-sm-8 margin-bottom-20">
+                                     <div class="form-group">
+                                       
+                                         <label >脚本语言</label>
+                                         <div class="col-sm-12 no-padding-left" id="language">
+                                          <a class="label label-lightinfo" >shell</a>
+                                            <a class="label label-default" >python</a>
+                                           <a class="label label-default" >PowerShell</a>
+                                         </div>
+                                     </div>
+                                  </div>  
+                                  
+                                   <div class="col-sm-12">
+                                     <div class="form-group">
+                                       
+                                         <label >脚本代码<span class="red padding-left-5">*</span></label>
+                                            <textarea class="form-control" rows="10" id="Plugincontent" name="content"></textarea>
+                                            <p class="red alertmsg"></p>
+                                           <p class="help-block">
+                                           使用 `$inputName` 来使用输入参数, 如:<span class="info">echo $inputA</span>,
+
+使用 `PutStr "outputName" "outputValue"` 来给输出参数赋值, 如:<span class="info">PutStr "outputB" "hello"</span></p>
+                                       
+                                     </div>
+                                  </div> 
+                                  <div class="col-sm-8">
+                                     <div class="form-group">
+                                         <label >工具说明</label>
+                                         
+                                         <input type="text" class="form-control" id="remark_tool" >
+                                         <p class="red alertmsg"></p>
+                                     </div>    
+                                  </div> 
+                                  </div>
+                                  </div>
+                                  
+                                  <!--  <div id="tab3" class="tab-pane">
+		                             <div class="well bordered-left bordered-themeprimary margin-bottom-20">
+                                    <p><i class="fa fa-star yellow margin-right-5"></i><strong>插件可以按指定的维度进行分组的表格来展示输出结果</strong></p>
+                                    
+                                 </div>
+		                              
+		                              <div class="row">
+		                                 <div class="col-sm-8">
+		                                    <div class="form-group">
+		                                      <table class="table table-hover">
+                                         <thead class="bordered-blueberry">
+	                                        <tr>
+	                                            <th> 输出ID</th>
+	                                            <th>输出标题 </th>
+	                                            <th>类型</th>
+	                                              <th>操作</th>
+	                                        </tr>
+                                         </thead>
+                                         <tbody>
+	                                       
+                                    </tbody>
+                                </table>
+		                                    </div>    
+		                                 </div> 
+		                                 </div> 
+		                               
+       
+		                                <div class="row">
+		                                 <div class="col-sm-8">
+		                                    <div class="form-group">
+		                                       <a class="btn btn-default" data-toggle="modal" data-target="#creatDataModal2"><i class="fa fa-plus padding-right-5"></i>添加输出列</a>
+		                                    </div>  
+  
+		                                 </div> 
+		                                 </div>
+                                    </div> -->
+									
+									
+									  <div id="tab2" class="tab-pane">
+		                               <div class="form-title">
+		                                                                                 设计输入表单                                                        
+		                               </div>
+		                              
+		                              <div class="row">
+		                                 <div class="col-sm-8">
+		                                    <div class="form-group">
+		                                      <table class="table table-hover">
+                                         <thead class="bordered-blueberry">
+	                                        <tr>
+	                                            <th> #</th>
+	                                            <th>参数名 </th>
+	                                            <th>参数标题</th>
+	                                             <th>辅助说明</th>
+	                                             <th>默认值</th>
+	                                              <th>操作</th>
+	                                        </tr>
+                                         </thead>
+                                         <tbody id="add_param">
+	                                       
+                                    </tbody> 
+                                </table>
+		                                    </div>    
+		                                 </div> 
+		                                 </div> 
+		                               
+       
+		                                <div class="row">
+		                                 <div class="col-sm-8">
+		                                    <div class="form-group">
+		                                       <a class="btn btn-default" onclick="fnCreateParam()"data-target="#creatDataModal"><i class="fa fa-plus padding-right-5"></i>添加参数</a>
+		                                    </div>    
+		                                 </div> 
+		                                 </div>
+                                    </div>
+									
+									
+									<div id="tab4" class="tab-pane">
+                               
+                             
+                                 <div class="row">
+                                  <div class="col-sm-8">
+                                     <div class="form-group">
+                                         <label >目标设备IP</label>
+                                         <input type="text" class="form-control" id="dev_IP" placeholder="ip地址" >
+                                     </div>    
+                                  </div>
+                                  <div class="col-sm-8">
+                                     <div class="form-group">
+                                       
+                                         <a class="btn btn-default" onclick="fnSelectedHostIp()" >从 CMDB 中筛选主机</a>
+                                     </div>
+                                  </div>
+                                   
+                                   <div class="col-sm-8">
+                                     <div class="form-group">
+                                         <label >执行用户</label>
+                                         <span class="red padding-left-5">*</span>
+                                         <input type="text" class="form-control" id="user_type" placeholder="root" onkeyup="checkName(this)">
+                                         <p class="red alertmsg"></p>
+                                     </div>    
+                                  </div>
+                                  <div class="col-sm-8">
+	                                  <div class="form-group" id="Plugin_showInExec">
+	                                  		
+	                                  </div>
+                                  </div>
+								  
+								     <div class="col-sm-8">
+                                     <div class="form-group">
+                                       
+                                         <a class="btn btn-default primary"  onclick="ShowDebuggerModal()" >执行调试 </a>
+                                     </div>
+                                  </div>
+                                   
+                                
+                                  </div>
+                                  </div>
+                                  
+                                   </div>
+                                   <hr class="no-margin-top">
+                                   <div class="row no-margin">
+                                   <div class="col-sm-8 ">
+                                     <div class="form-group">
+                                         <button type='submit' class="btn btn-azure" style="width:200px" onclick="saveinfo()">保存</button>
+                                         <button  class="btn btn-default"  onclick="window.location.href='#/webcontent/platformsetting/Plug-In/market.html'">取消</button>
+                                         
+                                     </div>
+                                  </div> 
+                                 </div> 
+                             </form> 
+                                   
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           </div>                  
+     </div>	
+    </div>
+
+ 
+
+     <!-- /Page Content -->
+     <!-- 添加参数 -->
+      <div class="modal fade" id="creatDataModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+     data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">添加参数</h4>
+                </div>
+                 <form id="accountForm1" method="post"  novalidate="novalidate" class="form-horizontal">
+                 
+                <div class="modal-body">
+                 <div class="form-group">
+                      <label  class="col-sm-2 control-label no-padding-right" >参数名<span class="red padding-left-5">*</span></label>
+                      
+                      <div class="col-sm-9">
+                          <input type="text" class="form-control" id="param_key" onkeyup="checkName(this)">
+                         <p class="red alertmsg"></p>
+                      </div>
+                   </div>
+                     
+                     <div class="form-group">
+                         <label  class="col-sm-2 control-label no-padding-right" >参数标题</label>
+                         <div class="col-sm-9">
+                             <input type="text" class="form-control" id="param_name">
+                            
+                         </div>
+                     </div> 
+                        
+                       
+                        
+                         <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right" >辅助说明</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="remark">
+                                
+                            </div>
+                        </div> 
+                        
+                         <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">默认值</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control"  id="param_def">
+                                
+                            </div>
+                        </div>       
+                        
+                           
+                    </div>
+               
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="button" class="btn btn-azure"  id="createUser4" onclick="fn_add_param()">创建</button>
+                 </div>
+                 
+                </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+        
+             <!-- /Page Content -->
+     <!-- 修改参数 -->
+      <div class="modal fade" id="updateDataModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+     data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel1">修改参数</h4>
+                    <span class="hidden" id="updateIndex"></span>
+                </div>
+                 <form id="accountForm" method="post"  novalidate="novalidate" class="form-horizontal">
+                 
+                <div class="modal-body">
+                 <div class="form-group">
+                      <label  class="col-sm-2 control-label no-padding-right" >参数名<span class="red padding-left-5">*</span></label>
+                      
+                      <div class="col-sm-9">
+                          <input type="text" class="form-control" id="param_key1" onkeyup="checkName(this)">
+                         <p class="red alertmsg"></p>
+                      </div>
+                   </div>
+                     
+                     <div class="form-group">
+                         <label  class="col-sm-2 control-label no-padding-right" >参数标题</label>
+                         <div class="col-sm-9">
+                             <input type="text" class="form-control" id="param_name1">
+                            
+                         </div>
+                     </div> 
+                        
+                       
+                        
+                         <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right" >辅助说明</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="remark1">
+                                
+                            </div>
+                        </div> 
+                        
+                         <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">默认值</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control"  id="param_def1">
+                                
+                            </div>
+                        </div>       
+                        
+                           
+                    </div>
+               
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="button" class="btn btn-azure"  id="createUser1" onclick="fn_update_param()">修改</button>
+                 </div>
+                 
+                </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+        
+       <!--  添加输出定义 -->
+    <!-- <div class="modal fade" id="creatDataModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+data-backdrop="static" data-keyboard="false">
+   <div class="modal-dialog " >
+       <div class="modal-content">
+
+           <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+               <h4 class="modal-title" id="myLargeModalLabel">添加参数</h4>
+           </div>
+            <form id="accountForm" method="post"  novalidate="novalidate" class="form-horizontal">
+
+           <div class="modal-body">
+            <div class="form-group">
+                 <label  class="col-sm-2 control-label no-padding-right">参数名</label>
+                 <div class="col-sm-9">
+                     <input type="text" class="form-control" >
+
+                 </div>
+              </div>
+
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label no-padding-right">参数标题</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control">
+
+                    </div>
+                </div>
+
+                   <div class="form-group">
+                       <label  class="col-sm-2 control-label no-padding-right">类型</label>
+                       <div class="col-sm-9">
+                           <input type="text" class="form-control">
+
+                       </div>
+                   </div>
+
+                    <div class="form-group">
+                       <label  class="col-sm-2 control-label no-padding-right">辅助说明</label>
+                       <div class="col-sm-9">
+                           <input type="text" class="form-control">
+
+                       </div>
+                   </div>
+
+                    <div class="form-group">
+                       <label  class="col-sm-2 control-label no-padding-right">默认值</label>
+                       <div class="col-sm-9">
+                           <input type="text" class="form-control">
+
+                       </div>
+                   </div>
+
+
+               </div>
+
+             <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-azure"  id="createUser2">创建</button>
+            </div>
+
+           </form>
+           </div>
+       </div>
+        </div>/.modal-dialog -->
+		
+		
+		
+		   <!-- 添加参数 -->
+      <div class="modal fade" id="creatDataModal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+     data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel2">添加输出列</h4>
+                </div>
+                 <form id="accountForm2" method="post"  novalidate="novalidate" class="form-horizontal">
+                 
+                <div class="modal-body">
+                 <div class="form-group">
+                      <label  class="col-sm-2 control-label no-padding-right">维度ID</label>
+                      <div class="col-sm-9">
+                          <input type="text" class="form-control" >
+                         
+                      </div>
+                   </div>
+                     
+                     <div class="form-group">
+                         <label  class="col-sm-2 control-label no-padding-right">维度标题</label>
+                         <div class="col-sm-9">
+                             <input type="text" class="form-control">
+                            
+                         </div>
+                     </div> 
+                        
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">类型</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control">
+                                
+                            </div>
+                        </div>     
+                           
+                    </div>
+               
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure"  id="createUser3">创建</button>
+                 </div>
+                 
+                </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div>
+        		   <!-- 添加参数 -->
+      <div class="modal fade" id="creatDataModal3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+     data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel3">添加从 CMDB 中筛选主机列</h4>
+                </div>
+                
+                 
+                <div class="modal-body">
+                 
+                  <div class="col-sm-12 margin-top-10">
+                  <table class="table table-borderd" >
+                 <thead>
+                  <tr>
+                  <td></td>
+                  <td>IP</td>
+                    <td>集群标签</td>
+                    
+                        <td></td>
+                  </tr>
+                  </thead>
+                  <tbody id="host_table">
+                 
+                  </tbody> 
+                  </table>
+                  </div>
+                 
+                        
+                           
+                           
+                    </div>
+               
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure"  onclick="fn_append()">添加</button>
+                 </div>
+                 
+            
+                </div>
+            </div><!-- /.modal-content -->
+        </div>
+        
+ <!--    执行调试    -->
+        
+          <div class="modal fade" id="DebuggerModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false" style="display: none;"
+     data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel4">插件调试结果</h4>
+                </div>
+                 <form id="accountForm3" method="post"  novalidate="novalidate" >
+                
+                                   
+                <div class="modal-body">
+	                 <div class="row">
+                    <div class="col-sm-12">
+                
+					 <div class="well" id="networklist">
+					 	<div class="row margin-left-20">
+                       <div class="col-sm-12">
+                       <h2 id="filename_h"></h2>
+                      </div>
+                       
+                       <div class="col-sm-12 padding-top-10">
+                      
+                       	<div class="col-sm-6 no-padding-left"><strong class="padding-right-10">结果：</strong><span id="result_h"></span></div>
+                       <div class="col-sm-6">
+                       	 <strong>开始时间:</strong>
+                         <span class="padding-left-10" id="creattime_h"></span> 
+                       </div>  
+                       </div>
+                       
+                       <div class="col-sm-12 padding-top-20">
+                       	<div class="col-sm-6 no-padding-left">
+                       	<strong>目标主机：</strong><span class="padding-left-5" id="target_h"></span>
+                       </div>
+                        <div class="col-sm-6">
+                          <strong>耗时:</strong><span class="padding-left-5" id="cost_time_h"></span> 
+                        </div>
+                       </div>
+                       </div>
+                     </div>		
+		                   
+                       
+          		</div>
+          		
+          		<div class="col-sm-12">
+                	  	<div class="well">
+                	  	<div class="row">
+                	  <div class="col-sm-12">
+                	  <h6>详情</h6>
+                	  </div>
+                	  	
+		  					<div id="detail_u"></div>
+		  				
+                	  	
+                	  	
+                	  	</div>
+
+                	  	</div>
+                	  </div>
+          		
+          	</div>
+	                 
+	             
+	                       
+                    </div>
+               
+                 
+                  </form>
+                
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+
+    <!--成功提示信息-->
+    <div class="modal modal-message modal-info in" id="successmodal"  aria-hidden="true"
+         style="display:none;" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header no-padding-bottom">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+            <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+          </div>
+          <div class="modal-body" >
+            <div class="title1" id="successTitle"></div>
+
+          </div>
+          <div class="modal-footer padding-bottom-20">
+
+            <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!--错误失败提示信息-->
+    <div class="modal modal-message modal-info in" id="failmodal"  aria-hidden="true"
+         style="display:none;" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header no-padding-bottom">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+            <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+          </div>
+          <div class="modal-body" >
+            <p class="title1" id="failTitle"></p>
+            <div id="failSpan"></div>
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+        
+
+        <!-- /Page Container -->
+        <!-- Main Container -->
+       
+
+    <!--Basic Scripts-->
+     <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap-select.js"></script>
+     <script src="assets/js/select2/select2.min.js"></script>
+     <script src="assets/js/validation/bootstrapValidator.js"></script>
+     <script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+     <script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+       <script src="assets/js/codemirror/codemirror.js"></script>
+       <script src="assets/js/codemirror/python.js"></script>
+    <script src="./webcontent/platformsetting/js/market-creat.js"></script>
+

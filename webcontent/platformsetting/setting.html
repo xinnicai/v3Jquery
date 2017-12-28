@@ -1,0 +1,503 @@
+﻿
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+    <!--main.css-->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+     <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+     <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+     <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+
+     <!--     -->
+
+<!-- /Head -->
+<!-- Body  onload="initPage()"-->
+
+
+                <!-- Page Breadcrumb  title="Help"-->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                        <li >
+                            <a class="dropdown-toggle"  data-toggle="dropdown" href="#">
+                           <span>平台配置 <i class="fa fa-sort-desc"></i> </span>  </a>
+                            <ul class="dropdown-menu" >
+                                <li>
+                                    <a href="#/webcontent/platformsetting/setting.html">用户管理</a>
+                                </li>
+                                <li>
+                                    <a href="#/webcontent/platformsetting/roleManage.html" >角色管理</a>
+                                </li>
+                                <li>
+                                    <a href="#/webcontent/platformsetting/note_info.html" >公告信息</a>
+                                </li>
+                              
+                                <li>
+                                    <a href="#/webcontent/platformsetting/appReport.html" >统计报表</a>
+                                </li>
+                                  <li>
+                                    <a href="#/webcontent/platformsetting/menuManage.html" >菜单管理</a>
+                                </li>
+                                <li>
+                                    <a href="#/webcontent/platformsetting/baseData.html" >字典维护</a>
+                                </li>
+                                <li>
+                                    <a href="#/webcontent/platformsetting/model.html" >功能列表</a>
+                                </li>
+                                  <li>
+                                    <a href="#/webcontent/platformsetting/quotas.html" >配额管理</a>
+                                </li>
+                                 <li>
+                                    <a href="#/webcontent/platformsetting/Plug-In/market.html" >插件市场</a>
+                                </li>
+                                <li>
+                                    <a href="#/webcontent/platformsetting/powerGroupManage.html" >权限组管理</a>
+                                </li>
+                                 <!-- <li>
+                                    <a href="javascript:void(0);">插件市场</a>
+                                </li>-->                           
+                             </ul>
+                        </li>
+                        <li>用户管理</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                
+                <!-- Page Body -->
+                <div class="page-body">
+                <div id="sessionExpiredAlertBlock" class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		     			<span>会话失效，请重新登录! <a class="btn btn-danger" href="/iMonitor/login.jsp">登录</a></span>
+					</div>
+			
+					<div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" idden="true">&times;</span></button>
+			     		<span id="warningMsg"></span>
+					</div>
+				
+					<div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				     	<span id="successMsg"></span>
+					</div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                        <div class="widget">
+                        	<div class="widget-header bg-lightinfo">
+                        		用户管理可以新增用户、给用户分配资源、赋权、重置密码、以及锁定用户与激活用户等管理
+                        	</div>
+                        	<div class="widget-body">
+                        		
+                        		<div class="col-sm-6 no-padding-left margin-bottom-10">
+                        			<a class="btn btn-default" onclick="fnCreateApplication()" ><i class="fa fa-plus"></i>新增用户</a>
+                        			
+                        			
+                        	
+                        		</div>
+
+                        		<table class="table  table-hover table-bordered" id="editabledatatable">
+
+                                    </table>	
+
+                        	</div>
+                        </div>  
+                        
+                          
+                   
+                    </div>
+                  
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+
+        <!-- /Page Container -->
+        <!-- Main Container -->
+
+    
+   <!--  创建 -->
+     <div class="modal fade" id="creatApplition" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+     data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">创建用户</h4>
+                </div>
+                 <form id="accountForm" method="post"  novalidate="novalidate" class="form-horizontal">
+                 
+                <div class="modal-body">
+                     
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">用户名</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="username" id="username">
+                                <!-- <p class="help-block">由字母跟汉字组合.</p> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">密码</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control"  name="passwords" id="passwords"> 
+                            </div>
+                        </div>    
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">密码确认</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control"  name="compasswords" id="compasswords"> 
+                            </div>
+                        </div>      
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">姓名</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="name" id="name"> 
+                            </div>
+                        </div> 
+                         <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">手机号</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="telephone" id="telephone"> 
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">说明</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="explain" id="explain">
+                            </div>
+                        </div>
+                        <div class="form-group" id="checkBlock">
+                            <label  class="col-sm-2 control-label no-padding-right ">用户类型</label>
+                            <div class="col-sm-7 ">
+                                <div class="col-lg-6 col-sm-6 col-xs-6 ">
+                                    <div class="radio">
+                                        <label>
+                                            <input name="checkRadio" type="radio" class="colored-blue" aaaa="icloud" checked required="false">
+                                            <span class="text">平台用户</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 col-xs-6 ">
+                                    <div class="radio">
+                                        <label>
+                                            <input name="checkRadio" type="radio" class="colored-blue" aaaa="interface" required="false">
+                                            <span class="text">接口用户</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- <div class="form-group">
+                       <label  class="col-sm-2 control-label no-padding-right">选择用户组</label>
+                       <div class="col-sm-9">
+                           <select type="text" class="form-control" name="selectGroup" id="selectGroup">
+                               <option value="1">测试组</option>
+                               <option value="2">研发组</option>
+                           </select>
+                       </div>
+                   </div>  -->
+                <div id="icloudBlock" class="">
+                        <div class="form-group" id="select_roleBlock">
+                            <label  class="col-sm-2 control-label no-padding-right">选择角色</label>
+                            <div class="col-sm-9">
+                                <select class="selectpicker form-control" title="请选择角色"
+				                      data-actions-box="true" data-live-search="true" name="select_role" id="select_role">
+				                <option></option>
+				              </select>
+                            </div>
+                        </div> 
+                         <div class="form-group" id="select_powerBlock">
+                            <label  class="col-sm-2 control-label no-padding-right">应用权限</label>
+                            <div class="col-sm-9">
+                            	<select class="selectpicker form-control" multiple   title="请选择权限"
+				                      data-actions-box="true" data-live-search="true" name="select_power" id="select_power">
+				                <option></option>
+				              </select>
+                               
+                            </div>
+                        </div> 
+                        <div class="form-group" id="modal_objectBlock">
+                            <label  class="col-sm-2 control-label no-padding-right">功能权限</label>
+                            <div class="col-sm-9">
+                                 <select class="selectpicker form-control" multiple   title="请选择模型"
+				                      data-actions-box="true" data-live-search="true" name="modal_object" id="modal_object">
+				                <option></option>
+				              </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="interfaceBlock" class="hidden">
+                        <div class="form-group" id="modal_objectBlock1">
+                            <label  class="col-sm-2 control-label no-padding-right">功能权限</label>
+                            <div class="col-sm-9">
+                                <select class="selectpicker form-control" multiple   title="请选择模型"
+                                        data-actions-box="true" data-live-search="true" name="modal_object1" id="modal_object1">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                 </div>
+
+
+               
+                  <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure"  id="createUser1">创建</button>
+                </div>
+                 
+                </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+        
+      <!--  编辑  -->
+        <div class="modal fade" id="updateApplition" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+        data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="LargeModalLabel">编辑用户</h4>
+                    <span id="basedataid" class="hidden"></span>
+                    <span id="save_user_type" class="hidden"></span>
+                </div>
+                 <form id="updateForm" method="post"  novalidate="novalidate" class="form-horizontal">
+                 
+                <div class="modal-body">
+                     
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">用户名</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="username" id="username_U">
+                                <!-- <p class="help-block">由字母跟汉字组合.</p> -->
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">密码</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control"  name="passwords" id="passwords_U"> 
+                            </div>
+                        </div>    
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">密码确认</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control"  name="compasswords" id="compasswords_U"> 
+                            </div>
+                        </div>    -->   
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">姓名</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="name" id="name_U"> 
+                            </div>
+                        </div> 
+                         <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">手机号</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="telephone" id="telephone_U"> 
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">说明</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="explain" id="explain_U"> 
+                            </div>
+                        </div>  
+                         <!-- <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">选择用户组</label>
+                            <div class="col-sm-9">
+                                <select type="text" class="form-control" name="selectGroup" id="selectGroup_U"> 
+                                	<option value="1">测试组</option>
+                                	<option value="2">研发组</option>
+                                </select>	
+                            </div>
+                        </div>  -->
+                    <div id="updateIcloud" >
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">选择角色</label>
+                            <div class="col-sm-9">
+                            <select class="selectpicker form-control" title="请选择角色"
+				                      data-actions-box="true" data-live-search="true" name="select_role" id="select_role_U">
+				                <option></option>
+				              </select>
+                                	
+                            </div>
+                        </div> 
+                         <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">应用权限</label>
+                            <div class="col-sm-9">
+                                <select class="selectpicker form-control" multiple   title="请选择权限"
+				                      data-actions-box="true" data-live-search="true" name="select_power" id="select_power_U">
+				                <option></option>
+				              </select>	
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">功能权限</label>
+                            <div class="col-sm-9">
+                                <select class="selectpicker form-control" multiple   title="请选择模型"
+                                        data-actions-box="true" data-live-search="true" name="modal_object" id="modal_object_U">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="updateInterface">
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">功能权限</label>
+                            <div class="col-sm-9">
+                             <select class="selectpicker form-control" multiple   title="请选择模型"
+				                      data-actions-box="true" data-live-search="true" name="modal_object1" id="modal_object_U1">
+				                <option></option>
+				              </select>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    </div>
+               
+                  <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure"  id="createUser">更新</button>
+                </div>
+                 
+                </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+        
+        
+        <!-- 用户锁定 -->
+     <div id="clockUser" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true"
+     	data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+                </div>
+                <div class="modal-body"><span class="title1">确定要锁定用户?</span></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="clock()">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+    <!-- 用户解锁 -->
+     <div id="unclockUser" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true"
+     	data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+                </div>
+                <div class="modal-body">确定要解锁用户?</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="unclock()">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+    
+    <!-- 密码重置 -->
+     <div id="resetPasswd" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true" 
+      data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+                </div>
+                <div class="modal-body">确定要将密码重置为   Sddcos.123?</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="resetpawd()">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+    
+    <!-- 删除 用户 -->
+     <div id="DeleteUser" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true" 
+      data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+                </div>
+                <div class="modal-body">确定要删除用户?</div>
+                <span id="deleteID" class="hidden"></span>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="deleteData()">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+
+    <!--成功提示信息-->
+    <div class="modal modal-message modal-info in" id="successmodal"  aria-hidden="true"
+         style="display:none;" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header no-padding-bottom">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+            <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+          </div>
+          <div class="modal-body" >
+            <div class="title1" id="successTitle"></div>
+
+          </div>
+          <div class="modal-footer padding-bottom-20">
+
+            <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!--错误失败提示信息-->
+    <div class="modal modal-message modal-info in" id="failmodal"  aria-hidden="true"
+         style="display:none;" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header no-padding-bottom">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+            <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+          </div>
+          <div class="modal-body" >
+            <p class="title1" id="failTitle"></p>
+            <div id="failSpan"></div>
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap-select.js"></script>
+     <script src="assets/js/select2/select2.min.js"></script>
+   <script src="assets/js/validation/bootstrapValidator.js"></script>
+    <script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+   <script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+  
+
+   <script src="./webcontent/platformsetting/js/setting.js"></script>
+

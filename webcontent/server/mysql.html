@@ -1,0 +1,557 @@
+
+    <!--Basic Styles-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--main.css-->
+    <link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                    	
+                        <li>
+                           
+                       <a href="#/webcontent/server/servercluster.html"> 服务集成</a>
+                        </li>
+                         
+                        <li class="active">Mysql</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Body -->
+                <div class="page-body">
+                	<div class="row">	
+                	   <div class="col-sm-12">
+                		  <div class="widget">
+                            <div class="widget-header bg-lightinfo">
+                                <span >mysql是一个分布式的，开放源码的分布式应用程序协调服务，是Google的Chubby一个开源的实现，是Hadoop和Hbase的重要组件。它是一个为分布式应用提供一致性服务的软件，提供的功能包括：配置维护、域名服务、分布式同步、组服务等。</span>
+                            </div>
+                            <div class="widget-body padding-30">
+                              <div>
+                                 <form id="accountForm" method="post" class="form-horizontal bv-form" novalidate="novalidate" role="form">
+                                   <div class="form-group padding-bottom-10">
+                                     <label  class="col-sm-2 control-label">资源池</label>
+                                     <div class="col-lg-9 col-md-10 col-sm-10 col-xs-10  col-xs-10" id="ResourcesPool">
+                                     </div>
+                                   </div>
+                                   <div class="form-group padding-bottom-10">
+                                     <label  class="col-sm-2 control-label">集群</label>
+                                     <div class="col-lg-9 col-md-10 col-sm-10 col-xs-10  col-xs-10" id="cluster">
+                                     </div>
+                                   </div>
+                                   <div class="form-group padding-bottom-10">
+                                         <label  class="col-sm-2 control-label">系统名称</label>
+                                         <div class="col-sm-10">
+                                           <div class="col-sm-3 no-padding-left">
+                                             <select   id="firstResource" name="selectcheck" style="width:100%">
+                                             </select>
+                                           </div>
+                                           <div class="col-sm-3">
+                                             <select  id="secondResource" name="selectcheck" style="width:100%">
+                                             </select>
+                                           </div>
+                                           <div class="col-sm-3">
+                                             <select  id="thirdResource" name="selectcheck" style="width:100%">
+                                             </select>
+                                           </div>
+                                         </div>
+                                      </div>
+                                   <div class="form-group padding-bottom-10">
+                                         <label  class="col-sm-2 control-label">节点信息</label>
+                                         <div class="col-lg-9 col-md-10 col-sm-10 col-xs-10  col-xs-10" id="slave_info">
+                                           <a class="btn btn-info cpunum">单节点</a>
+                                           <a class="btn btn-default">多节点</a>
+                                         </div>    
+                                      </div>
+
+                                        <div class="form-group version padding-bottom-10">
+                                           <label  class="col-sm-2 control-label ">选择版本</label>
+                                          <div class="col-sm-8 ">
+
+                                            <div class="col-sm-10 no-padding">
+                                              <div class="col-sm-12 no-padding">
+                                                <select id="version" class="control-select" style="margin-left:0;">
+                                                  <option value="mysql-5.6">mysql-5.6</option>
+                                                  <option value="mysql-5.7">mysql-5.7</option>
+                                                </select>
+                                              </div>
+
+                                              <div class="col-sm-12 no-padding margin-top-20" style="display: none;" id="config">
+                                                <!--<div class="form-title margin-top-20"><strong>线程值配置</strong></div>-->
+                                                <div class="col-sm-6 no-padding">
+                                                    <label>缓冲池大小<a href="javascript:void(0);" class="padding-left-5 tooltip-info" data-container="body" data-toggle="popover-hover" data-placement="top" data-title="" data-content="<h6><strong>innodb_buffer_pool_size</strong><h6><p>建议设置成内存的70%--80%</p>" data-original-title="" title=""><i class="fa  fa-question-circle-o"></i></a>
+
+                                                    </label>
+                                                    <input type="text" class="form-control" id="innodb_buffer_pool_size">
+
+                                                </div>
+
+
+                                                <div class="col-sm-6 no-padding-right">
+                                                    <label>日志大小<a href="#" class="padding-left-5 tooltip-info" data-container="body" data-toggle="popover-hover" data-placement="top" data-title="" data-content="<h6><strong>innodb_log_file_size</strong><h6><p>单个日志文件大小</p>" data-original-title="" title=""><i class="fa  fa-question-circle-o"></i></a></label>
+                                                    <input type="text" class="form-control" id="innodb_log_file_size">
+
+                                                </div>
+
+                                                <div class="col-sm-6 margin-top-20 no-padding">
+                                                    <label>日志磁盘缓冲<a href="#" class="padding-left-5 tooltip-info" data-container="body" data-toggle="popover-hover" data-placement="top" data-title="" data-content="<h6><strong>innodb_log_buffer_size</strong><h6><p>日志写入磁盘的缓冲池大小</p>" data-original-title="" title=""><i class="fa  fa-question-circle-o"></i></a></label>
+                                                    <input type="text" class="form-control" id="innodb_log_buffer_sizele_size">
+                                                </div>
+
+                                                <div class="col-sm-6 margin-top-20 no-padding-right">
+                                                    <label>最大连接数<a href="#" class="padding-left-5" data-toggle="popover-hover" data-placement="top" data-title="" data-content="<h6><strong>max_connections</strong><h6><p>客户端连接数据库的最大链接数</p>" data-original-title="" title=""><i class="fa  fa-question-circle-o"></i></a></label>
+                                                    <input type="text" class="form-control" id="max_connections">
+                                                </div>
+
+                                                <div class="col-sm-6 margin-top-20 no-padding">
+                                                    <label>是否区分表的大小写<a href="#" class="padding-left-5" data-toggle="popover-hover" data-placement="top" data-title="" data-content="<h6><strong>lower_case_table_names</strong><h6><p>1代表不区分表的大小写，0代表区分</p>" data-original-title="" title=""><i class="fa  fa-question-circle-o"></i></a></label>
+                                                    <input type="text" class="form-control" id="lower_case_table_names">
+                                                </div>
+
+                                                <div class="col-sm-6 margin-top-20 no-padding-right">
+                                                    <label>最大连接错误数<a href="#" class="padding-left-5" data-toggle="popover-hover" data-placement="top" data-title="" data-content="<h6><strong>max_connect_errors</strong><h6><p>负责阻止过多尝试失败的客户端以防止暴力破解密码的情况</p>" data-original-title="" title=""><i class="fa  fa-question-circle-o"></i></a></label>
+                                                    <input type="text" class="form-control" id="max_connect_errors">
+                                                </div>
+
+
+                                                <div class="col-sm-6 margin-top-20 no-padding">
+                                                    <label>mysql实例名<a href="#" class="padding-left-5" data-toggle="popover-hover" data-placement="top" data-title="" data-content="<h6><strong>server-id</strong><h6><p>设置id（做主从的时候需要）</p>" data-original-title="" title=""><i class="fa  fa-question-circle-o"></i></a></label>
+                                                    <input type="text" class="form-control" id="">
+                                                </div>
+
+                                                <div class="col-sm-6 margin-top-20 no-padding-right">
+                                                    <label>二进制日志文件保存期<a href="#" class="padding-left-5" data-toggle="popover-hover" data-placement="top" data-title="" data-content="<h6><strong>expire_logs_days</strong><h6><p>默认0，永久保存</p>" data-original-title="" title=""><i class="fa  fa-question-circle-o"></i></a></label>
+                                                    <input type="text" class="form-control" id="expire_logs_days">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-sm-2 padding-top-5" style="font-size:14px"><a hredf="javascript:;" class="darkgray" onclick="showcongig()"><i class="fa fa-cog"></i></a></div>
+
+                                          </div>
+                                        </div>
+
+                                         <div class="form-group padding-botttom-10">
+                                            <label  class="col-sm-2 control-label">容器配置</label>
+                                           <div class="col-sm-8  list-jd " id="con_configure">
+                                             <div class="col-sm-12 no-padding">
+                                               <div class="con_configureX">
+                                             <a class="jd pull-left margin-right-10 " href="javascript:;">
+                                               <div class="panel panel-default con_configure active" onclick="fnSelectConfigure(this)">
+                                                 <div class="panel-heading text-center cpu_mem">
+                                                   2核/4GB
+                                                 </div>
+                                                 <div class="panel-body text-center  darkgray" style="padding:10px 30px">
+                                                   最低配置
+                                                 </div>
+                                               </div>
+                                             </a>
+
+                                             <a class="jd pull-left margin-right-10" href="javascript:;">
+                                               <div class="panel panel-default con_configure" onclick="fnSelectConfigure(this)">
+                                                 <div class="panel-heading text-center cpu_mem">
+                                                   3核/6GB
+                                                 </div>
+                                                 <div class="panel-body text-center darkgray" style="padding:10px 30px">
+                                                   标准配置
+                                                 </div>
+                                               </div>
+                                             </a>
+                                             <a class="jd pull-left margin-right-10" href="javascript:;">
+                                               <div class="panel panel-default con_configure" onclick="fnSelectConfigure(this)">
+                                                 <div class="panel-heading text-center cpu_mem">
+                                                   4核/8GB
+                                                 </div>
+                                                 <div class="panel-body text-center darkgray" style="padding:10px 30px">
+                                                   最高配置
+                                                 </div>
+                                               </div>
+                                             </a>
+                                               </div>
+
+                                             <a class="jd pull-left margin-right-10" href="javascript:;">
+                                               <div class="panel panel-default con_configure" onclick="fnSelectConfigure(this)">
+                                                 <div class="panel-heading text-center" style="padding:10px 30px;font-size:21px">
+                                                   <i class="glyphicon glyphicon-plus"></i>
+                                                   <h6 class="no-margin-bottom">自定义</h6>
+                                                 </div>
+
+                                               </div>
+                                             </a>
+                                           </div>
+                                           </div>
+                                            <!--<div class="col-lg-9 col-md-10 col-sm-10 col-xs-10  col-xs-10" id="CPU">
+                                              <a class="btn btn-default">2C</a>
+                                              <a class="btn btn-info cpunum">3C</a>
+                                              <a class="btn btn-default">4C</a>
+                                              <a class="btn btn-default">5C</a>
+                                              <a class="btn btn-default">6C</a>
+                                              <a class="btn btn-default">7C</a>
+                                              <a class="btn btn-default">8C</a>
+                                              <a class="btn btn-default">9C</a>
+                                              <a class="btn btn-default">10C</a>
+                                              <a class="btn btn-default">11C</a>
+                                              <a class="btn btn-default">12C</a>
+                                            </div>-->
+                                        </div>
+                                        
+                                        <!-- <div class="form-group">
+                                            <label  class="col-sm-2 control-label">内存</label>
+                                           <div class="col-sm-9 margin-top-10">
+                                            	<div class="col-sm-8 no-padding-left">
+                                            		  <div id="sample-onehandle" class="slider-xs" name="mem"></div>
+                                            	</div>
+                                                <div class="col-sm-2  no-padding-right" style="margin-top:-10px">
+                                            	<input type="number" class="form-control" value="3" id="mem" onkeyup="change(this)" />
+                                            </div>
+                                             <div class="col-sm-2" style="margin-top:-5px">
+                                            	<p class="no-padding-left">GB</p>
+                                            </div>
+                                            </div>    
+                                        </div>-->
+                                        <div class="form-group padding-bottom-10">
+                                            <label  class="col-sm-2 control-label">磁盘</label>
+                                          <div class="col-sm-8">
+                                            <div class="col-sm-10 no-padding">
+                                              <input type="text" class="form-control" id="sys_disk">
+                                            </div>
+
+                                            <div class="col-sm-2" style="margin-top:5px">
+                                              <p class="no-padding-left">GB</p>
+                                            </div>
+                                          </div>
+
+                                        </div>
+                                      <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-8 padding-bottom-30">
+                                            <button type="button" class="btn btn-azure btn-block" onclick="fnajax()">创建</button>
+                                        </div>
+                                      </div> 
+                                      
+                                  </form>
+                                </div>
+                            </div>
+                        </div>
+		          </div>   
+              </div>
+                <!-- /Page Body -->
+            </div>
+
+
+    
+    <!-- 忙等待 -->
+<div class="modal in" id="tips" style="display:none">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body" style="font-size:15px;font-weight:bold">
+				<span></span><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+				<span class="sr-only"></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--成功提示框-->
+    <!--成功提示信息-->
+    <div class="modal modal-message modal-info in" id="successmodal"  aria-hidden="true"
+         style="display:none;" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header no-padding-bottom">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+            <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+          </div>
+          <div class="modal-body" >
+            <p class="title1">服务创建成功</p>
+            <p >服务地址：<span class="info" id="sever_address"></span></p>
+            <p >用户名：<span class="info" id="sever_user"></span></p>
+            <p >密码：<span class="info" id="sever_Password"></span></p>
+            <p class="hidden">密码：<span class="info" id="sever_id"></span></p>
+
+          </div>
+          <div class="modal-footer padding-bottom-20">
+
+            <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="fnHerf()">好的，我知道了</button>
+
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <!--错误失败提示信息-->
+    <div class="modal modal-message modal-info in" id="failmodal"  aria-hidden="true"
+         style="display:none;" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header no-padding-bottom">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+            <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+          </div>
+          <div class="modal-body" >
+            <p class="title1">服务创建失败</p>
+            <p id="failSpan"></p>
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+<!--<div class="modal modal-message modal-info fade" id="MsgAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="zeromodal-icon show-zero2 zeromodal-icon-question">×</div>
+        <h4 id="MsgAlertTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <h2 id="MsgAlertContent"></h2>
+      </div>
+      <div class="modal-footer padding-bo">
+      <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">确定</button>
+      </div>
+    </div>
+  </div>
+</div>-->
+
+    <!--  自定义配置-->
+    <div class="modal fade" id="addConfigureModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+         data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog " >
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">容器配置自定义</h4>
+          </div>
+          <form id="configureForm" method="post"  novalidate="novalidate" class="form-horizontal">
+
+            <div class="modal-body">
+
+              <!--<div class="form-group">
+                <label  class="col-sm-2 control-label">CPU</label>
+                <div class="col-sm-9 margin-top-10">
+                  <div class="col-sm-8 no-padding-left">
+                    <div id="sample-onehandle4" class="slider-xs" name="con_CPU"></div>
+                  </div>
+                  <div class="col-sm-3  no-padding-right" style="margin-top:-10px">
+                    <input type="text" class="form-control" value="0" id="con_CPU" onkeyup="change(this,'15')" disabled/>
+                  </div>
+                  <div class="col-sm-1" style="margin-top:-5px">
+                    <p class="no-padding-left">核</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label  class="col-sm-2 control-label">内存</label>
+                <div class="col-sm-9 margin-top-10">
+                  <div class="col-sm-8 no-padding-left">
+                    <div id="sample-onehandle5" class="slider-xs" name="con_mem"></div>
+                  </div>
+                  <div class="col-sm-3  no-padding-right" style="margin-top:-10px">
+                    <input type="text" class="form-control" value="0" id="con_mem" onkeyup="change(this,'40')" disabled/>
+                  </div>
+                  <div class="col-sm-1" style="margin-top:-5px">
+                    <p class="no-padding-left">GB</p>
+                  </div>
+                </div>
+              </div>-->
+              <div class="form-group">
+                <label  class="col-sm-2 control-label">CPU</label>
+                <div class="col-sm-9 margin-top-10">
+                  <div class="col-sm-11 no-padding-left" style="margin-top:-10px;" id="con_CPU">
+                    <div class="input-group" style="display:none;">
+                      <input type="text" class="form-control" id="dataTypei" name="type" placeholder="输入CPU" onkeyup="value=value.replace(/[^\d.]/g,'')"
+                             data-bv-field="type"><i class="form-control-feedback" data-bv-field="type" style="display: none;"></i>
+                      <span class="input-group-btn">
+				                    <button class="btn btn-default" type="button" onclick="closeInput(this);">
+				                      <i class="fa fa-remove"></i>
+				                    </button>
+				                  </span>
+                    </div>
+                    <select class="form-control" style="width:100%">
+                      <option value="0.5">0.5</option>
+                      <option value="1">1</option>
+                      <option value="1.5">1.5</option>
+                      <!--<option value="">新增</option>-->
+                    </select>
+                  </div>
+                  <!--<div class="col-sm-8 no-padding-left">
+                    <div id="sample-onehandle4" class="slider-xs" name="con_CPU"></div>
+                  </div>-->
+                  <!--<div class="col-sm-12  no-padding-right">
+                    <input type="text" value="0" id="con_CPU" onkeyup="change(this,'15')" />
+                  </div>-->
+                  <div class="col-sm-1" style="margin-top:-5px">
+                    <p class="no-padding-left">核</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label  class="col-sm-2 control-label">内存</label>
+                <div class="col-sm-9 margin-top-10">
+                  <div class="col-sm-11 no-padding-left" style="margin-top:-10px;" id="con_mem">
+                    <div class="input-group" style="display:none;">
+                      <input type="text" class="form-control"  name="type" placeholder="输入内存" onkeyup="value=value.replace(/[^\d.]/g,'')"
+                             data-bv-field="type"><i class="form-control-feedback" data-bv-field="type" style="display: none;"></i>
+                      <span class="input-group-btn">
+				                    <button class="btn btn-default" type="button" onclick="closeInput(this);">
+				                      <i class="fa fa-remove"></i>
+				                    </button>
+				                  </span>
+                    </div>
+                    <select  class="form-control" style="width:100%">
+                      <option value="0.25">0.25</option>
+                      <option value="0.5">0.5</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <!--<option value="">新增</option>-->
+                    </select>
+                  </div>
+                  <!--<div class="col-sm-8 no-padding-left">
+                    <div id="sample-onehandle5" class="slider-xs" name="con_mem"></div>
+                  </div>
+                  <div class="col-sm-3  no-padding-right" style="margin-top:-10px">
+                    <input type="text" class="form-control" value="0" id="con_mem" onkeyup="change(this,'40')" />
+                  </div>-->
+                  <div class="col-sm-1" style="margin-top:-5px">
+                    <p class="no-padding-left">GB</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-azure"  data-dismiss="modal" id="createCPUmem">确定</button>
+            </div>
+
+          </form>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
+ <!--  创建系统 -->
+   <!--  <div class="modal fade" id="creatSysModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;"
+     data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">创建资源配额</h4>
+                </div>
+                 <form id="accountForm" method="post"  novalidate="novalidate" class="form-horizontal">
+                 
+                <div class="modal-body">
+                	<div class="form-group">
+                          <label  class="col-sm-2 control-label">系统名称</label>
+                         <div class="col-sm-9">
+                          	<input type="text" class="form-control"  name="dataKey" id="sys_sysname"> 
+                          </div>    
+                      </div> 
+                      <div class="form-group">
+                          <label  class="col-sm-2 control-label">系统标签</label>
+                         <div class="col-sm-9">
+                          	<input type="text" class="form-control"  name="dataKey" id="sys_syslable"> 
+                          </div>    
+                      </div>  
+                    <div class="form-group">
+                          <label  class="col-sm-2 control-label">CPU</label>
+                         <div class="col-sm-9 margin-top-10">
+                          	<div class="col-sm-8 no-padding-left">
+                          		  <div id="sample-onehandlecpu" class="slider-xs" name="sys_CPU"></div>
+                          	</div>
+                              <div class="col-sm-3  no-padding-right" style="margin-top:-10px">
+                          	<input type="number" class="form-control" value="0" id="sys_CPU" onkeyup="change(this)" />
+                          </div>
+                           <div class="col-sm-1" style="margin-top:-5px">
+                          	<p class="no-padding-left">核</p>
+                          </div>
+                          </div>    
+                      </div>  
+                     
+                        <div class="form-group">
+                          <label  class="col-sm-2 control-label">内存</label>
+                         <div class="col-sm-9 margin-top-10">
+                          	<div class="col-sm-8 no-padding-left">
+                          		  <div id="sample-onehandlemem" class="slider-xs" name="sys_mem"></div>
+                          	</div>
+                              <div class="col-sm-3  no-padding-right" style="margin-top:-10px">
+                          	<input type="number" class="form-control" value="0" id="sys_mem" onkeyup="change(this)" />
+                          </div>
+                           <div class="col-sm-1" style="margin-top:-5px">
+                          	<p class="no-padding-left">GB</p>
+                          </div>
+                          </div>    
+                      </div>  
+                        
+                         <div class="form-group">
+                          <label  class="col-sm-2 control-label">磁盘</label>
+                         <div class="col-sm-9 margin-top-10">
+                          	<div class="col-sm-8 no-padding-left">
+                          		  <div id="sample-onehandledisk" class="slider-xs" name="sys_disk"></div>
+                          	</div>
+                              <div class="col-sm-3  no-padding-right" style="margin-top:-10px">
+                          	<input type="number" class="form-control" value="0" id="sys_disk" onkeyup="change(this)" />
+                          </div>
+                           <div class="col-sm-1" style="margin-top:-5px">
+                          	<p class="no-padding-left">GB</p>
+                          </div>
+                          </div>    
+                      </div>  
+                        
+                           
+                    </div>
+
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="submit" class="btn btn-azure"  id="createUser">创建</button>
+                 </div>
+                 
+                </form>
+                </div>
+            </div>&lt;!&ndash; /.modal-content &ndash;&gt;
+        </div>--><!-- /.modal-dialog -->
+    <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <script src="assets/js/skins.min.js"></script>
+    <script src="assets/js/beyond.min.js"></script>
+    <script src="assets/js/validation/bootstrapValidator.js"></script>
+
+    <script src="assets/js/bootstrap-select.js"></script>
+    <script src="assets/js/select2/select2.min.js"></script>
+    <script src="assets/js/slider/jquery.nouislider.js"></script>
+   <script src="webcontent/server/js/mysql.js"></script>
+    <script>
+      function showcongig(){
+        if($('#config').is(':hidden')){//如果当前隐藏
+          $('#config').show();//那么就显示div
+        }else{//否则
+          $('#config').hide();//就隐藏div
+        }
+      }
+
+
+
+
+
+    </script>
+

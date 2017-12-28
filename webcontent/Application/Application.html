@@ -1,0 +1,1636 @@
+
+    <!--Basic Styles-->
+    <link href="assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="plugin/uploadify/Huploadify.css" rel="stylesheet" />
+    <link href="assets/js/select2/select2.min.css" rel="stylesheet"/>
+    <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+    <!--<link href="assets/css/main.css" rel="stylesheet" type="text/css" />-->
+    <!--main.css-->
+    <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+     <style>
+       .fixed-table-container{border:none}
+       .warningcontainer .table>thead>tr>th{padding:0px}
+       .fixed-table-body{overflow:inherit;}
+      /* #clustertab li{list-style: none;padding:10px 0;font-size: 14px;color:#000000;cursor:pointer}
+       #clustertab li.active{background-color: #F5F5F5}*/
+        a.btn{border-radius: 0;}
+       .page-sidebar .sidebar-menu li.application :before{display:none;content:"";
+         position:absolute;top:0;bottom:0;right:-4px;width:4px;
+         max-width:4px;overflow:hidden;background-color:#384459}
+       .evenwidth{
+         /*Firefox*/
+         min-width:-moz-calc(100vw - 502px);
+           /*chrome safari*/
+         min-width:-webkit-calc(100vw - 502px);
+           /*Standard */
+         min-width:calc(100vw - 502px);
+         max-width:-moz-calc(100vw - 284px);
+         max-width:-webkit-calc(100vw - 284px);
+         /*Standard */
+         max-width:calc(100vw - 284px);
+       }
+     </style>
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="#/webcontent/Application/Applist.html">应用列表</a>
+                        </li>
+                        <li id="zstest"></li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Body -->
+                <div class="page-body">
+                
+                <div id="sessionExpiredAlertBlock" class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		     			<span>会话失效，请重新登录! <a class="btn btn-danger" href="/iMonitor/login.jsp">登录</a></span>
+					</div>
+			
+					<div id="warningAlertBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#warningAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			     		<span id="warningMsg"></span>
+					</div>
+				
+					<div id="successAlertBlock" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#successAlertBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				     	<span id="successMsg"></span>
+					</div>
+                   <div class="row">
+                   	<div class="col-sm-12">
+					 <div class="well">
+					 	<div class="row">
+                      
+                       
+                       
+                       <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
+                       <div class="col-lg-7 col-md-4 col-sm-4 no-padding-left">
+                       	<h2 id="appName"></h2>
+                       		<span class="app-status running" title="">
+							<span id="app-info-status" class="hidden"></span>
+							<!-- <span class="tasks-summary" id="app-info-instances">(1 of 1 instances)</span> -->
+						</span>
+                       	<!--<div class="progress health-bar col-sm-4" style="padding:0;margin:4px 4px 0 0;" data-reactid=".0.1.1.0.2.0">
+                             <div class="progress-bar health-bar-healthy" style="width:0%;" id="app-info-progress-healthy"></div>
+                             <div class="progress-bar health-bar-unhealthy" style="width:0%;" id="app-info-progress-unhealthy"></div>
+                             <div class="progress-bar health-bar-unknown " style="width:0%;" id="app-info-progress-unknown"></div>
+                             <div class="progress-bar health-bar-staged" style="width:100%;" id="app-info-progress-staged"></div>
+                             <div class="progress-bar health-bar-over-capacity" style="width:0%;" id="app-info-progress-over-capacity"></div>
+                             <div class="progress-bar health-bar-unscheduled" style="width:0%;" id="app-info-progress-unscheduled"></div>
+                             &lt;!&ndash; <div class="loading-bar"></div> &ndash;&gt;
+                         </div>-->
+                       </div>
+                         <div class="col-lg-5 col-md-8 col-sm-8 col-xs-12 text-align-right margin-bottom-10">
+                         <a href="javascript:void(0);"  class="btn btn-azure btn-sm hidden" id="deployButton"onclick="showrerlease()"><i class="fa fa-file-o" ></i>发布</a>
+                       	<a class="btn btn-azure btn-sm hidden" id="appStop" onclick="fnDoModalShow()"><i class="fa  fa-pause"></i>暂停</a>
+                             <a class="btn btn-azure btn-sm hidden" href="javascript:void(0);" id="RestartapplicationBtn" ><i class="fa fa-refresh"></i>重启</a>
+                       	<a class="btn btn-danger btn-sm hidden" id="undeployment"><i class="fa   fa-minus-square-o"></i>取消部署</a>
+                       	 <div class="btn-group hidden" id="moreAppBtn">
+                                    <a class="btn  btn-azure btn-sm" href="javascript:void(0);"><i class="fa fa fa-th"></i>更多操作</a>
+                                    <a class="btn  btn-azure btn-sm dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><i class="fa fa-angle-down"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:void(0);" id="doScaleAppBtn" ><i class="padding-right-5 fa fa-exchange hidden"></i>手动扩缩</a>
+                                        </li>
+                                        
+                                        <li>
+                                            <a href="javascript:void(0);" id="autoApplitionBtn"  ><i class="padding-right-5 fa  fa-random hidden"></i>自动扩缩</a>
+                                        </li>
+                                      <li>
+                                        <a href="javascript:void(0);" id="updateBtn"  ><i class="padding-right-5 fa fa-edit hidden"></i>更改发布方式</a>
+                                      </li>
+                                         <!-- <li>
+                                            <a href="javascript:void(0);"  data-toggle="modal" data-target="#Cluster"><i class="padding-right-5 fa  fa-th-large"></i>集群分配</a>
+                                        </li>
+                                          <li>
+                                            <a href="javascript:void(0);"  data-toggle="modal" data-target="#modal-info"><i class="padding-right-5 fa  fa-th-large"></i>测试</a>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                       </div>
+                       
+                       
+                       	
+                       </div>
+                       <div class="col-lg-12 col-md-12 col-sm-12 no-padding-left ">
+                       	<div class="col-lg-8 col-md-6 col-sm-4 margin-top-5" id="clusterstatus">
+                       	</div>
+                     
+                        </div>
+                       <div class="col-sm-12 margin-top-10">
+                      
+                       	<div class="col-lg-6 col-md-6  col-sm-12 no-padding-left">
+                       		<strong class="padding-right-10">应用ID:</strong>
+                       		<span class="padding-left-5 silver" id="appID" style="word-wrap:break-word;word-break:break-all"></span></div>
+                       <div class="col-lg-6 col-md-6  col-sm-12 no-padding-left">
+                       	 <strong>容器规格:</strong>
+                         <ul class="breadcrumb">
+                        <li> CPU:<span id="CPU"></span>(核)</li>
+                        <li>内存：<span id="mem"></span>（MB）</li>
+                        <li>磁盘：<span id="disk"></span>（MB）</li>
+                    </ul>
+                       	
+                       </div>  
+                       </div>
+                       
+                       <div class="col-sm-12  margin-top-10">
+                       	<div class="col-lg-6 col-md-6  col-sm-12 no-padding-left">
+                       	  <strong  class="padding-right-10">创建时间:</strong><span class="padding-left-5 silver" id="create_time"></span> 	
+                       	
+                       </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 no-padding-left">
+                        <strong  class="padding-right-10">镜像地址：</strong><span class="padding-left-5 silver" id="image_url"></span>
+                        </div>
+                       </div>
+                       
+                       <div class="col-sm-12  margin-top-10">
+	                       	<div class="col-lg-6 col-md-6  col-sm-12 no-padding-left">
+	                       	  <strong  class="padding-right-10">弹性扩缩:</strong><span class="padding-left-5 silver" id="autoscale_policy"></span> 	
+	                       	
+	                       </div>
+	                       <div class="col-lg-6 col-md-6  col-sm-12 no-padding-left">
+	                       	 <strong   class="padding-right-10">发布方式:</strong><span class="padding-left-5 silver" id="cluster_list" label=""></span>
+		                       
+	                       </div>
+                       </div>
+                       <!--<div class="col-sm-12  margin-top-10">
+	                       	<div class="col-lg-6 col-md-6  col-sm-12 no-padding-left">
+	                       	  <strong  class="padding-right-10">Marathon地址:</strong><span class="padding-left-5 silver" id="marathon_addr"></span> 	
+	                       	
+	                       </div>
+	                       <div class="col-lg-6 col-md-6  col-sm-12 no-padding-left"
+	                       >
+	                       	 <strong   class="padding-right-10">Haproxy信息:</strong><a  href="javascript:;" class="padding-left-5" id="haproxy_list" ></a>
+		                       
+	                       </div>
+                       </div>-->
+                        <div class="col-sm-12  margin-top-10">
+                            <div class="col-lg-6 col-md-6  col-sm-12 no-padding-left">
+                                <strong  class="padding-right-10">域名:</strong><span class="padding-left-5 silver" id="domain_name"></span>
+
+                            </div>
+                            <div class="col-lg-6 col-md-6  col-sm-12 no-padding-left"
+                                 style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                                <strong   class="padding-right-10">vip:</strong><span class="padding-left-5 silver" id="vip_name"></span>
+
+                            </div>
+                        </div>
+                     </div>		
+		            </div>
+                	  
+                	  <div class="col-sm-12 no-padding-left no-padding-right">
+
+                	  	<div class="well">
+                        <div class="row">
+                        <div class="col-sm-12 no-padding-left ">
+                          <!--<ul id="" class="no-padding col-sm-1" style="text-align: center">
+                            <li value="">所有集群</li>
+                          </ul>-->
+                          <div class="page-sidebar no-padding col-sm-2" id="clustersidebar" style="position: relative; width:16.66666667%;display:none;">
+                            <div class="application">
+                             <ul class="nav sidebar-menu">
+                               <div class="">
+                              <!--Dashboard-->
+                              <li value="" class="active">
+                                <a href="" class="menu-dropdown" onclick='fnAllCluster()'>
+                                <i class="menu-icon fa fa-table"></i>
+                                <span class="menu-text">所有集群</span>
+                                <i class="menu-expand"></i>
+                              </a>
+                              <ul class="submenu" id="clustertab" style="display:none">
+                                <li>
+                                  <a href="tables-data.html">
+                                  <span class="menu-text">Data Tables</span>
+                                </a>
+                                </li>
+                              </ul>
+                              </li>
+                               </div>
+                            </ul>
+                            <!-- /Sidebar Menu -->
+                            </div>
+                          </div>
+                          <div class="col-sm-10 no-padding-right" style="border-left:1px solid #ccc;">
+                	  		<div class="tabbable">
+                                <ul class="nav nav-tabs tabs-flat" id="myTab11">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#tab1">性能监控</a>
+                                    </li>
+                                  
+                                    <li >
+                                        <a data-toggle="tab" href="#tab2"> 事件查看 </a>
+                                    </li>
+                                    
+                                      <li >
+                                        <a data-toggle="tab" href="#tab3">容器管理 </a>
+                                    </li>
+                                  <!--   <li >
+                                        <a data-toggle="tab" href="#tab4">持续集成</a>
+                                    </li> -->
+                                     <li >
+                                        <a data-toggle="tab" href="#tab5">系统信息</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content tabs-flat">
+                                    <div id="tab1" class="tab-pane active">
+                                      
+                                    <div class="row">   
+                                    <div class="col-sm-6">
+	                                    <div class="panel panel-default">
+	                                    	<div class="panel-heading">容器平均CPU
+	                                    		<span class="pull-right">
+	                                    			<a href="javascript:void(0);" onclick="showMore('cpu','d','CPU');" style="color:#777">
+	                                    			<i class="fa fa-bars"></i></a>
+	                                    		</span>
+	                                    	</div>
+	                                       	<div class="panel-body">
+	                                        	<div id="CPUused" style="height:260px"></div>   
+	                                    	</div>
+	                                    </div>
+                                    </div>
+                                    
+                                      <div class="col-sm-6">
+                                    	<div class="panel panel-default">
+                                    		<div class="panel-heading">容器平均内存
+	                                    		<span class="pull-right">
+	                                    			<a href="javascript:void(0);" onclick="showMore('mem','d','内存');" style="color:#777">
+	                                    			<i class="fa fa-bars"></i></a>
+	                                    		</span>
+	                                    	</div>
+                                       <div class="panel-body">
+                                        <div id="Memused" style="height:260px"></div> 
+                                        
+                                    </div>
+                                    </div>
+                                    </div>
+                                   </div> 
+                                   <div class="row"> 
+                                      <div class="col-sm-6">
+                                    	<div class="panel panel-default">
+                                    		<div class="panel-heading">JVM指标
+	                                    		<span class="pull-right">
+	                                    			<a href="javascript:void(0);" onclick="showMore('jvm','d','JVM');" style="color:#777">
+	                                    			<i class="fa fa-bars"></i></a>
+	                                    		</span>
+	                                    	</div>
+                                       <div class="panel-body">
+                                        <div id="JVM" style="height:260px"></div> 
+                                        
+                                    </div>
+                                    </div>
+                                    </div>
+
+                                    
+                                      
+                                    <div class="col-sm-6">
+                                    	<div class="panel panel-default">
+                                    	<div class="panel-heading">线程数
+	                                    		<span class="pull-right">
+	                                    			<a href="javascript:void(0);" onclick="showMore('thread','d','线程数');" style="color:#777">
+	                                    			<i class="fa fa-bars"></i></a>
+	                                    		</span>
+	                                    	</div>
+                                       <div class="panel-body">
+                                        <div id="thread" style="height:260px"></div> 
+                                        
+                                    </div>
+                                    </div>
+                                    </div>
+                                    
+                                      <div class="col-sm-6">
+                                    	<div class="panel panel-default">
+                                    	<div class="panel-heading">并发数
+	                                    		<span class="pull-right">
+	                                    			<a href="javascript:void(0);" onclick="showMore('concurrent','d','并发数');" style="color:#777">
+	                                    			<i class="fa fa-bars"></i></a>
+	                                    		</span>
+	                                    	</div>	
+                                       <div class="panel-body">
+                                        <div id="concurrent" style="height:260px"></div> 
+                                        
+                                    </div>
+                                    </div>
+                                    </div>
+                                    
+                                      <div class="col-sm-6">
+                                    	<div class="panel panel-default">
+                                    	<div class="panel-heading">容器数
+	                                    		<span class="pull-right">
+	                                    			<a href="javascript:void(0);" onclick="showMore('container','d','容器数');" style="color:#777">
+	                                    			<i class="fa fa-bars"></i></a>
+	                                    		</span>
+	                                    	</div>	
+                                       <div class="panel-body">
+                                        <div id="containerused" style="height:260px"></div> 
+                                        
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    
+                                   </div>
+                           
+                           <div id="tab2" class="tab-pane warningcontainer">
+                           	<div class="tickets-container">
+                                <ul class="tickets-list">
+                                  <table class="table table-hover table-no-bordered" id="appEvent" style="margin-top:-10px" >
+
+                                  </table>
+                                </ul>
+
+                            </div>
+                           	
+                           </div>  
+                                    
+                          <div id="tab3" class="tab-pane">
+                             <table class="table table-bordered table-hover" id="editabledatatable" style="table-layout: fixed;width: 100%">
+                        
+                            </table>          
+                          </div>
+                         <!--over tab3--> 
+                         <!--  <div id="tab4" class="tab-pane">
+                          	暂无信息
+                          </div> -->
+                          <!--over tab4--> 
+                          
+                            <div id="tab5" class="tab-pane">
+                            <ul class="list-group">
+                                <li class="list-group-item row no-margin"><span class="col-sm-2">marathon地址 :</span><span class="padding-left-10" id="marathon_addr"></span></li>
+                                <li class="list-group-item row no-margin"><span class="col-sm-2">Haproxy信息:</span><span class="padding-left-10"
+                                             onclick="fnHaproxyDetail()" id="haproxy_list" style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;"></span></li>
+                              <li class="list-group-item row no-margin"><span class="col-sm-2">当前运行版本 :</span><span class="padding-left-10" id="now_version"></span></li>
+                              <li class="list-group-item row no-margin"><span class="col-sm-2">ftp信息 :</span><span class="padding-left-10" id="ftpInfo"></span></li>
+                              <li class="list-group-item row no-margin"><span class="col-sm-2">环境变量 :</span><span class="padding-left-10" id="env" style="width: 800px;display: inline-block;"></span></li>
+                              <li class="list-group-item row no-margin"><span class="col-sm-2">域名:</span><span class="padding-left-10" id="inter-domain" href=""></span></li>
+                                <li class="list-group-item row no-margin"><span class="col-sm-2"> 检查地址:</span><span class="col-sm-10" id="inter-check" href=""></span></li>
+                                <li class="list-group-item row no-margin"><span class="col-sm-2">公网IP:</span><span class="col-sm-10" id="public_vip"></span></li>
+                                <li class="list-group-item row no-margin"><span class="col-sm-2">私网IP:</span><span class="col-sm-10" id="private_vip"></span></li>
+
+                                <li class="list-group-item row no-margin"><span class="col-sm-2">Haproxy服务类型:</span><span class="col-sm-10" id="ha_mode"></span></li>
+
+                                <li class="list-group-item row no-margin"><span class="col-sm-2">Haproxy地址端口：</span><span class="col-sm-10" id="ha_ip"></span></li> 
+                                <li class="list-group-item row no-margin"><span class="col-sm-2">Bamboo节点：</span><span class="col-sm-10" id="bamboo_node"></span> </li>
+                                <li class="list-group-item row no-margin"><span class="col-sm-2">开通防火墙端口：</span><span class="col-sm-10" id="firewall_conf"></span></li>
+                               <!-- <li class="list-group-item row no-margin"><span class="col-sm-2">甲方接口人姓名：</span>
+                                    <div class="col-sm-10 no-padding-left" id="inter-mana" ondblclick="fnReplace(this)">
+                                        <div class='col-sm-12' id='inter-man' >
+
+                                        </div>
+                                    <div id="interface_aBlock" class="col-sm-12 hidden no-padding-left">
+                                        <div class="col-sm-4 no-padding-left" id="typeselect" style="height: 34px;"onclick="fnCheckClick(this)" >
+                                            <select id='dataTypes'  class="control-select" style="margin-left:0;width:100%"  data-click="false" >
+
+                                            </select>
+                                            <span class="hidden" id="saveIdBlock"></span>
+                                        </div>
+                                            <div class="col-sm-1 no-padding-left" style="line-height:25px" onclick="fnAddInterfaceUser(this)" id="addLogo">
+                                                <img src="assets/img/svg/add.svg" width="20em" height="20em"/>
+                                            </div>
+
+
+                                         <div class="col-sm-4 no-padding-left hidden" id="typeinput" >
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"   data-flag="empty" placeholder="输入接口人姓名" id="interface_a_Name" onblur="fnValidate(this)">
+                                                    <span class="red"></span>
+                                                    <span class="input-group-btn">
+                                                    <button class="btn btn-default" id="switcher" type="button" onclick="closeInputSelect(this);">
+                                                      <i class="fa fa-remove"></i>
+                                                    </button>
+                                                  </span>
+                                                </div>
+                                            </div>
+                                        <div class="col-sm-2">
+                                            <a class="btn btn-default"  type="button" id="aAjax" onclick="fnNameAjax(this);">
+                                                确定修改
+                                            </a>
+                                        </div>
+
+
+                                    </div>
+                                    </div>
+                                    <span class="hidden" id="interface_a_id"></span>
+                                     </li>
+                                <li class="list-group-item row no-margin"><span class="col-sm-2">联系电话：</span><span class="col-sm-10" id="inter-phone" onclick="fnupdatePhoneCheckPower(this)"></span><input id="update_phone" class="col-sm-3 hidden" onblur="fnValidatePhone(this)"><p>   </p><span class="red"></span></li>
+                                <li class="list-group-item row no-margin"><span class="col-sm-2">邮箱地址：</span><span class="col-sm-10" id="inter-email" href="mailto:" onclick="fnupdateEmailCheckPower(this)"></span><input id="update_email" class="col-sm-3 hidden" onblur="fnValidateEmail(this)"><p>   </p><span class="red"></span></li>
+                                <li class="list-group-item row no-margin"><span class="col-sm-2">所在单位：</span><span class="col-sm-10" id="inter-depart" onclick="fnupdateDepartCheckPower(this)"></span><input id="update_depart" class="col-sm-3 hidden" onblur="fnValidateDepart(this)"><p>   </p><span class="red"></span></li>
+                                <li class="list-group-item row no-margin"><span class="col-sm-2">乙方接口人姓名：</span>
+                                    <div class="col-sm-10 no-padding-left" id="inter-mana1" ondblclick="fnReplace(this)">
+                                        <div class='col-sm-12' id='inter-man1' >
+
+                                        </div>
+                                        <div id="interface_aBlock1" class="col-sm-12 hidden no-padding-left">
+                                            <div class="col-sm-4 no-padding-left" id="typeselect1" style="height: 34px;"onclick="fnCheckClick(this)" >
+                                                <select id='dataTypes1'  class="control-select" style="margin-left:0;width:100%"  data-click="false" >
+
+                                                </select>
+                                                <span class="hidden" id="saveIdBlock1"></span>
+                                            </div>
+                                            <div class="col-sm-1 no-padding-left" style="line-height:25px" onclick="fnAddInterfaceUser(this)" id="addLogo1">
+                                                <img src="assets/img/svg/add.svg" width="20em" height="20em"/>
+                                            </div>
+
+
+                                            <div class="col-sm-4 no-padding-left hidden" id="typeinput1" >
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"   data-flag="empty" placeholder="输入接口人姓名" id="interface_b_Name" onblur="fnValidate(this)">
+                                                    <span class="red"></span>
+                                                    <span class="input-group-btn">
+                                                    <button class="btn btn-default" id="switcher1" type="button" onclick="closeInputSelect(this);">
+                                                      <i class="fa fa-remove"></i>
+                                                    </button>
+                                                  </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <a class="btn btn-default"  type="button" id="bAjax" onclick="fnNameAjax(this);">
+                                                    确定修改
+                                                </a>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <span class="hidden" id="interface_b_id"></span>
+                                </li>
+                                <li class="list-group-item row no-margin"><span class="col-sm-2">联系电话：</span><span class="col-sm-10" id="inter-phone1" onclick="fnupdatePhoneCheckPower(this)"></span><input id="update_phone1" class="col-sm-3 hidden" onblur="fnValidatePhone(this)"><p>   </p><span class="red"></span></li>
+                                <li class="list-group-item row no-margin"><span class="col-sm-2">邮箱地址：</span><span class="col-sm-10" id="inter-email1" href="mailto:"onclick="fnupdateEmailCheckPower(this)"></span><input id="update_email1" class="col-sm-3 hidden" onblur="fnValidateEmail(this)"><p>   </p><span class="red"></span></li>
+                                <li class="list-group-item row no-margin"><span class="col-sm-2">所在单位：</span><span class="col-sm-10" id="inter-depart1"onclick="fnupdateDepartCheckPower(this)"></span><input id="update_depart1" class="col-sm-3 hidden" onblur="fnValidateDepart(this)"><p>   </p><span class="red"></span></li> -->
+                            </ul>	
+                            </div>
+                              <!--over tab5-->        
+                                </div>
+                            </div>
+                          </div>
+                	  	</div>
+                	  </div>
+                    </div>
+                    </div>
+                	</div>
+                	
+                	
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+
+        <!-- /Page Container -->
+        <!-- Main Container -->
+         <!-- 发布 -->
+         <div class="modal fade" id="Release" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" 
+         style="display: none;" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " style="width:800px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="">应用发布</h4>
+                </div>
+                <div id="warningBlock" class="alert alert-warning alert-dismissible fade in" role="alert" style="display:none;">
+						<button type="button" class="close" onclick="$('#warningBlock').hide();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			     		<span id="warning_Msg"></span>
+					</div>
+                <form class="form-horizontal">
+                <div class="modal-body no-padding-top">
+                  <div class="form-group">
+                    <div class="row form-title" name="reset_cluster" style="margin:0;">
+                      <div class="col-lg-3 col-sm-3 col-xs-3">
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" class="colored-blue">
+                            <span class="text">资源池3</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div  class="table-responsive" style="border:1px solid #ddd;max-height:300px;overflow:auto">
+                		<table class="table table-hover" >
+                            <thead class="bordered-inverse">
+                                <tr>
+                                   <th></th>
+                                   <th>文件名</th>
+                                    <th>版本号 </th>
+                                    <th>  文件大小 </th>
+                                    <th>上传时间 </th>
+                                     <th> 操作者</th>
+                                     <th> 状态</th>
+                                     <th>备注</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="_ReleaseTable">
+
+                            </tbody>
+                	        </table>
+                  </div>
+                	   <div class="col-sm-12 margin-top-20">
+                	   	 <a class="btn btn-info" onclick="showuploadfile()"><i class="fa  fa-file-o"></i>创建新版本</a>
+                	   </div>   	      
+                   </div>
+               <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="button" class="btn btn-azure" onclick="publishAffirm()">发布</button>
+                </div>
+             
+        </form>    
+            <!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    </div>
+   <!--上传程序包 --> 
+    <div class="modal fade" id="uploadfile" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" 
+    style="display: none;" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " style="width:800px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" >创建版本</h4>
+                </div>
+                <form>
+                <div class="modal-body" style="min-height:300px"> 
+                	<div id="warningPwdBlock" class="alert alert-warning alert-dismissible" role="alert" style="display: none;">
+			            <button type="button" class="close" onclick="$('#warningPwdBlock').hide();" aria-label="Close"><span aria-hidden="true">×</span></button>
+			            <span id="warningPwd">密码不能为空！</span>
+			        </div>
+                	<div class="row no-margin" >
+            		<h6 class="col-sm-12">当前程序包来源为：<span id="now_origin">本地上传</span><span class="warning padding-left-5">(默认选择为当前来源)</span></h6>
+                           <div id="checkedapp_origin" style="display:none;">
+                            <div class="col-lg-4 col-sm-4 col-xs-4 no-padding-left">
+                                <div class="radio">
+                                    <label>
+                                        <input name="form-field-radio" type="radio" value="bdsc"
+                                        class="colored-success" onchange="fnchangeorigin()" >
+                                        <span class="text">本地上传</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-4 col-xs-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="form-field-radio" type="radio" value="fwqxz" class="colored-success"
+                                        onchange="fnchangeorigin()">
+                                        <span class="text">持续集成</span>
+                                    </label>
+                                </div>
+                            </div>
+                          
+                           </div>
+                     </div>	
+                <!--本地上传-->
+                 <div class="form-group hidden" name="bdsc">
+                      
+                      <div class="form-group">
+                      <div class="col-sm-12">
+                            <div class="form-group">
+                                <label >应用内部版本号：</label>
+                                    <input type="text" class="form-control" id="insideVersion"  placeholder="输入应用内部版本号">        
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label >版本说明：</label>
+                                    <input type="text" class="form-control" id="versionExp" placeholder="输入版本说明">        
+                            </div>
+                        </div>
+                        </div>
+                        
+
+                	 </div>  
+                	 <!--服务器下载-->
+                	<div class="row no-margin margin-top-10 hidden" name="fwqxz">
+                        <!--<div class="col-sm-4">-->
+                            <!--<div class="form-group">-->
+                                <!--<label >服务器IP</label>-->
+                                    <!--<input type="text" class="form-control" id="ftp_ip" placeholder="输入服务器IP地址">        -->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-sm-4">-->
+                            <!--<div class="form-group">-->
+                                <!--<label>服务器端口</label>-->
+                                    <!--<input type="text" class="form-control" id="ftp_port"  placeholder="仅支持输入数字">        -->
+                            <!--</div>-->
+                        <!--</div>-->
+                         <!--<div class="col-sm-4">-->
+                            <!--<div class="form-group">-->
+                                <!--<label>文件名</label>-->
+                                    <!--<input type="text" class="form-control" id="filename" placeholder="输入要下载的文件名称">        -->
+                            <!--</div>-->
+                        <!--</div>-->
+                         <!--<div class="col-sm-4">-->
+                            <!--<div class="form-group">-->
+                                <!--<label>服务器用户名</label>-->
+                                    <!--<input type="text" class="form-control" id="ftp_username"  placeholder="输入用户名">        -->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-sm-4">-->
+                            <!--<div class="form-group">-->
+                                <!--<label>服务器密码</label>-->
+                                    <!--<input type="password" class="form-control" id="ftp_passwd"  placeholder="输入密码">        -->
+                            <!--</div>-->
+                        <!--</div>-->
+                         <!--<div class="col-sm-4">-->
+                            <!--<div class="form-group">-->
+                                <!--<label>存放路径</label>-->
+                                    <!--<input type="text" class="form-control" id="path"  placeholder="文件存放路径">        -->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label >应用内部版本号：</label>
+                                    <input type="text" class="form-control" id="cxinsideVersion"  placeholder="输入应用内部版本号">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label >版本说明：</label>
+                                    <input type="text" class="form-control" id="cxversionExp" placeholder="输入版本说明">
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                     <!--镜像发布-->
+                	<div class="row no-margin margin-top-10 hidden" name="jxfb">
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <label >应用内部版本号：</label>
+                          <input type="text" class="form-control" id="jxinsideVersion"  placeholder="输入应用内部版本号">
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <label >版本说明：</label>
+                          <input type="text" class="form-control" id="jxversionExp" placeholder="输入版本说明">
+                        </div>
+                      </div>
+                    </div>
+                        <div class="form-group">
+                          <div class="col-sm-12" id="com_spe">
+                            <label >镜像选择：</label>
+                            <div class="form-group">
+                            <div class="col-sm-6 no-padding-right no-padding-left">
+                              <select class="form-control" id="image_name" onchange="fnGetNewImg()">
+                              </select>
+                            </div>
+                            <div class="col-sm-6 no-padding-right">
+                              <select class="form-control" id="image_version">
+                              </select>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        </div>
+                    <div class="col-md-12 no-padding-right margin-bottom-20 " id="upLoadFileContainer">
+                        <!-- <input type="file" id="fileinput" multiple="multiple" accept="image/*" /> -->
+                        <div id="uploadfilebtn"></div>
+                        <span id="disk_filename" class="hidden"></span>
+                        <span id="format" class="hidden"></span>
+                        <span id="md5" class="hidden"></span>
+                        <span id="size" class="hidden"></span>
+                        <span id="raw_filename" class="hidden"></span>
+                    </div>
+                   </div>
+               <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="button" class="btn btn-azure" id="docreate" onclick="fnCreateVersion()" disabled>确定</button>
+                </div>
+              
+        </form>    
+            <!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    </div>
+    
+    <!--ftp下载 --> 
+    <div class="modal fade" id="uploadfileftp" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog " style="width:800px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="">选择程序包上传方式</h4>
+                </div>
+                <form class="form-horizontal">
+                <div class="modal-body"> 
+                	<div class="row no-margin">
+            		<h6 class="col-sm-12">当前程序包来源为：本地上传<span class="warning padding-left-5">(默认选择为当前来源)</span></h6>
+                            <div class="col-lg-4 col-sm-4 col-xs-4 no-padding-left">
+                                <div class="radio">
+                                    <label>
+                                        <input name="form-field-radio" type="radio" checked="checked" class="colored-success" >
+                                        <span class="text">本地上传</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-4 col-xs-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="form-field-radio" type="radio"  class="colored-success" >
+                                        <span class="text">FTP下载</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-4 col-xs-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="form-field-radio" type="radio"  class="colored-success" >
+                                        <span class="text">持续集成</span>
+                                    </label>
+                                </div>
+                            </div>
+                     </div>	
+                
+                    <div class="form-group">
+                    	
+                      <input type="file" class="filestyle " data-classbutton="btn btn-default" data-classinput="form-control inline">
+                	 </div>    	      
+                   </div>
+               <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="button" class="btn btn-azure" data-dismiss="modal">确定</button>
+                </div>
+              
+        </form>    
+            <!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    </div>
+         
+  <!--自动扩缩-->
+ <div class="modal fade" id="creatApplition" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+  style="display: none;" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog " style="width:800px">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" style="display:inline-block;">自动扩缩</h4>
+                  <label class="" id="clusterScale" style="margin-bottom:0;"></label><span id="marathon_endpoint" class="hidden"></span>
+                </div>
+                <form class="form-horizontal">
+                <div class="modal-body no-padding">
+                <div class="buy-info-wrapper clearfix">	
+               <div class="left uhost-create">
+                 <!--<div class="form-group">
+
+                 </div>-->
+             <div class="form-group">
+                   <label class="col-sm-3 control-label padding-top-10">是否自动扩缩</label>
+                  <div class="col-lg-8 col-sm-8 col-xs-8 no-padding-left">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" class="colored-blue" id="autoScale">
+                                <span class="text">自动</span>
+                                
+                            </label>
+                        </div>
+                    </div>
+                </div>
+             
+                
+                 <div class="form-group">
+                    <label  class="col-sm-3 control-label">最小实例数</label>
+                   <div class="col-sm-9 margin-top-10">
+                    	<div class="col-sm-8 no-padding-left">
+                    		  <div id="sample-onehandle" class="slider-xs" name="minTasks"></div>
+                    		  <p class="help-block"></p>
+                    	</div>
+                        <div class="col-sm-2  no-padding-right" style="margin-top:-10px">
+                    	<input type="text" class="form-control" value="0" id="minTasks" onkeyup="change(this)"/>
+                    </div>
+                     <div class="col-sm-2" style="margin-top:-5px">
+                    	<p class="no-padding-left">个</p>
+                    </div>
+                    </div>    
+                </div>
+                  <div class="form-group">
+                    <label  class="col-sm-3 control-label">最大实例数</label>
+                   <div class="col-sm-9 margin-top-10">
+                    	<div class="col-sm-8 no-padding-left">
+                    		  <div id="sample-onehandle2" class="slider-xs" name="maxTasks"></div>
+                    	</div>
+                        <div class="col-sm-2  no-padding-right" style="margin-top:-10px">
+                    	<input type="text" class="form-control" value="0" id="maxTasks" onkeyup="change(this)"/>
+                    </div>
+                     <div class="col-sm-2" style="margin-top:-5px">
+                    	<p class="no-padding-left">个</p>
+                    </div>
+                    </div>    
+                </div> 
+                 <div class="form-group">
+                    <label  class="col-sm-3 control-label">冷却时间</label>
+                   <div class="col-sm-9 margin-top-10">
+                    	<div class="col-sm-8 no-padding-left">
+                    		  <div id="sample-onehandle3" class="slider-xs" name="cooldownSeconds"></div>
+                    	</div>
+                        <div class="col-sm-2  no-padding-right" style="margin-top:-10px">
+                    	<input type="text" class="form-control" value="0" id="cooldownSeconds" onkeyup="change(this)"/>
+                    </div>
+                     <div class="col-sm-2" style="margin-top:-5px">
+                    	<p class="no-padding-left">秒</p>
+                    </div>
+                    </div>    
+                </div>
+                
+                <div class="form-group">
+                    <label  class="col-sm-3 control-label">添加规则</label>
+                   <div class="col-sm-8">
+                    	
+                     <select id="e2" multiple="multiple" style="width: 100%;">
+                       <!--<option value="AL" />定时</option>
+                            <option value="AK" />CPU</option>
+                            <option value="AZ" />内存</option>
+                            <option value="AX" />线程数</option>-->
+                    </select> 
+                    
+                    </div>    
+                </div>
+                
+                <hr >
+                 <div class="attakTime hidden" id="AL">
+                <div class="form-title row no-margin">
+                	<label class="col-sm-3 text-align-right">定时策略</label>
+                    <div class="col-lg-8 col-sm-8 col-xs-8 no-padding-left">
+                        <div class="checkbox no-padding-top ">
+                            <label>
+                                <input type="checkbox" class="colored-success" checked="checked">
+                                <span class="text">启用</span>
+                                 <span class="font-50">（只有在点击启用之后策略才能生效）</span>
+                            </label>
+                        </div>
+                    </div> 
+                </div>
+                <div class="staticScaleX">
+	                 <div class="form-group margin-top-20 staticScale">
+	                      <label class="col-sm-3 control-label">触发时间<span class="red padding-left-5">*</span></label>
+	                      <div class="col-sm-9">
+	                          <div class="col-sm-2 no-padding">
+	                              <input type="text" data-time class="form-control ctTime time" name="scaleout" id="" style="text-align:center;">
+	                          </div>
+	                          <div class="col-sm-6">
+	                              <label class="col-sm-6 control-label no-padding-left">实例数<span class="red padding-left-5">*</span></label>
+	                              <div class="col-sm-6 no-padding">
+	                                  <input type="number" value="" name="InsNum" validate="Number" class="form-control ctTasks tasks" step="any" 
+	                                  style="text-align:center;" onchange="value=value.replace(/[^\d.]/g,'')" onkeyup="value=value.replace(/[^\d.]/g,'')">
+	                                  
+	                              </div>
+	                          </div>
+	                          <div class="col-sm-4  header-buttons">
+	                             <a href="javascript:;" class="tooltip-primary pull-left" onclick="fnCutpolicy(this)"><i class="glyphicon glyphicon-minus"></i></a>
+	                             <a href="javascript:;" class="tooltip-primary  pull-left" onclick="fnaddpolicy()"><i class="glyphicon glyphicon-plus"></i></a>
+	                          </div>
+	                      </div>
+	                  </div>
+                  </div>
+                  </div>
+               
+               
+              
+                  
+              <div class="attakTime margin-bottom-10 hidden" id="AK">
+                <div class="form-title row no-margin">
+                	<label class="col-sm-3 text-align-right">CPU策略</label>
+                    <div class="col-lg-8 col-sm-8 col-xs-8 no-padding-left">
+                        <div class="checkbox no-padding-top ">
+                            <label>
+                                <input type="checkbox" class="colored-success"  >
+                                <span class="text">启用</span>
+                                <span class="font-50">（只有在点击启用之后策略才能生效）</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                  <div class="form-group margin-top-20">
+                      <label class="col-sm-3 control-label">最小阈值<span class="red padding-left-5">*</span></label>
+                     <div class="col-sm-9 margin-top-10">
+                    	<div class="col-sm-8 no-padding-left">
+                    		   <div id="sample-onehandlecpu" class="slider-xs" name="minCpuPercent"></div>
+                    	</div>
+                        <div class="col-sm-2  no-padding" style="margin-top:-10px">
+                    	<input type="text" class="form-control" value="0" id="minCpuPercent" onkeyup="change(this)">
+                    </div>
+                     <div class="col-sm-2 " style="margin-top:-5px">
+                    	<p class="no-padding-left">%</p>
+                    </div>
+                    </div>
+                </div>
+                
+                <div class="form-group margin-top-20">
+                      <label class="col-sm-3 control-label">最大阈值<span class="red padding-left-5">*</span></label>
+                     <div class="col-sm-9 margin-top-10">
+                    	<div class="col-sm-8 no-padding-left">
+                    		   <div id="sample-onehandle6" class="slider-xs" name="maxConcurrentCPU"></div>
+                    	</div>
+                        <div class="col-sm-2  no-padding" style="margin-top:-10px">
+                    	<input type="text" class="form-control" value="0" id="maxConcurrentCPU" onkeyup="change(this)">
+                    </div>
+                     <div class="col-sm-2 " style="margin-top:-5px">
+                    	<p class="no-padding-left">%</p>
+                    </div>
+                    </div>
+                </div>
+                
+                 <div class="form-group margin-top-20">
+                      <label class="col-sm-3 control-label">扩缩比例<span class="red padding-left-5">*</span></label>
+                     <div class="col-sm-9 margin-top-10">
+                    	<div class="col-sm-8 no-padding-left">
+                    		  <div id="sample-onehandle7" class="slider-xs" nme="scaleOutcpu"></div>
+                    	</div>
+                        <div class="col-sm-2  no-padding" style="margin-top:-10px">
+                    	<input type="text" class="form-control" placeholder="0" id="scaleOutcpu" onkeyup="change(this)">
+                    </div>
+                     <div class="col-sm-2 " style="margin-top:-5px">
+                    	<p class="no-padding-left">%</p>
+                    </div>
+                    </div>
+                </div>
+                
+               </div>
+               
+                <div class="attakTime margin-bottom-10 hidden" id="AZ">
+                <div class="form-title row no-margin">
+                	<label class="col-sm-3 text-align-right">内存策略</label>
+                    <div class="col-lg-8 col-sm-8 col-xs-8 no-padding-left">
+                        <div class="checkbox no-padding-top ">
+                            <label>
+                                <input type="checkbox" class="colored-success" >
+                                <span class="text">启用</span>
+                                <span class="font-50">（只有在点击启用之后策略才能生效）</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                  <div class="form-group margin-top-20">
+                      <label class="col-sm-3 control-label">最小阈值<span class="red padding-left-5">*</span></label>
+                     <div class="col-sm-9 margin-top-10">
+                    	<div class="col-sm-8 no-padding-left">
+                    		   <div id="sample-onehandlemem" class="slider-xs" name="minMemory"></div>
+                    	</div>
+                        <div class="col-sm-2  no-padding" style="margin-top:-10px">
+                    	<input type="text" class="form-control" value="0" id="minMemory" onkeyup="change(this)">
+                    </div>
+                     <div class="col-sm-2 " style="margin-top:-5px">
+                    	<p class="no-padding-left">%</p>
+                    </div>
+                    </div>
+                </div>
+                
+                <div class="form-group margin-top-20">
+                      <label class="col-sm-3 control-label">最大阈值<span class="red padding-left-5">*</span></label>
+                     <div class="col-sm-9 margin-top-10">
+                    	<div class="col-sm-8 no-padding-left">
+                    		   <div id="sample-onehandle8" class="slider-xs" name="maxMemory"></div>
+                    	</div>
+                        <div class="col-sm-2  no-padding" style="margin-top:-10px">
+                    	<input type="text" class="form-control" value="0" id="maxMemory" onkeyup="change(this)">
+                    </div>
+                     <div class="col-sm-2 " style="margin-top:-5px">
+                    	<p class="no-padding-left">%</p>
+                    </div>
+                    </div>
+                </div>
+                
+                 <div class="form-group margin-top-20">
+                      <label class="col-sm-3 control-label">扩缩比例<span class="red padding-left-5">*</span></label>
+                     <div class="col-sm-9 margin-top-10">
+                    	<div class="col-sm-8 no-padding-left">
+                    		  <div id="sample-onehandle9" class="slider-xs" name="scaleOutmem"></div>
+                    	</div>
+                        <div class="col-sm-2  no-padding" style="margin-top:-10px">
+                    	<input type="text" class="form-control" value="0" id="scaleOutmem" onkeyup="change(this)">
+                    </div>
+                     <div class="col-sm-2 " style="margin-top:-5px">
+                    	<p class="no-padding-left">%</p>
+                    </div>
+                    </div>
+                </div>
+                
+               </div>
+               
+              <div class="attakTime margin-bottom-10 hidden" id="AX">
+                <div class="form-title row no-margin">
+                	<label class="col-sm-3 text-align-right">线程策略</label>
+                    <div class="col-lg-8 col-sm-8 col-xs-8 no-padding-left">
+                        <div class="checkbox no-padding-top  small">
+                            <label>
+                                <input type="checkbox" class="colored-success" >
+                                <span class="text">启用</span>
+                                <span class="font-50">（只有在点击启用之后策略才能生效）</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                  <div class="form-group margin-top-20">
+                      <label class="col-sm-3 control-label">最小阈值<span class="red padding-left-5">*</span></label>
+                     <div class="col-sm-9 margin-top-10">
+                    	<div class="col-sm-8 no-padding-left">
+                    		   <div id="sample-onehandlecon" class="slider-xs" name="minConcurrent"></div>
+                    	</div>
+                        <div class="col-sm-2  no-padding" style="margin-top:-10px">
+                    	<input type="text" class="form-control" value="0" id="minConcurrent" onkeyup="change(this)">
+                    </div>
+                     <div class="col-sm-2 " style="margin-top:-5px">
+                    	<p class="no-padding-left">%</p>
+                    </div>
+                    </div>
+                </div>
+                
+                <div class="form-group margin-top-20">
+                      <label class="col-sm-3 control-label">最大阈值<span class="red padding-left-5">*</span></label>
+                     <div class="col-sm-9 margin-top-10">
+                    	<div class="col-sm-8 no-padding-left">
+                    		   <div id="sample-onehandle0" class="slider-xs" name="maxConcurrent"></div>
+                    	</div>
+                        <div class="col-sm-2  no-padding" style="margin-top:-10px">
+                    	<input type="text" class="form-control" value="0" id="maxConcurrent" onkeyup="change(this)">
+                    </div>
+                     <div class="col-sm-2 " style="margin-top:-5px">
+                    	<p class="no-padding-left">%</p>
+                    </div>
+                    </div>
+                </div>
+                
+                 <div class="form-group margin-top-20">
+                      <label class="col-sm-3 control-label">扩缩比例<span class="red padding-left-5">*</span></label>
+                     <div class="col-sm-9 margin-top-10">
+                    	<div class="col-sm-8 no-padding-left">
+                    		  <div id="sample-onehand" class="slider-xs" name="scaleOutcon"></div>
+                    	</div>
+                        <div class="col-sm-2  no-padding" style="margin-top:-10px">
+                    	<input type="text" class="form-control" value="0" id="scaleOutcon" onkeyup="change(this)">
+                    </div>
+                     <div class="col-sm-2 " style="margin-top:-5px">
+                    	<p class="no-padding-left">%</p>
+                    </div>
+                    </div>
+                </div>
+                
+               </div>
+               
+                  
+             </div>
+               
+             <div class="right">
+             	<ul class="list-group">
+                        <li class="list-group-item "><span class="col-sm-6 text-align-right" >自动扩缩:</span><span class="primary" id="scale"><i class="fa  fa-minus-square-o padding-right-5"></i>未开启</span></li>
+                        <li class="list-group-item "><span class="col-sm-6 text-align-right" > 最小实例数:</span><span id="mininstance">0</span></li>
+                        <li class="list-group-item "><span class="col-sm-6 text-align-right">最大实例数:</span><span id="maxinstance">0</span></li>
+                        <li class="list-group-item "><span class="col-sm-6 text-align-right">冷却时间:</span><span id="cooltime">00秒</span></li>
+                        <li class="list-group-item row no-margin-left no-margin-right hidden" id="sideAL">
+                        	<span class="col-sm-6 text-align-right">定时策略:</span><span class="primary col-sm-6 no-padding-left" ><i class="fa fa-check-circle-o padding-right-5"></i>启用</span>
+                        	<div class="more">
+                        		<span class="col-sm-6 padding-top-5 text-align-right" >触发时间:</span><span class="col-sm-6 no-padding-left padding-top-5 time" >20:00</span>
+                        		<span class="col-sm-6 padding-top-5 text-align-right" >实例数:</span><span class="col-sm-6 no-padding-left padding-top-5 tasks" >3</span>
+                        	</div>
+                        </li>
+                        <li class="list-group-item row no-margin-left no-margin-right hidden" id="sideAK">
+                        	<span class="col-sm-6 text-align-right">CPU策略:</span><span class="primary col-sm-6 no-padding-left" name="enabled"><i class="fa  fa-minus-square-o padding-right-5"></i>未启用</span>
+                        	<span class="col-sm-6 padding-top-5 text-align-right" >最小阈值:</span><span class="col-sm-6 no-padding-left padding-top-5" name="minthreshold">20%</span>
+                        	<span class="col-sm-6 padding-top-5 text-align-right" >最大阈值:</span><span class="col-sm-6 no-padding-left padding-top-5" name="maxthreshold">30%</span>
+                        	<span class="col-sm-6 padding-top-5 text-align-right" >扩缩比例:</span><span class="col-sm-6 no-padding-left padding-top-5" name="scaleratio">30%</span>
+                        </li>
+                         <li class="list-group-item row no-margin-left no-margin-right hidden" id="sideAZ">
+                         	<span class="col-sm-6 text-align-right">内存策略:</span><span class="primary col-sm-6 no-padding-left" name="enabled"><i class="fa  fa-minus-square-o padding-right-5"></i>启用</span>
+                        	<span class="col-sm-6 padding-top-5 text-align-right" >最小阈值:</span><span class="col-sm-6 no-padding-left padding-top-5" name="minthreshold">20%</span>
+                        	<span class="col-sm-6 padding-top-5 text-align-right" >最大阈值:</span><span class="col-sm-6 no-padding-left padding-top-5" name="maxthreshold">30%</span>
+                        	<span class="col-sm-6 padding-top-5 text-align-right" >扩缩比例:</span><span class="col-sm-6 no-padding-left padding-top-5" name="scaleratio">30%</span>
+                         </li>
+                         <li class="list-group-item row no-margin-left no-margin-right hidden" id="sideAX">
+                         	<span class="col-sm-6 text-align-right">线程策略:</span><span class="primary col-sm-6 no-padding-left" name="enabled"><i class="fa  fa-minus-square-o padding-right-5"></i>未启用</span>
+                        	<span class="col-sm-6 padding-top-5 text-align-right" >最小阈值:</span><span class="col-sm-6 no-padding-left padding-top-5" name="minthreshold">20%</span>
+                        	<span class="col-sm-6 padding-top-5  text-align-right" >最大阈值:</span><span class="col-sm-6 no-padding-left padding-top-5" name="maxthreshold">30%</span>
+                        	<span class="col-sm-6 padding-top-5 text-align-right" >扩缩比例:</span><span class="col-sm-6 no-padding-left padding-top-5" name="scaleratio">30%</span>
+                         </li>
+                    </ul>
+                </div>
+               </div>       
+              </div>
+            	<div class="modal-footer" style="text-align:center">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="button" class="btn btn-azure"  onclick="fncreatescaleOut()">确定</button>
+                </div>
+                
+            </form>    
+            <!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    </div>
+    
+ <!--重启应用-->
+ <div class="modal fade" id="Restartapplication" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" 
+ style="display: none;" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">应用<span hname="handlename">重启</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group ">
+                   <div class="form-title">
+                                  选择你要<span hname="handlename1">重启</span>的资源池
+                   </div>
+                   <div class="row" name="reset_cluster">
+                    <div class="col-lg-3 col-sm-3 col-xs-3">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" class="colored-blue">
+                                <span class="text">资源池3</span>
+                            </label>
+                        </div>
+                    </div>
+                   </div>
+                        
+                </div>
+                </div>
+                <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="fuReset()">确定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+
+                  <!--更改发布方式-->
+<div class="modal fade" id="updatestylemodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+     style="display: none;" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">更改应用发布方式</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group ">
+          <div class="form-title">
+          当前为<span id="current" style="color:red;"></span>方式，选择你需要的发布方式
+          </div>
+          <div class="row" id="app_origin">
+            <div class="col-lg-4 col-sm-4 col-xs-4">
+              <div class="radio" value="bdsc">
+                <label>
+                  <input name="form-field-radio1" type="radio" class="colored-success" >
+                  <span class="text">本地上传</span>
+                </label>
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-4">
+              <div class="radio" value="fwqxz">
+                <label>
+                  <input name="form-field-radio1" type="radio" class="colored-success" >
+                  <span class="text">持续集成</span>
+                </label>
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-4">
+              <div class="radio" value="jxfb">
+                <label>
+                  <input name="form-field-radio1" type="radio" class="colored-success" >
+                  <span class="text">镜像发布</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row" id="ci_detail" style="display:none">
+            <div class="col-lg-6 col-sm-6 col-xs-6">
+              <label style="padding-left: 15px">请输入路径:<span class="red padding-left-5">*</span></label>
+              <div class="col-sm-12 no-padding-right">
+                <input type="text" class="form-control" id="package_path"  placeholder="请输入路径" data=''>
+                <span class="red"></span>
+              </div>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-xs-6">
+              <label style="padding-left: 15px">请输入包名:<span class="red padding-left-5">*</span></label>
+              <div class="col-sm-12 no-padding-right">
+                <input type="text" class="form-control" id="package_name"  placeholder="请输入路径" data=''>
+                <span class="red"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-azure" onclick="fnUpdateStyle()">确定</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+
+                  <!--手动扩缩-->
+ <div class="modal fade" id="doScaleApp" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" 
+ style="display: none;" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" >手动扩缩</h4>
+                </div>
+                <div class="modal-body">
+                	<form  class="form-horizontal">
+                    <div class="form-group no-margin">
+                   <div class="form-title margin-left-40 margin-right-40">
+                                    当前实例数<span class="blue padding-left-5" id="curentinstance"></span>，可扩展最大实例数<span class="blue padding-left-5" id="maxInstances"></span>
+                   </div>
+                      <div id="clusterquota"></div>
+                   	<div class="form-group ">
+                    <label class="col-sm-2 control-label margin-left-20 no-padding-right">目标实例数</label>
+                   <div class="col-sm-9">
+                        <div class="col-sm-10  no-padding-right">
+                    		<input type="number" class="form-control"  id="slider_value" onchange="this" onkeyup="value=value.replace(/[^\d]/g,'')" onblur="fnMaxValue(this)">
+                          <p class="help-block">仅支持输入0以上的整数且<span class="red">不可超过可扩展最大实例数</span></p>
+	                    </div>
+	                     <div class="col-sm-2 no-padding-right" >
+	                    	<p class="no-padding-left">个</p>
+	                    </div>
+                    </div>    
+                </div>
+                </div>
+                </div>
+                </form>
+                <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="button" class="btn btn-azure" id="HMdo" data-dismiss="modal" onclick="fnScalemodal()">确定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+
+
+<!--发布状态-->
+ <div id="modal-info" class="modal modal-message modal-info fade in" style="display: none;" aria-hidden="false"  data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+                    
+                 </div>
+                <div class="modal-title">
+                    <span id="publishing"></span>
+                
+                </div>
+
+                <div class="modal-body successpublish">
+                 <div class="progress progress-striped active">
+                     <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" 
+                     style="width: 20%" id="statusslider">
+                         <span class="sr-only">
+                             20% Complete
+                         </span>
+                     </div>
+                 </div>
+                </div>
+                
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+
+  <!--成功提示  -->
+    <div class="modal modal-message modal-info fade in" id="tips"  aria-hidden="true"
+ style="display:none;" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#888">×</button>
+        <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/success.svg"></div>
+
+      </div>
+			<div class="modal-body" >
+        <span id="tipsSpan" class="title1"></span>
+        <p id="tipsSpan1" class="title1"></p>
+			</div>
+     <div class="modal-footer">
+        <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我知道了</button>
+      </div>
+
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+                  <!--失败提示-->
+
+                  <div class="modal modal-message modal-info  in" id="failmodal"  aria-hidden="true"
+                       style="display:none;" data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+
+                          <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/fail.svg"></div>
+
+                        </div>
+                        <div class="modal-body" >
+                          <p class="title1" id="failtitle"></p>
+                          <p id="failInfo"></p>
+
+                        </div>
+                        <div class="modal-footer padding-bottom-20">
+                          <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="$('#docreate').attr('disabled',false)">好的，我了解了！</button>
+
+                        </div>
+
+                      </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                  </div><!-- /.modal -->
+
+
+                <!-- 警告提示-->
+                  <div class="modal modal-message modal-info  in" id="warningmodal"  aria-hidden="true"
+                       style="display:none;" data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+
+                          <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/warn.svg"></div>
+
+                        </div>
+                        <div class="modal-body" >
+                          <span class="title1" id="warningtitle"></span>
+                          <!--<p id="warningInfo"></p>-->
+
+                        </div>
+                        <div class="modal-footer padding-bottom-20">
+                          <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我了解了！</button>
+
+                        </div>
+
+                      </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                  </div><!-- /.modal -->
+
+                  <!-- 非健康警告提示-->
+                  <div class="modal modal-message modal-info  in" id="Falsewarningmodal"  aria-hidden="true"
+                       style="display:none;" data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+
+                          <div class="show-zero2 zeromodal-icon zeromodal-error"><img src="assets/img/svg/warn.svg"></div>
+
+                        </div>
+                        <div class="modal-body"  style="text-align: center">
+                          <div class="col-sm-offset-1 col-sm-10" >当前应用<span id="status"></span>中，无需进行此项操作！</div>
+                          <!--<p id="warningInfo"></p>-->
+
+                        </div>
+                        <div class="modal-footer padding-bottom-20">
+                          <button type="button" class="btn btn-azure" data-dismiss="modal">好的，我了解了</button>
+
+                        </div>
+
+                      </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                  </div><!-- /.modal -->
+
+
+<!--确认-->
+    <div class="modal modal-message modal-info fade in" id="do" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                  <div class="zeromodal-icon show-zero2 zeromodal-icon-question zeromodal-borderd">？</div>
+                    <!--<h4 class="modal-title" id="">确认<span do-name="dohandle"></span></h4>-->
+                </div>
+                <div class="modal-body">
+                    <div class="title1">确认是否进行<span do-name="dohandle" class="info"></span>操作?</div>
+                      <div id="infomessage" class="padding-top-5"></div>
+
+                   <span id="parameter" class="hidden"></span>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-info" data-dismiss="modal" onclick="fndo()">确定</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    
+    <!--重启容器-->
+ <div class="modal fade" id="RestartContainer" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" 
+ style="display: none;" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="">容器重启</h4>
+                    <span id="restart" class="hidden"></span>
+                </div>
+                <div class="modal-body">
+                   <div>是否确认操作?</div>
+                </div>
+                <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="button" class="btn btn-azure" data-dismiss="modal" onclick="fuResartCon()">确定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    
+    
+      <!--容器性能监控-->
+ <div class="modal " id="ContainerMonitor" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" 
+ style="display: none;" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="">容器<span id="containertype"></span></h4>
+                    <span id="monitorid" class="hidden"></span>
+                    <span id="monitordata" class="hidden"></span>
+                </div>
+                <div class="modal-body">
+                
+                	<div class="form-group"> 
+                   <div class="row">
+	                    <div class="col-lg-12 col-sm-12 col-xs-12">
+		                    <div class="btn-group" style="float:right;margin-bottom:0px;margin-top:0px;margin-right: 20px;">
+		                      <select id="monitortype">
+	                        	<option value="cpu" selected="selected">cpu</option>
+	                        	<option value="mem">内存</option>
+	                        	<option value="jvm">jvm</option>
+	                        	<option value="thread">线程数</option>
+	                        	<option value="concurrent">并发数</option>
+	                        </select>
+		                  </div>
+					    </div> 
+                	</div>
+                	
+                </div>
+                	<div class="form-group">
+                		<div id="funmonitor" style="height:240px;"></div>
+                	 </div>
+                </div>
+                <!--<div class="modal-footer">-->
+                     <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                <!--</div>-->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    
+        <!--容器threaddown-->
+ <div class="modal fade" id="threaddown_log" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" 
+ style="display: none;" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="">容器<span id="threaddown_logtype"></span></h4>
+                    <span id="thlog" class="hidden"></span>
+                </div>
+                <div class="modal-body">
+                   
+                		<div id="message"></div>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    
+            <!--日志下载-->
+ <div class="modal fade" id="dwonlogmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" 
+ style="display: none;" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="">日志下载</h4>
+                    <span id="logdwonid" class="hidden"></span>
+                </div>
+                <div class="modal-body">
+                   
+                		<table  class="table table-hover">
+                			<thead class="bordered-inverse">
+                                <tr>
+                                    <th>#</th>
+                                    <th>日志名称 </th>
+                                    <th>创建时间</th>
+                                    <th> 文件大小</th>
+                                </tr>
+                            </thead>
+                            <tbody id="logdwontable">
+                            </tbody>
+                		</table>
+
+                </div>
+                <div class="modal-footer">
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                     <button type="button" class="btn btn-azure" data-dismiss="modal" >确定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    
+    <!--容器性能监控更多-->
+ <div class="modal " id="showMoreModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" 
+ style="display: none;" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="showMoreType"></h4>
+                    <span class="hidden" id="echartSpan" value=""></span>
+                </div>
+                <div class="modal-body">
+                
+                   <div class="form-group"> 
+                   <div class="row">
+	                    <div class="col-lg-12 col-sm-12 col-xs-12">
+		                    <div class="btn-group" style="float:right;margin-bottom:0px;margin-top:0px;margin-right: 20px;">
+		                      <select class="form-control" id="moreSort" onchange="chartRefresh()">
+		                          <option value="d">按天统计</option>
+		                          <option value="w">按周统计</option>
+		                          <option value="m">按月统计</option>
+		                      </select>
+		                  </div>
+					    </div> 
+                	</div>
+                	<div class="form-group">
+                		<div id="moreEchart" style="height:240px;"></div>
+                	 </div>
+                </div>
+                </div>
+                <!--<div class="modal-footer">-->
+                    <!---->
+                     <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+   <!---->
+                <!--</div>-->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <div class="modal " id="haproxy_listmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" 
+ style="display: none;" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel"><span id="ComponentType">Haproxy</span>详细信息</h4>
+                </div>
+                <div class="modal-body">
+                	<div class="form-group"> 
+	                   <div class="row">
+		                    <div class="col-lg-12 col-sm-12 col-xs-12">
+			                    <span id="modalha"></span>
+			                    <table  class="table table-hover">
+                            <tbody id="haproxy_table"></tbody>
+			                    </table>
+						    </div> 
+	                	</div>
+	                </div> 
+                </div>
+                <!--<div class="modal-footer">-->
+                    <!---->
+                     <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                <!---->
+                <!--</div>-->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</div>
+    <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="plugin/uploadify/jquery.Huploadify.js"></script>
+    <script src="assets/js/bootstrap-filestyle.min.js"></script>
+    <script src="assets/js/echarts.common.min.js"></script>
+     <script src="assets/js/datetime/moment.min.js"></script>
+    <script src="assets/js/datetime/bootstrap-datepicker.js"></script>
+    <script src="assets/js/datetime/bootstrap-datetimepicker.min.js"></script>
+        <script src="assets/js/validation/bootstrapValidator.js"></script>
+        <script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+          <script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+    <script src="assets/js/slider/jquery.nouislider.js"></script>
+    <script src="assets/js/select2/select2.min.js"></script>
+    <script src="assets/js/userPwoer.js"></script>
+    <script src="assets/js/skins.min.js"></script>
+    <script src="assets/js/beyond.min.js"></script>
+   <script src="./webcontent/Application/js/Application.js"></script>
+
+
+    
+    

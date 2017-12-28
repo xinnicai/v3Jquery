@@ -1,0 +1,241 @@
+    <!--Basic Styles-->
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+     <link href="assets/css/bootstrap-table.min.css" rel="stylesheet" />
+    <!--main.css-->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+            	<!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            SDDCOS
+                        </li>
+                        <li class="active">日志管理</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                  <!-- Page Body -->
+                <div class="page-body">  
+                	<div class="row">
+                 	 	<div class="col-sm-12">
+                 	 		<div class="widget-body">
+                 	 		<div class="col-sm-6 pull-right ">
+									<a href="http://dcosgraylog.yw.zj.chinamobile.com" class="btn btn-default  btn-sm  pull-right primary" target="_blank"><i class=""></i>统一日志</a>
+									</div>
+                 	 		<div class="tabbable">
+		                        <ul class="nav nav-tabs" id="myTab11">
+		                            <li class="active">
+		                                <a data-toggle="tab" href="#home11">
+		                                    操作事件
+		                                </a>
+		                            </li>
+		                            <li>
+		                                <a data-toggle="tab" href="#profile11">
+		                                    平台日志
+		                                </a>
+		                            </li>
+		                            <li>
+		                                <a data-toggle="tab" href="#tab3">
+		                                    日志查询
+		                                </a>
+		                            </li>
+		                        </ul>
+		                        
+		                        <div class="tab-content tabs-flat">
+		                            <div id="home11" class="tab-pane in active">
+		                                	<div class="panel panel-default">
+                 	 			 <div class="panel-heading" style="background-color: #fff;">
+                 	 			 	<div class="row">
+                 	 			 	<div class="col-sm-4 no-padding-left">
+                 	 			 		<div class="col-sm-6">
+                 	 			 			<select class="selectpicker form-control" title="请选择用户"
+				                      data-actions-box="true" data-live-search="true"  id="select_user">
+				                <option></option>
+				              </select>
+                 	 			 		</div>
+                 	 			 		<div class="col-sm-6 no-padding-left">
+                 	 			 			<select class="selectpicker form-control" title="请选择事件类型"
+				                      data-actions-box="true" data-live-search="true"  id="select_event">
+				                <option></option>
+                 	 			 		</select>
+                 	 			 		</div>
+                 	 			 		
+                 	 			 	</div>	
+                 	 			  <div class="col-sm-8 text-align-right">
+                 	 			  	 <a class="btn btn-default" onclick="fnhour()">一小时</a>
+                 	 			    <a class="btn btn-default" onclick="fnday()">一天</a>
+                 	 			    <!-- <a class="btn btn-default">一周</a> -->
+                 	 			    <a class="btn btn-default" onclick="fnmonth()">一月</a>
+                 	 			 	<input type="text"   placeholder="开始时间"  name="empty" id="startTime" style="width:180px;height:28px; padding:13px 15px 16px 15px; margin-top:2px">
+                                    <input type="text"   placeholder="结束时间"  name="empty" id="endTime" style="width:180px;height:28px;padding:13px 15px 16px 15px;margin-top:2px  " >
+                                    <button  type="button" class="btn-sm btn-azure" onclick="fndefine()">查询</button>	
+                 	 			    </div>
+                 	 			    </div>
+                 	 			 </div>	
+                 	 			<div class="panel-body">
+			                      	<div class="panel-body">
+                            	      <div id="main" style="width:100%;height:400px;"></div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                      <div class="panel-heading" style="background-color:#fff">日志列表</div>	
+                                    	<div class="panel-body warningcontainer">
+                                    	
+                                    	<!-- <div class="col-sm-12 no-padding margin-bottom-10">
+                        					<input class="form-control" placeholder="search..." type="text" onkeyup="fnSearch(this)"/>
+                        	
+                        				</div> -->
+                                        <table class="table table-bordered table-hover" id="editabledatatable">
+			                              
+			                           
+	                                 </table>
+	                             </div>
+	                           </div> 
+                           </div>
+                      </div>
+		                            </div>
+		
+		                            <div id="profile11" class="tab-pane">
+		                                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
+		                            </div>
+		                           
+		                              <div id="tab3" class="tab-pane">
+		                                    <div class="row">
+          	       <div class="col-sm-12">
+          		   	<div class="widget-body">
+          		   		<div class="row">
+          		   <form class="form-horizontal" role="form">
+          		  
+          			<div class="col-sm-12 margin-bottom-20">
+		  				<!-- <div class="col-sm-4 no-padding">
+		  				<label class="col-sm-3 control-label no-padding-right">选择集群</label>
+		  				<div class="col-sm-9">
+		  				<select class="form-control" id="selectCluster">
+		  				<option>请选择</option>
+		  				
+		  				</select>
+		  				</div>
+		  				</div> -->
+							<div class="col-sm-10 no-padding">
+		  				<div class="col-sm-4 no-padding">
+		  				<label class="col-sm-3 control-label no-padding-right">应用名</label>
+		  				<div class="col-sm-9">
+		  				<select class="form-control" id="appName">
+		  			
+		  				</select>
+		  				</div>
+		  				</div>
+		  				<div class="col-sm-4 no-padding">
+		  				<label class="col-sm-3 control-label no-padding-right">关键字</label>
+		  				<div class="col-sm-9">
+		  				<input class="form-control" type="text" id="keywods">
+		  				</div>
+		  				</div>
+
+		  				
+		  				<!-- <div class="col-sm-12 margin-bottom-20">
+		  				<div class="col-sm-4 no-padding">
+		  				<label class="col-sm-3 control-label no-padding-right">实例名</label>
+		  				<div class="col-sm-9">
+		  				<select class="form-control" id="instanceName">
+		  				<option>demo</option>
+		  				</select>
+		  				</div>
+		  				</div>
+		  				<div class="col-sm-4 no-padding">
+		  				<label class="col-sm-3 control-label no-padding-right">日志目录</label>
+		  				<div class="col-sm-9">
+		  				<select class="form-control" id="logMenu">
+		  				<option>catalina.log</option>
+		  				</select>
+		  				</div>
+		  				</div>
+		  				</div> -->
+		  				<div class="col-sm-4 no-padding">
+		  				<label class="col-sm-3 control-label no-padding-right">查询时间</label>
+		  				<div class="col-sm-9">
+		  				<select class="form-control" id="searchtime">
+		  				<option value="">请选择</option>
+		  				<option value="1">1小时</option>
+		  				<option value="3">3小时</option>
+		  				<option value="8">8小时</option>
+		  				<option value="24">1天</option>
+		  				<option value="72">3天</option>
+		  				<option value="168">一周</option>
+		  				<option value="336">两周</option>
+		  			    <!-- <option value="">自定义</option> -->
+		  				</select>
+		  				</div>
+		  				</div>
+							</div>
+		  				<div class="col-sm-2 no-padding">
+
+		  				<div class="col-sm-12">
+		  				<a class="btn btn-primary" id="logshow" onclick="fnOnSearch()">查询</a>
+		  				<!-- <a class="btn btn-default" href="/uploads/files/201603/catalina.log" target="_blank">导出日志</a> -->
+		  				</div>
+		  				</div>
+								</div>
+		  				<div class="col-sm-12 margin-bottom-20 padding-left-50" >
+		  				<div class="well bordered-left bordered-themeprimary">
+		  					<div  id="applog" >
+		  						<div class="logcontent">
+		  							<span style="display:inline-block;margin-right:20px;">暂无日志</span>
+		  							
+		  						</div>
+		  						<hr>
+							</div>
+		  				</div>
+		  			 
+		  				
+		  				</div>
+		  				</form>	
+				   </div>
+				  </div>
+    		
+				    	
+				  	
+					
+          			
+          		</div>
+          	</div>
+		                            </div> 
+		                            
+		                            
+		                        </div>
+		                    </div>
+                 	 </div>	
+                 </div>
+              </div>  
+           </div>
+                <!-- /Page Body -->
+                
+
+        <!-- Page Container -->
+   <!-- Main Container -->
+    <!--Basic Scripts-->
+        <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+     <script src="assets/js/bootstrap-select.js"></script>
+      <script src="assets/js/validation/bootstrapValidator.js"></script>
+      <script src="assets/js/bootstrap-table/bootstrap-table.js"></script>
+       <script src="assets/js/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+    <script src="assets/js/echarts.common.min.js"></script>
+     <script src="assets/js/datetime/moment.min.js"></script>
+     <script src="assets/js/datetime/bootstrap-datepicker.js"></script>
+      <script src="assets/js/datetime/bootstrap-datetimepicker.min.js"></script>
+   <script src="./webcontent/Platformlog/Platformlog.js"></script>
+	 <script src="./webcontent/Platformlog/appLog.js"></script>
+
+     
+

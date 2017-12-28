@@ -1,0 +1,198 @@
+
+    <!--Basic Styles-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--main.css-->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/dist.css" rel="stylesheet" type="text/css" />
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs breadcrumbs-fixed">
+                    <ul class="breadcrumb">
+                    	
+                        <li>
+                           
+                       <a href="#/webcontent/server/servercluster.html" > 服务集成</a>
+                        </li>
+                         
+                        <li class="active" id="typetitle">Elasticsearch</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Body -->
+                <div class="page-body">
+                	<div class="row">	
+                	   <div class="col-sm-12">
+                		  <div class="widget">
+                            <div class="widget-header bg-lightinfo margin-bottom-10">
+                                <span >ElasticSearch是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口。</span>
+                            </div>
+                            <div class="widget-body padding-30">
+                              <div>
+                                 <form id="accountForm" method="post" class="form-horizontal bv-form" novalidate="novalidate" role="form">
+                                  <div class="form-group">
+                                            <label  class="col-sm-2 control-label ">服务名称</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="servername"  name="fullName" data-bv-field="fullName">   
+                                            </div>
+                                   </div>
+                                   <div class="form-group">
+                                     <label  class="col-sm-2 control-label">实例数</label>
+                                      <div class="col-sm-8">
+                                        <select class="form-control" id="instances_num">
+                                          <option value="1">1</option>
+                                        </select>  
+                                      </div> 
+                                   </div>
+                                   <div class="form-group">
+                                     <label  class="col-sm-2 control-label">发布集群</label>
+                                      <div class="col-sm-8">
+                                        <select class="form-control" id="resource_name">
+                                          <option value="test1">test1</option>
+                                        </select>  
+                                        <input type="hidden" id="marathon_name" value="">
+                                        <input type="hidden" id="zk_hosts" value="">
+                                      </div> 
+                                   </div>
+                                        <div class="form-group">
+                                           <label  class="col-sm-2 control-label ">选择版本</label>
+                                        <div class="col-sm-8 no-padding-left">
+                                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 list-jd">
+                                        	<a class="jd" href="#">
+                                        	<div class="panel panel-default active">
+                                        		<div class="panel-heading text-center font-140">
+                                        			Elasticsearch-单节点
+                                        		</div>
+                                        		<div class="panel-body text-center">
+                                        			<img src="assets/img/img/Elasticsearch.jpg"></img>
+                                        		</div>
+                                        		</div>
+                                        	</a>
+                                         </div>
+                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 list-jd">
+                                           <a class="jd" href="#">
+                                        	<div class="panel panel-default">
+                                        		<div class="panel-heading text-center font-140">
+                                        			Elasticsearch-集群节点
+                                        		</div>
+                                        		<div class="panel-body text-center">
+                                        			<img src="assets/img/img/Elasticsearch.jpg"></img>
+                                        		</div>
+                                        		</div>
+                                        	</a>
+                                        </div>   
+                                        </div> 
+                                        </div>
+                                        <!-- <div class="form-group">
+                                           <label  class="col-sm-2 control-label">网络</label>
+                                            <div class="col-sm-8">
+                                               <select class="form-control" id="network">
+                                       	    <option >网络3</option>
+                                       	    <option >网络5</option>
+                                            </select>  
+                                            </div> 
+                                     </div>
+                                      <div class="form-group">
+                                           <label  class="col-sm-2 control-label">存储</label>
+                                            <div class="col-sm-8">
+                                               <select class="form-control" id="volume">
+                                       	    <option >存储3</option>
+                                       	    <option >存储5</option>
+                                            </select>  
+                                            </div> 
+                                     </div>
+                                        
+                                         <div class="form-group">
+                                            <label  class="col-sm-2 control-label">端口</label>
+                                            <div class="col-sm-8">
+                                                 <input type="text" class="form-control" placeholder="65535" id="port" name="port" data-bv-field="fullName"/>
+                                                 
+                                            </div>    
+                                        </div>  -->
+                                        
+                                        
+                                      
+                                         <div class="form-group">
+                                            <label  class="col-sm-2 control-label">CPU</label>
+                                            <div class="col-lg-9 col-md-10 col-sm-10 col-xs-10  col-xs-10" id="CPU">
+                                              <a class="btn btn-info cpunum">2C</a>
+                                              <a class="btn btn-default">3C</a>
+                                              <a class="btn btn-default">4C</a>
+                                              <a class="btn btn-default">5C</a>
+                                              <a class="btn btn-default">6C</a>
+                                              <a class="btn btn-default">7C</a>
+                                              <a class="btn btn-default">8C</a>
+                                              <a class="btn btn-default">9C</a>
+                                              <a class="btn btn-default">10C</a>
+                                              <a class="btn btn-default">11C</a>
+                                              <a class="btn btn-default">12C</a>
+                                            </div>    
+                                        </div>
+                                        
+                                         <div class="form-group">
+                                            <label  class="col-sm-2 control-label">内存</label>
+                                           <div class="col-sm-9 margin-top-10">
+                                            	<div class="col-sm-8 no-padding-left">
+                                            		  <div id="sample-onehandle" class="slider-xs"></div>
+                                            	</div>
+                                                <div class="col-sm-2  no-padding-right" style="margin-top:-10px">
+                                            	<input type="number" class="form-control" value="100.00" id="mem" onkeyup="change(this)" />
+                                            </div>
+                                             <div class="col-sm-2" style="margin-top:-5px">
+                                            	<p class="no-padding-left">MB</p>
+                                            </div>
+                                            </div>    
+                                        </div>     
+                                        
+                                      <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-8 padding-bottom-30">
+                                            <button type="submit" class="btn btn-azure btn-block" disabled="disabled">确定</button>
+                                        </div>
+                                      </div> 
+                                      
+                                  </form>
+                                </div>
+                            </div>
+                        </div>
+		          </div>   
+              </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+
+<div class="modal in" id="tips" style="display:none">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body" style="font-size:15px;font-weight:bold;margin-top:250px">
+				<span></span><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+				<span class="sr-only"></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--提示框-->
+<div class="modal in" id="MsgAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h4 id="MsgAlertTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <h6 id="MsgAlertContent"></h6>
+      </div>
+      <div class="modal-footer">
+      <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!--Basic Scripts-->
+    <script src="assets/js/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/validation/bootstrapValidator.js"></script>
+    <script src="assets/js/datetime/bootstrap-datepicker.js"></script>
+    <script src="assets/js/slider/jquery.nouislider.js"></script>
+   <script src="webcontent/server/js/elasticsearch.js"></script>
